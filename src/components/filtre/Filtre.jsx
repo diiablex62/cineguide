@@ -9,8 +9,8 @@ export default function Filtre() {
     setOpenFilter(!openFilter);
   }
   return (
-    <div>
-      <div className="flex mb-5 p-2">
+    <>
+      <div className="flex mb-5 p-2 md:hidden">
         <button
           onClick={toggleFilter}
           className={`bg-white cursor-pointer text-black border flex rounded items-center justify-center text-center p-2 ${
@@ -22,12 +22,12 @@ export default function Filtre() {
         </button>
       </div>
       <div
-        className={`w-full bg-white dark:bg-black absolute z-10 p-2 ${
+        className={`w-full bg-white dark:bg-black absolute z-10 p-2 md:p-0 md:flex md:relative ${
           openFilter ? "flex" : "hidden"
         }`}
       >
         <div className="border p-8">
-          <div className="flex justify-end">
+          <div className="flex justify-end md:hidden">
             <button onClick={toggleFilter} className="cursor-pointer">
               <img src="../src/assets/close.png" className="w-[20px]" alt="" />
             </button>
@@ -35,9 +35,10 @@ export default function Filtre() {
           <h2 className="font-bold text-3xl">Trier</h2>
           <p>Par plateforme : </p>
           <div className="flex flex-wrap gap-3 items-center mt-4">
-            {PlatformeData.map((platforme) => (
+            {PlatformeData.map((platforme, index) => (
               <a
                 href="#"
+                key={index}
                 className="text-[12px] bg-white hover:bg-black hover:text-white text-black border flex rounded items-center justify-center text-center w-[50px] h-[50px]"
               >
                 {platforme.name}
@@ -71,9 +72,10 @@ export default function Filtre() {
           </div>
           <p className="mt-5 mb-2">Genres : </p>
           <div className="flex flex-wrap gap-3 items-center mt-4">
-            {GenreData.map((genre) => (
+            {GenreData.map((genre, index) => (
               <a
                 href="#"
+                key={index}
                 className="text-[12px] bg-white hover:bg-black hover:text-white text-black border flex rounded items-center justify-center text-center p-2"
               >
                 {genre}
@@ -94,6 +96,6 @@ export default function Filtre() {
           />
         </div>
       </div>
-    </div>
+    </>
   );
 }

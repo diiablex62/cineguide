@@ -6,66 +6,127 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 export default function CardFilm({ FilmData }) {
-  const [openInfo, setOpenInfo] = useState(false);
-  const [goSee, setGoSee] = useState(false);
-  const [alreadySeen, setAlreadySeen] = useState(false);
-  function toggleState(stateSetter) {
-    stateSetter((prevState) => !prevState);
+  const [goSeeStates, setGoSeeStates] = useState({});
+  const [alreadySeenStates, setAlreadySeenStates] = useState({});
+  const [openInfoStates, setOpenInfoStates] = useState({});
+
+  function toggleState(setter, index) {
+    setter((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
   }
+
   return (
-    <div className="flex items-center justify-center ">
-      <Swiper
-        modules={[Navigation]}
-        navigation
-        spaceBetween={50}
-        slidesPerView={1}
-      >
-        {FilmData.map((film) => (
-          <SwiperSlide className="flex! flex-col items-center  relative ">
-            <div className="relative">
-              <img className="w-[375px]" src={film.image} alt="" />
-              <button
-                onClick={() => toggleState(setOpenInfo)}
-                className="cursor-pointer absolute bottom-0 right-0 mr-[10px] mb-2 text-white text-4xl bg-pink-700 px-2 rounded"
-              >
-                {openInfo ? "+" : "-"}
-              </button>
-            </div>
-            <div
-              className={`w-[375px]! flex flex-col justify-center text-center mt-2 shadow-xl py-4 ${
-                openInfo ? "hidden" : "flex"
-              }`}
-            >
+    <>
+      {/* Affichage desktop */}
+      <div className="hidden md:flex md:flex-wrap">
+        {FilmData.map((film, index) => (
+          <div
+            key={index}
+            className="flex md:w-full lg:w-[48%] gap-4 border p-4 mr-2 mb-4"
+          >
+            <img className="w-[30%] object-cover" src={film.image} alt="" />
+            <div className="w-[70%] flex flex-col justify-center mt-2 shadow-xl py-4 px-4">
               <p className="font-bold text-2xl">{film.titre}</p>
-              <p>{film.dateSortie}</p>
-              <p>{film.note}</p>
-              <p>{film.duree}</p>
-              <p>{film.synopsis}</p>
-              <div className="flex flex-col items-center">
+              <div className="flex">
+                <p className="mr-3">
+                  {new Date(film.dateSortie).getFullYear()}
+                </p>
+                <p className="mr-3">Note : {film.note}</p>
+                <p className="mr-3">{film.duree}</p>
+              </div>
+              <p>
+                {film.synopsis.length > 50
+                  ? film.synopsis.slice(0, 50) + "..."
+                  : film.synopsis}
+              </p>
+              <div className="flex flex-col ">
                 <button
-                  onClick={() => toggleState(setGoSee)}
-                  className={`mt-2 cursor-pointer  text-white w-[150px] h-[50px] ${
-                    goSee ? "bg-gray-fonce" : "bg-gray-400"
+                  onClick={() => toggleState(setGoSeeStates, index)}
+                  className={`mt-2 cursor-pointer text-white w-[150px] h-[50px] lg:text-[15px] ${
+                    goSeeStates[index] ? "bg-gray-fonce" : "bg-gray-400"
                   }`}
                 >
-                  {goSee ? "+ A voir" : " Déjà ajouter"}
+                  {goSeeStates[index] ? "+ A voir" : "Déjà ajouté"}
                 </button>
-                <button className="mt-2 cursor-pointer bg-fuchsia text-white w-[250px] h-[50px]">
-                  Regarder
-                </button>
-                <button
-                  onClick={() => toggleState(setAlreadySeen)}
-                  className={`mt-2 cursor-pointer text-white w-[150px] h-[50px] ${
-                    alreadySeen ? "bg-green-600" : "bg-red-400"
-                  }`}
-                >
-                  {alreadySeen ? "Déjà vu" : " + Pas encore vu"}
-                </button>
+                <div className="flex">
+                  <button className="mt-2 mr-2 cursor-pointer bg-fuchsia text-white w-[250px] h-[50px] lg:text-[15px]">
+                    Regarder
+                  </button>
+                  <button
+                    onClick={() => toggleState(setAlreadySeenStates, index)}
+                    className={`mt-2 cursor-pointer text-white w-[150px] h-[50px] lg:text-[15px] ${
+                      alreadySeenStates[index] ? "bg-green-600" : "bg-red-400"
+                    }`}
+                  >
+                    {alreadySeenStates[index] ? "Déjà vu" : "+ Pas encore vu"}
+                  </button>
+                </div>
               </div>
             </div>
-          </SwiperSlide>
+          </div>
         ))}
-      </Swiper>
-    </div>
+      </div>
+
+      {/* Affichage mobile (Swiper) */}
+      <div className="flex items-center justify-center md:hidden">
+        <Swiper
+          modules={[Navigation]}
+          navigation
+          spaceBetween={50}
+          slidesPerView={1}
+        >
+          {FilmData.map((film, index) => (
+            <SwiperSlide
+              key={index}
+              className="flex! flex-col items-center relative"
+            >
+              <div className="relative">
+                <img className="w-[375px]" src={film.image} alt="" />
+                <button
+                  onClick={() => toggleState(setOpenInfoStates, index)}
+                  className="cursor-pointer absolute bottom-0 right-0 mr-[10px] mb-2 text-white text-4xl bg-pink-700 px-2 rounded"
+                >
+                  {openInfoStates[index] ? "+" : "-"}
+                </button>
+              </div>
+              <div
+                className={`w-[375px]! flex flex-col justify-center text-center mt-2 shadow-xl py-4 ${
+                  openInfoStates[index] ? "hidden" : "flex"
+                }`}
+              >
+                <p className="font-bold text-2xl">{film.titre}</p>
+                <p>{new Date(film.dateSortie).getFullYear()}</p>
+                <p>Note : {film.note}</p>
+                <p>{film.duree}</p>
+                <p>{film.synopsis}</p>
+                <div className="flex flex-col items-center">
+                  <button
+                    onClick={() => toggleState(setGoSeeStates, index)}
+                    className={`mt-2 cursor-pointer text-white w-[150px] h-[50px] ${
+                      goSeeStates[index] ? "bg-gray-fonce" : "bg-gray-400"
+                    }`}
+                  >
+                    {goSeeStates[index] ? "+ A voir" : "Déjà ajouté"}
+                  </button>
+                  <button className="mt-2 cursor-pointer bg-fuchsia text-white w-[250px] h-[50px]">
+                    Regarder
+                  </button>
+                  <button
+                    onClick={() => toggleState(setAlreadySeenStates, index)}
+                    className={`mt-2 cursor-pointer text-white w-[150px] h-[50px] ${
+                      alreadySeenStates[index] ? "bg-green-600" : "bg-red-400"
+                    }`}
+                  >
+                    {alreadySeenStates[index] ? "Déjà vu" : "+ Pas encore vu"}
+                  </button>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+    </>
   );
 }
