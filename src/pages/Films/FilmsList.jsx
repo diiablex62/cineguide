@@ -1,12 +1,12 @@
 import React from "react";
 import Filtre from "../../components/filtre/Filtre";
-
+import CardFilm from "./components/CardFilm";
+import FilmData from "../../data/Film.json";
 export default function FilmsList() {
   return (
-    <div>
-      <h2>
-        <Filtre></Filtre>
-      </h2>
+    <div className="">
+      <Filtre></Filtre>
+      <CardFilm FilmData={FilmData}></CardFilm>
     </div>
   );
 }
