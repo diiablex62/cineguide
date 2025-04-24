@@ -30,8 +30,6 @@ export default function Connexion() {
   });
 
   const onSubmit = (data) => {
-    console.log("Login values:", data);
-    localStorage.setItem("login", JSON.stringify(data));
     login(data);
   };
 

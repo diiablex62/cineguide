@@ -43,8 +43,6 @@ export default function Inscription() {
   });
 
   const onSubmit = (data) => {
-    console.log("Form values:", data); 
-    localStorage.setItem("user", JSON.stringify(data)); 
     registerUser(data);
   };
 
