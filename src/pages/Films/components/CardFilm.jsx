@@ -1,21 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
-
 import "swiper/css";
 import "swiper/css/navigation";
+import { FilmContext } from "../../../context/FilmContext";
 
-export default function CardFilm({ FilmData }) {
-  const [goSeeStates, setGoSeeStates] = useState({});
-  const [alreadySeenStates, setAlreadySeenStates] = useState({});
-  const [openInfoStates, setOpenInfoStates] = useState({});
-
-  function toggleState(setter, index) {
-    setter((prev) => ({
-      ...prev,
-      [index]: !prev[index],
-    }));
-  }
+export default function CardFilm() {
+  const {
+    FilmData,
+    goSeeStates,
+    alreadySeenStates,
+    openInfoStates,
+    toggleState,
+    setGoSeeStates,
+    setAlreadySeenStates,
+    setOpenInfoStates,
+  } = useContext(FilmContext);
 
   return (
     <>

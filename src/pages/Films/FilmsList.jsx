@@ -1,7 +1,7 @@
 import React from "react";
 import Filtre from "../../components/filtre/Filtre";
 import CardFilm from "./components/CardFilm";
-import FilmData from "../../data/Film.json";
+
 export default function FilmsList() {
   return (
     <>
@@ -10,7 +10,7 @@ export default function FilmsList() {
           <Filtre></Filtre>
         </div>
         <div className="md:w-[60%] lg:w-[75%]">
-          <CardFilm FilmData={FilmData}></CardFilm>
+          <CardFilm></CardFilm>
         </div>
       </div>
       <div className="flex justify-center m-5">
