@@ -18,10 +18,10 @@ export const router = createBrowserRouter([
         element: <FilmList />,
       },
       {
-        path:"/detailserie",
+        path:"/detailserie/:id",
         element:<DetailSerie/>
       },{
-        path:"/detailfilm",
+        path:"/detailfilm/:id",
         element:<DetailFilm/>
       }
     ],
