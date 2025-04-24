@@ -3,9 +3,14 @@ import GoogleIcon from "../../components/filtre/icone/google";
 
 export default function Inscription() {
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
   };
 
   return (
@@ -136,14 +141,14 @@ export default function Inscription() {
             <div className='relative'>
               <input
                 id='confirm-password'
-                type={showPassword ? "text" : "password"}
+                type={showConfirmPassword ? "text" : "password"}
                 placeholder='Confirmez votre mot de passe'
                 className='w-full p-2 border border-gray-300 rounded focus:ring-[var(--color-fuchsia)] focus:border-[var(--color-fuchsia)] focus:outline-[var(--color-fuchsia)] text-[var(--color-fuchsia)] placeholder-[var(--color-placeholder)]'
               />
               <span
-                onClick={togglePasswordVisibility}
+                onClick={toggleConfirmPasswordVisibility}
                 className='absolute inset-y-0 right-3 flex items-center text-gray-400 cursor-pointer'>
-                {showPassword ? (
+                {showConfirmPassword ? (
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     viewBox='0 0 122.879 79.699'
