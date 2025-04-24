@@ -1,8 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { AuthContext } from "../../components/providers/AuthProvider";
 import GoogleIcon from "../../components/filtre/icone/google";
 
 export default function Connexion() {
+  const { login } = useContext(AuthContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    login(email, password);
+  };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -21,7 +30,7 @@ export default function Connexion() {
           <h2 className='text-center mb-4 text-2xl font-bold text-black'>
             SE CONNECTER
           </h2>
-          <form className='flex flex-col gap-4'>
+          <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
             <div>
               <label
                 htmlFor='email'
@@ -31,6 +40,8 @@ export default function Connexion() {
               <input
                 id='email'
                 type='email'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder='Entrez votre email'
                 className='w-full p-2 border border-gray-300 rounded focus:ring-[var(--color-fuchsia)] focus:border-[var(--color-fuchsia)] focus:outline-[var(--color-fuchsia)] text-[var(--color-fuchsia)] placeholder-gray-400'
               />
@@ -45,6 +56,8 @@ export default function Connexion() {
                 <input
                   id='password'
                   type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder='Entrez votre mot de passe'
                   className='w-full p-2 border border-gray-300 rounded focus:ring-[var(--color-fuchsia)] focus:border-[var(--color-fuchsia)] focus:outline-[var(--color-fuchsia)] text-[var(--color-fuchsia)] placeholder-gray-400'
                 />
@@ -72,7 +85,7 @@ export default function Connexion() {
               </div>
             </div>
             <button
-              type='button'
+              type='submit'
               className='w-full p-3 bg-[var(--color-fuchsia)] text-white rounded hover:bg-[var(--color-fuchsia-hover)]'>
               Se connecter
             </button>
@@ -84,7 +97,9 @@ export default function Connexion() {
           </form>
           <p className='text-center mt-4 text-sm text-gray-700'>
             Pas encore inscrit ?{" "}
-            <a href='#' className='text-[var(--color-fuchsia)] underline'>
+            <a
+              href='/inscription'
+              className='text-[var(--color-fuchsia)] underline'>
               S'inscrire
             </a>
           </p>
@@ -94,13 +109,6 @@ export default function Connexion() {
       {/* Section droite */}
       <div className='w-1/2 flex justify-center items-center'>
         <div className='w-4/5 flex flex-col items-center'>
-          {/* <a href='#'>
-            <img
-              src='/src/assets/logo.png'
-              alt='CineGuide'
-              className='h-12 mb-8'
-            />
-          </a> */}
           <h1 className='text-6xl font-light text-[var(--color-fuchsia)] text-left'>
             Toutes vos plateformes de
             <br />
