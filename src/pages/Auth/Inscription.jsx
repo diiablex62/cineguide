@@ -33,12 +33,14 @@ export default function Inscription() {
           />
           <a
             href='/'
-            className='text-sm text-gray-500 hover:underline block text-start mt-4'>
+            className='text-sm text-black hover:underline block text-start mt-4'>
             &lt; Retour vers la page d'accueil
           </a>
         </div>
 
-        <h2 className='text-center mb-4 text-2xl font-bold'>S'INSCRIRE</h2>
+        <h2 className='text-center mb-4 text-2xl font-bold text-black'>
+          S'INSCRIRE
+        </h2>
         <form className='w-full max-w-md flex flex-col gap-4'>
           <div className='flex gap-4'>
             <div className='flex-1'>
@@ -184,18 +186,18 @@ export default function Inscription() {
           </div>
           <button
             type='button'
-            className='w-full p-3 bg-[var(--color-fuchsia)] text-white rounded hover:bg-[var(--color-fuchsia-hover)]'>
+            className='w-full p-3 bg-black text-white rounded hover:bg-gray-800'>
             S'inscrire
           </button>
           <button
             type='button'
-            className='w-full p-3 bg-white text-[var(--color-fuchsia)] border border-[var(--color-fuchsia)] rounded hover:bg-fuchsia-100 flex items-center justify-center gap-2'>
+            className='w-full p-3 bg-white text-black border border-black rounded hover:bg-gray-100 flex items-center justify-center gap-2'>
             <GoogleIcon className='h-5 w-5' /> Connexion avec Google
           </button>
         </form>
         <p className='text-center mt-4 text-sm'>
           Déjà inscrit ?{" "}
-          <a href='#' className='text-[var(--color-fuchsia)] underline'>
+          <a href='#' className='text-black underline'>
             Se connecter
           </a>
         </p>

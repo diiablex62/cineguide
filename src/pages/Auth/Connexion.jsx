@@ -11,9 +11,14 @@ export default function Connexion() {
   return (
     <div className='flex h-screen'>
       {/* Section gauche */}
-      <div className='w-1/2 flex justify-center items-center bg-[var(--color-fuchsia)] text-white'>
+      <div className='w-1/2 flex justify-center items-center bg-[var(--color-fuchsia)] text-white animate-fuchsia'>
         <div className='bg-white p-6 rounded-lg shadow-lg w-4/5 max-w-sm'>
-          <h2 className='text-center mb-4 text-2xl font-bold text-[var(--color-fuchsia)]'>
+          <a
+            href='/'
+            className='text-sm text-gray-500 hover:underline block text-start mb-10'>
+            &lt; Retour vers la page d'accueil
+          </a>
+          <h2 className='text-center mb-4 text-2xl font-bold text-black'>
             SE CONNECTER
           </h2>
           <form className='flex flex-col gap-4'>
@@ -79,9 +84,7 @@ export default function Connexion() {
           </form>
           <p className='text-center mt-4 text-sm text-gray-700'>
             Pas encore inscrit ?{" "}
-            <a
-              href='#'
-              className='text-[var(--color-fuchsia)] underline'>
+            <a href='#' className='text-[var(--color-fuchsia)] underline'>
               S'inscrire
             </a>
           </p>
@@ -89,15 +92,20 @@ export default function Connexion() {
       </div>
 
       {/* Section droite */}
-      <div className='w-1/2 flex justify-center items-center px-10'>
-        <div className='text-center'>
-          <img
-            src='/src/assets/logo.png'
-            alt='CineGuide'
-            className='h-12 mx-auto mb-4'
-          />
-          <h1 className='text-4xl font-light text-[var(--color-fuchsia)]'>
-            Toutes vos plateformes de streaming au même endroit
+      <div className='w-1/2 flex justify-center items-center'>
+        <div className='w-4/5 flex flex-col items-center'>
+          {/* <a href='#'>
+            <img
+              src='/src/assets/logo.png'
+              alt='CineGuide'
+              className='h-12 mb-8'
+            />
+          </a> */}
+          <h1 className='text-6xl font-light text-[var(--color-fuchsia)] text-left'>
+            Toutes vos plateformes de
+            <br />
+            streaming au
+            <br /> même endroit
           </h1>
         </div>
       </div>
