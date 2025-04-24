@@ -34,10 +34,14 @@ export default function Connexion() {
   };
 
   return (
-    <div className='flex h-screen'>
+    <div className='flex flex-col md:flex-row h-screen'>
       {/* Section gauche */}
-      <div className='w-1/2 flex justify-center items-center bg-[var(--color-fuchsia)] text-white animate-fuchsia'>
-        <div className='bg-white p-6 rounded-lg shadow-lg w-4/5 max-w-sm'>
+      <div className='w-full md:w-1/2 flex justify-center items-center bg-white md:bg-[var(--color-fuchsia)] text-black md:text-white'>
+        <div className='bg-white p-6 w-4/5 max-w-sm h-full flex flex-col justify-center items-center'>
+          {/* Logo en mobile */}
+          <div className='mb-6 flex justify-center md:hidden'>
+            <img src='/src/assets/logo.png' alt='CineGuide' className='h-12' />
+          </div>
           <a
             href='/'
             className='text-sm text-gray-500 hover:underline block text-start mb-10'>
@@ -47,7 +51,7 @@ export default function Connexion() {
             SE CONNECTER
           </h2>
           <form
-            className='flex flex-col gap-4'
+            className='flex flex-col gap-4 w-full'
             onSubmit={handleSubmit(onSubmit)}>
             <div>
               <label
@@ -106,7 +110,10 @@ export default function Connexion() {
       </div>
 
       {/* Section droite */}
-      <div className='w-1/2 flex justify-center items-center'>
+      <div className='hidden md:flex w-1/2 justify-center items-center flex-col'>
+        <div className='mb-6'>
+          <img src='/src/assets/logo.png' alt='CineGuide' className='h-12' />
+        </div>
         <div className='w-4/5 flex flex-col items-center'>
           <h1 className='text-6xl font-light text-[var(--color-fuchsia)] text-left'>
             Toutes vos plateformes de
