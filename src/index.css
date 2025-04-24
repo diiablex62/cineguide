@@ -32,7 +32,10 @@
   --color-gray-fonce: #31373b;
   --color-placeholder: #81888e;
   --color-gray-clair: #d0d5dd;
+  --font-poppins: "Poppins", sans-serif;
 }
+
+html {font-family: var(--font-poppins);} 
 
 @keyframes animation-fuchsia {
   0% {
