@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 .active {
-  @apply text-red-500;
+  @apply underline;
 }
 
 @layer base {
@@ -32,4 +32,11 @@
   --color-gray-fonce: #31373b;
   --color-gray-moyen: #81888e;
   --color-gray-clair: #d0d5dd;
+  --font-poppins: Poppins, sans-serif;
+  --breakpoint-1500: 1500px;
+  --breakpoint-1100: 1100px;
+}
+
+html {
+  font-family: var(--font-poppins);
 }
