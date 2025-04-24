@@ -3,7 +3,7 @@ import Inscription from "./pages/Auth/Inscription";
 import Connexion from "./pages/Auth/Connexion";
 
 function App() {
-  return <Inscription></Inscription>;
+  return <Connexion />;
 }
 
 export default App;
