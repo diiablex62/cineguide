@@ -33,3 +33,25 @@
   --color-placeholder: #81888e;
   --color-gray-clair: #d0d5dd;
 }
+
+@keyframes animation-fuchsia {
+  0% {
+    background-color: #d91468;
+  }
+  25% {
+    background-color: #c2185b;
+  }
+  50% {
+    background-color: #b01e5c;
+  }
+  75% {
+    background-color: #e91e63;
+  }
+  100% {
+    background-color: #d91468;
+  }
+}
+
+.animate-fuchsia {
+  animation: animation-fuchsia 4s linear infinite alternate both;
+}

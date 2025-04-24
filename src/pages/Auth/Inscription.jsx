@@ -9,16 +9,16 @@ export default function Inscription() {
   };
 
   return (
-    <div className='flex h-screen'>
+    <div className='flex h-screen animate-fuchsia'>
       {/* Section gauche */}
-      <div className='flex-1 bg-[var(--color-fuchsia)] text-white flex justify-center items-center px-10'>
+      <div className='flex-1 text-white flex justify-center items-center px-10'>
         <h1 className='text-7xl font-light text-left w-4/5'>
           Toutes vos plateformes de streaming au même endroit
         </h1>
       </div>
 
       {/* Section droite */}
-      <div className='flex-1 p-8 flex flex-col justify-center items-center'>
+      <div className='flex-1 p-8 flex flex-col justify-center items-center bg-white'>
         {/* Logo et retour */}
         <div className='w-full max-w-md mt-8 mb-4'>
           <img
