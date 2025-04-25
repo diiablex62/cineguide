@@ -9,7 +9,7 @@ export default function ActualitesPage() {
       title:
         "Avengers Doomsday : fausse bonne nouvelle pour le retour de ce X-Men ?",
       image:
-        "https://www.ecranlarge.com/content/uploads/2025/04/avengers-doomsday-fausse-bonne-nouvelle-pour-le-retour-de-ce-x-men--1260x708.jpg.webp",
+        "https://www.geoado.com/wp-content/uploads/2016/05/x-men-apocalypse-x-men-apocalypse-955886.jpg",
       date: "10 avril 2025",
       category: "FILMS",
       link: "/article",
