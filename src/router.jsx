@@ -18,12 +18,13 @@ export const router = createBrowserRouter([
         element: <FilmList />,
       },
       {
-        path:"/detailserie",
-        element:<DetailSerie/>
-      },{
-        path:"/detailfilm",
-        element:<DetailFilm/>
-      }
+        path: "/detailserie/:id",
+        element: <DetailSerie />,
+      },
+      {
+        path: "/detailfilm/:id",
+        element: <DetailFilm />,
+      },
     ],
   },
 ]);
