@@ -145,7 +145,7 @@ export default function ActualitesPage() {
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
-    window.scrollTo({ top: 0, behavior: "smooth" }); // Transition douce pour le défilement
+    window.scrollTo({ top: 0, behavior: "smooth" }); 
   };
 
   return (
@@ -164,7 +164,7 @@ export default function ActualitesPage() {
                   a.title ===
                   "Road House 2 : la suite du remake Amazon avec Jake Gyllenhaal a peut-être trouvé un nouveau..."
               )?.image || article.image
-            } // Utilise l'image de "Road House 2" si disponible
+            } 
             date={article.date}
             category={article.category}
             link={article.link}
