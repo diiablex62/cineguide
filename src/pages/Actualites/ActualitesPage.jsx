@@ -8,10 +8,10 @@ export default function ActualitesPage() {
       title:
         "Avengers Doomsday : fausse bonne nouvelle pour le retour de ce X-Men ?",
       image:
-        "https://www.ecranlarge.com/content/uploads/2025/04/avengers-doomsday-fausse-bonne-nouvelle-pour-le-retour-de-ce-x-men--1260x708.jpg.webp",
+        "https://www.geoado.com/wp-content/uploads/2016/05/x-men-apocalypse-x-men-apocalypse-955886.jpg",
       date: "10 avril 2025",
       category: "FILMS",
-      link: "/article/1",
+      link: "/article",
     },
     {
       title:
@@ -145,7 +145,7 @@ export default function ActualitesPage() {
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
-    window.scrollTo({ top: 0, behavior: "smooth" }); 
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -164,10 +164,11 @@ export default function ActualitesPage() {
                   a.title ===
                   "Road House 2 : la suite du remake Amazon avec Jake Gyllenhaal a peut-être trouvé un nouveau..."
               )?.image || article.image
-            } 
+            }
             date={article.date}
             category={article.category}
-            link={article.link}
+            link='/article'
+            className='text-gray-800 dark:text-white'
           />
         ) : (
           <ArticleCard
@@ -176,7 +177,8 @@ export default function ActualitesPage() {
             image={article.image}
             date={article.date}
             category={article.category}
-            link={article.link}
+            link='#'
+            className='text-gray-800 dark:text-white'
           />
         )
       )}
@@ -185,7 +187,7 @@ export default function ActualitesPage() {
           <button
             key={index + 1}
             onClick={() => handlePageChange(index + 1)}
-            className={`px-3 py-1 mx-1 border rounded ${
+            className={`px-3 py-1 mx-1 border rounded cursor-pointer ${
               currentPage === index + 1
                 ? "bg-[var(--color-fuchsia)] text-white"
                 : "bg-white text-black border-gray-300 hover:bg-gray-100"
