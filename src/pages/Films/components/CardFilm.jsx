@@ -7,7 +7,7 @@ import { FilmContext } from "../../../context/FilmContext";
 
 export default function CardFilm() {
   const {
-    FilmData,
+    film,
     goSeeStates,
     alreadySeenStates,
     openInfoStates,
@@ -21,7 +21,7 @@ export default function CardFilm() {
     <>
       {/* Affichage desktop */}
       <div className="hidden md:flex md:flex-wrap">
-        {FilmData.map((film, index) => (
+        {film.map((film, index) => (
           <div
             key={index}
             className="flex md:w-full lg:w-[48%] gap-4 border p-4 mr-2 mb-4"
@@ -77,7 +77,7 @@ export default function CardFilm() {
           spaceBetween={50}
           slidesPerView={1}
         >
-          {FilmData.map((film, index) => (
+          {film.map((film, index) => (
             <SwiperSlide
               key={index}
               className="flex! flex-col items-center relative"
