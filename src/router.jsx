@@ -13,6 +13,7 @@ import FAQ from "./pages/Legal/FAQ";
 import DetailSerie from "./pages/DetailSerie/DetailSerie";
 import DetailFilm from "./pages/DetailFilm/DetailFilm";
 import ActualiteDetail from "./pages/Actualites/ActualiteDetail";
+import ModalAbo from "./components/modal-abo/modalAbo";
 
 export const router = createBrowserRouter([
   {
@@ -32,7 +33,6 @@ export const router = createBrowserRouter([
         element: <DetailSerie />,
       },
       {
-        
         path: "/series",
         element: <SeriesList />,
       },
@@ -66,7 +66,7 @@ export const router = createBrowserRouter([
         element: <ActualitesPage />,
       },
       {
-        path: "/actualites/article", 
+        path: "/actualites/article",
         element: <ActualiteDetail />,
       },
       {
@@ -76,6 +76,14 @@ export const router = createBrowserRouter([
       {
         path: "/detailfilm/:id",
         element: <DetailFilm />,
+      },
+      {
+        path: "/abonnement",
+        element: (
+       
+              <ModalAbo />
+     
+        ),
       },
     ],
   },
