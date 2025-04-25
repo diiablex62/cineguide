@@ -10,6 +10,8 @@ import CGV from "./pages/Legal/CGV";
 import FAQ from "./pages/Legal/FAQ";
 import Connexion from "./pages/Auth/Connexion";
 import Inscription from "./pages/Auth/Inscription";
+import DetailSerie from "./pages/DetailSerie/DetailSerie";
+import DetailFilm from "./pages/DetailFilm/DetailFilm";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -54,6 +56,14 @@ export const router = createBrowserRouter([
       {
         path: "/inscription",
         element: <Inscription />,
+      },
+      {
+        path: "/detailserie/:id",
+        element: <DetailSerie />,
+      },
+      {
+        path: "/detailfilm/:id",
+        element: <DetailFilm />,
       },
     ],
   },
