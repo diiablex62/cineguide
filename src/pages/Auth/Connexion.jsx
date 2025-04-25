@@ -37,7 +37,7 @@ export default function Connexion() {
     <div className='flex flex-col md:flex-row h-screen'>
       {/* Section gauche */}
       <div className='w-full md:w-1/2 flex justify-center items-center bg-white md:bg-[var(--color-fuchsia)] text-black md:text-white'>
-        <div className='bg-white p-6 w-4/5 max-w-sm h-full flex flex-col justify-center items-center'>
+        <div className='bg-white p-6 w-4/5 max-w-sm max-md:h-screen flex flex-col justify-center items-center'>
           {/* Logo en mobile */}
           <div className='mb-6 flex justify-center md:hidden'>
             <img src='/src/assets/logo.png' alt='CineGuide' className='h-12' />
