@@ -82,7 +82,7 @@ export default function Connexion() {
           </div>
           <a
             href='/'
-            className='text-sm text-gray-500 dark:text-gray-400 hover:underline block text-start mb-10'>
+            className='text-sm text-gray-500 dark:text-gray-400 hover:underline self-start mb-8'>
             &lt; Retour vers la page d'accueil
           </a>
           <h2 className='text-center mb-4 text-2xl font-bold text-black dark:text-white'>

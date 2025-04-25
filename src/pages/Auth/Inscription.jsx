@@ -103,7 +103,7 @@ export default function Inscription() {
           />
           <a
             href='/'
-            className='text-sm text-black dark:text-white hover:underline block text-start mt-4'>
+            className='text-sm text-gray-500 dark:text-gray-400 hover:underline block text-start mt-4'>
             &lt; Retour vers la page d'accueil
           </a>
         </div>
@@ -283,7 +283,7 @@ export default function Inscription() {
         </form>
         <p className='text-center mt-4 text-sm text-black dark:text-white'>
           Déjà inscrit ?{" "}
-          <a href='/connexion' className='text-black dark:text-white underline'>
+          <a href='/connexion' className='text-[var(--color-fuchsia)] dark:text-[var(--color-fuchsia)] underline'>
             Se connecter
           </a>
         </p>
