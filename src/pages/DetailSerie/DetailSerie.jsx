@@ -79,7 +79,7 @@ export default function DetailSerie() {
             </div>
 
             <div className="mb-6 px-3">
-              <div className="flex flex md:flex-col">
+              <div className="flex  md:flex-col">
                 <div className="w-1/2">
                   <h3 className="font-bold text-sm mb-2">ÂGE</h3>
                   <p className="text-xs text-gray-600 dark:text-gray-300">18</p>
