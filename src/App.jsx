@@ -4,7 +4,7 @@ import Connexion from "./pages/Auth/Connexion";
 import ThemeProvider from "./components/providers/ThemeProviders"; 
 
 function App() {
-  return <Inscription />;
+  return <Connexion />;
 }
 
 export default App;
