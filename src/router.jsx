@@ -28,6 +28,11 @@ export const router = createBrowserRouter([
         element: <FilmList />,
       },
       {
+        path: "/detailserie",
+        element: <DetailSerie />,
+      },
+      {
+        
         path: "/series",
         element: <SeriesList />,
       },
