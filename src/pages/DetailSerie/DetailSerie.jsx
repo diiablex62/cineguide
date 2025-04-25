@@ -4,7 +4,7 @@ export default function DetailSerie() {
   return (
     <div className=" bg-white dark:bg-gray-900 text-gray-900 dark:text-white font-poppins">
       <nav className="py-2">
-        <div className="flex  space-x-2 px-4 py-4 overflow-x-auto">
+        <div className="flex  space-x-2 px-4 py-4 overflow-x-auto md:justify-center">
           <button className="bg-fuchsia hover:bg-fuchsia-hover text-white px-3 py-1  text-sm">
             Episodes
           </button>
@@ -79,7 +79,7 @@ export default function DetailSerie() {
             </div>
 
             <div className="mb-6 px-3">
-              <div className="flex flex md:flex-col">
+              <div className="flex  md:flex-col">
                 <div className="w-1/2">
                   <h3 className="font-bold text-sm mb-2">ÂGE</h3>
                   <p className="text-xs text-gray-600 dark:text-gray-300">18</p>
@@ -150,7 +150,7 @@ export default function DetailSerie() {
               <div className="flex flex-wrap gap-4">
                 <div className="relative">
                   <div className="bg-gray-800 w-44 h-24  flex items-center justify-center"></div>
-                  <div className="absolute bottom-0 left-0 w-full bg-fuchsia hover:bg-fuchsia-hovertext-white text-xs p-1">
+                  <div className="absolute bottom-0 left-0 w-full bg-fuchsia hover:bg-fuchsia-hover text-white text-xs p-1">
                     BANDE-ANNONCE OFFICIELLE VOST
                   </div>
                 </div>

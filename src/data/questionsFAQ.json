@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "question": "Qu'est-ce que Cineguide ?",
+    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+  },
+  {
+    "id": 2,
+    "question": "Comment fonctionne la recherche de contenu ?",
+    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+  },
+  {
+    "id": 3,
+    "question": "Puis-je créer une liste de contenu préféré ?",
+    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+  },
+  {
+    "id": 4,
+    "question": "L’application est-elle gratuite ?",
+    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+  },
+  {
+    "id": 5,
+    "question": "Comment puis-je accéder à des films et séries en streaming via Cineguide ?",
+    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+  },
+  {
+    "id": 6,
+    "question": "Quels services de streaming sont disponibles sur Cineguide ?",
+    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+  },
+  {
+    "id": 7,
+    "question": "Comment puis-je modifier mes préférences de recherche ?",
+    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+  },
+  {
+    "id": 8,
+    "question": "Puis-je voir les avis des utilisateurs sur un contenu ?",
+    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+  },
+  {
+    "id": 9,
+    "question": "Puis-je utiliser Cineguide sur mon téléphone ou ma tablette ?",
+    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+  },
+  {
+    "id": 10,
+    "question": "Que faire si je rencontre un problème technique avec l'application ?",
+    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+  },
+  {
+    "id": 11,
+    "question": "Pourquoi mes résultats de recherche ne sont-ils pas à jour ?",
+    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+  },
+  {
+    "id": 12,
+    "question": "Comment puis-je m'abonner à une fonctionnalité premium ?",
+    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+  },
+  {
+    "id": 13,
+    "question": "Comment supprimer mon compte ?",
+    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+  },
+  {
+    "id": 14,
+    "question": "Mon contenu préféré n'est pas disponible dans ma région, que faire ?",
+    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+  },
+  {
+    "id": 15,
+    "question": "Comment puis-je signaler un problème avec un contenu ?",
+    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+  },
+  {
+    "id": 16,
+    "question": "Comment fonctionne l’algorithme de recommandation de contenu ?",
+    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+  }
+]
