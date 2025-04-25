@@ -14,6 +14,10 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+body.dark {
+  background-color: black;
+}
+
 @theme {
   --color-transparent: transparent;
   --color-current: currentColor;
@@ -37,6 +41,14 @@
   --breakpoint-1100: 1100px;
 }
 
+* {
+  font-family: Poppins;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: black !important;
+}
 html {font-family: var(--font-poppins);} 
 
 @keyframes animation-fuchsia {
