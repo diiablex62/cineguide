@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Outlet } from "react-router-dom";
 import ArticleCard from "../../components/actu/ArticleCard";
 import FirstArticleCard from "../../components/actu/FirstArticleCard";
 
