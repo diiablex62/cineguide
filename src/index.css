@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 .active {
-  @apply text-red-500;
+  @apply underline;
 }
 
 @layer base {
@@ -57,4 +57,8 @@ html {font-family: var(--font-poppins);}
 
 .animate-fuchsia {
   animation: animation-fuchsia 4s linear infinite alternate both;
+  --font-poppins: Poppins, sans-serif;
+  --breakpoint-1500: 1500px;
+  --breakpoint-1100: 1100px;
 }
+
