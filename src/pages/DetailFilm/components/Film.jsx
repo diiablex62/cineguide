@@ -1,25 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaRegStar, FaStar } from "react-icons/fa";
+import { FilmContext } from "../../../context/FilmContext";
 
 export default function Film() {
-  const [detailFilm, setDetailFilm] = useState({
-    id: 1,
-    titre: "Le Parrain",
-    synopsis: "L'histoire d'une famille mafieuse italienne aux États-Unis.",
-    image:
-      "https://fr.web.img6.acsta.net/c_310_420/pictures/22/01/14/08/39/1848157.jpg",
-    acteurs: ["Marlon Brando", "Al Pacino", "James Caan"],
-    duree: "2h55",
-    note: 9.2,
-    dateSortie: "1972-03-24",
-    realisateur: "Francis Ford Coppola",
-    bandeAnnonce: "https://www.youtube.com/watch?v=bmtuIhesQWA",
-    genre: ["Drame", "Crime"],
-    paysProduction: ["États-Unis"],
-  });
+ 
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
-  console.log(detailFilm);
+const {detailFilm}=useContext(FilmContext)
+console.log(detailFilm);
+
 
   return (
     <div className="md:w-1/3 flex-shrink-0 md:pl-4">

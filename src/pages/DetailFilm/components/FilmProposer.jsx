@@ -1,32 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Films from "../../../data/Film.json";
 import Card from "../Card";
+import { FilmContext } from "../../../context/FilmContext";
 
 export default function FilmProposer() {
-  const [detailFilm, setDetailFilm] = useState({
-    id: 1,
-    titre: "Le Parrain",
-    synopsis: "L'histoire d'une famille mafieuse italienne aux États-Unis.",
-    image:
-      "https://fr.web.img6.acsta.net/c_310_420/pictures/22/01/14/08/39/1848157.jpg",
-    acteurs: ["Marlon Brando", "Al Pacino", "James Caan"],
-    duree: "2h55",
-    note: 9.2,
-    dateSortie: "1972-03-24",
-    realisateur: "Francis Ford Coppola",
-    bandeAnnonce: "https://www.youtube.com/watch?v=bmtuIhesQWA",
-    genre: ["Drame", "Crime"],
-    paysProduction: ["États-Unis"],
-  });
-  const [films, setFilms] = useState(Films);
+  
+  const {detailFilm,film}=useContext(FilmContext)
 
-  const handleFilmClick = (film) => {
-    setDetailFilm(film);
-    window.scrollTo(0, 0);
-  };
+ 
 
   // Filtrer les films par le même genre que le film actuel (mais exclure le film actuel)
-  const similarFilms = films
+  const similarFilms = film
     .filter(
       (film) =>
         film.id !== detailFilm.id &&
@@ -34,13 +18,13 @@ export default function FilmProposer() {
     )
     .slice(0, 6);
   // Obtenir des films populaires (triés par note, excluant le film actuel)
-  const popularFilms = [...films]
+  const popularFilms = [...film]
     .filter((film) => film.id !== detailFilm.id)
     .sort((a, b) => b.note - a.note)
     .slice(0, 6);
 
   // Obtenez des films spé (triés par note, excluant le film actuel)
-  const dramaFilms = films
+  const dramaFilms = film
     .filter((film) => film.id !== detailFilm.id && film.genre.includes("Drame"))
     .slice(0, 6);
   return (
@@ -85,7 +69,6 @@ export default function FilmProposer() {
               <Card
                 key={film.id}
                 film={film}
-                onClick={handleFilmClick}
                 currentFilmId={detailFilm.id}
               />
             ))}

@@ -1,14 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-export default function Card({ film, onClick, currentFilmId }) {
+export default function Card({ film, currentFilmId }) {
   if (film.id === currentFilmId) {
     return null;
   }
 
   return (
-    <div
+    <Link to={`/detailfilm/${film.id}`}
       className="w-48 flex-shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
-      onClick={() => onClick && onClick(film)}
+     
     >
       <div className="relative h-64 overflow-hidden rounded-md shadow-lg">
         <img
@@ -17,6 +18,6 @@ export default function Card({ film, onClick, currentFilmId }) {
           className="w-full h-full object-cover"
         />
       </div>
-    </div>
+    </Link>
   );
 }

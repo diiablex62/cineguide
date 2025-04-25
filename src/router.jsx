@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
         element: <DetailSerie />,
       },
       {
-        ath: "/detailfilm",
+        ath: "/detailfilm/:id",
         element: <DetailFilm />,
         children: [
           {
