@@ -12,7 +12,7 @@
   }
 }
 
-@custom-variant dark (&:where(.dark, .dark *));
+/* @custom-variant dark (&:where(.dark, .dark *)); */
 
 @theme {
   --color-transparent: transparent;
