@@ -117,7 +117,6 @@ export default function Connexion() {
         <div className='w-4/5 flex flex-col items-center'>
           <h1 className='text-6xl font-light text-[var(--color-fuchsia)] text-left'>
             Toutes vos plateformes de
-            <br />
             streaming au
             <br /> même endroit
           </h1>
