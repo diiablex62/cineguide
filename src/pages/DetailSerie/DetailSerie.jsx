@@ -4,7 +4,7 @@ export default function DetailSerie() {
   return (
     <div className=" bg-white dark:bg-gray-900 text-gray-900 dark:text-white font-poppins">
       <nav className="py-2">
-        <div className="flex  space-x-2 px-4 py-4 overflow-x-auto">
+        <div className="flex  space-x-2 px-4 py-4 overflow-x-auto md:justify-center">
           <button className="bg-fuchsia hover:bg-fuchsia-hover text-white px-3 py-1  text-sm">
             Episodes
           </button>
