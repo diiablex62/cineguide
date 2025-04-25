@@ -50,7 +50,7 @@ export default function ModalAbo() {
           <div
             className='fixed inset-0 flex items-center justify-center'
             onClick={(e) => e.stopPropagation()}>
-            <div className='bg-white dark:bg-black p-6 rounded shadow-lg w-11/12 max-w-[900px]'>
+            <div className='bg-white dark:bg-black p-6 rounded shadow-lg w-11/12 max-w-[900px] h-[400px] flex flex-col justify-between'>
               <div className='text-center mb-6 relative'>
                 <h2 className='text-3xl font-light'>
                   {step === 1 ? "Choisir un abonnement :" : "Moyen de paiement"}
@@ -69,7 +69,7 @@ export default function ModalAbo() {
                 )}
               </div>
 
-              <div>
+              <div className='flex-grow'>
                 {step === 1 && (
                   <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4'>
                     {/* Silver Plan */}
@@ -163,7 +163,7 @@ export default function ModalAbo() {
                 )}
 
                 {step === 2 && (
-                  <div className='flex flex-col items-center'>
+                  <div className='flex flex-col items-center justify-center h-full'>
                     <div className='flex justify-center gap-8 mb-6'>
                       <div className='text-center cursor-pointer'>
                         <img
@@ -178,11 +178,6 @@ export default function ModalAbo() {
                         <p className='mt-2'>PayPal</p>
                       </div>
                     </div>
-                    <button
-                      onClick={() => handlePaymentClick("suivant")}
-                      className='p-3 bg-[var(--color-fuchsia)] text-white rounded hover:bg-[var(--color-fuchsia-hover)] cursor-pointer'>
-                      Suivant
-                    </button>
                   </div>
                 )}
               </div>
