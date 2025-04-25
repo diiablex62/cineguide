@@ -69,121 +69,123 @@ export default function ModalAbo() {
                 )}
               </div>
 
-              {step === 1 && (
-                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4'>
-                  {/* Silver Plan */}
-                  <div className='border p-4 rounded shadow mx-auto'>
-                    <div className='flex items-center justify-between'>
-                      <h3 className='text-[26px] font-light'>Silver</h3>
-                      <div className='text-center'>
-                        <img
-                          src={silverLogo}
-                          alt='Silver'
-                          className='h-16 w-16 mx-auto'
-                        />
-                        <p className='text-gray-500 mt-2 whitespace-nowrap'>
-                          20€ / mois
-                        </p>
+              <div>
+                {step === 1 && (
+                  <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4'>
+                    {/* Silver Plan */}
+                    <div className='border p-4 rounded shadow mx-auto'>
+                      <div className='flex items-center justify-between'>
+                        <h3 className='text-[26px] font-light'>Silver</h3>
+                        <div className='text-center'>
+                          <img
+                            src={silverLogo}
+                            alt='Silver'
+                            className='h-16 w-16 mx-auto'
+                          />
+                          <p className='text-gray-500 mt-2 whitespace-nowrap'>
+                            20€ / mois
+                          </p>
+                        </div>
                       </div>
+                      <ul className='mt-4 text-sm'>
+                        <li>➤ Pas de pub</li>
+                        <li>➤ Liste (max 20)</li>
+                        <li>➤ Commentaire / jour (max 10)</li>
+                        <li>➤ Notification (nouvelle saison)</li>
+                        <li>➤ Badge</li>
+                      </ul>
+                      <button
+                        id='silver'
+                        onClick={() => handleSubscriptionClick("silver")}
+                        className='mt-4 p-2 bg-[var(--color-fuchsia)] text-white rounded hover:bg-[var(--color-fuchsia-hover)] w-full cursor-pointer'>
+                        Choisir
+                      </button>
                     </div>
-                    <ul className='mt-4 text-sm'>
-                      <li>➤ Pas de pub</li>
-                      <li>➤ Liste (max 20)</li>
-                      <li>➤ Commentaire / jour (max 10)</li>
-                      <li>➤ Notification (nouvelle saison)</li>
-                      <li>➤ Badge</li>
-                    </ul>
-                    <button
-                      id='silver'
-                      onClick={() => handleSubscriptionClick("silver")}
-                      className='mt-4 p-2 bg-[var(--color-fuchsia)] text-white rounded hover:bg-[var(--color-fuchsia-hover)] w-full cursor-pointer'>
-                      Choisir
-                    </button>
-                  </div>
-                  {/* Gold Plan */}
-                  <div className='border p-4 rounded shadow mx-auto'>
-                    <div className='flex items-center justify-between'>
-                      <h3 className='text-[26px] font-light'>Gold</h3>
-                      <div className='text-center'>
-                        <img
-                          src={goldLogo}
-                          alt='Gold'
-                          className='h-16 w-16 mx-auto'
-                        />
-                        <p className='text-gray-500 mt-2 whitespace-nowrap'>
-                          50€ / mois
-                        </p>
+                    {/* Gold Plan */}
+                    <div className='border p-4 rounded shadow mx-auto'>
+                      <div className='flex items-center justify-between'>
+                        <h3 className='text-[26px] font-light'>Gold</h3>
+                        <div className='text-center'>
+                          <img
+                            src={goldLogo}
+                            alt='Gold'
+                            className='h-16 w-16 mx-auto'
+                          />
+                          <p className='text-gray-500 mt-2 whitespace-nowrap'>
+                            50€ / mois
+                          </p>
+                        </div>
                       </div>
+                      <ul className='mt-4 text-sm'>
+                        <li>➤ Pas de pub</li>
+                        <li>➤ Liste (max 50)</li>
+                        <li>➤ Commentaire / jour (max 100)</li>
+                        <li>➤ Notification (nouvelle saison)</li>
+                        <li>➤ Badge</li>
+                      </ul>
+                      <button
+                        id='gold'
+                        onClick={() => handleSubscriptionClick("gold")}
+                        className='mt-4 p-2 bg-[var(--color-fuchsia)] text-white rounded hover:bg-[var(--color-fuchsia-hover)] w-full cursor-pointer'>
+                        Choisir
+                      </button>
                     </div>
-                    <ul className='mt-4 text-sm'>
-                      <li>➤ Pas de pub</li>
-                      <li>➤ Liste (max 50)</li>
-                      <li>➤ Commentaire / jour (max 100)</li>
-                      <li>➤ Notification (nouvelle saison)</li>
-                      <li>➤ Badge</li>
-                    </ul>
-                    <button
-                      id='gold'
-                      onClick={() => handleSubscriptionClick("gold")}
-                      className='mt-4 p-2 bg-[var(--color-fuchsia)] text-white rounded hover:bg-[var(--color-fuchsia-hover)] w-full cursor-pointer'>
-                      Choisir
-                    </button>
-                  </div>
-                  {/* Diamond Plan */}
-                  <div className='border p-4 rounded shadow mx-auto'>
-                    <div className='flex items-center justify-between'>
-                      <h3 className='text-[26px] font-light'>Diamond</h3>
-                      <div className='text-center'>
-                        <img
-                          src={diamondLogo}
-                          alt='Diamond'
-                          className='h-16 w-16 mx-auto'
-                        />
-                        <p className='text-gray-500 mt-2 whitespace-nowrap'>
-                          550€ / mois
-                        </p>
+                    {/* Diamond Plan */}
+                    <div className='border p-4 rounded shadow mx-auto'>
+                      <div className='flex items-center justify-between'>
+                        <h3 className='text-[26px] font-light'>Diamond</h3>
+                        <div className='text-center'>
+                          <img
+                            src={diamondLogo}
+                            alt='Diamond'
+                            className='h-16 w-16 mx-auto'
+                          />
+                          <p className='text-gray-500 mt-2 whitespace-nowrap'>
+                            550€ / mois
+                          </p>
+                        </div>
                       </div>
+                      <ul className='mt-4 text-sm'>
+                        <li>➤ Pas de pub</li>
+                        <li>➤ Liste (illimité)</li>
+                        <li>➤ Commentaire / jour (illimité)</li>
+                        <li>➤ Notification (nouvelle saison)</li>
+                        <li>➤ Badge</li>
+                      </ul>
+                      <button
+                        id='diamond'
+                        onClick={() => handleSubscriptionClick("diamond")}
+                        className='mt-4 p-2 bg-[var(--color-fuchsia)] text-white rounded hover:bg-[var(--color-fuchsia-hover)] w-full cursor-pointer'>
+                        Choisir
+                      </button>
                     </div>
-                    <ul className='mt-4 text-sm'>
-                      <li>➤ Pas de pub</li>
-                      <li>➤ Liste (illimité)</li>
-                      <li>➤ Commentaire / jour (illimité)</li>
-                      <li>➤ Notification (nouvelle saison)</li>
-                      <li>➤ Badge</li>
-                    </ul>
-                    <button
-                      id='diamond'
-                      onClick={() => handleSubscriptionClick("diamond")}
-                      className='mt-4 p-2 bg-[var(--color-fuchsia)] text-white rounded hover:bg-[var(--color-fuchsia-hover)] w-full cursor-pointer'>
-                      Choisir
-                    </button>
                   </div>
-                </div>
-              )}
+                )}
 
-              {step === 2 && (
-                <div className='flex flex-col items-center'>
-                  <div className='flex justify-center gap-8 mb-6'>
-                    <div className='text-center cursor-pointer'>
-                      <img
-                        src={cbIcon}
-                        alt='Carte Bancaire'
-                        className='h-16 w-16 mx-auto'
-                      />
-                      <p className='mt-2'>Carte Bancaire</p>
+                {step === 2 && (
+                  <div className='flex flex-col items-center'>
+                    <div className='flex justify-center gap-8 mb-6'>
+                      <div className='text-center cursor-pointer'>
+                        <img
+                          src={cbIcon}
+                          alt='Carte Bancaire'
+                          className='h-16 w-16 mx-auto'
+                        />
+                        <p className='mt-2'>Carte Bancaire</p>
+                      </div>
+                      <div className='text-center cursor-pointer'>
+                        <PayPal className='h-16 w-16 mx-auto' />
+                        <p className='mt-2'>PayPal</p>
+                      </div>
                     </div>
-                    <div className='text-center cursor-pointer'>
-                      <PayPal className='h-16 w-16 mx-auto' />
-                      <p className='mt-2'>PayPal</p>
-                    </div>
+                    <button
+                      onClick={() => handlePaymentClick("suivant")}
+                      className='p-3 bg-[var(--color-fuchsia)] text-white rounded hover:bg-[var(--color-fuchsia-hover)] cursor-pointer'>
+                      Suivant
+                    </button>
                   </div>
-                  <button
-                    onClick={() => handlePaymentClick("suivant")}
-                    className='p-3 bg-[var(--color-fuchsia)] text-white rounded hover:bg-[var(--color-fuchsia-hover)] cursor-pointer'>
-                    Suivant
-                  </button>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </div>
         )}
