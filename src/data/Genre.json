@@ -1,0 +1,11 @@
+[
+  { "type": "Drame" },
+  { "type": "Crime" },
+  { "type": "Science-fiction" },
+  { "type": "Action" },
+  { "type": "Thriller" },
+  { "type": "Aventure" },
+  { "type": "Romance" },
+  { "type": "Comédie" },
+  { "type": "Fantasy" }
+]

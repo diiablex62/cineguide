@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 .active {
-  @apply text-red-500;
+  @apply underline;
 }
 
 @layer base {
@@ -13,6 +13,10 @@
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+body.dark {
+  background-color: black;
+}
 
 @theme {
   --color-transparent: transparent;
@@ -30,6 +34,44 @@
   --color-fuchsia: #d91468;
   --color-fuchsia-hover: #b01e5c;
   --color-gray-fonce: #31373b;
-  --color-gray-moyen: #81888e;
+  --color-placeholder: #81888e;
   --color-gray-clair: #d0d5dd;
+  --font-poppins: "Poppins", sans-serif;
+  --breakpoint-1500: 1500px;
+  --breakpoint-1100: 1100px;
 }
+
+* {
+  font-family: Poppins;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: black !important;
+}
+html {font-family: var(--font-poppins);} 
+
+@keyframes animation-fuchsia {
+  0% {
+    background-color: #d91468;
+  }
+  25% {
+    background-color: #c2185b;
+  }
+  50% {
+    background-color: #b01e5c;
+  }
+  75% {
+    background-color: #e91e63;
+  }
+  100% {
+    background-color: #d91468;
+  }
+}
+
+.animate-fuchsia {
+  animation: animation-fuchsia 4s linear infinite alternate both;
+  --font-poppins: Poppins, sans-serif;
+
+}
+
