@@ -33,7 +33,7 @@ export default function CardFilm() {
                 key={index}
                 className="flex md:w-full lg:w-[48%] gap-4 border p-4 mr-2 mb-4"
               >
-                <NavLink to={`/detailfilm/${film.id}`}>
+                <NavLink to={`/detailfilm/${film.id}`} className="w-[30%]">
                   <img
                     className="w-[30%] object-cover"
                     src={film.image}
@@ -100,7 +100,10 @@ export default function CardFilm() {
                   className="flex! flex-col items-center relative"
                 >
                   <div className="relative">
-                    <NavLink to={`/detailfilm/${film.id}`}>
+                    <NavLink
+                      to={`/detailfilm/${film.id}`}
+                      className="w-[375px]"
+                    >
                       <img className="w-[375px]" src={film.image} alt="" />
                     </NavLink>
                     <button
