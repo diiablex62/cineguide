@@ -13,6 +13,7 @@ import FAQ from "./pages/Legal/FAQ";
 import DetailSerie from "./pages/DetailSerie/DetailSerie";
 import DetailFilm from "./pages/DetailFilm/DetailFilm";
 import ActualiteDetail from "./pages/Actualites/ActualiteDetail";
+import Profil from "./pages/Profil/Profil";
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
+        path: "/profil",
+        element: <Profil />,
+      },
+      {
         path: "/film",
         element: <FilmList />,
       },
@@ -32,7 +37,6 @@ export const router = createBrowserRouter([
         element: <DetailSerie />,
       },
       {
-        
         path: "/series",
         element: <SeriesList />,
       },
@@ -66,7 +70,7 @@ export const router = createBrowserRouter([
         element: <ActualitesPage />,
       },
       {
-        path: "/actualites/article", 
+        path: "/actualites/article",
         element: <ActualiteDetail />,
       },
       {
