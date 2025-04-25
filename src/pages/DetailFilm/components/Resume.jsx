@@ -5,7 +5,7 @@ import { FilmContext } from "../../../context/FilmContext";
 export default function Resume() {
   
       const {detailFilm}=useContext(FilmContext)
-      console.log(detailFilm);
+      
       
   return (
     <div className="md:w-2/3 flex-1">

@@ -7,8 +7,10 @@ export default function Film() {
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
 const {detailFilm}=useContext(FilmContext)
-console.log(detailFilm);
 
+if (!detailFilm) {
+  return <div className="p-4 text-center">Chargement du film...</div>;
+}
 
   return (
     <div className="md:w-1/3 flex-shrink-0 md:pl-4">

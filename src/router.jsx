@@ -17,6 +17,8 @@ import Resume from "./pages/DetailFilm/components/Resume";
 import BandeAnnonce from "./pages/DetailFilm/components/BandeAnnonce";
 import Commentaire from "./pages/DetailFilm/components/Commentaire";
 import FilmProposer from "./pages/DetailFilm/components/FilmProposer";
+import ActualiteDetail from "./pages/Actualites/ActualiteDetail";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -30,9 +32,8 @@ export const router = createBrowserRouter([
         path: "/film",
         element: <FilmList />,
       },
-      
+
       {
-        
         path: "/series",
         element: <SeriesList />,
       },
@@ -66,11 +67,15 @@ export const router = createBrowserRouter([
         element: <ActualitesPage />,
       },
       {
+        path: "/actualites/article",
+        element: <ActualiteDetail />,
+      },
+      {
         path: "/detailserie/:id",
         element: <DetailSerie />,
       },
       {
-        ath: "/detailfilm/:id",
+        path: "/detailfilm/:id",
         element: <DetailFilm />,
         children: [
           {

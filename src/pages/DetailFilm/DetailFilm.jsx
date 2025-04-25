@@ -1,18 +1,22 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, Outlet, useParams } from "react-router-dom";
 import Film from "./components/Film";
 import { FilmContext } from "../../context/FilmContext";
 
 export default function DetailFilm() {
   const { id } = useParams();
-  const {film}=useContext(FilmContext)
+  const { film, setDetailFilm } = useContext(FilmContext);
   useEffect(() => {
     const detail = film.find((f) => f.id === Number(id));
-    console.log(detail);
-
+    console.log("Film detail found:", detail);
+    if (detail) {
+      setDetailFilm(detail);
+    } else {
+      console.error("Film not found with id:", id);
+    }
+  }, [id, film, setDetailFilm]);
  
-  }, [id]);
-  
+
   return (
     <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white font-poppins">
       <nav className="py-2 sticky top-0 bg-white dark:bg-gray-900 z-10 shadow-md">
@@ -53,7 +57,7 @@ export default function DetailFilm() {
       <div className="w-full p-4">
         <div className="flex flex-col md:flex-row-reverse">
           <Film />
-          <Outlet  />
+          <Outlet />
         </div>
       </div>
     </div>

@@ -45,7 +45,22 @@ export default function FilmProvider({ children }) {
       )
     );
   }
-  const [detailFilm, setDetailFilm] = useState("film");
+  const [detailFilm, setDetailFilm] = useState({
+    id: 0,
+    titre: "Chargement...",
+    synopsis: "Chargement des informations du film...",
+    image: "https://via.placeholder.com/300x450?text=Chargement...",
+    acteurs: [],
+    duree: "",
+    note: 0,
+    dateSortie: "",
+    realisateur: "",
+    bandeAnnonce: "",
+    genre: [],
+    paysProduction: [],
+    platforms: [],
+    langues: [],
+  });
 
   return (
     <FilmContext.Provider

@@ -4,6 +4,7 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { FilmContext } from "../../../context/FilmContext";
+import { NavLink } from "react-router-dom";
 
 export default function CardFilm() {
   const {
@@ -26,7 +27,9 @@ export default function CardFilm() {
             key={index}
             className="flex md:w-full lg:w-[48%] gap-4 border p-4 mr-2 mb-4"
           >
-            <img className="w-[30%] object-cover" src={film.image} alt="" />
+            <NavLink to={`/detailfilm/${film.id}`}>
+              <img className="w-[30%] object-cover" src={film.image} alt="" />
+            </NavLink>
             <div className="w-[70%] flex flex-col justify-center mt-2 shadow-xl py-4 px-4">
               <p className="font-bold text-2xl">{film.titre}</p>
               <div className="flex">
@@ -83,7 +86,9 @@ export default function CardFilm() {
               className="flex! flex-col items-center relative"
             >
               <div className="relative">
-                <img className="w-[375px]" src={film.image} alt="" />
+                <NavLink to={`/detailfilm/${film.id}`}>
+                  <img className="w-[375px]" src={film.image} alt="" />
+                </NavLink>
                 <button
                   onClick={() => toggleState(setOpenInfoStates, index)}
                   className="cursor-pointer absolute bottom-0 right-0 mr-[10px] mb-2 text-white text-4xl bg-pink-700 px-2 rounded"

@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function FirstArticleCard({
   title,
@@ -7,8 +8,16 @@ export default function FirstArticleCard({
   category,
   link,
 }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/actualites/article");
+  };
+
   return (
-    <div className='relative mb-8 w-full md:w-[50%] mx-auto'>
+    <div
+      className='relative mb-8 w-full md:w-[50%] mx-auto cursor-pointer'
+      onClick={handleClick}>
       <img
         alt={title}
         className='w-full h-96 object-cover rounded-lg'
@@ -18,9 +27,11 @@ export default function FirstArticleCard({
         <p className='text-sm text-[var(--color-fuchsia)] font-bold uppercase'>
           {category} / {date}
         </p>
-        <h2 className='text-2xl font-bold text-white mt-2'>{title}</h2>
+        <h2 className='text-2xl font-bold text-gray-800 dark:text-white mt-2'>
+          {title}
+        </h2>
         <a
-          href={link}
+          href='article'
           className='text-sm text-[var(--color-fuchsia)] hover:underline mt-4'>
           Lire l'article
         </a>

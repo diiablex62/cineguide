@@ -4,10 +4,7 @@ import Card from "../Card";
 import { FilmContext } from "../../../context/FilmContext";
 
 export default function FilmProposer() {
-  
-  const {detailFilm,film}=useContext(FilmContext)
-
- 
+  const { detailFilm, film } = useContext(FilmContext);
 
   // Filtrer les films par le même genre que le film actuel (mais exclure le film actuel)
   const similarFilms = film
@@ -35,12 +32,7 @@ export default function FilmProposer() {
         </h2>
         <div className="flex overflow-x-auto gap-4 pb-4">
           {similarFilms.slice(0, 4).map((film) => (
-            <Card
-              key={film.id}
-              film={film}
-              onClick={handleFilmClick}
-              currentFilmId={detailFilm.id}
-            />
+            <Card key={film.id} film={film} currentFilmId={detailFilm.id} />
           ))}
         </div>
 
@@ -50,12 +42,7 @@ export default function FilmProposer() {
           </h2>
           <div className="flex overflow-x-auto gap-4 pb-4">
             {popularFilms.map((film) => (
-              <Card
-                key={film.id}
-                film={film}
-                onClick={handleFilmClick}
-                currentFilmId={detailFilm.id}
-              />
+              <Card key={film.id} film={film} currentFilmId={detailFilm.id} />
             ))}
           </div>
         </div>
@@ -66,11 +53,7 @@ export default function FilmProposer() {
           </h2>
           <div className="flex overflow-x-auto gap-4 pb-4">
             {dramaFilms.map((film) => (
-              <Card
-                key={film.id}
-                film={film}
-                currentFilmId={detailFilm.id}
-              />
+              <Card key={film.id} film={film} currentFilmId={detailFilm.id} />
             ))}
           </div>
         </div>
