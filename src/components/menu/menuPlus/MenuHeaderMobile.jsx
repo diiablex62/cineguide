@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { MenuContext } from "../../../context/MenuContext";
 
-export default function MenuHeaderMobile({ menuPlusRef, setMenuPlus }) {
+export default function MenuHeaderMobile() {
+  const { menuPlusRef, setMenuPlus } = useContext(MenuContext);
+
   return (
     <div
       ref={menuPlusRef}
-      className="absolute border border-black bg-white shadow-md flex items-center flex-col gap-2.5 p-2.5 pr-5 z-50 dark:bg-black dark:border-white dark:shadow-white"
+      className="border border-black bg-white shadow-md flex items-center flex-col gap-2.5 p-2.5 w-full dark:bg-black dark:border-white dark:shadow-white"
     >
       <NavLink
         to="/mentionsLegales"

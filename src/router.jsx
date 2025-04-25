@@ -8,6 +8,8 @@ import MentionsLegales from "./pages/Legal/MentionsLegales";
 import CGU from "./pages/Legal/CGU";
 import CGV from "./pages/Legal/CGV";
 import FAQ from "./pages/Legal/FAQ";
+import Connexion from "./pages/Auth/Connexion";
+import Inscription from "./pages/Auth/Inscription";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -44,6 +46,14 @@ export const router = createBrowserRouter([
       {
         path: "/faq",
         element: <FAQ />,
+      },
+      {
+        path: "/connexion",
+        element: <Connexion />,
+      },
+      {
+        path: "/inscription",
+        element: <Inscription />,
       },
     ],
   },

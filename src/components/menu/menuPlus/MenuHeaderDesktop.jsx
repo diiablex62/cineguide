@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { MenuContext } from "../../../context/MenuContext";
 
-export default function MenuHeaderDesktop({ menuRef, setMenu }) {
+export default function MenuHeaderDesktop() {
+  const { menuRef, setMenu } = useContext(MenuContext);
   return (
     <div
       ref={menuRef}

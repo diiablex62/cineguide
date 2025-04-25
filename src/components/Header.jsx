@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext } from "react";
 import logo from "../assets/logo.png";
 import logoWhite from "../assets/logo_blanc.png";
 import { IoSearchOutline } from "react-icons/io5";
@@ -7,7 +7,7 @@ import { FaChevronDown } from "react-icons/fa";
 import { FaChevronUp } from "react-icons/fa";
 import MenuHeaderDesktop from "./menu/menuPlus/MenuHeaderDesktop";
 import fr from "../assets/france.png";
-import MenuLangageDesktop from "./menu/menuLangage/MenuLangageDesktop";
+import MenuLangage from "./menu/menuLangage/MenuLangage";
 import { LangageContext } from "../context/LangageContext";
 import { FaFacebookSquare } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
@@ -16,34 +16,12 @@ import { MdSunny } from "react-icons/md";
 import { ThemeContext } from "../context/ThemeContext";
 import { RiMenu2Fill } from "react-icons/ri";
 import MenuBurger from "./menu/menuResponsive/MenuBurger";
+import { MenuContext } from "../context/MenuContext";
 
 export default function Header() {
   const { langageMenu, setLangageMenu } = useContext(LangageContext);
   const { theme, toggleTheme } = useContext(ThemeContext);
-  const [menu, setMenu] = useState(false);
-  const menuRef = useRef(null);
-  const [burger, setBurger] = useState(false);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setMenu(false);
-      }
-    };
-
-    if (menu) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [menu]);
-
-  const toggleBurger = () =>
-    setBurger((prev) => (prev === false ? true : false));
+  const { menu, setMenu, burger, toggleBurger } = useContext(MenuContext);
 
   return (
     <div className="flex items-center justify-between shadow-md px-8 py-4 gap-2.5 dark:bg-black dark:text-white dark:shadow-white">
@@ -99,7 +77,7 @@ export default function Header() {
                 <p>Plus</p>
                 <FaChevronUp />
               </div>
-              <MenuHeaderDesktop menuRef={menuRef} setMenu={setMenu} />
+              <MenuHeaderDesktop />
             </div>
           ) : (
             <div
@@ -114,21 +92,26 @@ export default function Header() {
       </div>
       <div className="flex flex-col gap-4 items-center justify-end max-1100:hidden">
         <div className="flex gap-5">
-          <button className="bg-fuchsia px-18 text-white max-1500:px-8">
+          <NavLink
+            to="/connexion"
+            className="bg-fuchsia px-18 py-4 text-white max-1500:px-8"
+          >
             Connexion
-          </button>
-          <button className="px-18 border max-1500:px-8">S'inscrire</button>
-          {langageMenu ? (
-            <MenuLangageDesktop />
-          ) : (
-            <div
-              onClick={() => setLangageMenu(true)}
-              className="flex items-center justify-between px-4 py-2.5 gap-2 w-fit border bg-white dark:bg-black dark:border-white"
-            >
-              <img src={fr} alt="drapeau langue française" className="w-8" />
-              <FaChevronDown />
-            </div>
-          )}
+          </NavLink>
+          <NavLink
+            to="/inscription"
+            className="bg-white text-black dark:bg-black dark:text-white px-18 py-4 border max-1500:px-8"
+          >
+            S'inscrire
+          </NavLink>
+          <div
+            onClick={() => setLangageMenu(true)}
+            className="flex items-center justify-between px-4 py-2.5 gap-2 w-fit border bg-white dark:bg-black dark:border-white"
+          >
+            <img src={fr} alt="drapeau langue française" className="w-8" />
+            <FaChevronDown />
+          </div>
+          {langageMenu && <MenuLangage />}
         </div>
         <div className="flex gap-[30px] items-center justify-end w-full">
           <div
@@ -136,11 +119,16 @@ export default function Header() {
             className="flex items-center gap-8 px-6 py-3 border cursor-pointer"
           >
             {theme === "dark" ? (
-              <MdSunny className="text-3xl" />
+              <>
+                <MdSunny className="text-3xl" />
+                <p>Mode Light</p>
+              </>
             ) : (
-              <BsFillMoonStarsFill className="text-3xl" />
+              <>
+                <BsFillMoonStarsFill className="text-3xl" />
+                <p>Mode Dark</p>
+              </>
             )}
-            <p>Mode Dark</p>
           </div>
           <div className="flex gap-5 items-center justify-center text-3xl">
             <FaFacebookSquare className="dark:text-white" />
@@ -150,7 +138,7 @@ export default function Header() {
       </div>
 
       {burger ? (
-        <MenuBurger toggleBurger={toggleBurger} />
+        <MenuBurger />
       ) : (
         <RiMenu2Fill
           onClick={toggleBurger}
