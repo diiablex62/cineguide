@@ -33,11 +33,11 @@ export default function CardFilm() {
                 key={index}
                 className="flex md:w-full lg:w-[48%] gap-4 border p-4 mr-2 mb-4"
               >
-                <NavLink to={`/detailfilm/${film.id}`} className="w-[30%]">
+                <NavLink to={`/detailfilm/${film.id}`} className="w-48 h-64">
                   <img
-                    className="w-[30%] object-cover"
+                    className="w-full h-full object-cover"
                     src={film.image}
-                    alt=""
+                    alt={film.titre}
                   />
                 </NavLink>
                 <div className="w-[70%] flex flex-col justify-center mt-2 shadow-xl py-4 px-4">
