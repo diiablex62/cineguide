@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AuthContext } from "../../components/providers/AuthProvider";
-import GoogleIcon from "../../components/filtre/icone/google";
+import GoogleIcon from "../../components/icone/google";
 
 const EyeIcon = () => (
   <svg
@@ -210,7 +210,7 @@ export default function Inscription() {
                 type='button'
                 onClick={togglePasswordVisibility}
                 className='absolute inset-y-0 right-3 flex items-center text-gray-500 dark:text-gray-300'>
-                {showPassword ?  <EyeIcon /> : <EyeSlashIcon />}
+                {showPassword ? <EyeIcon /> : <EyeSlashIcon />}
               </button>
             </div>
             {errors.password && (
@@ -237,7 +237,7 @@ export default function Inscription() {
                 type='button'
                 onClick={toggleConfirmPasswordVisibility}
                 className='absolute inset-y-0 right-3 flex items-center text-gray-500 dark:text-gray-300'>
-                {showConfirmPassword ?  <EyeIcon /> : <EyeSlashIcon />}
+                {showConfirmPassword ? <EyeIcon /> : <EyeSlashIcon />}
               </button>
             </div>
             {errors.confirmPassword && (
@@ -283,7 +283,9 @@ export default function Inscription() {
         </form>
         <p className='text-center mt-4 text-sm text-black dark:text-white'>
           Déjà inscrit ?{" "}
-          <a href='/connexion' className='text-[var(--color-fuchsia)] dark:text-[var(--color-fuchsia)] underline'>
+          <a
+            href='/connexion'
+            className='text-[var(--color-fuchsia)] dark:text-[var(--color-fuchsia)] underline'>
             Se connecter
           </a>
         </p>

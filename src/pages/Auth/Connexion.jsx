@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AuthContext } from "../../components/providers/AuthProvider";
-import GoogleIcon from "../../components/filtre/icone/google";
+import GoogleIcon from "../../components/icone/google";
 
 const EyeIcon = () => (
   <svg

@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import FilmList from "./pages/Films/FilmsList";
 import Connexion from "./pages/Auth/Connexion";
 import Inscription from "./pages/Auth/Inscription";
+import ActualitesPage from "./pages/Actualites/ActualitesPage";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
       {
         path: "/inscription",
         element: <Inscription />,
+      },
+      {
+        path: "/actualite",
+        element: <ActualitesPage />,
       },
     ],
   },
