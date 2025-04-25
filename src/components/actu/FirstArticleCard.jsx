@@ -27,7 +27,9 @@ export default function FirstArticleCard({
         <p className='text-sm text-[var(--color-fuchsia)] font-bold uppercase'>
           {category} / {date}
         </p>
-        <h2 className='text-2xl font-bold text-white mt-2'>{title}</h2>
+        <h2 className='text-2xl font-bold text-gray-800 dark:text-white mt-2'>
+          {title}
+        </h2>
         <a
           href='article'
           className='text-sm text-[var(--color-fuchsia)] hover:underline mt-4'>

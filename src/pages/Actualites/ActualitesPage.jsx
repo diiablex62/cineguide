@@ -168,7 +168,8 @@ export default function ActualitesPage() {
             }
             date={article.date}
             category={article.category}
-            link={article.link}
+            link='/article'
+            className='text-gray-800 dark:text-white'
           />
         ) : (
           <ArticleCard
@@ -177,7 +178,8 @@ export default function ActualitesPage() {
             image={article.image}
             date={article.date}
             category={article.category}
-            link={article.link}
+            link='#'
+            className='text-gray-800 dark:text-white'
           />
         )
       )}
@@ -186,7 +188,7 @@ export default function ActualitesPage() {
           <button
             key={index + 1}
             onClick={() => handlePageChange(index + 1)}
-            className={`px-3 py-1 mx-1 border rounded ${
+            className={`px-3 py-1 mx-1 border rounded cursor-pointer ${
               currentPage === index + 1
                 ? "bg-[var(--color-fuchsia)] text-white"
                 : "bg-white text-black border-gray-300 hover:bg-gray-100"
