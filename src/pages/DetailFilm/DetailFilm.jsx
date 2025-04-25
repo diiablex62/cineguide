@@ -15,11 +15,10 @@ export default function DetailFilm() {
       console.error("Film not found with id:", id);
     }
   }, [id, film, setDetailFilm]);
- 
 
   return (
-    <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white font-poppins">
-      <nav className="py-2 sticky top-0 bg-white dark:bg-gray-900 z-10 shadow-md">
+    <div className="bg-white dark:bg-black text-gray-900 dark:text-white font-poppins">
+      <nav className="py-2 sticky top-0 -10 shadow-md">
         <div className="flex  space-x-2 px-4 py-4 overflow-auto md:justify-center">
           <Link
             to={""}
