@@ -7,7 +7,8 @@ export default function ActualitesPage() {
     {
       title:
         "Avengers Doomsday : fausse bonne nouvelle pour le retour de ce X-Men ?",
-      image: "/path/to/image1.jpg",
+      image:
+        "https://www.ecranlarge.com/content/uploads/2025/04/avengers-doomsday-fausse-bonne-nouvelle-pour-le-retour-de-ce-x-men--1260x708.jpg.webp",
       date: "10 avril 2025",
       category: "FILMS",
       link: "/article/1",
@@ -15,7 +16,8 @@ export default function ActualitesPage() {
     {
       title:
         "Minecraft 2 : la suite déjà en discussion chez la Warner après le démarrage record du film",
-      image: "/path/to/image2.jpg",
+      image:
+        "https://www.ecranlarge.com/content/uploads/2025/04/minecraft-suite-1260x708.jpg.webp",
       date: "10 avril 2025",
       category: "FILMS",
       link: "/article/2",
@@ -23,14 +25,16 @@ export default function ActualitesPage() {
     {
       title:
         "Le Podcast d'Écran Large : Minecraft écrase tout, Tron 3 et Mission Impossible 8 intriguent...",
-      image: "/path/to/image3.jpg",
+      image:
+        "https://www.ecranlarge.com/content/uploads/2025/04/design-sans-titre-2025-04-09t180228.656-1260x708.jpg.webp",
       date: "10 avril 2025",
       category: "FILMS",
       link: "/article/3",
     },
     {
       title: "Le méga-bide Mickey 17 : pourquoi Warner enchaîne les échecs ?",
-      image: "/path/to/image4.jpg",
+      image:
+        "https://www.ecranlarge.com/content/uploads/2025/04/bo_warner_v3b-1260x708.jpg.webp",
       date: "09 avril 2025",
       category: "FILMS",
       link: "/article/4",
@@ -38,7 +42,8 @@ export default function ActualitesPage() {
     {
       title:
         "Le film le plus terrifiant que vous n'avez pas vu va avoir le droit à son remake, et c'est d'actualité",
-      image: "/path/to/image5.jpg",
+      image:
+        "https://www.ecranlarge.com/content/uploads/2025/04/design-sans-titre-2025-04-09t164624.367-1260x708.jpg.webp",
       date: "09 avril 2025",
       category: "FILMS",
       link: "/article/5",
@@ -46,7 +51,8 @@ export default function ActualitesPage() {
     {
       title:
         "Predator : bande-annonce entre samouraïs et vikings pour le film secret Killer of Killers (et une date)",
-      image: "/path/to/image6.jpg",
+      image:
+        "https://www.ecranlarge.com/content/uploads/2025/04/predator-ba-1260x708.jpg.webp",
       date: "09 avril 2025",
       category: "FILMS",
       link: "/article/6",
@@ -54,7 +60,8 @@ export default function ActualitesPage() {
     {
       title:
         "Dune 3 : le casting s’agrandit avec l’un des pires ennemis de Paul Atréides (et c’est un grand oui)",
-      image: "/path/to/image7.jpg",
+      image:
+        "https://www.ecranlarge.com/content/uploads/2025/04/design-sans-titre-2025-04-01t155046.217-1260x708.jpg.webp",
       date: "09 avril 2025",
       category: "FILMS",
       link: "/article/7",
@@ -62,7 +69,8 @@ export default function ActualitesPage() {
     {
       title:
         "Balle Perdue 3 : bande-annonce explosive pour le retour du Fast and Furious français de Netflix",
-      image: "/path/to/image8.jpg",
+      image:
+        "https://www.ecranlarge.com/content/uploads/2025/04/balle-perdue-3-une-bande-annonce-explosive-pour-le-retour-du-fast-and-furious-francais-1-1260x708.jpg.webp",
       date: "09 avril 2025",
       category: "FILMS",
       link: "/article/8",
@@ -70,7 +78,8 @@ export default function ActualitesPage() {
     {
       title:
         "Souviens-toi... l’été dernier : coup de vieux avec les premières photos de la suite qui fait peur",
-      image: "/path/to/image9.jpg",
+      image:
+        "https://www.ecranlarge.com/content/uploads/2025/04/souviens-toi-lete-dernier-coup-de-vieux-premieres-photos-1260x708.png.webp",
       date: "09 avril 2025",
       category: "FILMS",
       link: "/article/9",
@@ -78,7 +87,8 @@ export default function ActualitesPage() {
     {
       title:
         "Tron Ares : Jared Leto joue un méchant Pinocchio dans le nouveau film, apparemment",
-      image: "/path/to/image10.jpg",
+      image:
+        "https://www.ecranlarge.com/content/uploads/2025/04/tron-ares-jared-leto-joue-un-mechant-pinocchio-dans-le-nouveau-film.jpg.webp",
       date: "09 avril 2025",
       category: "FILMS",
       link: "/article/10",
@@ -86,7 +96,8 @@ export default function ActualitesPage() {
     {
       title:
         "Road House 2 : la suite du remake Amazon avec Jake Gyllenhaal a peut-être trouvé un nouveau...",
-      image: "/path/to/image11.jpg",
+      image:
+        "https://www.ecranlarge.com/content/uploads/2025/04/road-house-2-realisateur-1260x708.jpg.webp",
       date: "08 avril 2025",
       category: "FILMS",
       link: "/article/11",
@@ -94,7 +105,8 @@ export default function ActualitesPage() {
     {
       title:
         "The Odyssey : on connaît peut-être le rôle de Robert Pattinson dans le film de Nolan",
-      image: "/path/to/image12.jpg",
+      image:
+        "https://www.ecranlarge.com/content/uploads/2025/04/the-odyssey-on-connait-peut-etre-le-role-de-robert-pattinson-dans-le-film-de-nolan-1260x708.jpg.webp",
       date: "08 avril 2025",
       category: "FILMS",
       link: "/article/12",
@@ -102,7 +114,8 @@ export default function ActualitesPage() {
     {
       title:
         "An Innocent Girl : Netflix prépare un thriller érotique avec Jaume Collet-Serra (Carry-On)",
-      image: "/path/to/image13.jpg",
+      image:
+        "https://www.ecranlarge.com/content/uploads/2025/04/design-sans-titre-2025-04-08t140917.028-1260x708.jpg.webp",
       date: "08 avril 2025",
       category: "FILMS",
       link: "/article/13",
@@ -110,7 +123,8 @@ export default function ActualitesPage() {
     {
       title:
         "Minecraft : cette révélation prouve le total chaos en coulisses (et explique beaucoup de choses)",
-      image: "/path/to/image14.jpg",
+      image:
+        "https://www.ecranlarge.com/content/uploads/2025/04/design-sans-titre-2025-04-08t144800.767-1260x708.jpg.webp",
       date: "08 avril 2025",
       category: "FILMS",
       link: "/article/14",
@@ -131,6 +145,7 @@ export default function ActualitesPage() {
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: "smooth" }); // Transition douce pour le défilement
   };
 
   return (
@@ -143,7 +158,13 @@ export default function ActualitesPage() {
           <FirstArticleCard
             key={index}
             title={article.title}
-            image={article.image}
+            image={
+              currentArticles.find(
+                (a) =>
+                  a.title ===
+                  "Road House 2 : la suite du remake Amazon avec Jake Gyllenhaal a peut-être trouvé un nouveau..."
+              )?.image || article.image
+            } // Utilise l'image de "Road House 2" si disponible
             date={article.date}
             category={article.category}
             link={article.link}

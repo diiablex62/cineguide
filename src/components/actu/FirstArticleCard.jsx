@@ -10,11 +10,11 @@ export default function FirstArticleCard({
   return (
     <div className='relative mb-8 w-full md:w-[50%] mx-auto'>
       <img
-        src={image}
         alt={title}
         className='w-full h-96 object-cover rounded-lg'
+        src={image}
       />
-      <div className='absolute inset-0 bg-black bg-opacity-50 rounded-lg flex flex-col justify-end p-6'>
+      <div className='absolute inset-0 bg-opacity-50 rounded-lg flex flex-col justify-end p-6'>
         <p className='text-sm text-[var(--color-fuchsia)] font-bold uppercase'>
           {category} / {date}
         </p>
