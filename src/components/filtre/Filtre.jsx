@@ -53,6 +53,11 @@ export default function Filtre() {
                     el.classList.remove("bg-black!", "text-white!");
                   });
                   e.target.classList.add("bg-black!", "text-white!");
+                  document
+                    .querySelectorAll('input[name="see"]')
+                    .forEach((el) => {
+                      el.checked = false;
+                    });
                 }}
                 href="#"
                 key={index}
@@ -140,6 +145,11 @@ export default function Filtre() {
                     el.classList.remove("bg-black!", "text-white!");
                   });
                   e.target.classList.add("bg-black!", "text-white!");
+                  document
+                    .querySelectorAll('input[name="see"]')
+                    .forEach((el) => {
+                      el.checked = false;
+                    });
                 }}
                 key={index}
                 className="genre-link text-[12px] bg-white hover:bg-black hover:text-white text-black border flex rounded items-center justify-center text-center p-2"
