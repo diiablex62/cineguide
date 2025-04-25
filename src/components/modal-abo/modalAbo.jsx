@@ -50,11 +50,8 @@ export default function ModalAbo() {
           <div
             className='fixed inset-0 flex items-center justify-center'
             onClick={(e) => e.stopPropagation()}>
-            <div className='bg-white dark:bg-black p-6 rounded shadow-lg w-11/12 max-w-[900px] h-[400px] flex flex-col justify-between'>
-              <div className='text-center mb-6 relative'>
-                <h2 className='text-3xl font-light'>
-                  {step === 1 ? "Choisir un abonnement :" : "Moyen de paiement"}
-                </h2>
+            <div className='bg-white dark:bg-black p-6 rounded shadow-lg w-11/12 max-w-[900px] h-auto sm:h-[400px] flex flex-col justify-between'>
+              <div className='relative mb-6'>
                 <button
                   onClick={handleCloseModal}
                   className='absolute top-0 right-0 text-4xl font-light text-black hover:text-gray-700 cursor-pointer'>
@@ -67,9 +64,12 @@ export default function ModalAbo() {
                     &larr; Retour
                   </button>
                 )}
+                <h2 className='text-2xl sm:text-3xl font-light mt-10 sm:mt-0 text-center'>
+                  {step === 1 ? "Choisir un abonnement :" : "Moyen de paiement"}
+                </h2>
               </div>
 
-              <div className='flex-grow'>
+              <div className='flex-grow flex flex-col'>
                 {step === 1 && (
                   <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4'>
                     {/* Silver Plan */}
@@ -163,8 +163,8 @@ export default function ModalAbo() {
                 )}
 
                 {step === 2 && (
-                  <div className='flex flex-col items-center justify-center h-full'>
-                    <div className='flex justify-center gap-8 mb-6'>
+                  <div className='flex flex-col items-center justify-center flex-grow'>
+                    <div className='flex flex-col sm:flex-row justify-center gap-8 mb-6'>
                       <div className='text-center cursor-pointer'>
                         <img
                           src={cbIcon}
