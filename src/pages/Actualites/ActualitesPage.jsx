@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Outlet } from "react-router-dom";
 import ArticleCard from "../../components/actu/ArticleCard";
 import FirstArticleCard from "../../components/actu/FirstArticleCard";
 
@@ -11,7 +12,7 @@ export default function ActualitesPage() {
         "https://www.ecranlarge.com/content/uploads/2025/04/avengers-doomsday-fausse-bonne-nouvelle-pour-le-retour-de-ce-x-men--1260x708.jpg.webp",
       date: "10 avril 2025",
       category: "FILMS",
-      link: "/article/1",
+      link: "/article",
     },
     {
       title:
@@ -145,7 +146,7 @@ export default function ActualitesPage() {
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
-    window.scrollTo({ top: 0, behavior: "smooth" }); 
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -164,7 +165,7 @@ export default function ActualitesPage() {
                   a.title ===
                   "Road House 2 : la suite du remake Amazon avec Jake Gyllenhaal a peut-être trouvé un nouveau..."
               )?.image || article.image
-            } 
+            }
             date={article.date}
             category={article.category}
             link={article.link}

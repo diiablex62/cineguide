@@ -12,6 +12,8 @@ import CGV from "./pages/Legal/CGV";
 import FAQ from "./pages/Legal/FAQ";
 import DetailSerie from "./pages/DetailSerie/DetailSerie";
 import DetailFilm from "./pages/DetailFilm/DetailFilm";
+import ActualiteDetail from "./pages/Actualites/ActualiteDetail";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -29,7 +31,7 @@ export const router = createBrowserRouter([
         path: "/series",
         element: <SeriesList />,
       },
-    
+
       {
         path: "/mentionsLegales",
         element: <MentionsLegales />,
@@ -57,6 +59,10 @@ export const router = createBrowserRouter([
       {
         path: "/actualites",
         element: <ActualitesPage />,
+      },
+      {
+        path: "/actualites/article", 
+        element: <ActualiteDetail />,
       },
       {
         path: "/detailserie/:id",
