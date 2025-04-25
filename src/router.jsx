@@ -12,6 +12,11 @@ import CGV from "./pages/Legal/CGV";
 import FAQ from "./pages/Legal/FAQ";
 import DetailSerie from "./pages/DetailSerie/DetailSerie";
 import DetailFilm from "./pages/DetailFilm/DetailFilm";
+import Tous from "./pages/DetailFilm/components/Tous";
+import Resume from "./pages/DetailFilm/components/Resume";
+import BandeAnnonce from "./pages/DetailFilm/components/BandeAnnonce";
+import Commentaire from "./pages/DetailFilm/components/Commentaire";
+import FilmProposer from "./pages/DetailFilm/components/FilmProposer";
 import ActualiteDetail from "./pages/Actualites/ActualiteDetail";
 
 export const router = createBrowserRouter([
@@ -27,12 +32,8 @@ export const router = createBrowserRouter([
         path: "/film",
         element: <FilmList />,
       },
+
       {
-        path: "/detailserie",
-        element: <DetailSerie />,
-      },
-      {
-        
         path: "/series",
         element: <SeriesList />,
       },
@@ -66,7 +67,7 @@ export const router = createBrowserRouter([
         element: <ActualitesPage />,
       },
       {
-        path: "/actualites/article", 
+        path: "/actualites/article",
         element: <ActualiteDetail />,
       },
       {
@@ -76,6 +77,28 @@ export const router = createBrowserRouter([
       {
         path: "/detailfilm/:id",
         element: <DetailFilm />,
+        children: [
+          {
+            index: true,
+            element: <Tous />,
+          },
+          {
+            path: "resume",
+            element: <Resume />,
+          },
+          {
+            path: "bandeannonce",
+            element: <BandeAnnonce />,
+          },
+          {
+            path: "commentaire",
+            element: <Commentaire />,
+          },
+          {
+            path: "filmproposer",
+            element: <FilmProposer />,
+          },
+        ],
       },
     ],
   },
