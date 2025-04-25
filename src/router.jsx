@@ -5,9 +5,7 @@ import FilmList from "./pages/Films/FilmsList";
 import Connexion from "./pages/Auth/Connexion";
 import Inscription from "./pages/Auth/Inscription";
 import ActualitesPage from "./pages/Actualites/ActualitesPage";
-
 import SeriesList from "./pages/Series/SeriesList";
-import ActualitesPage from "./pages/Actualites/ActualitesPage";
 import MentionsLegales from "./pages/Legal/MentionsLegales";
 import CGU from "./pages/Legal/CGU";
 import CGV from "./pages/Legal/CGV";
@@ -57,7 +55,7 @@ export const router = createBrowserRouter([
         element: <Inscription />,
       },
       {
-        path: "/actualite",
+        path: "/actualites",
         element: <ActualitesPage />,
       },
       {
