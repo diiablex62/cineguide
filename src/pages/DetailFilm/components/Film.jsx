@@ -3,23 +3,22 @@ import { FaRegStar, FaStar } from "react-icons/fa";
 import { FilmContext } from "../../../context/FilmContext";
 
 export default function Film() {
- 
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
-const {detailFilm}=useContext(FilmContext)
+  const { detailFilm } = useContext(FilmContext);
 
-if (!detailFilm) {
-  return <div className="p-4 text-center">Chargement du film...</div>;
-}
+  if (!detailFilm) {
+    return <div className="p-4 text-center">Chargement du film...</div>;
+  }
 
   return (
     <div className="md:w-1/3 flex-shrink-0 md:pl-4">
       <div className="flex gap-4 p-3 mb-6">
-        <div className="bg-gray-800 mb-3 w-1/2 h-44 md:h-64 relative  overflow-hidden shadow-xl">
+        <div className="bg-gray-800 mb-3 h-64 w-48 relative  overflow-hidden shadow-xl">
           <img
             src={`${detailFilm.image}`}
             alt={`${detailFilm.titre}`}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-fill"
           />
         </div>
         <div className="flex flex-col">
