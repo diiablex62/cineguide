@@ -8,65 +8,77 @@ export default function ActualiteDetail() {
   const [articleContent, setArticleContent] = useState("");
   const [isLoading, setIsLoading] = useState(true); // État pour le chargement
 
-  // proxy pour contourner les CORS
+  // Liste des proxys à tester
+  const proxyList = [
+    "https://corsproxy.io/?",
+    "https://api.allorigins.win/get?url=",
+    "https://thingproxy.freeboard.io/fetch/",
+  ];
+
   useEffect(() => {
     const fetchArticleContent = async () => {
       if (!article?.link) return;
-      try {
-        const proxyUrl = "https://thingproxy.freeboard.io/fetch/";
-        const response = await fetch(
-          proxyUrl + encodeURIComponent(article.link)
-        );
-        const data = await response.text();
-        const parser = new DOMParser();
-        const html = parser.parseFromString(data, "text/html");
 
-        // Cibler le contenu principal avec l'ID #article-content
-        const contentElement = html.querySelector("#article-content");
-        if (contentElement) {
-          // Supprimer uniquement les sections indésirables
-          const unwantedElements = contentElement.querySelectorAll(
-            ".cms-item-wrapper, .media-info-entity, .button-action-holder"
+      for (const proxyUrl of proxyList) {
+        try {
+          const response = await fetch(
+            proxyUrl + encodeURIComponent(article.link)
           );
-          unwantedElements.forEach((el) => el.remove());
+          const data = proxyUrl.includes("allorigins")
+            ? await response.json()
+            : await response.text();
+          const parser = new DOMParser();
+          const html = parser.parseFromString(
+            proxyUrl.includes("allorigins") ? data.contents : data,
+            "text/html"
+          );
 
-          // Gérer les images avec `data-src`
-          const images = contentElement.querySelectorAll("img");
-          images.forEach((img) => {
-            if (img.getAttribute("data-src")) {
-              img.setAttribute("src", img.getAttribute("data-src"));
-            }
-            img.classList.add("max-w-full", "h-auto", "my-4");
-          });
-
-          // Ajouter des classes Tailwind aux paragraphes
-          const paragraphs = contentElement.querySelectorAll(".bo-p");
-          paragraphs.forEach((p) => {
-            p.classList.add(
-              "mb-6",
-              "leading-relaxed",
-              "text-base",
-              "text-gray-800",
-              "dark:text-white"
+          // Cibler le contenu principal avec l'ID #article-content
+          const contentElement = html.querySelector("#article-content");
+          if (contentElement) {
+            // Supprimer uniquement les sections indésirables
+            const unwantedElements = contentElement.querySelectorAll(
+              ".cms-item-wrapper, .media-info-entity, .button-action-holder"
             );
-          });
+            unwantedElements.forEach((el) => el.remove());
 
-          // Extraire le contenu nettoyé
-          setArticleContent(contentElement.innerHTML);
-        } else {
-          setArticleContent("Contenu indisponible.");
+            // Gérer les images avec `data-src`
+            const images = contentElement.querySelectorAll("img");
+            images.forEach((img) => {
+              if (img.getAttribute("data-src")) {
+                img.setAttribute("src", img.getAttribute("data-src"));
+              }
+              img.classList.add("max-w-full", "h-auto", "my-4");
+            });
+
+            // Ajouter des classes Tailwind aux paragraphes
+            const paragraphs = contentElement.querySelectorAll(".bo-p");
+            paragraphs.forEach((p) => {
+              p.classList.add(
+                "mb-6",
+                "leading-relaxed",
+                "text-base",
+                "text-gray-800",
+                "dark:text-white"
+              );
+            });
+
+            // Extraire le contenu nettoyé
+            setArticleContent(contentElement.innerHTML);
+            return; // Arrêter la boucle si un proxy fonctionne
+          }
+        } catch (error) {
+          console.warn(`Erreur avec le proxy ${proxyUrl}:`, error);
         }
-      } catch (error) {
-        console.error(
-          "Erreur lors de la récupération du contenu de l'article :",
-          error
-        );
-        setArticleContent("Erreur lors de la récupération du contenu.");
-      } finally {
-        setIsLoading(false); // Fin du chargement
       }
+
+      // Si aucun proxy ne fonctionne
+      setArticleContent(
+        "Impossible de récupérer le contenu de l'article. Veuillez réessayer plus tard."
+      );
     };
-    fetchArticleContent();
+
+    fetchArticleContent().finally(() => setIsLoading(false));
   }, [article]);
 
   if (!article) {
