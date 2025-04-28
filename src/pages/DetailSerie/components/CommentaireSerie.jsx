@@ -84,7 +84,7 @@ export default function CommentaireSerie() {
                       {comment.rating >= star ? (
                         <FaStar className="text-fuchsia text-xs" />
                       ) : (
-                        <FaRegStar className="text-white text-xs" />
+                        <FaRegStar className="dark:text-white text-gray-fonce text-xs" />
                       )}
                     </span>
                   ))}
