@@ -3,12 +3,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import { FilmContext } from "../../../context/FilmContext";
+import { SerieContext } from "../../../context/SerieContext";
 import { NavLink } from "react-router-dom";
 
-export default function CardFilm() {
+export default function CardSerie() {
   const {
-    film,
+    serie,
     goSeeStates,
     alreadySeenStates,
     openInfoStates,
@@ -16,43 +16,43 @@ export default function CardFilm() {
     setGoSeeStates,
     setAlreadySeenStates,
     setOpenInfoStates,
-  } = useContext(FilmContext);
+  } = useContext(SerieContext);
 
   return (
     <>
-      {film.length === 0 ? (
+      {serie.length === 0 ? (
         <div className="flex justify-center items-center h-screen mt-[-100px]">
-          <h2>Aucun film n'est disponible d'après vos recherches</h2>
+          <h2>Aucun serie n'est disponible d'après vos recherches</h2>
         </div>
       ) : (
         <>
           {/* Affichage desktop */}
-          <div className="hidden md:flex md:flex-wrap ">
-            {film.map((film, index) => (
+          <div className="hidden md:flex md:flex-wrap">
+            {serie.map((serie, index) => (
               <div
                 key={index}
                 className="flex md:w-full lg:w-[48%] gap-4 border p-4 mr-2 mb-4"
               >
-                <NavLink to={`/detailfilm/${film.id}`} className="w-48 h-64">
+                <NavLink to={`/detailserie/${serie.id}`} className="w-48 h-64">
                   <img
                     className="w-full h-full object-cover"
-                    src={film.image}
-                    alt={film.titre}
+                    src={serie.image}
+                    alt={serie.titre}
                   />
                 </NavLink>
                 <div className="w-[70%] flex flex-col justify-center mt-2 shadow-xl py-4 px-4">
-                  <p className="font-bold text-2xl">{film.titre}</p>
+                  <p className="font-bold text-2xl">{serie.titre}</p>
                   <div className="flex">
                     <p className="mr-3">
-                      {new Date(film.dateSortie).getFullYear()}
+                      {new Date(serie.dateDebut).getFullYear()}
                     </p>
-                    <p className="mr-3">Note : {film.note}</p>
-                    <p className="mr-3">{film.duree}</p>
+                    <p className="mr-3">Note : {serie.note}</p>
+                    <p className="mr-3">{serie.duree}</p>
                   </div>
                   <p>
-                    {film.synopsis.length > 50
-                      ? film.synopsis.slice(0, 50) + "..."
-                      : film.synopsis}
+                    {serie.synopsis.length > 50
+                      ? serie.synopsis.slice(0, 50) + "..."
+                      : serie.synopsis}
                   </p>
                   <div className="flex flex-col ">
                     <button
@@ -68,16 +68,14 @@ export default function CardFilm() {
                         Regarder
                       </button>
                       <button
-                        onClick={() =>
-                          toggleState(setAlreadySeenStates, film.id)
-                        }
+                        onClick={() => toggleState(setAlreadySeenStates, index)}
                         className={`mt-2 cursor-pointer text-white w-[150px] h-[50px] lg:text-[15px] ${
-                          alreadySeenStates[film.id]
+                          alreadySeenStates[index]
                             ? "bg-green-600"
                             : "bg-red-400"
                         }`}
                       >
-                        {alreadySeenStates[film.id]
+                        {alreadySeenStates[index]
                           ? "Déjà vu"
                           : "+ Pas encore vu"}
                       </button>
@@ -96,17 +94,17 @@ export default function CardFilm() {
               spaceBetween={50}
               slidesPerView={1}
             >
-              {film.map((film, index) => (
+              {serie.map((serie, index) => (
                 <SwiperSlide
                   key={index}
                   className="flex! flex-col items-center relative"
                 >
                   <div className="relative">
                     <NavLink
-                      to={`/detailfilm/${film.id}`}
+                      to={`/detailserie/${serie.id}`}
                       className="w-[375px]"
                     >
-                      <img className="w-[375px]" src={film.image} alt="" />
+                      <img className="w-[375px]" src={serie.image} alt="" />
                     </NavLink>
                     <button
                       onClick={() => toggleState(setOpenInfoStates, index)}
@@ -120,11 +118,11 @@ export default function CardFilm() {
                       openInfoStates[index] ? "hidden" : "flex"
                     }`}
                   >
-                    <p className="font-bold text-2xl">{film.titre}</p>
-                    <p>{new Date(film.dateSortie).getFullYear()}</p>
-                    <p>Note : {film.note}</p>
-                    <p>{film.duree}</p>
-                    <p>{film.synopsis}</p>
+                    <p className="font-bold text-2xl">{serie.titre}</p>
+                    <p>{new Date(serie.dateSortie).getFullYear()}</p>
+                    <p>Note : {serie.note}</p>
+                    <p>{serie.duree}</p>
+                    <p>{serie.synopsis}</p>
                     <div className="flex flex-col items-center">
                       <button
                         onClick={() => toggleState(setGoSeeStates, index)}
