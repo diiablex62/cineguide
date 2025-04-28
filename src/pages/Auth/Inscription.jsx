@@ -78,12 +78,12 @@ export default function Inscription() {
           <div className='mb-4'>
             <img
               src={logo}
-              alt='CineGuide'
+              alt='Logo CineGuide clair'
               className='h-12 mx-auto dark:hidden'
             />
             <img
               src={logoWhite}
-              alt='CineGuide'
+              alt='Logo CineGuide sombre'
               className='h-12 mx-auto hidden dark:block'
             />
             <a
@@ -273,8 +273,8 @@ export default function Inscription() {
             Consultez les articles sur{" "}
             <a
               href='https://www.allocine.fr/'
-              target='_blank' 
-              rel='noopener noreferrer' 
+              target='_blank'
+              rel='noopener noreferrer'
               className='text-[var(--color-fuchsia)] dark:text-[var(--color-fuchsia)] underline'>
               Allociné
             </a>
