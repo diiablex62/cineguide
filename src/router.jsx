@@ -20,6 +20,7 @@ import FilmProposer from "./pages/DetailFilm/components/FilmProposer";
 import ActualiteDetail from "./pages/Actualites/ActualiteDetail";
 import Profil from "./pages/Profil/Profil";
 import ModalAbo from "./components/modal-abo/modalAbo";
+import NotFound from "./pages/404";
 
 export const router = createBrowserRouter([
   {
@@ -114,6 +115,7 @@ export const router = createBrowserRouter([
         path: "/abonnement",
         element: <ModalAbo />,
       },
+      { path: "*", element: <NotFound /> }, 
     ],
   },
 ]);
