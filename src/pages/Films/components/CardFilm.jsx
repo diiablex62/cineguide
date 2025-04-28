@@ -27,7 +27,7 @@ export default function CardFilm() {
       ) : (
         <>
           {/* Affichage desktop */}
-          <div className="hidden md:flex md:flex-wrap">
+          <div className="hidden md:flex md:flex-wrap ">
             {film.map((film, index) => (
               <div
                 key={index}
@@ -68,14 +68,16 @@ export default function CardFilm() {
                         Regarder
                       </button>
                       <button
-                        onClick={() => toggleState(setAlreadySeenStates, index)}
+                        onClick={() =>
+                          toggleState(setAlreadySeenStates, film.id)
+                        }
                         className={`mt-2 cursor-pointer text-white w-[150px] h-[50px] lg:text-[15px] ${
-                          alreadySeenStates[index]
+                          alreadySeenStates[film.id]
                             ? "bg-green-600"
                             : "bg-red-400"
                         }`}
                       >
-                        {alreadySeenStates[index]
+                        {alreadySeenStates[film.id]
                           ? "Déjà vu"
                           : "+ Pas encore vu"}
                       </button>

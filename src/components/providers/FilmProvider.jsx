@@ -14,7 +14,7 @@ export default function FilmProvider({ children }) {
   // A chaque fois qu'un utilsateur utilise un boutton d'un film il s'adapte son setter change
 
   function toggleState(setter, id) {
-    id = id + 1;
+    id = id;
     setter((prev) => ({
       ...prev,
       [id]: !prev[id],
