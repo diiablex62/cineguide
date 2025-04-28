@@ -4,6 +4,7 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { FilmContext } from "../../../context/FilmContext";
+import { NavLink } from "react-router-dom";
 
 export default function CardFilm() {
   const {
@@ -32,7 +33,13 @@ export default function CardFilm() {
                 key={index}
                 className="flex md:w-full lg:w-[48%] gap-4 border p-4 mr-2 mb-4"
               >
-                <img className="w-[30%] object-cover" src={film.image} alt="" />
+                <NavLink to={`/detailfilm/${film.id}`} className="w-48 h-64">
+                  <img
+                    className="w-full h-full object-cover"
+                    src={film.image}
+                    alt={film.titre}
+                  />
+                </NavLink>
                 <div className="w-[70%] flex flex-col justify-center mt-2 shadow-xl py-4 px-4">
                   <p className="font-bold text-2xl">{film.titre}</p>
                   <div className="flex">
@@ -50,27 +57,27 @@ export default function CardFilm() {
                   <div className="flex flex-col ">
                     <button
                       onClick={() => toggleState(setGoSeeStates, index)}
-                      className={`mt-2 cursor-pointer text-white w-[140px] h-[40px] lg:text-[15px] ${
-                        goSeeStates[film.id] ? "bg-gray-fonce" : "bg-gray-400"
+                      className={`mt-2 cursor-pointer text-white w-[150px] h-[50px] lg:text-[15px] ${
+                        goSeeStates[index] ? "bg-gray-fonce" : "bg-gray-400"
                       }`}
                     >
-                      {goSeeStates[film.id] ? "+ A voir" : "Déjà ajouté"}
+                      {goSeeStates[index] ? "+ A voir" : "Déjà ajouté"}
                     </button>
                     <div className="flex">
-                      <button className="mt-2 mr-2 cursor-pointer bg-fuchsia text-white w-[190px] h-[40px] lg:text-[15px]">
+                      <button className="mt-2 mr-2 cursor-pointer bg-fuchsia text-white w-[250px] h-[50px] lg:text-[15px]">
                         Regarder
                       </button>
                       <button
-                        onClick={() =>
-                          toggleState(setAlreadySeenStates, index, film.id)
-                        }
-                        className={`mt-2 cursor-pointer text-white w-[140px] h-[40px] lg:text-[15px] ${
-                          alreadySeenStates[film.id]
+                        onClick={() => toggleState(setAlreadySeenStates, index)}
+                        className={`mt-2 cursor-pointer text-white w-[150px] h-[50px] lg:text-[15px] ${
+                          alreadySeenStates[index]
                             ? "bg-green-600"
                             : "bg-red-400"
                         }`}
                       >
-                        {alreadySeenStates[film.id] ? "Déjà vu" : "+ Pas  vu"}
+                        {alreadySeenStates[index]
+                          ? "Déjà vu"
+                          : "+ Pas encore vu"}
                       </button>
                     </div>
                   </div>
@@ -93,7 +100,12 @@ export default function CardFilm() {
                   className="flex! flex-col items-center relative"
                 >
                   <div className="relative">
-                    <img className="w-[375px]" src={film.image} alt="" />
+                    <NavLink
+                      to={`/detailfilm/${film.id}`}
+                      className="w-[375px]"
+                    >
+                      <img className="w-[375px]" src={film.image} alt="" />
+                    </NavLink>
                     <button
                       onClick={() => toggleState(setOpenInfoStates, index)}
                       className="cursor-pointer absolute bottom-0 right-0 mr-[10px] mb-2 text-white text-4xl bg-pink-700 px-2 rounded"
@@ -114,24 +126,26 @@ export default function CardFilm() {
                     <div className="flex flex-col items-center">
                       <button
                         onClick={() => toggleState(setGoSeeStates, index)}
-                        className={`mt-2 cursor-pointer text-white w-[140px] h-[40px] ${
+                        className={`mt-2 cursor-pointer text-white w-[150px] h-[50px] ${
                           goSeeStates[index] ? "bg-gray-fonce" : "bg-gray-400"
                         }`}
                       >
                         {goSeeStates[index] ? "+ A voir" : "Déjà ajouté"}
                       </button>
-                      <button className="mt-2 cursor-pointer bg-fuchsia text-white w-[190px] h-[40px]">
+                      <button className="mt-2 cursor-pointer bg-fuchsia text-white w-[250px] h-[50px]">
                         Regarder
                       </button>
                       <button
                         onClick={() => toggleState(setAlreadySeenStates, index)}
-                        className={`mt-2 cursor-pointer text-white w-[140px] h-[40px] ${
+                        className={`mt-2 cursor-pointer text-white w-[150px] h-[50px] ${
                           alreadySeenStates[index]
                             ? "bg-green-600"
                             : "bg-red-400"
                         }`}
                       >
-                        {alreadySeenStates[index] ? "Déjà vu" : "+ Pas  vu"}
+                        {alreadySeenStates[index]
+                          ? "Déjà vu"
+                          : "+ Pas encore vu"}
                       </button>
                     </div>
                   </div>
