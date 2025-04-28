@@ -7,6 +7,7 @@ import FiltreProvider from "./components/providers/FiltreProvider";
 import Header from "./components/Header";
 import LangageProvider from "./components/providers/LangageProvider";
 import MenuProvider from "./components/providers/MenuProvider";
+import SerieProvider from "./components/providers/SerieProvider";
 
 function App() {
   return (
@@ -15,10 +16,12 @@ function App() {
         <MenuProvider>
           <FiltreProvider>
             <FilmProvider>
-              <LangageProvider>
-                <Header />
-                <Outlet />
-              </LangageProvider>
+              <SerieProvider>
+                <LangageProvider>
+                  <Header />
+                  <Outlet />
+                </LangageProvider>
+              </SerieProvider>
             </FilmProvider>
           </FiltreProvider>
         </MenuProvider>

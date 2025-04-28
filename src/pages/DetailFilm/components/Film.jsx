@@ -53,7 +53,7 @@ export default function Film() {
             </button>
           </div>
           <div className="mt-4 text-xs flex justify-center w-full">
-            <button className="py-2 w-full text-center border border-gray-300 dark:border-gray-700  hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+            <button className="py-2 px-2 w-full text-center border border-gray-300 dark:border-gray-700  hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
               Connectez-vous pour synchroniser la Watchlist
             </button>
           </div>

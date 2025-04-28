@@ -1,0 +1,609 @@
+[
+  {
+    "id": 1,
+    "titre": "Breaking Bad",
+    "synopsis": "Un professeur de chimie atteint d'un cancer devient fabricant de méthamphétamine pour assurer l'avenir financier de sa famille.",
+    "image": "https://fr.web.img4.acsta.net/c_310_420/pictures/19/06/18/12/11/3956503.jpg",
+    "acteurs": ["Bryan Cranston", "Aaron Paul", "Anna Gunn"],
+    "note": 9.5,
+    "dateDebut": "2008-01-20",
+    "dateFin": "2013-09-29",
+    "createur": "Vince Gilligan",
+    "bandeAnnonce": "https://www.youtube.com/watch?v=HhesaQXLuRY",
+    "genre": ["Drame", "Crime", "Thriller"],
+    "paysProduction": ["États-Unis"],
+    "platforms": ["Netflix", "AMC"],
+    "langues": ["Anglais", "Français", "Espagnol"],
+    "saisons": [
+      {
+        "numero": 1,
+        "annee": 2008,
+        "nbEpisodes": 7,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Pilot",
+            "synopsis": "Walter White, professeur de chimie, apprend qu'il est atteint d'un cancer en phase terminale et décide de se lancer dans la fabrication de méthamphétamine.",
+            "duree": "58 min",
+            "dateDiffusion": "2008-01-20"
+          },
+          {
+            "numero": 2,
+            "titre": "Cat's in the Bag...",
+            "synopsis": "Walter et Jesse doivent gérer les conséquences de leur première production et éliminer deux corps.",
+            "duree": "48 min",
+            "dateDiffusion": "2008-01-27"
+          },
+          {
+            "numero": 3,
+            "titre": "...And the Bag's in the River",
+            "synopsis": "Walt doit décider s'il va éliminer Krazy-8 tandis que sa famille s'inquiète de son absence.",
+            "duree": "48 min",
+            "dateDiffusion": "2008-02-10"
+          },
+          {
+            "numero": 4,
+            "titre": "Cancer Man",
+            "synopsis": "Walt révèle à sa famille qu'il a un cancer. Jesse rend visite à ses parents.",
+            "duree": "48 min",
+            "dateDiffusion": "2008-02-17"
+          },
+          {
+            "numero": 5,
+            "titre": "Gray Matter",
+            "synopsis": "Walt refuse l'aide financière de ses anciens associés et reprend la fabrication de drogue.",
+            "duree": "48 min",
+            "dateDiffusion": "2008-02-24"
+          },
+          {
+            "numero": 6,
+            "titre": "Crazy Handful of Nothin'",
+            "synopsis": "Walt commence sa chimiothérapie et adopte un nouveau look intimidant pour traiter avec Tuco.",
+            "duree": "48 min",
+            "dateDiffusion": "2008-03-02"
+          },
+          {
+            "numero": 7,
+            "titre": "A No-Rough-Stuff-Type Deal",
+            "synopsis": "Walt et Jesse doivent produire une grande quantité de méthamphétamine pour Tuco.",
+            "duree": "48 min",
+            "dateDiffusion": "2008-03-09"
+          }
+        ]
+      },
+      {
+        "numero": 2,
+        "annee": 2009,
+        "nbEpisodes": 13,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Seven Thirty-Seven",
+            "synopsis": "Walt et Jesse sont confrontés à la violence de Tuco et planifient de l'éliminer.",
+            "duree": "47 min",
+            "dateDiffusion": "2009-03-08"
+          },
+          {
+            "numero": 2,
+            "titre": "Grilled",
+            "synopsis": "Tuco enlève Walt et Jesse. Hank recherche Walt qui a disparu.",
+            "duree": "48 min",
+            "dateDiffusion": "2009-03-15"
+          },
+          {
+            "numero": 3,
+            "titre": "Bit by a Dead Bee",
+            "synopsis": "Walt et Jesse élaborent des alibis pour expliquer leur absence. Walt est hospitalisé.",
+            "duree": "47 min",
+            "dateDiffusion": "2009-03-22"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "titre": "Stranger Things",
+    "synopsis": "Dans les années 80, un groupe d'enfants affronte des forces surnaturelles et des expériences gouvernementales secrètes.",
+    "image": "https://fr.web.img2.acsta.net/c_310_420/pictures/22/05/18/14/31/5186184.jpg",
+    "acteurs": ["Millie Bobby Brown", "Finn Wolfhard", "Winona Ryder"],
+    "note": 8.7,
+    "dateDebut": "2016-07-15",
+    "dateFin": null,
+    "createur": "Matt Duffer, Ross Duffer",
+    "bandeAnnonce": "https://www.youtube.com/watch?v=b9EkMc79ZSU",
+    "genre": ["Drame", "Fantastique", "Horreur"],
+    "paysProduction": ["États-Unis"],
+    "platforms": ["Netflix"],
+    "langues": ["Anglais", "Français", "Espagnol"],
+    "saisons": [
+      {
+        "numero": 1,
+        "annee": 2016,
+        "nbEpisodes": 8,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "La Disparition de Will Byers",
+            "synopsis": "Le jeune Will Byers disparaît mystérieusement à Hawkins, dans l'Indiana. Ses amis, sa mère et le chef de la police locale commencent à le rechercher.",
+            "duree": "47 min",
+            "dateDiffusion": "2016-07-15"
+          },
+          {
+            "numero": 2,
+            "titre": "La Barjot de Maple Street",
+            "synopsis": "Mike, Dustin et Lucas font la connaissance d'une mystérieuse fille aux pouvoirs étranges qui pourrait les aider à retrouver Will.",
+            "duree": "55 min",
+            "dateDiffusion": "2016-07-15"
+          },
+          {
+            "numero": 3,
+            "titre": "Des garçons bien élevés",
+            "synopsis": "Joyce est convaincue que Will essaie de communiquer avec elle. Nancy recherche son amie Barb disparue.",
+            "duree": "51 min",
+            "dateDiffusion": "2016-07-15"
+          },
+          {
+            "numero": 4,
+            "titre": "Le Corps",
+            "synopsis": "Joyce refuse d'accepter que le corps retrouvé soit celui de son fils. Nancy et Jonathan forment une alliance improbable.",
+            "duree": "49 min",
+            "dateDiffusion": "2016-07-15"
+          },
+          {
+            "numero": 5,
+            "titre": "La Puce et l'Acrobate",
+            "synopsis": "Hopper s'infiltre dans le laboratoire d'Hawkins. Les garçons tentent de localiser la Porte avec l'aide d'Eleven.",
+            "duree": "52 min",
+            "dateDiffusion": "2016-07-15"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "titre": "Game of Thrones",
+    "synopsis": "Plusieurs familles nobles rivalisent pour le contrôle du Trône de Fer dans un monde fantastique où l'hiver peut durer plusieurs années.",
+    "image": "https://fr.web.img6.acsta.net/c_310_420/pictures/19/03/21/16/09/4003111.jpg",
+    "acteurs": ["Emilia Clarke", "Kit Harington", "Peter Dinklage"],
+    "note": 9.2,
+    "dateDebut": "2011-04-17",
+    "dateFin": "2019-05-19",
+    "createur": "David Benioff, D.B. Weiss",
+    "bandeAnnonce": "https://www.youtube.com/watch?v=KPLWWIOCOOQ",
+    "genre": ["Drame", "Aventure", "Fantasy"],
+    "paysProduction": ["États-Unis", "Royaume-Uni"],
+    "platforms": ["HBO Max", "OCS"],
+    "langues": ["Anglais", "Français", "Allemand"],
+    "saisons": [
+      {
+        "numero": 1,
+        "annee": 2011,
+        "nbEpisodes": 10,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "L'hiver vient",
+            "synopsis": "Le roi Robert Baratheon se rend à Winterfell pour proposer à Ned Stark de devenir sa Main. Au-delà du Détroit, Viserys Targaryen planifie le mariage de sa sœur Daenerys avec Khal Drogo.",
+            "duree": "62 min",
+            "dateDiffusion": "2011-04-17"
+          },
+          {
+            "numero": 2,
+            "titre": "La Route royale",
+            "synopsis": "Alors que Bran reste dans le coma, Ned part pour Port-Réal avec ses filles. Jon Snow se prépare à rejoindre la Garde de Nuit.",
+            "duree": "56 min",
+            "dateDiffusion": "2011-04-24"
+          },
+          {
+            "numero": 3,
+            "titre": "Lord Snow",
+            "synopsis": "Ned arrive à Port-Réal et découvre les complots de la cour. Catelyn se rend secrètement dans la capitale pour informer son mari de ses soupçons concernant les Lannister.",
+            "duree": "58 min",
+            "dateDiffusion": "2011-05-01"
+          },
+          {
+            "numero": 4,
+            "titre": "Infirmes, Bâtards et Choses brisées",
+            "synopsis": "Ned enquête sur la mort de Jon Arryn. Tyrion s'arrête à Winterfell sur le chemin du retour et est accusé d'avoir tenté d'assassiner Bran.",
+            "duree": "56 min",
+            "dateDiffusion": "2011-05-08"
+          },
+          {
+            "numero": 5,
+            "titre": "Le Loup et le Lion",
+            "synopsis": "Robert apprend que Daenerys est enceinte et ordonne son assassinat. Catelyn arrête Tyrion et l'emmène au Val.",
+            "duree": "55 min",
+            "dateDiffusion": "2011-05-15"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "titre": "The Walking Dead",
+    "synopsis": "Un groupe de survivants tente de rester en vie dans un monde post-apocalyptique envahi par les zombies.",
+    "image": "https://fr.web.img6.acsta.net/c_310_420/pictures/22/10/20/12/18/3137433.jpg",
+    "acteurs": ["Andrew Lincoln", "Norman Reedus", "Melissa McBride"],
+    "note": 8.2,
+    "dateDebut": "2010-10-31",
+    "dateFin": "2022-11-20",
+    "createur": "Frank Darabont",
+    "bandeAnnonce": "https://www.youtube.com/watch?v=sfAc2U20uyg",
+    "genre": ["Horreur", "Drame", "Thriller"],
+    "paysProduction": ["États-Unis"],
+    "platforms": ["AMC", "Netflix"],
+    "langues": ["Anglais", "Français", "Espagnol"],
+    "saisons": [
+      {
+        "numero": 1,
+        "annee": 2010,
+        "nbEpisodes": 6,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Passé décomposé",
+            "synopsis": "Le shérif adjoint Rick Grimes se réveille d'un coma pour découvrir un monde ravagé par une apocalypse zombie.",
+            "duree": "67 min",
+            "dateDiffusion": "2010-10-31"
+          },
+          {
+            "numero": 2,
+            "titre": "Tripes",
+            "synopsis": "Rick se retrouve piégé dans un tank entouré de zombies à Atlanta. Il est sauvé par un groupe de survivants.",
+            "duree": "45 min",
+            "dateDiffusion": "2010-11-07"
+          },
+          {
+            "numero": 3,
+            "titre": "Je te trouve",
+            "synopsis": "Rick retrouve sa femme Lori et son fils Carl dans un camp de survivants. Les tensions montent entre les membres du groupe.",
+            "duree": "45 min",
+            "dateDiffusion": "2010-11-14"
+          },
+          {
+            "numero": 4,
+            "titre": "Le Gang",
+            "synopsis": "Rick retourne à Atlanta avec un petit groupe pour récupérer des armes et sauver Merle Dixon, laissé menotté sur un toit.",
+            "duree": "45 min",
+            "dateDiffusion": "2010-11-21"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "titre": "The Crown",
+    "synopsis": "L'histoire du règne de la reine Elizabeth II et les événements qui ont façonné la seconde moitié du 20e siècle.",
+    "image": "https://fr.web.img5.acsta.net/c_310_420/pictures/22/10/11/09/51/0583269.jpg",
+    "acteurs": ["Claire Foy", "Olivia Colman", "Imelda Staunton"],
+    "note": 8.7,
+    "dateDebut": "2016-11-04",
+    "dateFin": "2023-12-14",
+    "createur": "Peter Morgan",
+    "bandeAnnonce": "https://www.youtube.com/watch?v=JWtnJjn6ng0",
+    "genre": ["Drame", "Historique", "Biographie"],
+    "paysProduction": ["Royaume-Uni"],
+    "platforms": ["Netflix"],
+    "langues": ["Anglais", "Français", "Allemand"],
+    "saisons": [
+      {
+        "numero": 1,
+        "annee": 2016,
+        "nbEpisodes": 10,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Wolferton Splash",
+            "synopsis": "Après son mariage avec Philip, la princesse Elizabeth apprend que son père, le roi George VI, est gravement malade.",
+            "duree": "57 min",
+            "dateDiffusion": "2016-11-04"
+          },
+          {
+            "numero": 2,
+            "titre": "Hyde Park Corner",
+            "synopsis": "Alors qu'Elizabeth et Philip sont en voyage au Kenya, le roi meurt, et Elizabeth devient la nouvelle reine d'Angleterre.",
+            "duree": "61 min",
+            "dateDiffusion": "2016-11-04"
+          },
+          {
+            "numero": 3,
+            "titre": "Windsor",
+            "synopsis": "Elizabeth commence à assumer son rôle de reine tandis que Winston Churchill fait face à son déclin politique.",
+            "duree": "59 min",
+            "dateDiffusion": "2016-11-04"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "titre": "Friends",
+    "synopsis": "Les aventures quotidiennes de six amis à New York.",
+    "image": "https://fr.web.img6.acsta.net/c_310_420/pictures/18/11/15/18/01/1745792.jpg",
+    "acteurs": [
+      "Jennifer Aniston",
+      "Courteney Cox",
+      "Lisa Kudrow",
+      "Matt LeBlanc",
+      "Matthew Perry",
+      "David Schwimmer"
+    ],
+    "note": 8.9,
+    "dateDebut": "1994-09-22",
+    "dateFin": "2004-05-06",
+    "createur": "David Crane, Marta Kauffman",
+    "bandeAnnonce": "https://www.youtube.com/watch?v=IEEbUzffzrk",
+    "genre": ["Comédie", "Romance"],
+    "paysProduction": ["États-Unis"],
+    "platforms": ["Netflix", "HBO Max"],
+    "langues": ["Anglais", "Français", "Espagnol"],
+    "saisons": [
+      {
+        "numero": 1,
+        "annee": 1994,
+        "nbEpisodes": 24,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Celui qui déménage",
+            "synopsis": "Rachel abandonne son fiancé à l'autel et retrouve son ancienne amie Monica. Ross est déprimé après son divorce.",
+            "duree": "22 min",
+            "dateDiffusion": "1994-09-22"
+          },
+          {
+            "numero": 2,
+            "titre": "Celui qui est perdu",
+            "synopsis": "Ross tente de demander à Rachel de sortir avec lui. Chandler et Joey convainquent Ross d'acheter un nouveau mobilier.",
+            "duree": "22 min",
+            "dateDiffusion": "1994-09-29"
+          },
+          {
+            "numero": 3,
+            "titre": "Celui qui a un rôle",
+            "synopsis": "Joey décroche un rôle dans un feuilleton. Chandler commence à fumer à nouveau.",
+            "duree": "22 min",
+            "dateDiffusion": "1994-10-06"
+          },
+          {
+            "numero": 4,
+            "titre": "Celui avec George Stephanopoulos",
+            "synopsis": "Ross est déprimé pour l'anniversaire de son premier rapport sexuel avec Carol. Rachel reçoit son premier salaire.",
+            "duree": "22 min",
+            "dateDiffusion": "1994-10-13"
+          },
+          {
+            "numero": 5,
+            "titre": "Celui qui lave plus blanc",
+            "synopsis": "Phoebe reçoit 500 dollars qu'elle pense provenir de sa mère décédée. Ross fait sa lessive avec Rachel.",
+            "duree": "22 min",
+            "dateDiffusion": "1994-10-20"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "titre": "The Office",
+    "synopsis": "Le quotidien des employés d'une entreprise de papier dirigée par un patron maladroit et socialement incompétent.",
+    "image": "https://fr.web.img4.acsta.net/c_310_420/pictures/18/07/07/19/08/2155124.jpg",
+    "acteurs": ["Steve Carell", "John Krasinski", "Jenna Fischer"],
+    "note": 8.9,
+    "dateDebut": "2005-03-24",
+    "dateFin": "2013-05-16",
+    "createur": "Greg Daniels",
+    "bandeAnnonce": "https://www.youtube.com/watch?v=tNcDHWpselE",
+    "genre": ["Comédie"],
+    "paysProduction": ["États-Unis"],
+    "platforms": ["Netflix", "Peacock"],
+    "langues": ["Anglais", "Français", "Espagnol"],
+    "saisons": [
+      {
+        "numero": 1,
+        "annee": 2005,
+        "nbEpisodes": 6,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Pilote",
+            "synopsis": "Michael Scott, directeur régional de Dunder Mifflin, apprend à ses employés qu'un poste va être supprimé.",
+            "duree": "23 min",
+            "dateDiffusion": "2005-03-24"
+          },
+          {
+            "numero": 2,
+            "titre": "La Diversité",
+            "synopsis": "Michael organise un atelier sur la diversité après avoir raconté une blague raciste.",
+            "duree": "22 min",
+            "dateDiffusion": "2005-03-29"
+          },
+          {
+            "numero": 3,
+            "titre": "L'Alliance",
+            "synopsis": "Michael organise une fête d'anniversaire, tandis que Dwight forme une alliance avec Jim pour protéger leurs emplois.",
+            "duree": "22 min",
+            "dateDiffusion": "2005-04-05"
+          },
+          {
+            "numero": 4,
+            "titre": "La Soirée du personnel",
+            "synopsis": "Le personnel de bureau assiste à une soirée chez Michael qui espère faire bonne impression.",
+            "duree": "22 min",
+            "dateDiffusion": "2005-04-12"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "titre": "Sherlock",
+    "synopsis": "Version moderne des enquêtes du célèbre détective Sherlock Holmes et de son fidèle ami, le Dr John Watson.",
+    "image": "https://fr.web.img2.acsta.net/c_310_420/pictures/18/11/06/15/36/0408812.jpg",
+    "acteurs": ["Benedict Cumberbatch", "Martin Freeman", "Andrew Scott"],
+    "note": 9.1,
+    "dateDebut": "2010-07-25",
+    "dateFin": "2017-01-15",
+    "createur": "Mark Gatiss, Steven Moffat",
+    "bandeAnnonce": "https://www.youtube.com/watch?v=IrBKwzL3K7s",
+    "genre": ["Crime", "Drame", "Mystère"],
+    "paysProduction": ["Royaume-Uni"],
+    "platforms": ["Netflix", "BBC iPlayer"],
+    "langues": ["Anglais", "Français", "Allemand"],
+    "saisons": [
+      {
+        "numero": 1,
+        "annee": 2010,
+        "nbEpisodes": 3,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Une étude en rose",
+            "synopsis": "John Watson, médecin militaire revenu d'Afghanistan, rencontre Sherlock Holmes et devient son colocataire. Ils enquêtent sur une série de suicides inexpliqués.",
+            "duree": "88 min",
+            "dateDiffusion": "2010-07-25"
+          },
+          {
+            "numero": 2,
+            "titre": "Le Banquier aveugle",
+            "synopsis": "Sherlock est approché par un ancien camarade de classe pour enquêter sur un message crypté laissé dans une banque.",
+            "duree": "89 min",
+            "dateDiffusion": "2010-08-01"
+          },
+          {
+            "numero": 3,
+            "titre": "Le Grand Jeu",
+            "synopsis": "Un mystérieux criminel pose des énigmes à Sherlock avec des vies en jeu comme enjeu.",
+            "duree": "89 min",
+            "dateDiffusion": "2010-08-08"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "titre": "Peaky Blinders",
+    "synopsis": "Une famille de gangsters dans l'Angleterre de l'après-Première Guerre mondiale, dirigée par le redoutable Tommy Shelby.",
+    "image": "https://fr.web.img2.acsta.net/c_310_420/pictures/22/06/07/11/26/5224406.jpg",
+    "acteurs": ["Cillian Murphy", "Paul Anderson", "Helen McCrory"],
+    "note": 8.8,
+    "dateDebut": "2013-09-12",
+    "dateFin": "2022-04-03",
+    "createur": "Steven Knight",
+    "bandeAnnonce": "https://www.youtube.com/watch?v=oVzVdvGIC7U",
+    "genre": ["Crime", "Drame"],
+    "paysProduction": ["Royaume-Uni"],
+    "platforms": ["Netflix", "BBC"],
+    "langues": ["Anglais", "Français", "Allemand"],
+    "saisons": [
+      {
+        "numero": 1,
+        "annee": 2013,
+        "nbEpisodes": 6,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Épisode 1",
+            "synopsis": "Tommy Shelby, leader du gang des Peaky Blinders à Birmingham, s'empare d'une cargaison d'armes destinée à la Libye.",
+            "duree": "58 min",
+            "dateDiffusion": "2013-09-12"
+          },
+          {
+            "numero": 2,
+            "titre": "Épisode 2",
+            "synopsis": "L'inspecteur Campbell mène l'enquête à Birmingham. Tommy développe un plan pour contrôler les courses de chevaux.",
+            "duree": "57 min",
+            "dateDiffusion": "2013-09-19"
+          },
+          {
+            "numero": 3,
+            "titre": "Épisode 3",
+            "synopsis": "Tommy se rapproche de Grace, ignorant qu'elle est une informatrice de Campbell. Un nouveau venu menace les affaires des Shelby.",
+            "duree": "55 min",
+            "dateDiffusion": "2013-09-26"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "titre": "Black Mirror",
+    "synopsis": "Série d'anthologie explorant les conséquences inquiétantes de la technologie moderne sur notre vie.",
+    "image": "https://fr.web.img5.acsta.net/c_310_420/pictures/19/06/05/13/51/3087580.jpg",
+    "acteurs": ["Diverses distributions"],
+    "note": 8.8,
+    "dateDebut": "2011-12-04",
+    "dateFin": null,
+    "createur": "Charlie Brooker",
+    "bandeAnnonce": "https://www.youtube.com/watch?v=V0XOApF5nLU",
+    "genre": ["Science-fiction", "Drame", "Thriller"],
+    "paysProduction": ["Royaume-Uni"],
+    "platforms": ["Netflix"],
+    "langues": ["Anglais", "Français", "Espagnol"],
+    "saisons": [
+      {
+        "numero": 1,
+        "annee": 2011,
+        "nbEpisodes": 3,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "L'Hymne national",
+            "synopsis": "Le Premier ministre britannique est confronté à un dilemme moral choquant lorsqu'un membre de la famille royale est kidnappé.",
+            "duree": "44 min",
+            "dateDiffusion": "2011-12-04"
+          },
+          {
+            "numero": 2,
+            "titre": "15 millions de mérites",
+            "synopsis": "Dans un monde futuriste, les individus doivent pédaler sur des vélos stationnaires pour gagner des mérites et échapper à leur routine.",
+            "duree": "62 min",
+            "dateDiffusion": "2011-12-11"
+          },
+          {
+            "numero": 3,
+            "titre": "Retour sur image",
+            "synopsis": "Dans un monde où chaque souvenir est enregistré, un homme devient obsédé par la recherche d'indices de l'infidélité de sa femme.",
+            "duree": "49 min",
+            "dateDiffusion": "2011-12-18"
+          }
+        ]
+      },
+      {
+        "numero": 2,
+        "annee": 2013,
+        "nbEpisodes": 3,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Bientôt de retour",
+            "synopsis": "Une jeune femme endeuillée découvre un service qui permet de communiquer avec les morts via l'intelligence artificielle.",
+            "duree": "48 min",
+            "dateDiffusion": "2013-02-11"
+          },
+          {
+            "numero": 2,
+            "titre": "L'Ours blanc",
+            "synopsis": "Une femme se réveille sans aucun souvenir et se retrouve pourchassée par des personnes mystérieuses dans un monde où tout le monde la filme.",
+            "duree": "42 min",
+            "dateDiffusion": "2013-02-18"
+          },
+          {
+            "numero": 3,
+            "titre": "Le Show de Waldo",
+            "synopsis": "Un comédien contrôlant un ours animé bleu nommé Waldo se retrouve impliqué dans la politique.",
+            "duree": "43 min",
+            "dateDiffusion": "2013-02-25"
+          }
+        ]
+      }
+    ]
+  }
+]
