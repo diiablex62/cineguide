@@ -18,6 +18,7 @@ import BandeAnnonce from "./pages/DetailFilm/components/BandeAnnonce";
 import Commentaire from "./pages/DetailFilm/components/Commentaire";
 import FilmProposer from "./pages/DetailFilm/components/FilmProposer";
 import ActualiteDetail from "./pages/Actualites/ActualiteDetail";
+import ModalAbo from "./components/modal-abo/modalAbo";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
         element: <FilmList />,
       },
 
+      {
+        path: "/detailserie",
+        element: <DetailSerie />,
+      },
       {
         path: "/series",
         element: <SeriesList />,
@@ -99,6 +104,14 @@ export const router = createBrowserRouter([
             element: <FilmProposer />,
           },
         ],
+      },
+      {
+        path: "/abonnement",
+        element: (
+       
+              <ModalAbo />
+     
+        ),
       },
     ],
   },
