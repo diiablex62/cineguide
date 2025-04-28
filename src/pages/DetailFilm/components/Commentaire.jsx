@@ -14,7 +14,7 @@ export default function Commentaire() {
             rows="3"
             placeholder="Partagez votre avis sur ce film..."
           ></textarea>
-          <button className="bg-fuchsia hover:bg-fuchsia-hover text-white px-4 py-2 rounded-md text-sm">
+          <button className="bg-fuchsia hover:bg-fuchsia-hover text-white px-4 py-2 text-sm">
             Publier
           </button>
         </div>

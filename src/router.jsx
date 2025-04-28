@@ -20,6 +20,11 @@ import FilmProposer from "./pages/DetailFilm/components/FilmProposer";
 import ActualiteDetail from "./pages/Actualites/ActualiteDetail";
 import Profil from "./pages/Profil/Profil";
 import ModalAbo from "./components/modal-abo/modalAbo";
+import TousSerie from "./pages/DetailSerie/components/TousSerie";
+import ResumeSerie from "./pages/DetailSerie/components/ResumeSerie";
+import BandeAnnonceSerie from "./pages/DetailSerie/components/BandeAnnonceSerie";
+import CommentaireSerie from "./pages/DetailSerie/components/CommentaireSerie";
+import SerieProposer from "./pages/DetailSerie/components/SerieProposer";
 import NotFound from "./pages/404";
 
 export const router = createBrowserRouter([
@@ -41,8 +46,30 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "/detailserie",
+        path: "/detailserie/:id",
         element: <DetailSerie />,
+        children: [
+          {
+            index: true,
+            element: <TousSerie />,
+          },
+          {
+            path: "resumeserie",
+            element: <ResumeSerie />,
+          },
+          {
+            path: "bandeannonceserie",
+            element: <BandeAnnonceSerie />,
+          },
+          {
+            path: "commentaireserie",
+            element: <CommentaireSerie />,
+          },
+          {
+            path: "serieproposer",
+            element: <SerieProposer />,
+          },
+        ],
       },
       {
         path: "/series",
