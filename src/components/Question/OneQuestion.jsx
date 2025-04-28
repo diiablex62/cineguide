@@ -4,7 +4,7 @@ import { FaChevronDown } from "react-icons/fa";
 import { FaChevronUp } from "react-icons/fa";
 import { FaQuestionCircle } from "react-icons/fa";
 
-export default function Question({ question }) {
+export default function OneQuestion({ question }) {
   const [showAnswer, setShowAnswer] = useState(false);
 
   const toggleShowAnswer = () => {

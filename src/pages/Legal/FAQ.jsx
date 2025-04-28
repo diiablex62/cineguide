@@ -1,7 +1,7 @@
 import React from "react";
 import { RiQuestionAnswerFill } from "react-icons/ri";
 import questionsFAQ from "../../data/questionsFAQ.json";
-import Question from "../../components/Question/Question";
+import OneQuestion from "../../components/Question/OneQuestion";
 
 export default function FAQ() {
   return (
@@ -14,7 +14,7 @@ export default function FAQ() {
       </div>
       <div className="flex flex-col items-center justify-center gap-12">
         {questionsFAQ.map((question) => (
-          <Question question={question} key={question.id} />
+          <OneQuestion question={question} key={question.id} />
         ))}
       </div>
     </div>
