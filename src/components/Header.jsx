@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import logo from "../assets/logo.png";
 import logoWhite from "../assets/logo_blanc.png";
 import { IoSearchOutline } from "react-icons/io5";
@@ -22,6 +22,22 @@ export default function Header() {
   const { langageMenu, setLangageMenu } = useContext(LangageContext);
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { menu, setMenu, burger, toggleBurger } = useContext(MenuContext);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    !!localStorage.getItem("session")
+  );
+
+  useEffect(() => {
+    const checkSession = () => {
+      const session = localStorage.getItem("session");
+      setIsLoggedIn(!!session);
+    };
+
+    window.addEventListener("storage", checkSession);
+
+    return () => {
+      window.removeEventListener("storage", checkSession);
+    };
+  }, []);
 
   return (
     <div className="flex items-center justify-between shadow-md px-8 py-4 gap-2.5 dark:bg-black dark:text-white dark:shadow-white">
@@ -92,18 +108,29 @@ export default function Header() {
       </div>
       <div className="flex flex-col gap-4 items-center justify-end max-1100:hidden">
         <div className="flex gap-5">
-          <NavLink
-            to="/connexion"
-            className="bg-fuchsia px-18 py-4 text-white max-1500:px-8"
-          >
-            Connexion
-          </NavLink>
-          <NavLink
-            to="/inscription"
-            className="bg-white text-black dark:bg-black dark:text-white px-18 py-4 border max-1500:px-8"
-          >
-            S'inscrire
-          </NavLink>
+          {isLoggedIn ? (
+            <NavLink
+              to="/profil"
+              className="bg-fuchsia px-18 py-4 text-white max-1500:px-8"
+            >
+              Mon compte
+            </NavLink>
+          ) : (
+            <>
+              <NavLink
+                to="/connexion"
+                className="bg-fuchsia px-18 py-4 text-white max-1500:px-8"
+              >
+                Connexion
+              </NavLink>
+              <NavLink
+                to="/inscription"
+                className="bg-white text-black dark:bg-black dark:text-white px-18 py-4 border max-1500:px-8"
+              >
+                S'inscrire
+              </NavLink>
+            </>
+          )}
           <div
             onClick={() => setLangageMenu(true)}
             className="flex items-center justify-between px-4 py-2.5 gap-2 w-fit border bg-white dark:bg-black dark:border-white"

@@ -18,12 +18,8 @@ import BandeAnnonce from "./pages/DetailFilm/components/BandeAnnonce";
 import Commentaire from "./pages/DetailFilm/components/Commentaire";
 import FilmProposer from "./pages/DetailFilm/components/FilmProposer";
 import ActualiteDetail from "./pages/Actualites/ActualiteDetail";
+import Profil from "./pages/Profil/Profil";
 import ModalAbo from "./components/modal-abo/modalAbo";
-import ActeurProfil from "./pages/Acteurs/ActeurProfil";
-import AccueilActeur from "./pages/Acteurs/components/AccueilActeur";
-import BiographieActeur from "./pages/Acteurs/components/BiographieActeur";
-import FilmographieActeur from "./pages/Acteurs/components/FilmographieActeur";
-import RecompensesActeur from "./pages/Acteurs/components/RecompensesActeur";
 
 export const router = createBrowserRouter([
   {
@@ -35,13 +31,57 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
+        path: "/profil",
+        element: <Profil />,
+        children: [
+          {
+            index: true,
+            element: <Profil />,
+          },
+          {
+            path: "mon-activiter",
+            element: <ProfilActiviter />,
+          },
+          {
+            path: "ma-liste",
+            element: <ProfilListe />,
+          },
+          {
+            path: "mes-reviews",
+            element: <ProfileReviews />,
+          },
+        ],
+      },
+      {
         path: "/film",
         element: <FilmList />,
       },
 
       {
-        path: "/detailserie",
+        path: "/detailserie/:id",
         element: <DetailSerie />,
+        children: [
+          {
+            index: true,
+            element: <TousSerie />,
+          },
+          {
+            path: "resumeserie",
+            element: <ResumeSerie />,
+          },
+          {
+            path: "bandeannonceserie",
+            element: <BandeAnnonceSerie />,
+          },
+          {
+            path: "commentaireserie",
+            element: <CommentaireSerie />,
+          },
+          {
+            path: "serieproposer",
+            element: <SerieProposer />,
+          },
+        ],
       },
       {
         path: "/series",
@@ -77,7 +117,7 @@ export const router = createBrowserRouter([
         element: <ActualitesPage />,
       },
       {
-        path: "/actualites/article",
+        path: "/actualites/:title",
         element: <ActualiteDetail />,
       },
       {
@@ -113,28 +153,6 @@ export const router = createBrowserRouter([
       {
         path: "/abonnement",
         element: <ModalAbo />,
-      },
-      {
-        path: "/acteurs/:id",
-        element: <ActeurProfil />,
-        children: [
-          {
-            index: true,
-            element: <AccueilActeur />,
-          },
-          {
-            path: "biographie",
-            element: <BiographieActeur />,
-          },
-          {
-            path: "filmographie",
-            element: <FilmographieActeur />,
-          },
-          {
-            path: "recompenses",
-            element: <RecompensesActeur />,
-          },
-        ],
       },
     ],
   },

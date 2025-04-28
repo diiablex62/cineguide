@@ -7,7 +7,9 @@ import FiltreProvider from "./components/providers/FiltreProvider";
 import Header from "./components/Header";
 import LangageProvider from "./components/providers/LangageProvider";
 import MenuProvider from "./components/providers/MenuProvider";
+import SerieProvider from "./components/providers/SerieProvider";
 import ActorProvider from "./components/providers/ActorProvider";
+import ProfilProvider from "./components/providers/ProfilProvider";
 
 function App() {
   return (
@@ -15,14 +17,18 @@ function App() {
       <ThemeProvider>
         <MenuProvider>
           <FiltreProvider>
-            <ActorProvider>
-              <FilmProvider>
-                <LangageProvider>
-                  <Header />
-                  <Outlet />
-                </LangageProvider>
-              </FilmProvider>
-            </ActorProvider>
+            <ProfilProvider>
+              <ActorProvider>
+                <FilmProvider>
+                  <SerieProvider>
+                    <LangageProvider>
+                      <Header />
+                      <Outlet />
+                    </LangageProvider>
+                  </SerieProvider>
+                </FilmProvider>
+              </ActorProvider>
+            </ProfilProvider>
           </FiltreProvider>
         </MenuProvider>
       </ThemeProvider>

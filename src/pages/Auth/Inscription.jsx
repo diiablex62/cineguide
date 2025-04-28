@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -6,11 +7,14 @@ import { AuthContext } from "../../components/providers/AuthProvider";
 import GoogleIcon from "../../components/icone/google";
 import { FaRegEye } from "react-icons/fa6";
 import { FaRegEyeSlash } from "react-icons/fa6";
+import logo from "../../assets/logo.png";
+import logoWhite from "../../assets/logo_blanc.png";
 
 export default function Inscription() {
   const { register: registerUser } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
   const toggleConfirmPasswordVisibility = () =>
@@ -52,6 +56,9 @@ export default function Inscription() {
 
   const onSubmit = (data) => {
     registerUser(data);
+    localStorage.setItem("session", JSON.stringify(data));
+    navigate("/");
+    window.dispatchEvent(new Event("storage"));
   };
 
   return (
@@ -70,12 +77,12 @@ export default function Inscription() {
           onSubmit={handleSubmit(onSubmit)}>
           <div className='mb-4'>
             <img
-              src='/src/assets/logo.png'
+              src={logo}
               alt='CineGuide'
               className='h-12 mx-auto dark:hidden'
             />
             <img
-              src='/src/assets/logo_blanc.png'
+              src={logoWhite}
               alt='CineGuide'
               className='h-12 mx-auto hidden dark:block'
             />
@@ -85,11 +92,9 @@ export default function Inscription() {
               &lt; Retour vers la page d'accueil
             </a>
           </div>
-
           <h2 className='text-center mb-4 text-2xl font-bold text-black dark:text-white'>
             S'INSCRIRE
           </h2>
-
           <div className='flex gap-4'>
             <div className='flex-1'>
               <label
@@ -168,7 +173,7 @@ export default function Inscription() {
               </p>
             )}
           </div>
-          <div>
+          <div className='relative'>
             <label
               htmlFor='password'
               className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>
@@ -195,7 +200,7 @@ export default function Inscription() {
               </p>
             )}
           </div>
-          <div>
+          <div className='relative'>
             <label
               htmlFor='confirmPassword'
               className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>
@@ -262,6 +267,16 @@ export default function Inscription() {
               href='/connexion'
               className='text-[var(--color-fuchsia)] dark:text-[var(--color-fuchsia)] underline'>
               Se connecter
+            </a>
+          </p>
+          <p className='text-center mt-4 text-sm text-black dark:text-white'>
+            Consultez les articles sur{" "}
+            <a
+              href='https://www.allocine.fr/'
+              target='_blank' 
+              rel='noopener noreferrer' 
+              className='text-[var(--color-fuchsia)] dark:text-[var(--color-fuchsia)] underline'>
+              Allociné
             </a>
           </p>
         </form>
