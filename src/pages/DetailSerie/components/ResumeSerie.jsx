@@ -11,13 +11,13 @@ export default function ResumeSerie() {
   }
 
   return (
-    <div className="md:w-2/3 flex-1">
-      <div className="max-w-3xl">
+    <div className="w-full flex-1">
+      <div className="w-full text-center justify-center items-center">
         <div className="mb-8">
           <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-400">
             {detailSerie.saisons.length} SAISONS
           </h2>
-          <div className="flex overflow-x-auto space-x-6 pb-2">
+          <div className="flex overflow-x-auto space-x-6 pb-2 justify-center items-center">
             {detailSerie.saisons.map((saison, index) => (
               <div
                 key={saison.numero}
@@ -60,15 +60,17 @@ export default function ResumeSerie() {
                 key={episode.numero}
                 className="border-b border-gray-300 dark:border-gray-700 py-3 flex justify-between items-center"
               >
-                <div>
-                  <span className="text-sm font-medium">
+                <div className="text-start">
+                  <span className="text-sm text-start font-medium">
                     {episode.numero}. {episode.titre}
                   </span>
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="text-xs text-start text-gray-500 mt-1">
                     {episode.synopsis}
                   </p>
                 </div>
-                <span className="text-xs text-gray-500">{episode.duree}</span>
+                <span className="text-xs text-start text-gray-500">
+                  {episode.duree}
+                </span>
               </div>
             ))}
           </div>
