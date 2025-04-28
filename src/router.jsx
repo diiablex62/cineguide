@@ -20,6 +20,9 @@ import FilmProposer from "./pages/DetailFilm/components/FilmProposer";
 import ActualiteDetail from "./pages/Actualites/ActualiteDetail";
 import Profil from "./pages/Profil/Profil";
 import ModalAbo from "./components/modal-abo/modalAbo";
+import ProfilActiviter from "./pages/Profil/ProfilActiviter";
+import ProfilListe from "./pages/Profil/ProfilListe";
+import ProfileReviews from "./pages/Profil/ProfileReviews";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +36,24 @@ export const router = createBrowserRouter([
       {
         path: "/profil",
         element: <Profil />,
+        children: [
+          {
+            index: true,
+            element: <Profil />,
+          },
+          {
+            path: "mon-activiter",
+            element: <ProfilActiviter />,
+          },
+          {
+            path: "ma-liste",
+            element: <ProfilListe />,
+          },
+          {
+            path: "mes-reviews",
+            element: <ProfileReviews />,
+          },
+        ],
       },
       {
         path: "/film",

@@ -7,8 +7,8 @@ import ModalPassword from "../../../components/modalPassword/ModalPassword";
 import { IoMdClose } from "react-icons/io";
 export default function ProfilUtils() {
   const { Facture } = useContext(ProfilContext);
-  const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const selectedFactures = Facture.slice(startIndex, startIndex + itemsPerPage);

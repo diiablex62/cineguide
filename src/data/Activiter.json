@@ -1,0 +1,79 @@
+[
+  {
+    "id": 1,
+    "type": "note",
+    "commentaire": "Très bon travail, continue comme ça !",
+    "note": 4.5,
+    "idFilm": 2
+  },
+  {
+    "id": 2,
+    "type": "commentaire",
+    "commentaire": "Le style est intéressant mais certains passages sont confus.",
+    "note": null,
+    "idFilm": 4
+  },
+  {
+    "id": 3,
+    "type": "note",
+    "commentaire": "Bien structuré et clair.",
+    "note": 5.0,
+    "idFilm": 7
+  },
+  {
+    "id": 4,
+    "type": "commentaire",
+    "commentaire": "Manque un peu de profondeur dans l'analyse.",
+    "note": null,
+    "idFilm": 1
+  },
+  {
+    "id": 5,
+    "type": "note",
+    "commentaire": "Bonne compréhension du sujet.",
+    "note": 4.0,
+    "idFilm": 9
+  },
+  {
+    "id": 6,
+    "type": "note",
+    "commentaire": "Travail satisfaisant mais perfectible.",
+    "note": 3.2,
+    "idFilm": 12
+  },
+  {
+    "id": 7,
+    "type": "commentaire",
+    "commentaire": "Certains points mériteraient d'être plus développés.",
+    "note": null,
+    "idFilm": 11
+  },
+  {
+    "id": 8,
+    "type": "note",
+    "commentaire": "Excellente présentation et argumentation.",
+    "note": 4.8,
+    "idFilm": 3
+  },
+  {
+    "id": 9,
+    "type": "commentaire",
+    "commentaire": "Quelques fautes de syntaxe à corriger.",
+    "note": null,
+    "idFilm": 6
+  },
+  {
+    "id": 10,
+    "type": "note",
+    "commentaire": "Très bon esprit de synthèse.",
+    "note": 4.6,
+    "idFilm": 8
+  },
+  {
+    "id": 11,
+    "type": "note",
+    "commentaire": "Très bon esprit de synthèse.",
+    "note": 4.6,
+    "idFilm": 8
+  }
+]
