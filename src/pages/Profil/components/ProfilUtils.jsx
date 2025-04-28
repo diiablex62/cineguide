@@ -20,7 +20,7 @@ export default function ProfilUtils() {
           <p className="italic">Du 21/02/2021</p>
           <button className="italic flex items-center mt-3 cursor-pointer">
             <LiaFileInvoiceDollarSolid className="mr-2" />
-            Telecharger{" "}
+            Telecharger
           </button>
         </div>
         <div className="border flex flex-col items-center py-6 w-full mb-3">
@@ -29,7 +29,7 @@ export default function ProfilUtils() {
           <p className="italic">Du 21/02/2021</p>
           <button className="italic flex items-center mt-3 cursor-pointer">
             <LiaFileInvoiceDollarSolid className="mr-2" />
-            Telecharger{" "}
+            Telecharger
           </button>
         </div>
         <div className="border flex flex-col items-center py-6 w-full mb-3">
@@ -38,9 +38,15 @@ export default function ProfilUtils() {
           <p className="italic">Du 21/02/2021</p>
           <button className="italic flex items-center mt-3 cursor-pointer">
             <LiaFileInvoiceDollarSolid className="mr-2" />
-            Telecharger{" "}
+            Telecharger
           </button>
         </div>
+      </div>
+      <div className="flex flex-col items-center mt-4 mb-2 border p-3">
+        <p>Changer de mot de passe</p>
+        <button className="text-white mt-4 py-2 px-4 w-[150px] bg-fuchsia">
+          Modifier
+        </button>
       </div>
     </div>
   );
