@@ -1,7 +1,7 @@
 import React from "react";
 import { RiQuestionAnswerFill } from "react-icons/ri";
 import questionsFAQ from "../../data/questionsFAQ.json";
-import Question from "../../components/question/question";
+import Question from "../../components/Question/Question";
 
 export default function FAQ() {
   return (
