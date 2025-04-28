@@ -14,6 +14,7 @@
     "paysProduction": ["États-Unis"],
     "platforms": ["Netflix", "AMC"],
     "langues": ["Anglais", "Français", "Espagnol"],
+    "dureeEpisodeMoyenne": "48 min",
     "saisons": [
       {
         "numero": 1,
@@ -116,6 +117,7 @@
     "paysProduction": ["États-Unis"],
     "platforms": ["Netflix"],
     "langues": ["Anglais", "Français", "Espagnol"],
+    "dureeEpisodeMoyenne": "51 min",
     "saisons": [
       {
         "numero": 1,
@@ -176,6 +178,7 @@
     "paysProduction": ["États-Unis", "Royaume-Uni"],
     "platforms": ["HBO Max", "OCS"],
     "langues": ["Anglais", "Français", "Allemand"],
+    "dureeEpisodeMoyenne": "57 min",
     "saisons": [
       {
         "numero": 1,
@@ -236,6 +239,7 @@
     "paysProduction": ["États-Unis"],
     "platforms": ["AMC", "Netflix"],
     "langues": ["Anglais", "Français", "Espagnol"],
+    "dureeEpisodeMoyenne": "50 min",
     "saisons": [
       {
         "numero": 1,
@@ -289,6 +293,7 @@
     "paysProduction": ["Royaume-Uni"],
     "platforms": ["Netflix"],
     "langues": ["Anglais", "Français", "Allemand"],
+    "dureeEpisodeMoyenne": "59 min",
     "saisons": [
       {
         "numero": 1,
@@ -342,6 +347,7 @@
     "paysProduction": ["États-Unis"],
     "platforms": ["Netflix", "HBO Max"],
     "langues": ["Anglais", "Français", "Espagnol"],
+    "dureeEpisodeMoyenne": "22 min",
     "saisons": [
       {
         "numero": 1,
@@ -402,6 +408,7 @@
     "paysProduction": ["États-Unis"],
     "platforms": ["Netflix", "Peacock"],
     "langues": ["Anglais", "Français", "Espagnol"],
+    "dureeEpisodeMoyenne": "22 min",
     "saisons": [
       {
         "numero": 1,
@@ -455,6 +462,7 @@
     "paysProduction": ["Royaume-Uni"],
     "platforms": ["Netflix", "BBC iPlayer"],
     "langues": ["Anglais", "Français", "Allemand"],
+    "dureeEpisodeMoyenne": "89 min",
     "saisons": [
       {
         "numero": 1,
@@ -501,6 +509,7 @@
     "paysProduction": ["Royaume-Uni"],
     "platforms": ["Netflix", "BBC"],
     "langues": ["Anglais", "Français", "Allemand"],
+    "dureeEpisodeMoyenne": "57 min",
     "saisons": [
       {
         "numero": 1,
@@ -547,6 +556,7 @@
     "paysProduction": ["Royaume-Uni"],
     "platforms": ["Netflix"],
     "langues": ["Anglais", "Français", "Espagnol"],
+    "dureeEpisodeMoyenne": "48 min",
     "saisons": [
       {
         "numero": 1,

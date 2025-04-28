@@ -90,18 +90,20 @@ export default function SerieProvider({ children }) {
   const [detailSerie, setDetailSerie] = useState({
     id: 0,
     titre: "Chargement...",
-    synopsis: "Chargement des informations du film...",
+    synopsis: "Chargement des informations de la série...",
     image: "https://via.placeholder.com/300x450?text=Chargement...",
     acteurs: [],
-    duree: "",
     note: 0,
-    dateSortie: "",
-    realisateur: "",
+    dateDebut: "",
+    dateFin: "",
+    createur: "",
     bandeAnnonce: "",
     genre: [],
     paysProduction: [],
     platforms: [],
     langues: [],
+    dureeEpisodeMoyenne: "",
+    saisons: [],
   });
 
   return (
@@ -122,6 +124,8 @@ export default function SerieProvider({ children }) {
         filterNotSeen,
         searchSerie,
         allSerie,
+        detailSerie,
+        setDetailSerie,
       }}
     >
       {children}

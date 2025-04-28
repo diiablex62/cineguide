@@ -90,12 +90,7 @@ export default function Film() {
 
       <div className="mb-6 px-3">
         <div className="flex md:flex-col gap-y-4">
-          <div className="w-1/2 md:w-full">
-            <h3 className="font-bold text-sm mb-2 text-black dark:text-gray-400">
-              ÂGE
-            </h3>
-            <p className="text-xs text-gray-600 dark:text-gray-300">12</p>
-          </div>
+         
           <div className="w-1/2 md:w-full">
             <h3 className="font-bold text-sm mb-2 text-black dark:text-gray-400">
               PAYS DE PRODUCTION

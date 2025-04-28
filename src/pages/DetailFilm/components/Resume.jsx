@@ -27,7 +27,7 @@ export default function Resume() {
           {detailFilm.acteurs.map((actor) => (
             <div
               key={actor}
-              className="bg-gray-200 dark:bg-gray-800 px-3 py-1 text-xs rounded-full hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer transition-colors"
+              className="bg-gray-200 dark:bg-gray-800 px-3 py-1 text-xs  hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer transition-colors"
             >
               {actor}
             </div>
