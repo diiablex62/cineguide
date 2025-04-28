@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 
 export default function ActualiteDetail() {
-  const { state } = useLocation();
-  const article = state?.article;
+  const { title } = useParams();
+  const location = useLocation();
+  const article = location.state?.article;
   const [articleContent, setArticleContent] = useState("");
   const [isLoading, setIsLoading] = useState(true); // État pour le chargement
 
@@ -90,7 +91,7 @@ export default function ActualiteDetail() {
     <div className='flex justify-center items-center min-h-screen bg-white dark:bg-black'>
       <div className='w-full md:w-[50%] p-6'>
         <h2 className='text-2xl font-bold text-[var(--color-fuchsia)] mb-6'>
-          {article.title}
+          {decodeURIComponent(title)}
         </h2>
         <img
           src={article.image}

@@ -77,7 +77,7 @@ export const router = createBrowserRouter([
         element: <ActualitesPage />,
       },
       {
-        path: "/actualites/article",
+        path: "/actualites/:title",
         element: <ActualiteDetail />,
       },
       {

@@ -21,7 +21,9 @@ export default function ActualitesPage() {
           "https://www.allocine.fr/rss/news.xml"
         );
         const response = await fetch(proxyUrl + rssUrl);
-        const data = isLocalhost ? await response.json() : await response.text();
+        const data = isLocalhost
+          ? await response.json()
+          : await response.text();
         const parser = new DOMParser();
         const xml = parser.parseFromString(
           isLocalhost ? data.contents : data,
@@ -63,7 +65,8 @@ export default function ActualitesPage() {
   };
 
   const handleArticleClick = (article) => {
-    navigate("/actualites/article", { state: { article } });
+    const encodedTitle = encodeURIComponent(article.title);
+    navigate(`/actualites/${encodedTitle}`, { state: { article } });
   };
 
   return (
