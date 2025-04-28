@@ -26,6 +26,10 @@ import BandeAnnonceSerie from "./pages/DetailSerie/components/BandeAnnonceSerie"
 import CommentaireSerie from "./pages/DetailSerie/components/CommentaireSerie";
 import SerieProposer from "./pages/DetailSerie/components/SerieProposer";
 import NotFound from "./pages/404";
+import ProfilVueParAutre from "./pages/ProfilVueParAutre/ProfilVueParAutre";
+import List from "./pages/ProfilVueParAutre/components/List";
+import Activite from "./pages/ProfilVueParAutre/components/Activite";
+import Review from "./pages/ProfilVueParAutre/components/Review";
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +44,25 @@ export const router = createBrowserRouter([
         path: "/profil",
         element: <Profil />,
       },
+      {
+        path: "/profilvuparautre",
+        element: <ProfilVueParAutre />,
+        children: [
+          {
+            index: true,
+            element: <List />,
+          },
+          {
+            path: "activite",
+            element: <Activite />,
+          },
+          {
+            path: "review",
+            element: <Review />,
+          },
+        ],
+      },
+
       {
         path: "/film",
         element: <FilmList />,
@@ -142,7 +165,7 @@ export const router = createBrowserRouter([
         path: "/abonnement",
         element: <ModalAbo />,
       },
-      { path: "*", element: <NotFound /> }, 
+      { path: "*", element: <NotFound /> },
     ],
   },
 ]);
