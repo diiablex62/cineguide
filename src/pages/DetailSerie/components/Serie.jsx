@@ -11,7 +11,7 @@ export default function Serie() {
     return <div className="p-4 text-center">Chargement du film...</div>;
   }
   return (
-    <div className="md:w-1/3 flex-shrink-0 md:pl-4">
+    <div className="md:w-1/3 flex-shrink-0 md:pl-4 ">
       <div className="flex gap-4 p-3 mb-6">
         <div className="bg-gray-800 mb-3 h-64 w-48 relative  overflow-hidden shadow-xl">
           <img

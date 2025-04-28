@@ -53,7 +53,7 @@ export default function DetailSerie() {
       </nav>
 
       <div className="w-full p-4">
-        <div className="flex flex-col md:flex-row-reverse">
+        <div className="flex flex-col md:flex-row-reverse w-full">
           <Serie />
           <Outlet />
         </div>

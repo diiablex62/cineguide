@@ -4,7 +4,7 @@ import { SerieContext } from "../../../context/SerieContext";
 export default function BandeAnnonce() {
   const { detailSerie } = useContext(SerieContext);
   return (
-    <div className="md:w-2/3 flex-1">
+    <div className="w-full flex-1">
       <div className="max-w-3xl">
         <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-400">
           Vidéos: Trailer, Teaser, Bandes-annonces

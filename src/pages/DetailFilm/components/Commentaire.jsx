@@ -3,7 +3,7 @@ import { FaRegStar, FaStar } from "react-icons/fa";
 
 export default function Commentaire() {
   return (
-    <div className="md:w-2/3 flex-1">
+    <div className="w-full flex-1">
       <div className="max-w-3xl">
         <h2 className="font-bold mb-3 text-sm uppercase text-gray-500 dark:text-gray-400">
           Commentaires

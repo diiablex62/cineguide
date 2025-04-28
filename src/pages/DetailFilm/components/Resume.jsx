@@ -14,7 +14,7 @@ export default function Resume() {
   }, [detailFilm, detailActor]);
 
   return (
-    <div className="md:w-2/3 flex-1">
+    <div className="w-full flex-1">
       <div className="max-w-3xl">
         <div className="mb-8">
           <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-400">
