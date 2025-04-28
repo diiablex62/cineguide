@@ -72,10 +72,19 @@ export default function ActualiteDetail() {
         }
       }
 
-      // Si aucun proxy ne fonctionne
-      setArticleContent(
-        "Impossible de récupérer le contenu de l'article. Veuillez réessayer plus tard."
-      );
+      // Dernier recours : mode `no-cors`
+      try {
+        const response = await fetch(article.link, { mode: "no-cors" });
+        const data = await response.text();
+        setArticleContent(
+          "Le contenu ne peut pas être affiché en raison de restrictions CORS. Veuillez consulter l'article original."
+        );
+      } catch (error) {
+        console.error("Erreur avec le mode no-cors :", error);
+        setArticleContent(
+          "Impossible de récupérer le contenu de l'article. Veuillez réessayer plus tard."
+        );
+      }
     };
 
     fetchArticleContent().finally(() => setIsLoading(false));
