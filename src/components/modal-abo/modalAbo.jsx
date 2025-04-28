@@ -266,9 +266,9 @@ export default function ModalAbo() {
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setStep(1); 
-    setSelectedSubscription(""); 
-    setSelectedPaymentMethod(""); 
+    setStep(1);
+    setSelectedSubscription("");
+    setSelectedPaymentMethod("");
   };
   const handleSubscriptionClick = (id) => {
     setSelectedSubscription(id);
@@ -308,7 +308,7 @@ export default function ModalAbo() {
         onClick={handleCloseModal}>
         {isModalOpen && (
           <div
-            className='fixed inset-0 flex items-center justify-center'
+            className='fixed inset-0 flex items-start sm:items-center justify-center overflow-y-auto'
             onClick={(e) => e.stopPropagation()}>
             <div className='bg-white dark:bg-black border border-gray-300 dark:border-white text-black dark:text-white p-6 rounded shadow-lg w-11/12 max-w-[900px] h-auto sm:h-[400px] flex flex-col justify-between'>
               <div className='relative mb-6'>
