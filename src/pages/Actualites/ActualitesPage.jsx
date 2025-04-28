@@ -61,23 +61,35 @@ export default function ActualitesPage() {
       indexOfLastArticle
     );
 
-    return currentArticles.map((article, index) =>
-      index === 0 ? (
+    return currentArticles.map((article, index) => {
+      const date = new Date(article.pubDate);
+      const formattedDate = date.toLocaleDateString("fr-FR", {
+        weekday: "long",
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      });
+      const formattedTime = date.toLocaleTimeString("fr-FR", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+      return index === 0 ? (
         <FirstArticleCard
           key={index}
           {...article}
-          date={new Date(article.pubDate).toLocaleDateString("fr-FR")}
+          date={`${formattedDate}, ${formattedTime}`}
           onClick={() => handleArticleClick(article)}
         />
       ) : (
         <ArticleCard
           key={index}
           {...article}
-          date={new Date(article.pubDate).toLocaleDateString("fr-FR")}
+          date={`${formattedDate}, ${formattedTime}`}
           onClick={() => handleArticleClick(article)}
         />
-      )
-    );
+      );
+    });
   };
 
   if (isLoading) {
