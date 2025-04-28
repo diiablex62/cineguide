@@ -10,25 +10,16 @@ export default function ActualitesPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const isLocalhost = window.location.hostname === "localhost";
-
     const fetchRSS = async () => {
       try {
-        const proxyUrl = isLocalhost
-          ? "https://api.allorigins.win/get?url="
-          : "";
+        const proxyUrl = "https://api.allorigins.win/get?url=";
         const rssUrl = encodeURIComponent(
           "https://www.allocine.fr/rss/news.xml"
         );
         const response = await fetch(proxyUrl + rssUrl);
-        const data = isLocalhost
-          ? await response.json()
-          : await response.text();
+        const data = await response.json();
         const parser = new DOMParser();
-        const xml = parser.parseFromString(
-          isLocalhost ? data.contents : data,
-          "application/xml"
-        );
+        const xml = parser.parseFromString(data.contents, "application/xml");
         const items = Array.from(xml.querySelectorAll("item")).map((item) => ({
           title:
             item.querySelector("title")?.textContent || "Titre indisponible",
@@ -45,9 +36,7 @@ export default function ActualitesPage() {
       }
     };
 
-    if (isLocalhost) {
-      fetchRSS();
-    }
+    fetchRSS();
   }, []);
 
   const indexOfLastArticle = currentPage * articlesPerPage;
