@@ -12,7 +12,7 @@ export default function ResumeSerie() {
 
   return (
     <div className="w-full flex-1">
-      <div className="max-w-3xl">
+      <div className="w-full text-center justify-center items-center">
         <div className="mb-8">
           <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-400">
             {detailSerie.saisons.length} SAISONS
