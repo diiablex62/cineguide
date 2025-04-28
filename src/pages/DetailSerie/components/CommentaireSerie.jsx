@@ -1,10 +1,10 @@
 import React from "react";
 import { FaRegStar, FaStar } from "react-icons/fa";
 
-export default function Commentaire() {
+export default function CommentaireSerie() {
   return (
     <div className="w-full flex-1">
-      <div className="w-full text-center justify-center items-center">
+      <div className="w-full  text-center justify-center items-center">
         <h2 className="font-bold mb-3 text-sm uppercase text-gray-500 dark:text-gray-400">
           Commentaires
         </h2>

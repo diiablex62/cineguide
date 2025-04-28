@@ -1,9 +1,8 @@
-import React, { useContext, useState } from "react";
-import { FilmContext } from "../../../context/FilmContext";
+import React, { useContext } from "react";
+import { SerieContext } from "../../../context/SerieContext";
 
 export default function BandeAnnonce() {
-  const { detailFilm } = useContext(FilmContext);
-
+  const { detailSerie } = useContext(SerieContext);
   return (
     <div className="w-full flex-1">
       <div className="w-full text-center justify-center items-center">
@@ -16,7 +15,10 @@ export default function BandeAnnonce() {
               <iframe
                 width="100%"
                 height="100%"
-                src={`${detailFilm.bandeAnnonce.replace("watch?v=", "embed/")}`}
+                src={`${detailSerie.bandeAnnonce.replace(
+                  "watch?v=",
+                  "embed/"
+                )}`}
                 title="Bande-annonce officielle"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen

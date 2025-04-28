@@ -24,7 +24,7 @@ export default function DetailFilm() {
   return (
     <div className="bg-white dark:bg-black text-gray-900 dark:text-white font-poppins">
       <nav className="py-2 sticky top-0 z-10 shadow-md">
-        <div className="flex  space-x-2 px-4 py-4 overflow-auto md:justify-center">
+        <div className="flex  space-x-2 px-4 py-4 overflow-auto md:justify-center bg-white dark:bg-black">
           <Link
             to={""}
             className={`bg-fuchsia hover:bg-fuchsia-hover text-white px-3 py-1 text-xs md:text-lg transition-colors`}

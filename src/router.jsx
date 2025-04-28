@@ -23,6 +23,12 @@ import ModalAbo from "./components/modal-abo/modalAbo";
 import ProfilActiviter from "./pages/Profil/ProfilActiviter";
 import ProfilListe from "./pages/Profil/ProfilListe";
 import ProfileReviews from "./pages/Profil/ProfileReviews";
+import TousSerie from "./pages/DetailSerie/components/TousSerie";
+import ResumeSerie from "./pages/DetailSerie/components/ResumeSerie";
+import BandeAnnonceSerie from "./pages/DetailSerie/components/BandeAnnonceSerie";
+import CommentaireSerie from "./pages/DetailSerie/components/CommentaireSerie";
+import SerieProposer from "./pages/DetailSerie/components/SerieProposer";
+import NotFound from "./pages/404";
 
 export const router = createBrowserRouter([
   {
@@ -61,8 +67,30 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: "/detailserie",
+        path: "/detailserie/:id",
         element: <DetailSerie />,
+        children: [
+          {
+            index: true,
+            element: <TousSerie />,
+          },
+          {
+            path: "resumeserie",
+            element: <ResumeSerie />,
+          },
+          {
+            path: "bandeannonceserie",
+            element: <BandeAnnonceSerie />,
+          },
+          {
+            path: "commentaireserie",
+            element: <CommentaireSerie />,
+          },
+          {
+            path: "serieproposer",
+            element: <SerieProposer />,
+          },
+        ],
       },
       {
         path: "/series",
@@ -98,7 +126,7 @@ export const router = createBrowserRouter([
         element: <ActualitesPage />,
       },
       {
-        path: "/actualites/article",
+        path: "/actualites/:title",
         element: <ActualiteDetail />,
       },
       {
@@ -135,6 +163,7 @@ export const router = createBrowserRouter([
         path: "/abonnement",
         element: <ModalAbo />,
       },
+      { path: "*", element: <NotFound /> },
     ],
   },
 ]);

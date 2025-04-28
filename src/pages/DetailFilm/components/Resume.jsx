@@ -14,8 +14,8 @@ export default function Resume() {
   }, [detailFilm, detailActor]);
 
   return (
-    <div className="md:w-2/3 flex-1">
-      <div className="max-w-3xl">
+    <div className="w-full flex-1">
+      <div className="w-full text-center justify-center items-center">
         <div className="mb-8">
           <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-400">
             Résumé
@@ -33,7 +33,7 @@ export default function Resume() {
             {detailFilm.acteurs.map((actor) => (
               <div
                 key={actor}
-                className="bg-gray-200 dark:bg-gray-800 px-3 py-1 text-xs rounded-full hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer transition-colors"
+                className="bg-gray-200 dark:bg-gray-800 px-3 py-1 text-xs  hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer transition-colors"
               >
                 {actor}
               </div>
