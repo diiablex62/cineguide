@@ -27,7 +27,7 @@ export default function SerieProposer() {
     .slice(0, 6);
 
   return (
-    <div className="w-full flex-1">
+    <div className="w-full flex-1 text-center justify-center items-center">
       <div className="mt-8">
         <h2 className="font-bold mb-4 text-sm uppercase text-black dark:text-gray-400">
           Ça pourrait vous intéresser
