@@ -52,11 +52,15 @@ export default function Connexion() {
         <div className='bg-white dark:bg-black p-6 w-4/5 max-w-sm max-md:h-screen flex flex-col justify-center items-center border-0 dark:border dark:border-white'>
           {/* Logo en mobile */}
           <div className='mb-6 flex justify-center md:hidden'>
-            <img src={logo} alt='CineGuide' className='h-12 dark:hidden' />
+            <img
+              src={logo}
+              alt='CineGuide'
+              className='h-12 max-w-full object-contain dark:hidden' 
+            />
             <img
               src={logoWhite}
               alt='CineGuide'
-              className='h-12 hidden dark:block'
+              className='h-12 max-w-full object-contain hidden dark:block' 
             />
           </div>
           <a
@@ -140,11 +144,15 @@ export default function Connexion() {
       {/* Section droite */}
       <div className='hidden md:flex w-1/2 justify-center items-center flex-col bg-white dark:bg-black'>
         <div className='mb-6'>
-          <img src={logo} alt='CineGuide' className='h-12 dark:hidden' />
+          <img
+            src={logo}
+            alt='CineGuide'
+            className='h-12 max-w-full object-contain dark:hidden' 
+          />
           <img
             src={logoWhite}
             alt='CineGuide'
-            className='h-12 hidden dark:block'
+            className='h-12 max-w-full object-contain hidden dark:block' 
           />
         </div>
         <div className='w-4/5 flex flex-col items-center'>
