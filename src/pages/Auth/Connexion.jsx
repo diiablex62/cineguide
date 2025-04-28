@@ -7,6 +7,8 @@ import { AuthContext } from "../../components/providers/AuthProvider";
 import GoogleIcon from "../../components/icone/google";
 import { FaRegEye } from "react-icons/fa6";
 import { FaRegEyeSlash } from "react-icons/fa6";
+import logo from "../../assets/logo.png";
+import logoWhite from "../../assets/logo_blanc.png";
 
 export default function Connexion() {
   const { login } = useContext(AuthContext);
@@ -38,9 +40,9 @@ export default function Connexion() {
 
   const onSubmit = (data) => {
     login(data);
-    localStorage.setItem("session", JSON.stringify(data)); 
+    localStorage.setItem("session", JSON.stringify(data));
     window.dispatchEvent(new Event("storage"));
-    navigate("/"); 
+    navigate("/");
   };
 
   return (
@@ -50,13 +52,9 @@ export default function Connexion() {
         <div className='bg-white dark:bg-black p-6 w-4/5 max-w-sm max-md:h-screen flex flex-col justify-center items-center border-0 dark:border dark:border-white'>
           {/* Logo en mobile */}
           <div className='mb-6 flex justify-center md:hidden'>
+            <img src={logo} alt='CineGuide' className='h-12 dark:hidden' />
             <img
-              src='/src/assets/logo.png'
-              alt='CineGuide'
-              className='h-12 dark:hidden'
-            />
-            <img
-              src='/src/assets/logo_blanc.png'
+              src={logoWhite}
               alt='CineGuide'
               className='h-12 hidden dark:block'
             />
@@ -142,13 +140,9 @@ export default function Connexion() {
       {/* Section droite */}
       <div className='hidden md:flex w-1/2 justify-center items-center flex-col bg-white dark:bg-black'>
         <div className='mb-6'>
+          <img src={logo} alt='CineGuide' className='h-12 dark:hidden' />
           <img
-            src='/src/assets/logo.png'
-            alt='CineGuide'
-            className='h-12 dark:hidden'
-          />
-          <img
-            src='/src/assets/logo_blanc.png'
+            src={logoWhite}
             alt='CineGuide'
             className='h-12 hidden dark:block'
           />
