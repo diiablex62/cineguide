@@ -14,9 +14,16 @@ export default function NotFound() {
       <div className='absolute inset-0  bg-opacity-50'></div>
 
       {/* Contenu du texte sur la partie droite */}
-      <div className='relative z-10 w-1/2 ml-auto text-left px-12'>
-        <h1 className='text-5xl font-bold mb-6'>Vous vous êtes égaré ?</h1>
-        <p className='text-lg mb-8'>
+      <div
+        className='relative z-10 w-full md:w-1/2 ml-auto text-center md:text-left px-6 md:px-12'
+        style={{
+          paddingTop: "20%",
+          paddingBottom: "20%",
+        }}>
+        <h1 className='text-4xl md:text-5xl font-bold mb-6'>
+          Vous vous êtes égaré ?
+        </h1>
+        <p className='text-base md:text-lg mb-8'>
           Désolé, nous n'avons pas trouvé cette page. Vous trouverez d'autres
           films et séries à explorer sur la page d'accueil.
         </p>
