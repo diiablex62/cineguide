@@ -142,14 +142,14 @@ const StepContent = ({
                     }
                   }}
                   onInput={(e) => {
-                    let value = e.target.value.replace(/\D/g, ""); 
-                    if (value.length > 16) value = value.slice(0, 16); 
-                    e.target.value = value.match(/.{1,4}/g)?.join(" ") || ""; 
+                    let value = e.target.value.replace(/\D/g, "");
+                    if (value.length > 16) value = value.slice(0, 16);
+                    e.target.value = value.match(/.{1,4}/g)?.join(" ") || "";
                     if (value.length === 16) {
                       e.target
                         .closest("form")
                         .querySelector("input[placeholder='xxx']")
-                        .focus(); 
+                        .focus();
                     }
                   }}
                 />
@@ -179,7 +179,7 @@ const StepContent = ({
                         e.target
                           .closest("form")
                           .querySelector("input[placeholder='MM/YY']")
-                          .focus(); // Passe au champ suivant
+                          .focus(); 
                       }
                     }}
                   />
@@ -207,17 +207,17 @@ const StepContent = ({
                       }
                     }}
                     onInput={(e) => {
-                      let value = e.target.value.replace(/\D/g, ""); 
-                      if (value.length > 4) value = value.slice(0, 4); 
+                      let value = e.target.value.replace(/\D/g, "");
+                      if (value.length > 4) value = value.slice(0, 4);
                       if (value.length > 2) {
-                        value = value.slice(0, 2) + "/" + value.slice(2); 
+                        value = value.slice(0, 2) + "/" + value.slice(2);
                       }
                       e.target.value = value;
                       if (value.length === 5) {
                         e.target
                           .closest("form")
                           .querySelector("button[type='submit']")
-                          .focus(); 
+                          .focus();
                       }
                     }}
                   />
@@ -305,21 +305,21 @@ export default function ModalAbo() {
           <div
             className='fixed inset-0 flex items-center justify-center'
             onClick={(e) => e.stopPropagation()}>
-            <div className='bg-white dark:bg-black p-6 rounded shadow-lg w-11/12 max-w-[900px] h-auto sm:h-[400px] flex flex-col justify-between'>
+            <div className='bg-black border border-white text-white p-6 rounded shadow-lg w-11/12 max-w-[900px] h-auto sm:h-[400px] flex flex-col justify-between'>
               <div className='relative mb-6'>
                 <button
                   onClick={handleCloseModal}
-                  className='absolute top-2 right-2 sm:top-0 sm:right-0 text-4xl font-light text-black hover:text-gray-700 cursor-pointer'>
+                  className='absolute top-2 right-2 sm:top-0 sm:right-0 text-4xl font-light text-white hover:text-gray-300 cursor-pointer'>
                   &times;
                 </button>
                 {step > 1 && (
                   <button
                     onClick={() => setStep(step - 1)}
-                    className='absolute top-2 left-2 sm:top-0 sm:left-0 text-xl font-light text-black hover:text-gray-700 cursor-pointer'>
+                    className='absolute top-2 left-2 sm:top-0 sm:left-0 text-xl font-light text-white hover:text-gray-300 cursor-pointer'>
                     &larr; Retour
                   </button>
                 )}
-                <h2 className='text-2xl sm:text-3xl font-light mt-10 sm:mt-0 text-center'>
+                <h2 className='text-2xl sm:text-3xl font-light mt-10 sm:mt-0 text-center text-white'>
                   {step === 1
                     ? "Choisir un abonnement :"
                     : step === 2
