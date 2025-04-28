@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -14,7 +14,7 @@ export default function Inscription() {
   const { register: registerUser } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
   const toggleConfirmPasswordVisibility = () =>
@@ -56,8 +56,8 @@ export default function Inscription() {
 
   const onSubmit = (data) => {
     registerUser(data);
-    localStorage.setItem("session", JSON.stringify(data)); 
-    navigate("/"); 
+    localStorage.setItem("session", JSON.stringify(data));
+    navigate("/");
     window.dispatchEvent(new Event("storage"));
   };
 
@@ -267,6 +267,16 @@ export default function Inscription() {
               href='/connexion'
               className='text-[var(--color-fuchsia)] dark:text-[var(--color-fuchsia)] underline'>
               Se connecter
+            </a>
+          </p>
+          <p className='text-center mt-4 text-sm text-black dark:text-white'>
+            Consultez les articles sur{" "}
+            <a
+              href='https://www.allocine.fr/'
+              target='_blank' 
+              rel='noopener noreferrer' 
+              className='text-[var(--color-fuchsia)] dark:text-[var(--color-fuchsia)] underline'>
+              Allociné
             </a>
           </p>
         </form>
