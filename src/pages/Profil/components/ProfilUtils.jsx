@@ -44,7 +44,7 @@ export default function ProfilUtils() {
       </div>
       <div className="flex flex-col items-center mt-4 mb-2 border p-3">
         <p>Changer de mot de passe</p>
-        <button className="text-white mt-4 py-2 px-4 w-[150px] bg-fuchsia">
+        <button className="text-white mt-4 py-2 px-4 w-[150px] bg-fuchsia cursor-pointer">
           Modifier
         </button>
       </div>

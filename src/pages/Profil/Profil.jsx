@@ -8,8 +8,8 @@ import ProfilNav from "./components/ProfilNav";
 export default function profil() {
   const { user } = useContext(AuthContext);
   return (
-    <div className="flex flex-col p-5">
-      <div className="md:w-4/6 flex flex-col">
+    <div className="flex flex-col p-5 md:flex-row">
+      <div className="md:w-4/6 flex flex-col p-4">
         <div className="flex items-end">
           <img src={user.avatar} alt="" />
           <p className="font-bold text-4xl mb-3">
@@ -28,7 +28,7 @@ export default function profil() {
         <ProfilNav></ProfilNav>
         <ProfilForm></ProfilForm>
       </div>
-      <div className="md:w-2/6">
+      <div className="md:w-2/6 p-4">
         <ProfilUtils></ProfilUtils>
       </div>
     </div>
