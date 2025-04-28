@@ -39,96 +39,104 @@ export default function Connexion() {
   };
 
   return (
-    <div className='flex flex-col md:flex-row h-screen'>
+    <div className="flex flex-col md:flex-row h-screen">
       {/* Section gauche */}
-      <div className='w-full md:w-1/2 flex justify-center items-center bg-white dark:bg-[var(--color-fuchsia)]  md:bg-[var(--color-fuchsia)] text-black dark:text-white md:text-white'>
-        <div className='bg-white dark:bg-black p-6 w-4/5 max-w-sm max-md:h-screen flex flex-col justify-center items-center border-0 dark:border dark:border-white'>
+      <div className="w-full md:w-1/2 flex justify-center items-center bg-white dark:bg-[var(--color-fuchsia)]  md:bg-[var(--color-fuchsia)] text-black dark:text-white md:text-white">
+        <div className="bg-white dark:bg-black p-6 w-4/5 max-w-sm max-md:h-screen flex flex-col justify-center items-center border-0 dark:border dark:border-white">
           {/* Logo en mobile */}
-          <div className='mb-6 flex justify-center md:hidden'>
+          <div className="mb-6 flex justify-center md:hidden">
             <img
-              src='/src/assets/logo.png'
-              alt='CineGuide'
-              className='h-12 dark:hidden'
+              src="/src/assets/logo.png"
+              alt="CineGuide"
+              className="h-12 dark:hidden"
             />
             <img
-              src='/src/assets/logo_blanc.png'
-              alt='CineGuide'
-              className='h-12 hidden dark:block'
+              src="/src/assets/logo_blanc.png"
+              alt="CineGuide"
+              className="h-12 hidden dark:block"
             />
           </div>
           <a
-            href='/'
-            className='text-sm text-gray-500 dark:text-gray-400 hover:underline self-start mb-8'>
+            href="/"
+            className="text-sm text-gray-500 dark:text-gray-400 hover:underline self-start mb-8"
+          >
             &lt; Retour vers la page d'accueil
           </a>
-          <h2 className='text-center mb-4 text-2xl font-bold text-black dark:text-white'>
+          <h2 className="text-center mb-4 text-2xl font-bold text-black dark:text-white">
             SE CONNECTER
           </h2>
           <form
-            className='flex flex-col gap-4 w-full'
-            onSubmit={handleSubmit(onSubmit)}>
+            className="flex flex-col gap-4 w-full"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <div>
               <label
-                htmlFor='email'
-                className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+              >
                 Email
               </label>
               <input
                 {...register("email")}
-                id='email'
-                type='email'
-                placeholder='Entrez votre email'
-                className='w-full p-2 border border-gray-300 dark:border-gray-700 rounded focus:ring-[var(--color-fuchsia)] focus:border-[var(--color-fuchsia)] focus:outline-[var(--color-fuchsia)] text-[var(--color-fuchsia)] placeholder-gray-400 dark:placeholder-gray-500'
+                id="email"
+                type="email"
+                placeholder="Entrez votre email"
+                className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded focus:ring-[var(--color-fuchsia)] focus:border-[var(--color-fuchsia)] focus:outline-[var(--color-fuchsia)] text-[var(--color-fuchsia)] placeholder-gray-400 dark:placeholder-gray-500"
               />
               {errors.email && (
-                <p className='text-red-500 dark:text-red-400'>
+                <p className="text-red-500 dark:text-red-400">
                   {errors.email.message}
                 </p>
               )}
             </div>
             <div>
               <label
-                htmlFor='password'
-                className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+              >
                 Mot de passe
               </label>
-              <div className='relative'>
+              <div className="relative">
                 <input
                   {...register("password")}
-                  id='password'
+                  id="password"
                   type={showPassword ? "text" : "password"}
-                  placeholder='Entrez votre mot de passe'
-                  className='w-full p-2 border border-gray-300 dark:border-gray-700 rounded focus:ring-[var(--color-fuchsia)] focus:border-[var(--color-fuchsia)] focus:outline-[var(--color-fuchsia)] text-[var(--color-fuchsia)] placeholder-gray-400 dark:placeholder-gray-500'
+                  placeholder="Entrez votre mot de passe"
+                  className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded focus:ring-[var(--color-fuchsia)] focus:border-[var(--color-fuchsia)] focus:outline-[var(--color-fuchsia)] text-[var(--color-fuchsia)] placeholder-gray-400 dark:placeholder-gray-500"
                 />
                 <button
-                  type='button'
+                  type="button"
                   onClick={togglePasswordVisibility}
-                  className='absolute inset-y-0 right-3 flex items-center text-gray-500 dark:text-gray-300'>
+                  className="absolute inset-y-0 right-3 flex items-center text-gray-500 dark:text-gray-300"
+                >
                   {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}{" "}
                 </button>
               </div>
               {errors.password && (
-                <p className='text-red-500 dark:text-red-400'>
+                <p className="text-red-500 dark:text-red-400">
                   {errors.password.message}
                 </p>
               )}
             </div>
             <button
-              type='submit'
-              className='w-full p-3 bg-[var(--color-fuchsia)] text-white rounded hover:bg-[var(--color-fuchsia-hover)]'>
+              type="submit"
+              className="w-full p-3 bg-[var(--color-fuchsia)] text-white rounded hover:bg-[var(--color-fuchsia-hover)]"
+            >
               Se connecter
             </button>
             <button
-              type='button'
-              className='w-full p-3 bg-white dark:bg-black text-[var(--color-fuchsia)] border border-[var(--color-fuchsia)] rounded hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center justify-center gap-2'>
-              <GoogleIcon className='h-5 w-5' /> Se connecter avec Google
+              type="button"
+              className="w-full p-3 bg-white dark:bg-black text-[var(--color-fuchsia)] border border-[var(--color-fuchsia)] rounded hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center justify-center gap-2"
+            >
+              <GoogleIcon className="h-5 w-5" /> Se connecter avec Google
             </button>
           </form>
-          <p className='text-center mt-4 text-sm text-gray-700 dark:text-gray-300'>
+          <p className="text-center mt-4 text-sm text-gray-700 dark:text-gray-300">
             Pas encore inscrit ?{" "}
             <a
-              href='/inscription'
-              className='text-[var(--color-fuchsia)] underline'>
+              href="/inscription"
+              className="text-[var(--color-fuchsia)] underline"
+            >
               S'inscrire
             </a>
           </p>
@@ -136,21 +144,21 @@ export default function Connexion() {
       </div>
 
       {/* Section droite */}
-      <div className='hidden md:flex w-1/2 justify-center items-center flex-col bg-white dark:bg-black '>
-        <div className='mb-6'>
+      <div className="hidden md:flex w-1/2 justify-center items-center flex-col bg-white dark:bg-black ">
+        <div className="mb-6">
           <img
-            src='/src/assets/logo.png'
-            alt='CineGuide'
-            className='h-12 dark:hidden'
+            src="/src/assets/logo.png"
+            alt="CineGuide"
+            className="h-12 dark:hidden"
           />
           <img
-            src='/src/assets/logo_blanc.png'
-            alt='CineGuide'
-            className='h-12 hidden dark:block'
+            src="/src/assets/logo_blanc.png"
+            alt="CineGuide"
+            className="h-12 hidden dark:block"
           />
         </div>
-        <div className='w-4/5 flex flex-col items-center'>
-          <h1 className='text-6xl font-light text-[var(--color-fuchsia)] dark:text-[var(--color-fuchsia)]'>
+        <div className="w-4/5 flex flex-col items-center">
+          <h1 className="text-6xl font-light text-[var(--color-fuchsia)] dark:text-[var(--color-fuchsia)]">
             Toutes vos plateformes de streaming au
             <br /> même endroit
           </h1>

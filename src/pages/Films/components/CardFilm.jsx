@@ -27,7 +27,7 @@ export default function CardFilm() {
       ) : (
         <>
           {/* Affichage desktop */}
-          <div className="hidden md:flex md:flex-wrap">
+          <div className="hidden md:flex md:flex-wrap ">
             {film.map((film, index) => (
               <div
                 key={index}

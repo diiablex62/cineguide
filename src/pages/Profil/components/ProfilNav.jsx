@@ -15,7 +15,7 @@ export default function ProfilNav() {
         <ImStatsBars className=" w-[30px] h-[30px] lg:mr-2" />
         <span className="hidden lg:block ">Mon activité</span>
       </button>
-      <button className="bg-whitep-1  w-[50px] h-[50px] lg:w-auto lg:px-5 lg:justify-start flex justify-center items-center border cursor-pointer text-black hover:bg-fuchsia  hover:text-white ">
+      <button className="bg-white p-1  w-[50px] h-[50px] lg:w-auto lg:px-5 lg:justify-start flex justify-center items-center border cursor-pointer text-black hover:bg-fuchsia  hover:text-white ">
         <CiViewList className=" w-[30px] h-[30px] lg:mr-2" />
         <span className="hidden lg:block ">Ma liste</span>
       </button>

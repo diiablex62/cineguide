@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "date_debut": "2021-02-21",
+    "date_fin": "2021-02-21",
+    "telechargement": "https://exemple.com/factures/facture-2021-02-21.pdf"
+  },
+  {
+    "id": 2,
+    "date_debut": "2021-03-01",
+    "date_fin": "2021-03-31",
+    "telechargement": "https://exemple.com/factures/facture-2021-03.pdf"
+  },
+  {
+    "id": 3,
+    "date_debut": "2021-04-01",
+    "date_fin": "2021-04-30",
+    "telechargement": "https://exemple.com/factures/facture-2021-04.pdf"
+  },
+  {
+    "id": 4,
+    "date_debut": "2021-05-01",
+    "date_fin": "2021-05-31",
+    "telechargement": "https://exemple.com/factures/facture-2021-05.pdf"
+  }
+]
