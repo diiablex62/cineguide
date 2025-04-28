@@ -6,7 +6,7 @@ export default function BandeAnnonce() {
 
   return (
     <div className="w-full flex-1">
-      <div className="max-w-3xl">
+      <div className="w-full text-center justify-center items-center">
         <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-400">
           Vidéos: Trailer, Teaser, Bandes-annonces
         </h2>
