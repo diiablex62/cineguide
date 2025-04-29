@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Netflix from "../components/home/Netflix";
 import Primevideo from "../components/home/Primevideo";
 import Disney from "../components/home/Disney";
@@ -8,6 +8,38 @@ import peakyBg from "../assets/peaky2.jpg";
 import genres from "../data/Genre.json";
 
 export default function Home() {
+  const [selectedGenre, setSelectedGenre] = useState("");
+  const [selectedType, setSelectedType] = useState({
+    film: false,
+    serie: false,
+  });
+  const [selectedNote, setSelectedNote] = useState("");
+  const [filteredResult, setFilteredResult] = useState(series[0]);
+
+  const handleSearch = () => {
+    console.log('Filtres sélectionnés:', {
+      genre: selectedGenre,
+      type: selectedType,
+      note: selectedNote
+    });
+  };
+
+  // Gestionnaires d'événements pour les filtres
+  const handleGenreChange = (e) => {
+    setSelectedGenre(e.target.value);
+  };
+
+  const handleNoteChange = (e) => {
+    setSelectedNote(e.target.value);
+  };
+
+  const handleTypeChange = (type) => {
+    setSelectedType(prev => ({
+      ...prev,
+      [type]: !prev[type]
+    }));
+  };
+
   return (
     <div className='p-10'>
       <div className='mt-10 dark:black px-6 rounded-lg text-center'>
@@ -156,13 +188,16 @@ export default function Home() {
         </h2>
         <div className='flex flex-col md:flex-row gap-8'>
           {/* Colonne de gauche - Filtres */}
-          <div className='w-full md:w-1/2 space-y-6 flex flex-col items-center '>
-            <div className='space-y-4 w-[50%] '>
-              <div className='w-[80%] '>
+          <div className='w-full md:w-1/2 space-y-6 flex flex-col items-center'>
+            <div className='space-y-4 w-[50%]'>
+              <div className='w-[80%]'>
                 <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 '>
                   GENRE :
                 </label>
-                <select className='w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-black text-black dark:text-white'>
+                <select 
+                  className='w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-black text-black dark:text-white'
+                  value={selectedGenre}
+                  onChange={handleGenreChange}>
                   <option value='' className='bg-white dark:bg-black'>
                     Sélectionnez un genre
                   </option>
@@ -185,6 +220,8 @@ export default function Home() {
                     <input
                       type='checkbox'
                       className='form-checkbox text-[var(--color-fuchsia)]'
+                      checked={selectedType.film}
+                      onChange={() => handleTypeChange('film')}
                     />
                     <span className='ml-2 text-gray-700 dark:text-gray-300'>
                       Film
@@ -194,6 +231,8 @@ export default function Home() {
                     <input
                       type='checkbox'
                       className='form-checkbox text-[var(--color-fuchsia)]'
+                      checked={selectedType.serie}
+                      onChange={() => handleTypeChange('serie')}
                     />
                     <span className='ml-2 text-gray-700 dark:text-gray-300'>
                       Série
@@ -205,64 +244,81 @@ export default function Home() {
                 <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>
                   NOTE :
                 </label>
-                <select className='w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-black text-black dark:text-white'>
+                <select 
+                  className='w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-black text-black dark:text-white'
+                  value={selectedNote}
+                  onChange={handleNoteChange}>
                   <option value='' className='bg-white dark:bg-black'>
                     Sélectionnez une note
                   </option>
-                  <option value='90-100' className='bg-white dark:bg-black'>
-                    90 à 100 - Chef d'œuvre
+                  <option value='9-10' className='bg-white dark:bg-black'>
+                    9 à 10 - Chef d'œuvre
                   </option>
-                  <option value='70-90' className='bg-white dark:bg-black'>
-                    70 à 90 - Très bon
+                  <option value='7-9' className='bg-white dark:bg-black'>
+                    7 à 9 - Très bon
                   </option>
-                  <option value='40-70' className='bg-white dark:bg-black'>
-                    40 à 70 - Moyen
+                  <option value='4-7' className='bg-white dark:bg-black'>
+                    4 à 7 - Moyen
                   </option>
-                  <option value='0-40' className='bg-white dark:bg-black'>
-                    0 à 40 - Mauvais
+                  <option value='0-4' className='bg-white dark:bg-black'>
+                    0 à 4 - Mauvais
                   </option>
                 </select>
               </div>
-            </div>
-            <div className='w-[80%] flex justify-center'>
-              <button className='w-[30%] bg-[var(--color-fuchsia)] text-white py-2 px-4 rounded hover:bg-[var(--color-fuchsia-hover)]'>
-                TROUVER UN FILM
-              </button>
+              <div className='w-full flex'>
+                <button 
+                  onClick={handleSearch}
+                  className='bg-[var(--color-fuchsia)] text-white py-2 px-8 rounded hover:bg-[var(--color-fuchsia-hover)] whitespace-nowrap'>
+                  TROUVER UN FILM
+                </button>
+              </div>
             </div>
           </div>
 
-          {/* Colonne de droite - Résultat */}
+          {/* Colonne droite - Résultat */}
           <div className='w-full md:w-1/2 bg-white dark:bg-black rounded-lg p-6 border border-gray-200 dark:border-gray-700'>
-            <div className='flex gap-6'>
-              <img
-                src={series[8].image}
-                alt='Affiche du film'
-                className='w-32 h-48 object-cover rounded'
-              />
-              <div className='flex flex-col justify-between'>
-                <div>
-                  <h3 className='text-xl font-bold text-gray-900 dark:text-white'>
-                    Spider-Man: Into the Spider-Verse
-                  </h3>
-                  <p className='text-gray-600 dark:text-gray-300 text-sm mt-2'>
-                    2018 · Note: 99 · 1h 57m
-                  </p>
-                  <p className='text-gray-700 dark:text-gray-300 mt-4'>
-                    L'adolescent Miles Morales devient Spider-Man de son univers
-                    et doit rejoindre cinq individus dotés de pouvoirs
-                    d'araignée venant d'autres dimensions pour...
-                  </p>
-                </div>
-                <div className='flex gap-2 mt-4'>
-                  <button className='bg-[var(--color-fuchsia)] text-white px-4 py-2 rounded'>
-                    À voir
-                  </button>
-                  <button className='bg-green-600 text-white px-4 py-2 rounded'>
-                    Déjà vu
-                  </button>
+            {filteredResult ? (
+              <div className='flex gap-6'>
+                <img
+                  src={filteredResult.image}
+                  alt={filteredResult.titre}
+                  className='w-32 h-48 object-cover rounded'
+                />
+                <div className='flex flex-col justify-between'>
+                  <div>
+                    <h3 className='text-xl font-bold text-gray-900 dark:text-white'>
+                      {filteredResult.titre}
+                    </h3>
+                    <p className='text-gray-600 dark:text-gray-300 text-sm mt-2'>
+                      {new Date(filteredResult.dateSortie).getFullYear()} ·
+                      Note: {filteredResult.note.toFixed(1)} ·{" "}
+                      {filteredResult.duree}
+                    </p>
+                    <p className='text-gray-700 dark:text-gray-300 mt-4'>
+                      {filteredResult.synopsis}
+                    </p>
+                  </div>
+                  <div className='flex gap-2 mt-4'>
+                    <button className='bg-[var(--color-fuchsia)] text-white px-4 py-2 rounded'>
+                      À voir
+                    </button>
+                    <button className='bg-green-600 text-white px-4 py-2 rounded'>
+                      Déjà vu
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              <div className='flex flex-col items-center justify-center h-full text-center p-8'>
+                <p className='text-gray-600 dark:text-gray-300 mb-4'>
+                  Pas d'inspiration pour ce soir ? 🎬
+                </p>
+                <p className='text-gray-500 dark:text-gray-400'>
+                  Utilisez les filtres et cliquez sur "TROUVER UN FILM" pour
+                  obtenir une suggestion personnalisée !
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
