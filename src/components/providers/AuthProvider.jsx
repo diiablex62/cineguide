@@ -1,9 +1,9 @@
-import React, { createContext, useState } from "react";
-
-export const AuthContext = createContext();
+import React, { useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState({
+    id: "1",
     firstname: "Jean",
     lastname: "Dupont",
     email: "jean.dupont@gmail.fr",
@@ -33,6 +33,7 @@ export default function AuthProvider({ children }) {
   const logout = () => {
     localStorage.removeItem("session");
     setUser(null);
+    window.location.href = "/";
   };
 
   return (

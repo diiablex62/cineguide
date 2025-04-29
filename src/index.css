@@ -4,6 +4,10 @@
   @apply underline;
 }
 
+.activeActeur {
+  @apply bg-black text-white dark:text-white dark:border-white;
+}
+
 @layer base {
   *,
   *::before,
@@ -49,7 +53,9 @@ body.dark {
 .swiper-button-prev {
   color: black !important;
 }
-html {font-family: var(--font-poppins);} 
+html {
+  font-family: var(--font-poppins);
+}
 
 @keyframes animation-fuchsia {
   0% {
@@ -72,6 +78,4 @@ html {font-family: var(--font-poppins);}
 .animate-fuchsia {
   animation: animation-fuchsia 4s linear infinite alternate both;
   --font-poppins: Poppins, sans-serif;
-
 }
-

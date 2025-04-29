@@ -36,11 +36,7 @@ export default function Serie() {
                   onMouseLeave={() => setHoverRating(0)}
                   onClick={() => setRating(star)}
                 >
-                  {rating >= star || hoverRating >= star ? (
-                    <FaStar className="text-fuchsia" />
-                  ) : (
-                    <FaRegStar className="text-gray-fonce" />
-                  )}
+                  {<FaStar className="text-fuchsia" />}
                 </span>
               ))}
             </div>

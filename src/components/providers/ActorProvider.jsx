@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { ActorContext } from "../../context/ActorContext";
 import ActorData from "../../data/Acteurs.json";
-
+import { useNavigate } from "react-router-dom";
+import FilmParActeur from "../../data/FilmParActeur.json";
+import Recompenses from "../../data/Recompense.json";
 export default function ActorProvider({ children }) {
   const [allActors, setAllActors] = useState(ActorData);
   const [detailActor, setDetailActor] = useState({
@@ -14,8 +16,41 @@ export default function ActorProvider({ children }) {
     description: "",
     biographie: "",
   });
+  const navigate = useNavigate();
+  const [actor, setActor] = useState("");
+
+  const toggleActor = (params) => {
+    setActor(params);
+  };
+
+  const actorRedirect = () => {
+    navigate(`/acteurs/${detailActor.id}`);
+  };
+
+  const filmsByActor = FilmParActeur.filter(
+    (film) => film.idActeur === actor.id
+  );
+
+  const recompenseByActor = Recompenses.filter(
+    (recompense) => recompense.idActeur === actor.id
+  ).map((recompense) => ({
+    ...recompense,
+    film: FilmParActeur.find((film) => film.id === recompense.idFilm),
+  }));
+
   return (
-    <ActorContext.Provider value={{ detailActor, setDetailActor, allActors }}>
+    <ActorContext.Provider
+      value={{
+        detailActor,
+        setDetailActor,
+        allActors,
+        actorRedirect,
+        toggleActor,
+        actor,
+        filmsByActor,
+        recompenseByActor,
+      }}
+    >
       {children}
     </ActorContext.Provider>
   );
