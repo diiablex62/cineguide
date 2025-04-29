@@ -5,6 +5,7 @@ import Disney from "../components/home/Disney";
 import Hulu from "../components/home/Hulu";
 import series from "../data/Serie.json";
 import peakyBg from "../assets/peaky2.jpg";
+import genres from "../data/Genre.json";
 
 export default function Home() {
   return (
@@ -143,6 +144,124 @@ export default function Home() {
                   </h3>
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Section On regarde quoi ce soir */}
+      <div className='mt-20'>
+        <h2 className='text-2xl font-bold text-black dark:text-white mb-8'>
+          On regarde quoi ce soir ?
+        </h2>
+        <div className='flex flex-col md:flex-row gap-8'>
+          {/* Colonne de gauche - Filtres */}
+          <div className='w-full md:w-1/2 space-y-6 flex flex-col items-center '>
+            <div className='space-y-4 w-[50%] '>
+              <div className='w-[80%] '>
+                <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 '>
+                  GENRE :
+                </label>
+                <select className='w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-black text-black dark:text-white'>
+                  <option value='' className='bg-white dark:bg-black'>
+                    Sélectionnez un genre
+                  </option>
+                  {genres.map((genre, index) => (
+                    <option
+                      key={index}
+                      value={genre.type}
+                      className='bg-white dark:bg-black'>
+                      {genre.type}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>
+                  TYPE :
+                </label>
+                <div className='flex gap-4'>
+                  <label className='flex items-center'>
+                    <input
+                      type='checkbox'
+                      className='form-checkbox text-[var(--color-fuchsia)]'
+                    />
+                    <span className='ml-2 text-gray-700 dark:text-gray-300'>
+                      Film
+                    </span>
+                  </label>
+                  <label className='flex items-center'>
+                    <input
+                      type='checkbox'
+                      className='form-checkbox text-[var(--color-fuchsia)]'
+                    />
+                    <span className='ml-2 text-gray-700 dark:text-gray-300'>
+                      Série
+                    </span>
+                  </label>
+                </div>
+              </div>
+              <div className='w-[80%]'>
+                <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>
+                  NOTE :
+                </label>
+                <select className='w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-black text-black dark:text-white'>
+                  <option value='' className='bg-white dark:bg-black'>
+                    Sélectionnez une note
+                  </option>
+                  <option value='90-100' className='bg-white dark:bg-black'>
+                    90 à 100 - Chef d'œuvre
+                  </option>
+                  <option value='70-90' className='bg-white dark:bg-black'>
+                    70 à 90 - Très bon
+                  </option>
+                  <option value='40-70' className='bg-white dark:bg-black'>
+                    40 à 70 - Moyen
+                  </option>
+                  <option value='0-40' className='bg-white dark:bg-black'>
+                    0 à 40 - Mauvais
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div className='w-[80%] flex justify-center'>
+              <button className='w-[30%] bg-[var(--color-fuchsia)] text-white py-2 px-4 rounded hover:bg-[var(--color-fuchsia-hover)]'>
+                TROUVER UN FILM
+              </button>
+            </div>
+          </div>
+
+          {/* Colonne de droite - Résultat */}
+          <div className='w-full md:w-1/2 bg-white dark:bg-black rounded-lg p-6 border border-gray-200 dark:border-gray-700'>
+            <div className='flex gap-6'>
+              <img
+                src={series[8].image}
+                alt='Affiche du film'
+                className='w-32 h-48 object-cover rounded'
+              />
+              <div className='flex flex-col justify-between'>
+                <div>
+                  <h3 className='text-xl font-bold text-gray-900 dark:text-white'>
+                    Spider-Man: Into the Spider-Verse
+                  </h3>
+                  <p className='text-gray-600 dark:text-gray-300 text-sm mt-2'>
+                    2018 · Note: 99 · 1h 57m
+                  </p>
+                  <p className='text-gray-700 dark:text-gray-300 mt-4'>
+                    L'adolescent Miles Morales devient Spider-Man de son univers
+                    et doit rejoindre cinq individus dotés de pouvoirs
+                    d'araignée venant d'autres dimensions pour...
+                  </p>
+                </div>
+                <div className='flex gap-2 mt-4'>
+                  <button className='bg-[var(--color-fuchsia)] text-white px-4 py-2 rounded'>
+                    À voir
+                  </button>
+                  <button className='bg-green-600 text-white px-4 py-2 rounded'>
+                    Déjà vu
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

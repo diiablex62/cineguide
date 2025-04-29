@@ -7,5 +7,17 @@
   { "type": "Aventure" },
   { "type": "Romance" },
   { "type": "Comédie" },
-  { "type": "Fantasy" }
+  { "type": "Fantasy" },
+  { "type": "Animé" },
+  { "type": "Documentaire" },
+  { "type": "Policier" },
+  { "type": "Horreur" },
+  { "type": "Historique" },
+  { "type": "Guerre" },
+  { "type": "Western" },
+  { "type": "Musical" },
+  { "type": "Biopic" },
+  { "type": "Sportif" },
+  { "type": "Fantastique" },
+  { "type": "Animation" }
 ]
