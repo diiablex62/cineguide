@@ -33,6 +33,7 @@ export default function AuthProvider({ children }) {
   const logout = () => {
     localStorage.removeItem("session");
     setUser(null);
+    window.location.href = "/";
   };
 
   return (
