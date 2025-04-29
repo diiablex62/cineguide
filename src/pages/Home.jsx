@@ -39,12 +39,12 @@ export default function Home() {
           Top 10 cette semaine &gt;
         </h2>
         <div className='relative'>
-          <div className='flex gap-6 overflow-x-auto justify-start w-[70%] mx-auto scroll-snap-x pl-10'>
+          <div className='flex gap-20 overflow-x-auto justify-start w-[70%] mx-auto scroll-snap-x pl-10 scrollbar-hide'>
             {series.slice(0, 10).map((serie, index) => (
               <div
                 key={serie.id}
                 className='relative flex-shrink-0 w-40 h-60 bg-gray-200 dark:bg-gray-700 rounded-lg shadow scroll-snap-align-start'>
-                <div className='absolute -left-10 top-1/2 transform -translate-y-1/2 text-[8rem] font-bold text-gray-800 dark:text-gray-400'>
+                <div className='absolute bottom-[-50px] left-[-25px] transform -translate-x-1/2 text-[8rem] font-bold text-gray-800 dark:text-gray-400 '>
                   {index + 1}
                 </div>
                 <img
