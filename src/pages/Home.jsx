@@ -39,7 +39,7 @@ export default function Home() {
           Top 10 cette semaine &gt;
         </h2>
         <div className='relative'>
-          <div className='flex gap-6 overflow-x-auto justify-start w-[80%] mx-auto scroll-snap-x pl-6'>
+          <div className='flex gap-6 overflow-x-auto justify-start w-[80%] mx-auto scroll-snap-x pl-10'>
             {series.slice(0, 10).map((serie, index) => (
               <div
                 key={serie.id}
