@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import ProfilForm from "./components/ProfilForm";
 import ProfilUtils from "./components/ProfilUtils";
-import { AuthContext } from "../../components/providers/AuthProvider";
+import { AuthContext } from "../../context/AuthContext";
 import { FaPen } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import { useForm } from "react-hook-form";

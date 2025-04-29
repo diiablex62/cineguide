@@ -19,7 +19,7 @@ import MenuBurger from "./menu/menuResponsive/MenuBurger";
 import { MenuContext } from "../context/MenuContext";
 
 import { IoIosLogOut } from "react-icons/io";
-import { AuthContext } from "./providers/AuthProvider";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Header() {
   const { langageMenu, setLangageMenu } = useContext(LangageContext);
