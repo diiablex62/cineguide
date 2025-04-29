@@ -10,6 +10,7 @@ import MenuProvider from "./components/providers/MenuProvider";
 import SerieProvider from "./components/providers/SerieProvider";
 import ActorProvider from "./components/providers/ActorProvider";
 import ProfilProvider from "./components/providers/ProfilProvider";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
                     <LangageProvider>
                       <Header />
                       <Outlet />
+                      <Footer></Footer>
                     </LangageProvider>
                   </SerieProvider>
                 </FilmProvider>
