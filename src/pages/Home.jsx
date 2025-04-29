@@ -6,6 +6,7 @@ import Hulu from "../components/home/Hulu";
 import series from "../data/Serie.json";
 import peakyBg from "../assets/peaky2.jpg";
 import genres from "../data/Genre.json";
+import films from "../data/Film.json";
 
 export default function Home() {
   const [selectedGenre, setSelectedGenre] = useState("");
@@ -14,14 +15,49 @@ export default function Home() {
     serie: false,
   });
   const [selectedNote, setSelectedNote] = useState("");
-  const [filteredResult, setFilteredResult] = useState(series[0]);
+  const [filteredResult, setFilteredResult] = useState(null);
+  const [errors, setErrors] = useState({
+    genre: false,
+    type: false,
+    note: false,
+  });
 
   const handleSearch = () => {
-    console.log('Filtres sélectionnés:', {
-      genre: selectedGenre,
-      type: selectedType,
-      note: selectedNote
+    const newErrors = {
+      genre: !selectedGenre,
+      type: !selectedType.film && !selectedType.serie,
+      note: false, // optionnel
+    };
+
+    setErrors(newErrors);
+
+    if (newErrors.genre || newErrors.type) {
+      return;
+    }
+
+    let mediaList = [];
+    if (selectedType.film) mediaList = [...films];
+    if (selectedType.serie) mediaList = [...series];
+
+    const filtered = mediaList.filter((item) => {
+      const matchesGenre =
+        selectedGenre === "" || item.genre.includes(selectedGenre);
+      const matchesNote =
+        !selectedNote ||
+        (() => {
+          const [min, max] = selectedNote.split("-").map(Number);
+          return item.note >= min && item.note <= max;
+        })();
+
+      return matchesGenre && matchesNote;
     });
+
+    if (filtered.length > 0) {
+      const randomIndex = Math.floor(Math.random() * filtered.length);
+      setFilteredResult(filtered[randomIndex]);
+    } else {
+      setFilteredResult("no_results");
+    }
   };
 
   // Gestionnaires d'événements pour les filtres
@@ -34,9 +70,9 @@ export default function Home() {
   };
 
   const handleTypeChange = (type) => {
-    setSelectedType(prev => ({
+    setSelectedType((prev) => ({
       ...prev,
-      [type]: !prev[type]
+      [type]: !prev[type],
     }));
   };
 
@@ -191,11 +227,16 @@ export default function Home() {
           <div className='w-full md:w-1/2 space-y-6 flex flex-col items-center'>
             <div className='space-y-4 w-[50%]'>
               <div className='w-[80%]'>
-                <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 '>
+                {errors.genre && (
+                  <p className='text-red-500 dark:text-red-400 text-sm mb-2'>
+                    Veuillez sélectionner un genre
+                  </p>
+                )}
+                <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>
                   GENRE :
                 </label>
-                <select 
-                  className='w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-black text-black dark:text-white'
+                <select
+                  className='w-full p-2 border border-black  dark:border-gray-700 rounded bg-white dark:bg-black text-black dark:text-white'
                   value={selectedGenre}
                   onChange={handleGenreChange}>
                   <option value='' className='bg-white dark:bg-black'>
@@ -211,7 +252,13 @@ export default function Home() {
                   ))}
                 </select>
               </div>
+
               <div>
+                {errors.type && (
+                  <p className='text-red-500 dark:text-red-400 text-sm mb-2'>
+                    Veuillez sélectionner au moins un type
+                  </p>
+                )}
                 <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>
                   TYPE :
                 </label>
@@ -221,7 +268,7 @@ export default function Home() {
                       type='checkbox'
                       className='form-checkbox text-[var(--color-fuchsia)]'
                       checked={selectedType.film}
-                      onChange={() => handleTypeChange('film')}
+                      onChange={() => handleTypeChange("film")}
                     />
                     <span className='ml-2 text-gray-700 dark:text-gray-300'>
                       Film
@@ -232,7 +279,7 @@ export default function Home() {
                       type='checkbox'
                       className='form-checkbox text-[var(--color-fuchsia)]'
                       checked={selectedType.serie}
-                      onChange={() => handleTypeChange('serie')}
+                      onChange={() => handleTypeChange("serie")}
                     />
                     <span className='ml-2 text-gray-700 dark:text-gray-300'>
                       Série
@@ -241,11 +288,11 @@ export default function Home() {
                 </div>
               </div>
               <div className='w-[80%]'>
-                <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>
+                <label className='block text-sm font-medium  text-gray-700 dark:text-gray-300 mb-1'>
                   NOTE :
                 </label>
-                <select 
-                  className='w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-black text-black dark:text-white'
+                <select
+                  className='w-full p-2 border border-black dark:border-gray-700 rounded bg-white dark:bg-black text-black dark:text-white'
                   value={selectedNote}
                   onChange={handleNoteChange}>
                   <option value='' className='bg-white dark:bg-black'>
@@ -266,7 +313,7 @@ export default function Home() {
                 </select>
               </div>
               <div className='w-full flex'>
-                <button 
+                <button
                   onClick={handleSearch}
                   className='bg-[var(--color-fuchsia)] text-white py-2 px-8 rounded hover:bg-[var(--color-fuchsia-hover)] whitespace-nowrap'>
                   TROUVER UN FILM
@@ -276,8 +323,23 @@ export default function Home() {
           </div>
 
           {/* Colonne droite - Résultat */}
-          <div className='w-full md:w-1/2 bg-white dark:bg-black rounded-lg p-6 border border-gray-200 dark:border-gray-700'>
-            {filteredResult ? (
+          <div className='w-full md:w-1/2 bg-white dark:bg-black rounded-lg p-6 border border-black dark:border-gray-700'>
+            {filteredResult === "no_results" ? (
+              <div className='flex flex-col items-center justify-center h-full text-center p-8'>
+                <p className='text-gray-600 dark:text-gray-300 mb-4'>
+                  Aucun{" "}
+                  {selectedType.film && !selectedType.serie
+                    ? "film"
+                    : !selectedType.film && selectedType.serie
+                    ? "série"
+                    : "film ou série"}{" "}
+                  ne correspond à vos critères 😕
+                </p>
+                <p className='text-gray-500 dark:text-gray-400'>
+                  Essayez de modifier vos filtres pour obtenir plus de résultats
+                </p>
+              </div>
+            ) : filteredResult ? (
               <div className='flex gap-6'>
                 <img
                   src={filteredResult.image}
@@ -291,8 +353,10 @@ export default function Home() {
                     </h3>
                     <p className='text-gray-600 dark:text-gray-300 text-sm mt-2'>
                       {new Date(filteredResult.dateSortie).getFullYear()} ·
-                      Note: {filteredResult.note.toFixed(1)} ·{" "}
-                      {filteredResult.duree}
+                      Note: {filteredResult.note.toFixed(1)} ·
+                      {filteredResult.dureeEpisodeMoyenne
+                        ? `${filteredResult.dureeEpisodeMoyenne} par épisode`
+                        : filteredResult.duree}
                     </p>
                     <p className='text-gray-700 dark:text-gray-300 mt-4'>
                       {filteredResult.synopsis}
