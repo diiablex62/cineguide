@@ -55,7 +55,7 @@ export default function NavActeur() {
   });
 
   return (
-    <div className="flex justify-center items-center gap-5">
+    <div className="flex justify-center items-center gap-5 max-md:grid max-md:grid-cols-2">
       <div className="flex justify-center items-center px-4">
         <Link
           id="AccueilActeur"

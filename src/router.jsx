@@ -34,6 +34,8 @@ import BandeAnnonceSerie from "./pages/DetailSerie/components/BandeAnnonceSerie"
 import CommentaireSerie from "./pages/DetailSerie/components/CommentaireSerie";
 import SerieProposer from "./pages/DetailSerie/components/SerieProposer";
 import NotFound from "./pages/404";
+import UserConnected from "./components/ProtectedRoutes/UserConnected";
+import UserNotConnected from "./components/ProtectedRoutes/UserNotConnected";
 
 export const router = createBrowserRouter([
   {
@@ -46,7 +48,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/profil",
-        element: <Profil />,
+        element: (
+          <UserConnected>
+            <Profil />
+          </UserConnected>
+        ),
         children: [
           {
             index: true,
@@ -120,11 +126,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "/connexion",
-        element: <Connexion />,
+        element: (
+          <UserNotConnected>
+            <Connexion />
+          </UserNotConnected>
+        ),
       },
       {
         path: "/inscription",
-        element: <Inscription />,
+        element: (
+          <UserNotConnected>
+            <Inscription />
+          </UserNotConnected>
+        ),
       },
       {
         path: "/actualites",
@@ -166,7 +180,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/abonnement",
-        element: <ModalAbo />,
+        element: (
+          <UserConnected>
+            <ModalAbo />
+          </UserConnected>
+        ),
       },
       {
         path: "/acteurs/:id",

@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "titre": "Le Dernier Royaume",
+    "annee_sortie": 2018,
+    "idActeur": 3,
+    "role": "Roi déchu",
+    "estProducteur": true
+  },
+  {
+    "id": 2,
+    "titre": "L'Ombre du Passé",
+    "annee_sortie": 2020,
+    "idActeur": 7,
+    "role": "Détective tourmenté",
+    "estProducteur": false
+  },
+  {
+    "id": 3,
+    "titre": "Rêves Mécaniques",
+    "annee_sortie": 2017,
+    "idActeur": 1,
+    "role": "Inventeur de génie",
+    "estProducteur": false
+  },
+  {
+    "id": 4,
+    "titre": "Au-Delà des Mers",
+    "annee_sortie": 2015,
+    "idActeur": 5,
+    "role": "Capitaine courageux",
+    "estProducteur": false
+  },
+  {
+    "id": 5,
+    "titre": "Les Portes de l'Éternité",
+    "annee_sortie": 2019,
+    "idActeur": 9,
+    "role": "Gardien du temps",
+    "estProducteur": true
+  },
+  {
+    "id": 6,
+    "titre": "Terre Brûlée",
+    "annee_sortie": 2016,
+    "idActeur": 2,
+    "role": "Survivant rebelle",
+    "estProducteur": false
+  },
+  {
+    "id": 7,
+    "titre": "Écho Souterrain",
+    "annee_sortie": 2021,
+    "idActeur": 4,
+    "role": "Explorateur intrépide",
+    "estProducteur": true
+  },
+  {
+    "id": 8,
+    "titre": "Le Labyrinthe des Illusions",
+    "annee_sortie": 2014,
+    "idActeur": 10,
+    "role": "Maître illusionniste",
+    "estProducteur": false
+  },
+  {
+    "id": 9,
+    "titre": "Mirage Temporel",
+    "annee_sortie": 2022,
+    "idActeur": 6,
+    "role": "Voyageur temporel",
+    "estProducteur": true
+  },
+  {
+    "id": 10,
+    "titre": "La Prophétie d'Ambre",
+    "annee_sortie": 2023,
+    "idActeur": 8,
+    "role": "Élu mystique",
+    "estProducteur": false
+  },
+  {
+    "id": 11,
+    "titre": "L'Empire de Cendres",
+    "annee_sortie": 2012,
+    "idActeur": 1,
+    "role": "Empereur déchu",
+    "estProducteur": true
+  },
+  {
+    "id": 12,
+    "titre": "Soleil Noir",
+    "annee_sortie": 2013,
+    "idActeur": 2,
+    "role": "Astronome en exil",
+    "estProducteur": false
+  },
+  {
+    "id": 13,
+    "titre": "La Cité Engloutie",
+    "annee_sortie": 2016,
+    "idActeur": 3,
+    "role": "Archéologue intrépide",
+    "estProducteur": true
+  },
+  {
+    "id": 14,
+    "titre": "Chants de Glace",
+    "annee_sortie": 2017,
+    "idActeur": 4,
+    "role": "Explorateur polaire",
+    "estProducteur": false
+  },
+  {
+    "id": 15,
+    "titre": "La Trahison du Phénix",
+    "annee_sortie": 2018,
+    "idActeur": 5,
+    "role": "Guerrier légendaire",
+    "estProducteur": true
+  },
+  {
+    "id": 16,
+    "titre": "Au Coeur du Néant",
+    "annee_sortie": 2019,
+    "idActeur": 6,
+    "role": "Scientifique perdu",
+    "estProducteur": false
+  },
+  {
+    "id": 17,
+    "titre": "Éveil des Ombres",
+    "annee_sortie": 2020,
+    "idActeur": 7,
+    "role": "Chasseur de démons",
+    "estProducteur": true
+  },
+  {
+    "id": 18,
+    "titre": "Vents de Rébellion",
+    "annee_sortie": 2021,
+    "idActeur": 8,
+    "role": "Chef révolutionnaire",
+    "estProducteur": false
+  },
+  {
+    "id": 19,
+    "titre": "Le Miroir du Destin",
+    "annee_sortie": 2022,
+    "idActeur": 9,
+    "role": "Voyant énigmatique",
+    "estProducteur": true
+  },
+  {
+    "id": 20,
+    "titre": "Les Flammes de l'Exil",
+    "annee_sortie": 2023,
+    "idActeur": 10,
+    "role": "Exilé vengeur",
+    "estProducteur": false
+  },
+  {
+    "id": 21,
+    "titre": "L'Arche Perdue",
+    "annee_sortie": 2010,
+    "idActeur": 1,
+    "role": "Explorateur mythique",
+    "estProducteur": true
+  },
+  {
+    "id": 22,
+    "titre": "La Prison de Verre",
+    "annee_sortie": 2011,
+    "idActeur": 2,
+    "role": "Prisonnier oublié",
+    "estProducteur": false
+  },
+  {
+    "id": 23,
+    "titre": "Crépuscule Rouge",
+    "annee_sortie": 2012,
+    "idActeur": 3,
+    "role": "Combattant de l'ombre",
+    "estProducteur": true
+  },
+  {
+    "id": 24,
+    "titre": "Le Maître des Tempêtes",
+    "annee_sortie": 2013,
+    "idActeur": 4,
+    "role": "Dominateur des éléments",
+    "estProducteur": false
+  },
+  {
+    "id": 25,
+    "titre": "Le Pacte du Silence",
+    "annee_sortie": 2014,
+    "idActeur": 5,
+    "role": "Espion légendaire",
+    "estProducteur": true
+  },
+  {
+    "id": 26,
+    "titre": "Sous les Cendres",
+    "annee_sortie": 2015,
+    "idActeur": 6,
+    "role": "Survivant solitaire",
+    "estProducteur": false
+  },
+  {
+    "id": 27,
+    "titre": "La Nuit des Corbeaux",
+    "annee_sortie": 2016,
+    "idActeur": 7,
+    "role": "Chasseur maudit",
+    "estProducteur": true
+  },
+  {
+    "id": 28,
+    "titre": "Le Dernier Oracle",
+    "annee_sortie": 2017,
+    "idActeur": 8,
+    "role": "Oracle perdu",
+    "estProducteur": false
+  },
+  {
+    "id": 29,
+    "titre": "Sables d'Éternité",
+    "annee_sortie": 2018,
+    "idActeur": 9,
+    "role": "Explorateur antique",
+    "estProducteur": true
+  },
+  {
+    "id": 30,
+    "titre": "La Vengeance des Dieux",
+    "annee_sortie": 2019,
+    "idActeur": 10,
+    "role": "Héritier divin",
+    "estProducteur": false
+  }
+]

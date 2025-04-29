@@ -6,25 +6,25 @@ export default function LangageProvider({ children }) {
     {
       id: 1,
       langue: "fr",
-      img: "src/assets/france.png",
+      img: "/src/assets/france.png",
       desc: "drapeau langue française",
     },
     {
       id: 2,
       langue: "en",
-      img: "src/assets/royaume_uni.png",
+      img: "/src/assets/royaume_uni.png",
       desc: "drapeau langue anglaise",
     },
     {
       id: 3,
       langue: "es",
-      img: "src/assets/espagne.png",
+      img: "/src/assets/espagne.png",
       desc: "drapeau langue espagnol",
     },
     {
       id: 4,
       langue: "de",
-      img: "src/assets/allemagne.png",
+      img: "/src/assets/allemagne.png",
       desc: "drapeau langue allemande",
     },
   ]);

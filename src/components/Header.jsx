@@ -18,6 +18,9 @@ import { RiMenu2Fill } from "react-icons/ri";
 import MenuBurger from "./menu/menuResponsive/MenuBurger";
 import { MenuContext } from "../context/MenuContext";
 
+import { IoIosLogOut } from "react-icons/io";
+import { AuthContext } from "../context/AuthContext";
+
 export default function Header() {
   const { langageMenu, setLangageMenu } = useContext(LangageContext);
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -25,6 +28,7 @@ export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(
     !!localStorage.getItem("session")
   );
+  const { logout } = useContext(AuthContext);
 
   useEffect(() => {
     const checkSession = () => {
@@ -40,7 +44,7 @@ export default function Header() {
   }, []);
 
   return (
-    <div className="flex items-center justify-between shadow-md px-8 py-4 gap-2.5 dark:bg-black dark:text-white dark:shadow-white">
+    <div className="flex items-center justify-between shadow-md p-4  gap-2.5 dark:bg-black dark:text-white dark:shadow-white">
       {theme === "dark" ? (
         <Link to="/">
           <img src={logoWhite} alt="logo blanc cineguide" className="w-52" />
@@ -107,25 +111,33 @@ export default function Header() {
         </div>
       </div>
       <div className="flex flex-col gap-4 items-center justify-end max-1100:hidden">
-        <div className="flex gap-5">
+        <div className="flex items-center gap-5">
           {isLoggedIn ? (
-            <NavLink
-              to="/profil"
-              className="bg-fuchsia px-18 py-4 text-white max-1500:px-8"
-            >
-              Mon compte
-            </NavLink>
+            <>
+              <NavLink
+                to="/profil"
+                className="bg-fuchsia flex justify-center items-center h-[50px] px-2 text-white "
+              >
+                Mon compte
+              </NavLink>
+              <a
+                onClick={logout}
+                className="text-2xl cursor-pointer hover:text-fuchsia"
+              >
+                <IoIosLogOut />
+              </a>
+            </>
           ) : (
             <>
               <NavLink
                 to="/connexion"
-                className="bg-fuchsia px-18 py-4 text-white max-1500:px-8"
+                className="bg-fuchsia flex justify-center items-center h-[50px] w-[150px] px-2 text-white "
               >
                 Connexion
               </NavLink>
               <NavLink
                 to="/inscription"
-                className="bg-white text-black dark:bg-black dark:text-white px-18 py-4 border max-1500:px-8"
+                className="bg-white text-black flex justify-center items-center dark:bg-black dark:text-white h-[50px] w-[150px] border max-1500:px-8"
               >
                 S'inscrire
               </NavLink>
@@ -133,7 +145,7 @@ export default function Header() {
           )}
           <div
             onClick={() => setLangageMenu(true)}
-            className="flex items-center justify-between px-4 py-2.5 gap-2 w-fit border bg-white dark:bg-black dark:border-white"
+            className="flex cursor-pointer  items-center justify-between relative px-4 py-2.5 gap-2 w-fit border bg-white dark:bg-black dark:border-white"
           >
             <img src={fr} alt="drapeau langue française" className="w-8" />
             <FaChevronDown />
@@ -143,17 +155,15 @@ export default function Header() {
         <div className="flex gap-[30px] items-center justify-end w-full">
           <div
             onClick={toggleTheme}
-            className="flex items-center gap-8 px-6 py-3 border cursor-pointer"
+            className="flex items-center gap-8 justify-center cursor-pointer"
           >
             {theme === "dark" ? (
               <>
                 <MdSunny className="text-3xl" />
-                <p>Mode Light</p>
               </>
             ) : (
               <>
                 <BsFillMoonStarsFill className="text-3xl" />
-                <p>Mode Dark</p>
               </>
             )}
           </div>
