@@ -27,10 +27,10 @@ export default function Footer() {
         )}
       </div>
       <div className="flex flex-col  md:flex-row items-center gap-3">
-        <NavLink>Accueil</NavLink>
-        <NavLink>Films</NavLink>
-        <NavLink>Séries</NavLink>
-        <NavLink>Actualités</NavLink>
+        <NavLink to={"/"}>Accueil</NavLink>
+        <NavLink to={"/film"}>Films</NavLink>
+        <NavLink to={"/series"}>Séries</NavLink>
+        <NavLink to={"/actualites"}>Actualités</NavLink>
         {menuFooter ? (
           <div>
             <div
