@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { ActorContext } from "../../../context/ActorContext";
 import { NavLink } from "react-router-dom";
-
+import { IoIosLogOut } from "react-icons/io";
 export default function RecompensesActeur() {
   const { recompenseByActor } = useContext(ActorContext);
 
