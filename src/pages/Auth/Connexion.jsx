@@ -7,6 +7,8 @@ import { AuthContext } from "../../components/providers/AuthProvider";
 import GoogleIcon from "../../components/icone/google";
 import { FaRegEye } from "react-icons/fa6";
 import { FaRegEyeSlash } from "react-icons/fa6";
+import logo from "../../assets/logo.png";
+import logoWhite from "../../assets/logo_blanc.png";
 
 export default function Connexion() {
   const { login } = useContext(AuthContext);
@@ -38,9 +40,9 @@ export default function Connexion() {
 
   const onSubmit = (data) => {
     login(data);
-    localStorage.setItem("session", JSON.stringify(data)); 
+    localStorage.setItem("session", JSON.stringify(data));
     window.dispatchEvent(new Event("storage"));
-    navigate("/"); 
+    navigate("/");
   };
 
   return (
@@ -51,14 +53,14 @@ export default function Connexion() {
           {/* Logo en mobile */}
           <div className='mb-6 flex justify-center md:hidden'>
             <img
-              src='/src/assets/logo.png'
+              src={logo}
               alt='CineGuide'
-              className='h-12 dark:hidden'
+              className='h-12 max-w-full object-contain dark:hidden' 
             />
             <img
-              src='/src/assets/logo_blanc.png'
+              src={logoWhite}
               alt='CineGuide'
-              className='h-12 hidden dark:block'
+              className='h-12 max-w-full object-contain hidden dark:block' 
             />
           </div>
           <a
@@ -143,14 +145,14 @@ export default function Connexion() {
       <div className='hidden md:flex w-1/2 justify-center items-center flex-col bg-white dark:bg-black'>
         <div className='mb-6'>
           <img
-            src='/src/assets/logo.png'
+            src={logo}
             alt='CineGuide'
-            className='h-12 dark:hidden'
+            className='h-12 max-w-full object-contain dark:hidden' 
           />
           <img
-            src='/src/assets/logo_blanc.png'
+            src={logoWhite}
             alt='CineGuide'
-            className='h-12 hidden dark:block'
+            className='h-12 max-w-full object-contain hidden dark:block' 
           />
         </div>
         <div className='w-4/5 flex flex-col items-center'>

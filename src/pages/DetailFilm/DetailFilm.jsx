@@ -2,20 +2,19 @@ import React, { useContext, useEffect } from "react";
 import { Link, NavLink, Outlet, useParams } from "react-router-dom";
 import Film from "./components/Film";
 import { FilmContext } from "../../context/FilmContext";
-// import { ActorContext } from "../../context/ActorContext";
+import { ActorContext } from "../../context/ActorContext";
 
 export default function DetailFilm() {
   const { id } = useParams();
   const { film, setDetailFilm } = useContext(FilmContext);
-  // const { detailActor, setDetailActor, allActors } = useContext(ActorContext);
+  const { setDetailActor, allActors } = useContext(ActorContext);
 
   useEffect(() => {
     const detail = film.find((f) => f.id === Number(id));
-    // const oneActor = allActors.find((a) => a.id === Number(id));
-    console.log("Film detail found:", detail);
+    const oneActor = allActors.find((a) => detail.acteurs.includes(a.nom));
     if (detail) {
       setDetailFilm(detail);
-      // setDetailActor(oneActor);
+      setDetailActor(oneActor);
     } else {
       console.error("Film not found with id:", id);
     }

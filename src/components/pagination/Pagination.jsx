@@ -21,7 +21,7 @@ const Pagination = ({
           className={`px-3 py-1 h-[40x] w-[40px] flex justify-center items-center border cursor-pointer rounded ${
             page === currentPage
               ? "bg-fuchsia px-4 py-2 text-white"
-              : "bg-white"
+              : "bg-white dark:text-black"
           }`}
         >
           {page}
