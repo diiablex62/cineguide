@@ -22,16 +22,18 @@ export default function CGV() {
           <h3 className="font-bold text-2xl mb-5">Services proposés</h3>
           <p>
             L’application [Nom de l’application] propose les services suivants :
-            <ul className="list-disc pl-5">
-              <li>
-                [Description des services, ex. : abonnement mensuel pour un
-                accès premium, achats in-app, fonctionnalités supplémentaires…]
-              </li>
-              <li>
-                [Détails sur les différents forfaits, tarifs, et options si
-                applicables].
-              </li>
-            </ul>
+          </p>
+          <ul className="list-disc pl-5">
+            <li>
+              [Description des services, ex. : abonnement mensuel pour un accès
+              premium, achats in-app, fonctionnalités supplémentaires…]
+            </li>
+            <li>
+              [Détails sur les différents forfaits, tarifs, et options si
+              applicables].
+            </li>
+          </ul>
+          <p>
             L’utilisateur peut choisir et payer pour ces services via
             l’application en fonction de l’offre choisie.
           </p>

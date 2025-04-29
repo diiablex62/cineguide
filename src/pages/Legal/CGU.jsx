@@ -46,17 +46,17 @@ export default function CGU() {
             aux lois en vigueur et à ne pas porter atteinte à l’ordre public,
             aux bonnes mœurs ou aux droits de tiers. <br /> Il est interdit
             notamment :
-            <ul className="list-disc pl-5">
-              <li>
-                de diffuser tout contenu illégal, injurieux, diffamatoire, ou
-                incitant à la haine ;
-              </li>
-              <li>d'usurper l'identité d'une autre personne ;</li>
-              <li>
-                d’altérer ou perturber le bon fonctionnement de l'application.
-              </li>
-            </ul>
           </p>
+          <ul className="list-disc pl-5">
+            <li>
+              de diffuser tout contenu illégal, injurieux, diffamatoire, ou
+              incitant à la haine ;
+            </li>
+            <li>d'usurper l'identité d'une autre personne ;</li>
+            <li>
+              d’altérer ou perturber le bon fonctionnement de l'application.
+            </li>
+          </ul>
         </div>
         <div>
           <h3 className="font-bold text-2xl mb-5">Propriété intellectuelle</h3>
