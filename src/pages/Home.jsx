@@ -44,13 +44,13 @@ export default function Home() {
               <div
                 key={serie.id}
                 className='relative flex-shrink-0 w-40 h-60 bg-gray-200 dark:bg-gray-700 rounded-lg shadow scroll-snap-align-start'>
-                <div className='absolute bottom-[-50px] left-[-25px] transform -translate-x-1/2 text-[8rem] font-bold text-gray-800 dark:text-gray-400'>
+                <div className='absolute bottom-[-50px] left-[-25px] transform -translate-x-1/2 text-[8rem] font-bold text-gray-800 dark:text-gray-400 '>
                   {index + 1}
                 </div>
                 <img
                   src={serie.image}
                   alt={serie.titre}
-                  className='w-full h-full object-cover rounded-lg'
+                  className='w-full h-full object-cover rounded-lg relative z-10'
                 />
               </div>
             ))}
@@ -62,13 +62,13 @@ export default function Home() {
                 key={serie.id}
                 className='flex h-24 bg-gray-200 dark:bg-gray-700'>
                 <div className='relative w-[20%]'>
-                  <div className='absolute bottom-[-15px] left-[-15px] text-4xl font-bold text-gray-800 dark:text-gray-400'>
+                  <div className='absolute bottom-[20px] left-[-40px] text-5xl font-bold text-gray-800 dark:text-gray-400'>
                     {index + 1}
                   </div>
                   <img
                     src={serie.image}
                     alt={serie.titre}
-                    className='h-full w-full object-cover'
+                    className='h-full w-full object-cover relative z-10'
                   />
                 </div>
                 <div className='flex-1 p-4 flex items-center'>
@@ -79,7 +79,7 @@ export default function Home() {
               </div>
             ))}
           </div>
-          {/* Flou uniquement sur desktop */}
+  
           <div className='hidden md:block absolute top-0 right-0 bottom-0 w-20 bg-gradient-to-l from-white via-white to-transparent dark:from-black dark:via-black pointer-events-none z-10'></div>
         </div>
       </div>
