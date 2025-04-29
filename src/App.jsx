@@ -10,6 +10,7 @@ import MenuProvider from "./components/providers/MenuProvider";
 import SerieProvider from "./components/providers/SerieProvider";
 import ActorProvider from "./components/providers/ActorProvider";
 import ProfilProvider from "./components/providers/ProfilProvider";
+import CommentProvider from "./components/providers/CommentProvider";
 import Footer from "./components/Footer";
 
 function App() {
@@ -23,9 +24,11 @@ function App() {
                 <FilmProvider>
                   <SerieProvider>
                     <LangageProvider>
+                      <CommentProvider>
                       <Header />
                       <Outlet />
                       <Footer></Footer>
+                      </CommentProvider>
                     </LangageProvider>
                   </SerieProvider>
                 </FilmProvider>

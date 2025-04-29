@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Link, Outlet, useParams } from "react-router-dom";
+import { Link, NavLink, Outlet, useParams } from "react-router-dom";
 import Serie from "./components/Serie";
 import { SerieContext } from "../../context/SerieContext";
 
@@ -19,36 +19,36 @@ export default function DetailSerie() {
     <div className="bg-white dark:bg-black text-gray-900 dark:text-white font-poppins">
       <nav className="py-2 sticky top-0 z-10 shadow-md">
         <div className="flex  space-x-2 px-4 py-4 overflow-auto md:justify-center bg-white dark:bg-black">
-          <Link
+          <NavLink
             to={""}
             className={`bg-fuchsia hover:bg-fuchsia-hover text-white px-3 py-1 text-xs md:text-lg transition-colors`}
           >
             Afficher tout
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             to={"resumeserie"}
             className={`bg-fuchsia hover:bg-fuchsia-hover text-white px-3 py-1 text-xs md:text-lg transition-colors`}
           >
             Résumé
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             to={"bandeannonceserie"}
             className={`bg-fuchsia hover:bg-fuchsia-hover text-white px-3 py-1 text-xs md:text-lg transition-colors`}
           >
             Bandes-annonces
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             to={"serieproposer"}
             className={`bg-fuchsia hover:bg-fuchsia-hover text-white px-3 py-1 text-xs md:text-lg transition-colors`}
           >
             Séries similaires
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             to={"commentaireserie"}
             className={`bg-fuchsia hover:bg-fuchsia-hover text-white px-3 py-1 text-xs md:text-lg transition-colors`}
           >
             Commentaires
-          </Link>
+          </NavLink>
         </div>
       </nav>
 

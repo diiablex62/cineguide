@@ -72,6 +72,8 @@ export const router = createBrowserRouter([
           },
         ],
       },
+      
+
       {
         path: "/film",
         element: <FilmList />,
