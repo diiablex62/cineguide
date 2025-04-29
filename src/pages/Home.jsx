@@ -4,6 +4,7 @@ import Primevideo from "../components/home/Primevideo";
 import Disney from "../components/home/Disney";
 import Hulu from "../components/home/Hulu";
 import series from "../data/Serie.json";
+import peakyBg from "../assets/peaky2.jpg";
 
 export default function Home() {
   return (
@@ -43,8 +44,8 @@ export default function Home() {
             {series.slice(0, 10).map((serie, index) => (
               <div
                 key={serie.id}
-                className='relative flex-shrink-0 w-40 h-60 bg-gray-200 dark:bg-gray-700 rounded-lg shadow scroll-snap-align-start'>
-                <div className='absolute bottom-[-50px] left-[-25px] transform -translate-x-1/2 text-[8rem] font-bold text-gray-800 dark:text-gray-400 '>
+                className='relative flex-shrink-0 w-40 h-60 bg-gray-200 dark:bg-gray-700 rounded-lg shadow scroll-snap-align-start group'>
+                <div className='absolute bottom-[-50px] left-[-25px] transform -translate-x-1/2 text-[8rem] font-bold text-gray-800 dark:text-gray-400'>
                   {index + 1}
                 </div>
                 <img
@@ -52,6 +53,10 @@ export default function Home() {
                   alt={serie.titre}
                   className='w-full h-full object-cover rounded-lg relative z-10'
                 />
+                <div className='absolute inset-0 bg-black opacity-0 group-hover:opacity-50 transition-opacity duration-300 rounded-lg z-20'></div>
+                <h3 className='absolute bottom-2 left-2 right-2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-bold text-center z-30'>
+                  {serie.titre}
+                </h3>
               </div>
             ))}
           </div>
@@ -83,25 +88,63 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Nouvelle section 3 */}
+      {/* Section 3 */}
       <div className='mt-10'>
         <h2 className='text-xl font-bold mb-4 text-left text-black dark:text-white -mx-10 md:mx-0 px-4 md:px-0'>
-          À ne pas manquer &gt;
+          Meilleures séries Action &gt;
         </h2>
-        <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4'>
-          {series.slice(10, 22).map((serie) => (
-            <div key={serie.id} className='relative group'>
-              <img
-                src={serie.image}
-                alt={serie.titre}
-                className='w-full h-60 object-cover rounded-lg'
-              />
-              <div className='absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-opacity duration-300 rounded-lg'></div>
-              <h3 className='absolute bottom-2 left-2 right-2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-bold'>
-                {serie.titre}
-              </h3>
+        <div className='flex overflow-x-auto scrollbar-hide -mx-10 md:mx-0 px-4 md:px-0'>
+          <div className='flex gap-2'>
+            {series.slice(0, 10).map((serie) => (
+              <div
+                key={serie.id}
+                className='relative flex-shrink-0 w-40 h-60 group'>
+                <img
+                  src={serie.image}
+                  alt={serie.titre}
+                  className='w-full h-full object-cover rounded-lg'
+                />
+                <div className='absolute inset-0 bg-black opacity-0 group-hover:opacity-50 transition-opacity duration-300 rounded-lg'></div>
+                <h3 className='absolute bottom-2 left-2 right-2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-bold text-center'>
+                  {serie.titre}
+                </h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Section 4 - Peaky Blinders */}
+      <div
+        className='mt-20 relative h-[55vh] bg-cover bg-bottom bg-no-repeat overflow-hidden'
+        style={{
+          backgroundImage: `url(${peakyBg})`,
+          backgroundPosition: "50% 25%",
+          boxShadow: "inset 0px -400px 150px -50px rgba(0,0,0,0.9)",
+        }}>
+        <div className='absolute inset-0 flex flex-col items-center justify-center px-4'>
+          <h2 className='text-2xl text-white text-center mb-2 bg-black/30 px-1 py-1'>
+            Parce que vous aimez "Peaky Blinders"
+          </h2>
+          <div className='flex overflow-x-auto scrollbar-hide max-w-full'>
+            <div className='flex gap-4 px-4'>
+              {series.slice(0, 6).map((serie) => (
+                <div
+                  key={serie.id}
+                  className='relative flex-shrink-0 w-40 h-60 group'>
+                  <img
+                    src={serie.image}
+                    alt={serie.titre}
+                    className='w-full h-full object-cover rounded-lg'
+                  />
+                  <div className='absolute inset-0 bg-black opacity-0 group-hover:opacity-50 transition-opacity duration-300 rounded-lg'></div>
+                  <h3 className='absolute bottom-2 left-2 right-2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-bold text-center'>
+                    {serie.titre}
+                  </h3>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </div>
