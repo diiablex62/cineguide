@@ -8,7 +8,7 @@ import series from "../data/Serie.json";
 export default function Home() {
   return (
     <div className='p-10'>
-      <div className='mt-10 dark:black py-10 px-6 rounded-lg text-center'>
+      <div className='mt-10 dark:black px-6 rounded-lg text-center'>
         <h1 className='text-2xl font-semibold mb- dark:text-white'>
           CINÉGUIDE : Tous vos films et séries préférées au même endroit
         </h1>
