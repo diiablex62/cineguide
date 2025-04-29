@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Netflix from "../components/home/Netflix";
 import Primevideo from "../components/home/Primevideo";
 import Disney from "../components/home/Disney";
-import Hulu from "../components/home/Hulu";
+import Hulu from "../components/home/hulu";
 import series from "../data/Serie.json";
 import peakyBg from "../assets/peaky2.jpg";
 import genres from "../data/Genre.json";
