@@ -4,6 +4,7 @@ export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState({
+    id: "1",
     firstname: "Jean",
     lastname: "Dupont",
     email: "jean.dupont@gmail.fr",
@@ -13,6 +14,19 @@ export default function AuthProvider({ children }) {
     postalCode: "59000",
     complement: "Etage 3",
     textPerso: "J’adore les films de Christopher Nolan 😍 ",
+  });
+
+  const [autreUser, setAutreUser] = useState({
+    id: "2",
+    firstname: "Nicole",
+    lastname: "Duont",
+    email: "nicole.duont@gmail.fr",
+    avatar: "src/assets/profil/avatar.svg",
+    adress: "4 rue de lille",
+    city: "Liller",
+    postalCode: "62000",
+    complement: "Etage 37",
+    textPerso: "et on applaudi Christophe😍 ",
   });
 
   const saveSession = (data) => {
@@ -36,7 +50,7 @@ export default function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout }}>
+    <AuthContext.Provider value={{ user, login, register, logout, autreUser }}>
       {children}
     </AuthContext.Provider>
   );

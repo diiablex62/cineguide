@@ -11,13 +11,15 @@ import ModalPassword from "../../components/modalPassword/ModalPassword";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import ProfilActiviter from "./ProfilActiviter";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import ProfilListe from "./ProfilListe";
 import ProfileReviews from "./ProfileReviews";
 
 export default function profil() {
   const location = useLocation();
+  const { userId } = useParams(); // Get userId from URL parameters
   const { user } = useContext(AuthContext);
+
   const [isModalOpen, setModalOpen] = useState(false);
   const [citation, setCitation] = useState(user.textPerso);
   const schema = yup.object({
@@ -61,21 +63,31 @@ export default function profil() {
           </div>
           <div>
             <p className="italic my-3">{citation}</p>
-            <div className="flex justify-end">
-              <button
-                className="border rounded px-2 flex items-center cursor-pointer"
-                onClick={() => setModalOpen(true)}
-              >
-                <FaPen className="mr-2" />
-                Modifier
-              </button>
-            </div>
+            {!userId ? (
+              <div className="flex justify-end">
+                <button
+                  className="border rounded px-2 flex items-center cursor-pointer"
+                  onClick={() => setModalOpen(true)}
+                >
+                  <FaPen className="mr-2" />
+                  Modifier
+                </button>
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
           <ProfilNav></ProfilNav>
-          {location.pathname === "/profil" ? <ProfilForm></ProfilForm> : null}
+
+          {!userId &&
+            (location.pathname === "/profil" ? (
+              <ProfilForm></ProfilForm>
+            ) : location.pathname === "/profil/mon-activiter" ? (
+              <ProfilActiviter></ProfilActiviter>
+            ) : null)}
         </div>
 
-        {location.pathname === "/profil" ? (
+        {!userId && location.pathname === "/profil" ? (
           <div className="md:w-2/6 p-4">
             <ProfilUtils></ProfilUtils>
           </div>
