@@ -38,8 +38,8 @@ export default function Home() {
         <h2 className='text-xl font-bold mb-4 text-left dark:text-white'>
           Top 10 cette semaine &gt;
         </h2>
-        <div className='relative w-[70%] mx-auto'>
-          <div className='hidden md:flex gap-20 overflow-x-auto scroll-snap-x pl-10 pr-52 scrollbar-hide'>
+        <div className='relative w-[70%] mx-auto md:h-[15rem]'>
+          <div className='hidden md:flex gap-20 h-full overflow-x-auto overflow-y-hidden scroll-snap-x pl-10 pr-52 scrollbar-hide'>
             {series.slice(0, 10).map((serie, index) => (
               <div
                 key={serie.id}
@@ -79,8 +79,29 @@ export default function Home() {
               </div>
             ))}
           </div>
-  
           <div className='hidden md:block absolute top-0 right-0 bottom-0 w-20 bg-gradient-to-l from-white via-white to-transparent dark:from-black dark:via-black pointer-events-none z-10'></div>
+        </div>
+      </div>
+
+      {/* Nouvelle section 3 */}
+      <div className='mt-10'>
+        <h2 className='text-xl font-bold mb-4 text-left text-black dark:text-white -mx-10 md:mx-0 px-4 md:px-0'>
+          À ne pas manquer &gt;
+        </h2>
+        <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4'>
+          {series.slice(10, 22).map((serie) => (
+            <div key={serie.id} className='relative group'>
+              <img
+                src={serie.image}
+                alt={serie.titre}
+                className='w-full h-60 object-cover rounded-lg'
+              />
+              <div className='absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-opacity duration-300 rounded-lg'></div>
+              <h3 className='absolute bottom-2 left-2 right-2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm font-bold'>
+                {serie.titre}
+              </h3>
+            </div>
+          ))}
         </div>
       </div>
     </div>
