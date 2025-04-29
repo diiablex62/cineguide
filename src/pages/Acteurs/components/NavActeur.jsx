@@ -89,7 +89,7 @@ export default function NavActeur() {
           to={`/acteurs/${id}/recompenses`}
           className="flex justify-center items-center px-5 py-[5px] border border-black w-32 dark:bg-white dark:text-black"
         >
-          RÃ©compenses
+          Récompenses
         </Link>
       </div>
     </div>

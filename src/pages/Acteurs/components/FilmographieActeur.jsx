@@ -1,12 +1,9 @@
 import React, { useContext } from "react";
 import { ActorContext } from "../../../context/ActorContext";
-import FilmParActeur from "../../../data/FilmParActeur.json";
-export default function FilmographieActeur() {
-  const { actor } = useContext(ActorContext);
+import { NavLink } from "react-router-dom";
 
-  const filmsByActor = FilmParActeur.filter(
-    (film) => film.idActeur === actor.id
-  );
+export default function FilmographieActeur() {
+  const { filmsByActor } = useContext(ActorContext);
 
   return (
     <div className="w-full">
@@ -26,7 +23,12 @@ export default function FilmographieActeur() {
               <p className="md:w-1/3 hidden md:block px-1">
                 {film.annee_sortie}
               </p>
-              <p className="md:w-1/3 px-1">{film.titre}</p>
+              <NavLink
+                to={`/detailfilm/${film.id}`}
+                className="font-bold underline ml-2 md:w-1/3 px-1"
+              >
+                {film.titre}
+              </NavLink>
               <p className="md:w-1/3 hidden md:block px-1 text-right">
                 {film.role}
               </p>
@@ -47,13 +49,19 @@ export default function FilmographieActeur() {
                 <p className="md:w-1/3 hidden md:block px-1">
                   {film.annee_sortie}
                 </p>
-                <p className="md:w-1/3 px-1">{film.titre}</p>
+
+                <NavLink
+                  to={`/detailfilm/${film.id}`}
+                  className="font-bold underline ml-2 md:w-1/3 px-1"
+                >
+                  {film.titre}
+                </NavLink>
                 <p className="md:w-1/3 hidden md:block px-1 text-right">
                   {film.role}
                 </p>
               </div>
             ))}
-        </div>{" "}
+        </div>
       </div>
     </div>
   );

@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "nomRecompense": "Meilleur Film",
+    "idFilm": 3,
+    "idActeur": 2,
+    "role": "Réalisateur",
+    "annee": 2023,
+    "numEdition": 76
+  },
+  {
+    "id": 2,
+    "nomRecompense": "Meilleur Acteur",
+    "idFilm": 7,
+    "idActeur": 1,
+    "role": "Acteur principal",
+    "annee": 2023,
+    "numEdition": 76
+  },
+  {
+    "id": 3,
+    "nomRecompense": "Meilleure Réalisation",
+    "idFilm": 5,
+    "idActeur": 4,
+    "role": "Réalisateur",
+    "annee": 2022,
+    "numEdition": 75
+  },
+  {
+    "id": 4,
+    "nomRecompense": "Meilleur Scénario",
+    "idFilm": 9,
+    "idActeur": 3,
+    "role": "Scénariste",
+    "annee": 2021,
+    "numEdition": 74
+  },
+  {
+    "id": 5,
+    "nomRecompense": "Prix du Jury",
+    "idFilm": 1,
+    "idActeur": 5,
+    "role": "Acteur secondaire",
+    "annee": 2020,
+    "numEdition": 73
+  },
+  {
+    "id": 6,
+    "nomRecompense": "Prix du Public",
+    "idFilm": 2,
+    "idActeur": 1,
+    "role": "Acteur principal",
+    "annee": 2019,
+    "numEdition": 72
+  },
+  {
+    "id": 7,
+    "nomRecompense": "Prix de la Critique",
+    "idFilm": 8,
+    "idActeur": 3,
+    "role": "Réalisateur",
+    "annee": 2018,
+    "numEdition": 71
+  },
+  {
+    "id": 8,
+    "nomRecompense": "Meilleure Musique",
+    "idFilm": 10,
+    "idActeur": 2,
+    "role": "Compositeur",
+    "annee": 2017,
+    "numEdition": 70
+  },
+  {
+    "id": 9,
+    "nomRecompense": "Meilleurs Effets Visuels",
+    "idFilm": 4,
+    "idActeur": 5,
+    "role": "Technicien VFX",
+    "annee": 2016,
+    "numEdition": 69
+  },
+  {
+    "id": 10,
+    "nomRecompense": "Meilleur Court-Métrage",
+    "idFilm": 6,
+    "idActeur": 2,
+    "role": "Réalisateur",
+    "annee": 2015,
+    "numEdition": 68
+  },
+  {
+    "id": 11,
+    "nomRecompense": "Prix d’Honneur",
+    "idFilm": 3,
+    "idActeur": 1,
+    "role": "Carrière",
+    "annee": 2014,
+    "numEdition": 67
+  },
+  {
+    "id": 12,
+    "nomRecompense": "Prix de la Photographie",
+    "idFilm": 2,
+    "idActeur": 4,
+    "role": "Directeur photo",
+    "annee": 2013,
+    "numEdition": 66
+  },
+  {
+    "id": 13,
+    "nomRecompense": "Prix de la Mise en Scène",
+    "idFilm": 9,
+    "idActeur": 3,
+    "role": "Réalisateur",
+    "annee": 2012,
+    "numEdition": 65
+  },
+  {
+    "id": 14,
+    "nomRecompense": "Meilleure Actrice",
+    "idFilm": 5,
+    "idActeur": 5,
+    "role": "Actrice principale",
+    "annee": 2011,
+    "numEdition": 64
+  },
+  {
+    "id": 15,
+    "nomRecompense": "Révélation de l’année",
+    "idFilm": 7,
+    "idActeur": 1,
+    "role": "Nouvelle star",
+    "annee": 2010,
+    "numEdition": 63
+  }
+]
