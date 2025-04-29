@@ -73,17 +73,15 @@ export default function MenuBurger() {
         </NavLink>
         <div
           onClick={toggleTheme}
-          className="flex justify-center items-center gap-4 w-full py-3 border cursor-pointer"
+          className="flex justify-center items-center gap-4 w-full py-3  cursor-pointer"
         >
           {theme === "dark" ? (
             <>
               <MdSunny className="text-3xl" />
-              <p>Mode Light</p>
             </>
           ) : (
             <>
               <BsFillMoonStarsFill className="text-3xl" />
-              <p>Mode Dark</p>
             </>
           )}
         </div>

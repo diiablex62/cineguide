@@ -1,6 +1,5 @@
-import React, { createContext, useState } from "react";
-
-export const AuthContext = createContext();
+import React, { useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState({
@@ -14,19 +13,6 @@ export default function AuthProvider({ children }) {
     postalCode: "59000",
     complement: "Etage 3",
     textPerso: "J’adore les films de Christopher Nolan 😍 ",
-  });
-
-  const [autreUser, setAutreUser] = useState({
-    id: "2",
-    firstname: "Nicole",
-    lastname: "Duont",
-    email: "nicole.duont@gmail.fr",
-    avatar: "src/assets/profil/avatar.svg",
-    adress: "4 rue de lille",
-    city: "Liller",
-    postalCode: "62000",
-    complement: "Etage 37",
-    textPerso: "et on applaudi Christophe😍 ",
   });
 
   const saveSession = (data) => {
@@ -47,10 +33,11 @@ export default function AuthProvider({ children }) {
   const logout = () => {
     localStorage.removeItem("session");
     setUser(null);
+    window.location.href = "/";
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout, autreUser }}>
+    <AuthContext.Provider value={{ user, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );

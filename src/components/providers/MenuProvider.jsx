@@ -4,6 +4,7 @@ import { MenuContext } from "../../context/MenuContext";
 export default function MenuProvider({ children }) {
   // header
   const [menu, setMenu] = useState(false);
+  const [menuFooter, setMenuFooter] = useState(false);
   const menuRef = useRef(null);
   const [burger, setBurger] = useState(false);
   const [menuPlus, setMenuPlus] = useState(false);
@@ -55,6 +56,8 @@ export default function MenuProvider({ children }) {
         menuPlusRef,
         menuPlus,
         setMenuPlus,
+        menuFooter,
+        setMenuFooter,
       }}
     >
       {children}

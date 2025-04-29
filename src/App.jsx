@@ -11,6 +11,7 @@ import SerieProvider from "./components/providers/SerieProvider";
 import ActorProvider from "./components/providers/ActorProvider";
 import ProfilProvider from "./components/providers/ProfilProvider";
 import CommentProvider from "./components/providers/CommentProvider";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -24,8 +25,9 @@ function App() {
                   <SerieProvider>
                     <LangageProvider>
                       <CommentProvider>
-                        <Header />
-                        <Outlet />
+                      <Header />
+                      <Outlet />
+                      <Footer></Footer>
                       </CommentProvider>
                     </LangageProvider>
                   </SerieProvider>
