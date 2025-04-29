@@ -3,10 +3,11 @@ import ProfilForm from "./components/ProfilForm";
 import ProfilUtils from "./components/ProfilUtils";
 import { AuthContext } from "../../components/providers/AuthProvider";
 import { FaPen } from "react-icons/fa";
-import ProfilNav from "./components/ProfilNav";
-import ModalPassword from "../../components/modalPassword/ModalPassword";
 import { IoMdClose } from "react-icons/io";
 import { useForm } from "react-hook-form";
+import ProfilNav from "./components/ProfilNav";
+import ModalPassword from "../../components/modalPassword/ModalPassword";
+
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import ProfilActiviter from "./ProfilActiviter";
