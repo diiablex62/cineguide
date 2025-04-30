@@ -2,17 +2,29 @@ import React, { useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function AuthProvider({ children }) {
-  const [user, setUser] = useState({
-    id: "1",
-    firstname: "Jean",
-    lastname: "Dupont",
-    email: "jean.dupont@gmail.fr",
-    avatar: "src/assets/profil/avatar.svg",
-    adress: "42 rue de lille",
-    city: "Lille",
-    postalCode: "59000",
-    complement: "Etage 3",
-    textPerso: "J’adore les films de Christopher Nolan 😍 ",
+  const defaultUser = {
+    email: "",
+    firstname: "",
+    lastname: "",
+    avatar: "",
+    textPerso: "",
+    adress: "",
+    city: "",
+    postalCode: "",
+    complement: "",
+  };
+
+  const [user, setUser] = useState(() => {
+    const savedSession = localStorage.getItem("session");
+    return savedSession ? JSON.parse(savedSession) : defaultUser;
+  });
+
+  const [connectedUser, setConnectedUser] = useState(() => {
+    return !!localStorage.getItem("session");
+  });
+
+  const [fakeUser] = useState({
+    email: "default@example.com",
   });
 
   const saveSession = (data) => {
@@ -21,8 +33,9 @@ export default function AuthProvider({ children }) {
   };
 
   const login = (data) => {
-    console.log("Login values:", data);
-    saveSession(data);
+    setUser(data);
+    setConnectedUser(true);
+    localStorage.setItem("session", JSON.stringify(data));
   };
 
   const register = (data) => {
@@ -31,13 +44,15 @@ export default function AuthProvider({ children }) {
   };
 
   const logout = () => {
+    setUser(defaultUser);
+    setConnectedUser(false);
     localStorage.removeItem("session");
-    setUser(null);
     window.location.href = "/";
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout }}>
+    <AuthContext.Provider
+      value={{ user, fakeUser, login, logout, register: login, connectedUser }}>
       {children}
     </AuthContext.Provider>
   );
