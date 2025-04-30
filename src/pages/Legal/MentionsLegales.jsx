@@ -2,7 +2,7 @@ import React from "react";
 
 export default function MentionsLegales() {
   return (
-    <div className="flex flex-col items-center justify-center mt-12 px-56 gap-14 text-black dark:text-white max-1100:px-32 max-md:px-16 max-sm:px-4">
+    <div className="flex flex-col items-center justify-center mt-12 px-56 gap-14 text-black dark:text-white max-1100:px-32 max-md:px-16 max-sm:px-4 mb-10">
       <h2 className="font-bold text-4xl">Mentions Légales</h2>
       <div className="flex flex-col gap-12 justify-center w-full">
         <div>

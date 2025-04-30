@@ -17,7 +17,6 @@ import Resume from "./pages/DetailFilm/components/Resume";
 import BandeAnnonce from "./pages/DetailFilm/components/BandeAnnonce";
 import Commentaire from "./pages/DetailFilm/components/Commentaire";
 import FilmProposer from "./pages/DetailFilm/components/FilmProposer";
-import ActualiteDetail from "./pages/Actualites/ActualiteDetail";
 import Profil from "./pages/Profil/Profil";
 import ModalAbo from "./components/modal-abo/modalAbo";
 import ActeurProfil from "./pages/Acteurs/ActeurProfil";
@@ -92,7 +91,6 @@ export const router = createBrowserRouter([
           },
         ],
       },
-      
 
       {
         path: "/film",
@@ -149,10 +147,6 @@ export const router = createBrowserRouter([
       {
         path: "/actualites",
         element: <ActualitesPage />,
-      },
-      {
-        path: "/actualites/:title",
-        element: <ActualiteDetail />,
       },
       {
         path: "/detailserie/:id",
