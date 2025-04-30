@@ -62,21 +62,20 @@ export default function Inscription() {
   };
 
   return (
-    <div className="flex h-screen animate-fuchsia">
+    <div className='flex min-h-screen w-full animate-fuchsia'>
       {/* Section gauche */}
-      <div className="hidden md:flex flex-1 text-white dark:text-white justify-center items-center px-10 bg-[var(--color-fuchsia)]">
-        <h1 className="text-7xl font-light text-left w-4/5">
+      <div className='hidden md:flex flex-1 bg-[var(--color-fuchsia)] text-white justify-center items-center px-10'>
+        <h1 className='text-7xl font-light text-left w-4/5'>
           Toutes vos plateformes de streaming au même endroit
         </h1>
       </div>
 
       {/* Section droite */}
-      <div className="flex-1 p-8 flex flex-col justify-center items-center bg-white dark:bg-black">
+      <div className='flex-1 overflow-y-auto flex flex-col justify-center bg-white dark:bg-black p-8'>
         <form
-          className="w-full max-w-md flex flex-col gap-4 border border-transparent dark:border-white rounded-lg p-6"
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <div className="mb-4">
+          className='w-full max-w-md mx-auto flex flex-col gap-4 border border-transparent dark:border-white rounded-lg p-6'
+          onSubmit={handleSubmit(onSubmit)}>
+          <div className='mb-4'>
             <img
               src={logo}
               alt='CineGuide'
@@ -88,52 +87,49 @@ export default function Inscription() {
               className='h-12 mx-auto hidden dark:block'
             />
             <a
-              href="/"
-              className="text-sm text-gray-500 dark:text-gray-400 hover:underline block text-start mt-4"
-            >
+              href='/'
+              className='text-sm text-gray-500 dark:text-gray-400 hover:underline block text-start mt-4'>
               &lt; Retour vers la page d'accueil
             </a>
           </div>
-          <h2 className="text-center mb-4 text-2xl font-bold text-black dark:text-white">
+          <h2 className='text-center mb-4 text-2xl font-bold text-black dark:text-white'>
             S'INSCRIRE
           </h2>
-          <div className="flex gap-4">
-            <div className="flex-1">
+          <div className='flex gap-4'>
+            <div className='flex-1'>
               <label
-                htmlFor="prenom"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-              >
+                htmlFor='prenom'
+                className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>
                 Prénom
               </label>
               <input
                 {...register("prenom")}
-                id="prenom"
-                type="text"
-                placeholder="Prénom"
-                className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded focus:ring-[var(--color-fuchsia)] focus:border-[var(--color-fuchsia)] focus:outline-[var(--color-fuchsia)] text-[var(--color-fuchsia)] placeholder-gray-400 dark:placeholder-gray-500"
+                id='prenom'
+                type='text'
+                placeholder='Prénom'
+                className='w-full p-2 border border-gray-300 dark:border-gray-700 rounded focus:ring-[var(--color-fuchsia)] focus:border-[var(--color-fuchsia)] focus:outline-[var(--color-fuchsia)] text-[var(--color-fuchsia)] placeholder-gray-400 dark:placeholder-gray-500'
               />
               {errors.prenom && (
-                <p className="text-red-500 dark:text-red-400">
+                <p className='text-red-500 dark:text-red-400'>
                   {errors.prenom.message}
                 </p>
               )}
             </div>
-            <div className="flex-1">
+            <div className='flex-1'>
               <label
-                htmlFor="nom"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-              >
+                htmlFor='nom'
+                className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>
                 Nom
               </label>
               <input
                 {...register("nom")}
-                id="nom"
-                type="text"
-                placeholder="Nom"
-                className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded focus:ring-[var(--color-fuchsia)] focus:border-[var(--color-fuchsia)] focus:outline-[var(--color-fuchsia)] text-[var(--color-fuchsia)] placeholder-gray-400 dark:placeholder-gray-500"
+                id='nom'
+                type='text'
+                placeholder='Nom'
+                className='w-full p-2 border border-gray-300 dark:border-gray-700 rounded focus:ring-[var(--color-fuchsia)] focus:border-[var(--color-fuchsia)] focus:outline-[var(--color-fuchsia)] text-[var(--color-fuchsia)] placeholder-gray-400 dark:placeholder-gray-500'
               />
               {errors.nom && (
-                <p className="text-red-500 dark:text-red-400">
+                <p className='text-red-500 dark:text-red-400'>
                   {errors.nom.message}
                 </p>
               )}
@@ -141,155 +137,144 @@ export default function Inscription() {
           </div>
           <div>
             <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-            >
+              htmlFor='email'
+              className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>
               Email
             </label>
             <input
               {...register("email")}
-              id="email"
-              type="email"
-              placeholder="Entrez votre email"
-              className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded focus:ring-[var(--color-fuchsia)] focus:border-[var(--color-fuchsia)] focus:outline-[var(--color-fuchsia)] text-[var(--color-fuchsia)] placeholder-gray-400 dark:placeholder-gray-500"
+              id='email'
+              type='email'
+              placeholder='Entrez votre email'
+              className='w-full p-2 border border-gray-300 dark:border-gray-700 rounded focus:ring-[var(--color-fuchsia)] focus:border-[var(--color-fuchsia)] focus:outline-[var(--color-fuchsia)] text-[var(--color-fuchsia)] placeholder-gray-400 dark:placeholder-gray-500'
             />
             {errors.email && (
-              <p className="text-red-500 dark:text-red-400">
+              <p className='text-red-500 dark:text-red-400'>
                 {errors.email.message}
               </p>
             )}
           </div>
           <div>
             <label
-              htmlFor="username"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-            >
+              htmlFor='username'
+              className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>
               Nom d'utilisateur
             </label>
             <input
               {...register("username")}
-              id="username"
-              type="text"
-              placeholder="Entrez votre nom d’utilisateur"
-              className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded focus:ring-[var(--color-fuchsia)] focus:border-[var(--color-fuchsia)] focus:outline-[var(--color-fuchsia)] text-[var(--color-fuchsia)] placeholder-gray-400 dark:placeholder-gray-500"
+              id='username'
+              type='text'
+              placeholder='Entrez votre nom d’utilisateur'
+              className='w-full p-2 border border-gray-300 dark:border-gray-700 rounded focus:ring-[var(--color-fuchsia)] focus:border-[var(--color-fuchsia)] focus:outline-[var(--color-fuchsia)] text-[var(--color-fuchsia)] placeholder-gray-400 dark:placeholder-gray-500'
             />
             {errors.username && (
-              <p className="text-red-500 dark:text-red-400">
+              <p className='text-red-500 dark:text-red-400'>
                 {errors.username.message}
               </p>
             )}
           </div>
-          <div className="relative">
+          <div className='relative'>
             <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-            >
+              htmlFor='password'
+              className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>
               Mot de passe
             </label>
-            <div className="relative">
+            <div className='relative'>
               <input
                 {...register("password")}
-                id="password"
+                id='password'
                 type={showPassword ? "text" : "password"}
-                placeholder="Entrez votre mot de passe"
-                className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded focus:ring-[var(--color-fuchsia)] focus:border-[var(--color-fuchsia)] focus:outline-[var(--color-fuchsia)] text-[var(--color-fuchsia)] placeholder-gray-400 dark:placeholder-gray-500"
+                placeholder='Entrez votre mot de passe'
+                className='w-full p-2 border border-gray-300 dark:border-gray-700 rounded focus:ring-[var(--color-fuchsia)] focus:border-[var(--color-fuchsia)] focus:outline-[var(--color-fuchsia)] text-[var(--color-fuchsia)] placeholder-gray-400 dark:placeholder-gray-500'
               />
               <button
-                type="button"
+                type='button'
                 onClick={togglePasswordVisibility}
-                className="absolute inset-y-0 right-3 flex items-center text-gray-500 dark:text-white"
-              >
+                className='absolute inset-y-0 right-3 flex items-center text-gray-500 dark:text-white'>
                 {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
               </button>
             </div>
             {errors.password && (
-              <p className="text-red-500 dark:text-red-400">
+              <p className='text-red-500 dark:text-red-400'>
                 {errors.password.message}
               </p>
             )}
           </div>
-          <div className="relative">
+          <div className='relative'>
             <label
-              htmlFor="confirmPassword"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-            >
+              htmlFor='confirmPassword'
+              className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>
               Confirmez votre mot de passe
             </label>
-            <div className="relative">
+            <div className='relative'>
               <input
                 {...register("confirmPassword")}
-                id="confirmPassword"
+                id='confirmPassword'
                 type={showConfirmPassword ? "text" : "password"}
-                placeholder="Confirmez votre mot de passe"
-                className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded focus:ring-[var(--color-fuchsia)] focus:border-[var(--color-fuchsia)] focus:outline-[var(--color-fuchsia)] text-[var(--color-fuchsia)] placeholder-gray-400 dark:placeholder-gray-500"
+                placeholder='Confirmez votre mot de passe'
+                className='w-full p-2 border border-gray-300 dark:border-gray-700 rounded focus:ring-[var(--color-fuchsia)] focus:border-[var(--color-fuchsia)] focus:outline-[var(--color-fuchsia)] text-[var(--color-fuchsia)] placeholder-gray-400 dark:placeholder-gray-500'
               />
               <button
-                type="button"
+                type='button'
                 onClick={toggleConfirmPasswordVisibility}
-                className="absolute inset-y-0 right-3 flex items-center text-gray-500 dark:text-white"
-              >
+                className='absolute inset-y-0 right-3 flex items-center text-gray-500 dark:text-white'>
                 {showConfirmPassword ? <FaRegEye /> : <FaRegEyeSlash />}
               </button>
             </div>
             {errors.confirmPassword && (
-              <p className="text-red-500 dark:text-red-400">
+              <p className='text-red-500 dark:text-red-400'>
                 {errors.confirmPassword.message}
               </p>
             )}
           </div>
-          <div className="flex items-start gap-2">
+          <div className='flex items-start gap-2'>
             <input
               {...register("rgpd")}
-              id="rgpd"
-              type="checkbox"
-              className="h-4 w-4 text-fuchsia-600 border-gray-300 dark:border-gray-700 rounded focus:ring-[var(--color-fuchsia)]"
+              id='rgpd'
+              type='checkbox'
+              className='h-4 w-4 text-fuchsia-600 border-gray-300 dark:border-gray-700 rounded focus:ring-[var(--color-fuchsia)]'
             />
             <label
-              htmlFor="rgpd"
-              className="text-sm text-gray-700 dark:text-gray-300"
-            >
+              htmlFor='rgpd'
+              className='text-sm text-gray-700 dark:text-gray-300'>
               En cochant cette case, vous acceptez les{" "}
               <a
-                href="#"
-                className="text-fuchsia-700 dark:text-fuchsia-500 underline"
-              >
+                href='#'
+                className='text-fuchsia-700 dark:text-fuchsia-500 underline'>
                 conditions d'utilisations
               </a>{" "}
               du site.
             </label>
           </div>
           {errors.rgpd && (
-            <p className="text-red-500 dark:text-red-400">
+            <p className='text-red-500 dark:text-red-400'>
               {errors.rgpd.message}
             </p>
           )}
           <button
-            type="submit"
-            className="w-full p-3 bg-[var(--color-fuchsia)] text-white rounded hover:bg-[var(--color-fuchsia-hover)]"
-          >
+            type='submit'
+            className='w-full p-3 bg-[var(--color-fuchsia)] text-white rounded hover:bg-[var(--color-fuchsia-hover)]'>
             S'inscrire
           </button>
           <button
-            type="button"
-            className="w-full p-3 bg-white dark:bg-black text-black dark:text-white border border-black dark:border-white rounded hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center justify-center gap-2"
-          >
-            <GoogleIcon className="h-5 w-5" /> Connexion avec Google
+            type='button'
+            className='w-full p-3 bg-white dark:bg-black text-black dark:text-white border border-black dark:border-white rounded hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center justify-center gap-2'>
+            <GoogleIcon className='h-5 w-5' /> Connexion avec Google
           </button>
-          <p className="text-center mt-4 text-sm text-black dark:text-white">
+          <p className='text-center mt-4 text-sm text-black dark:text-white'>
             Déjà inscrit ?{" "}
             <a
-              href="/connexion"
-              className="text-[var(--color-fuchsia)] dark:text-[var(--color-fuchsia)] underline"
-            >
+              href='/connexion'
+              className='text-[var(--color-fuchsia)] dark:text-[var(--color-fuchsia)] underline'>
               Se connecter
             </a>
           </p>
-          <p className="text-center mt-4 text-sm text-black dark:text-white">
+          <p className='text-center mt-4 text-sm text-black dark:text-white'>
             Consultez les articles sur{" "}
             <a
               href='https://www.allocine.fr/'
-              target='_blank' 
-              rel='noopener noreferrer' 
+              target='_blank'
+              rel='noopener noreferrer'
               className='text-[var(--color-fuchsia)] dark:text-[var(--color-fuchsia)] underline'>
               Allociné
             </a>
