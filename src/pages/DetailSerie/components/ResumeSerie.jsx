@@ -17,7 +17,7 @@ export default function ResumeSerie() {
           <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-400">
             {detailSerie.saisons.length} SAISONS
           </h2>
-          <div className="flex overflow-x-auto space-x-6 pb-2 justify-center items-center">
+          <div className="flex overflow-x-auto space-x-6 pb-2 md:justify-center md:items-center">
             {detailSerie.saisons.map((saison, index) => (
               <div
                 key={saison.numero}
@@ -28,7 +28,7 @@ export default function ResumeSerie() {
               >
                 <div
                   className={`w-20 h-28 bg-gray-800 ${
-                    selectedSeason === index ? "ring-2 ring-blue-500" : ""
+                    selectedSeason === index ? "ring-2 ring-fuchsia" : ""
                   }`}
                 >
                   {" "}
