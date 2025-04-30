@@ -39,6 +39,26 @@ import UserNotConnected from "./components/ProtectedRoutes/UserNotConnected";
 
 export const router = createBrowserRouter([
   {
+    path: "*",
+    element: <NotFound />,
+  },
+  {
+    path: "/connexion",
+    element: (
+      <UserNotConnected>
+        <Connexion />
+      </UserNotConnected>
+    ),
+  },
+  {
+    path: "/inscription",
+    element: (
+      <UserNotConnected>
+        <Inscription />
+      </UserNotConnected>
+    ),
+  },
+  {
     path: "/",
     element: <App />,
     children: [
@@ -127,22 +147,6 @@ export const router = createBrowserRouter([
         element: <FAQ />,
       },
       {
-        path: "/connexion",
-        element: (
-          <UserNotConnected>
-            <Connexion />
-          </UserNotConnected>
-        ),
-      },
-      {
-        path: "/inscription",
-        element: (
-          <UserNotConnected>
-            <Inscription />
-          </UserNotConnected>
-        ),
-      },
-      {
         path: "/actualites",
         element: <ActualitesPage />,
       },
@@ -210,7 +214,6 @@ export const router = createBrowserRouter([
           },
         ],
       },
-      { path: "*", element: <NotFound /> },
     ],
   },
 ]);
