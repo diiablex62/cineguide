@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Review from "../../data/Activiter.json";
 import Film from "../../data/Film.json";
 import Pagination from "../../components/pagination/Pagination";
+import ProfilNav from "./components/ProfilNav";
 export default function ProfileReviews() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -9,6 +10,7 @@ export default function ProfileReviews() {
   const review = Review.slice(startIndex, startIndex + itemsPerPage);
   return (
     <>
+      <ProfilNav></ProfilNav>
       <div className=" flex flex-wrap items-center justify-center gap-4 ">
         {review.map((item) => {
           const film = Film.find((f) => f.id === item.idFilm);

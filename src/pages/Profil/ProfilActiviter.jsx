@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { IoStar } from "react-icons/io5";
 import Activiter from "../../data/Activiter.json";
 import Pagination from "../../components/pagination/Pagination";
+import ProfilNav from "./components/ProfilNav";
 
 export default function ProfilActiviter() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -13,6 +14,7 @@ export default function ProfilActiviter() {
   );
   return (
     <>
+      <ProfilNav></ProfilNav>
       <div className="flex flex-wrap">
         {selectedActiviter.map((activity) => (
           <div key={activity.id} className="w-full md:w-1/2 p-4">

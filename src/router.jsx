@@ -34,6 +34,7 @@ import BandeAnnonceSerie from "./pages/DetailSerie/components/BandeAnnonceSerie"
 import CommentaireSerie from "./pages/DetailSerie/components/CommentaireSerie";
 import SerieProposer from "./pages/DetailSerie/components/SerieProposer";
 import NotFound from "./pages/404";
+import ProfilNav from "./pages/Profil/components/ProfilNav";
 
 export const router = createBrowserRouter([
   {
@@ -46,22 +47,21 @@ export const router = createBrowserRouter([
       },
       {
         path: "/profil",
-        element: <Profil />,
         children: [
           {
             index: true,
             element: <Profil />,
           },
           {
-            path: "mon-activiter",
+            path: "/profil/mon-activiter",
             element: <ProfilActiviter />,
           },
           {
-            path: "ma-liste",
+            path: "/profil/ma-liste",
             element: <ProfilListe />,
           },
           {
-            path: "mes-reviews",
+            path: "/profil/mes-reviews",
             element: <ProfileReviews />,
           },
         ],

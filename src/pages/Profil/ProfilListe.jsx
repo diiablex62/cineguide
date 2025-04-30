@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ListeFilm from "../../data/Film.json";
 import Pagination from "../../components/pagination/Pagination";
+import ProfilNav from "./components/ProfilNav";
 export default function ProfilListe() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 18;
@@ -8,6 +9,7 @@ export default function ProfilListe() {
   const films = ListeFilm.slice(startIndex, startIndex + itemsPerPage);
   return (
     <>
+      <ProfilNav></ProfilNav>
       <div className="flex flex-wrap items-center justify-center gap-4">
         {films.map((film) => (
           <a href="#">
