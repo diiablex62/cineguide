@@ -17,7 +17,7 @@ import ProfileReviews from "./ProfileReviews";
 import userAvatar from "../../assets/profil/avatar.svg";
 export default function profil() {
   const location = useLocation();
-  const { userId } = useParams(); // Get userId from URL parameters
+
   const { user } = useContext(AuthContext);
 
   const [isModalOpen, setModalOpen] = useState(false);
@@ -63,31 +63,23 @@ export default function profil() {
           </div>
           <div>
             <p className="italic my-3">{citation}</p>
-            {!userId ? (
-              <div className="flex justify-end">
-                <button
-                  className="border rounded px-2 flex items-center cursor-pointer"
-                  onClick={() => setModalOpen(true)}
-                >
-                  <FaPen className="mr-2" />
-                  Modifier
-                </button>
-              </div>
-            ) : (
-              <></>
-            )}
+
+            <div className="flex justify-end">
+              <button
+                className="border rounded px-2 flex items-center cursor-pointer"
+                onClick={() => setModalOpen(true)}
+              >
+                <FaPen className="mr-2" />
+                Modifier
+              </button>
+            </div>
           </div>
           <ProfilNav></ProfilNav>
 
-          {!userId &&
-            (location.pathname === "/profil" ? (
-              <ProfilForm></ProfilForm>
-            ) : location.pathname === "/profil/mon-activiter" ? (
-              <ProfilActiviter></ProfilActiviter>
-            ) : null)}
+          {location.pathname === "/profil" ? <ProfilForm></ProfilForm> : null}
         </div>
 
-        {!userId && location.pathname === "/profil" ? (
+        {location.pathname === "/profil" ? (
           <div className="md:w-2/6 p-4">
             <ProfilUtils></ProfilUtils>
           </div>
