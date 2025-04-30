@@ -14,7 +14,7 @@ import ProfilActiviter from "./ProfilActiviter";
 import { useLocation, useParams } from "react-router-dom";
 import ProfilListe from "./ProfilListe";
 import ProfileReviews from "./ProfileReviews";
-
+import userAvatar from "../../assets/profil/avatar.svg";
 export default function profil() {
   const location = useLocation();
   const { userId } = useParams(); // Get userId from URL parameters
@@ -56,9 +56,9 @@ export default function profil() {
           }
         >
           <div className="flex items-end">
-            <img src={UserData.avatar} alt="" />
+            <img src={userAvatar} alt="" />
             <p className="font-bold text-4xl mb-3">
-              {UserData.firstname || ""}.{UserData.lastname?.charAt(0) || ""}
+              {UserData.firstname || ""}.{UserData.lastname.charAt(0) || ""}
             </p>
           </div>
           <div>
