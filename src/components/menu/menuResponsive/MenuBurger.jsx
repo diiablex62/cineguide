@@ -23,7 +23,7 @@ export default function MenuBurger() {
   return (
     <div
       ref={menuRef}
-      className="absolute top-0 right-0 flex flex-col gap-4 px-5 py-8 bg-white shadow-md text-center min-1100:hidden min-h-screen w-56 dark:bg-black dark:border dark:border-white"
+      className="absolute top-0 right-0 flex flex-col gap-4 px-5 py-8 bg-white shadow-md text-center min-1100:hidden min-h-screen w-56 dark:bg-black dark:border dark:border-white z-50"
     >
       <div className="flex justify-end">
         <IoMdClose className="cursor-pointer text-3xl" onClick={toggleBurger} />
