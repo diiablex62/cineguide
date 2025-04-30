@@ -6,18 +6,27 @@ export default function FirstArticleCard({
   image,
   date,
   category,
+  link,
   description,
 }) {
   const { setSelectedArticle } = useContext(ActuContext);
 
   const handleClick = () => {
+    if (link) {
+      window.open(link, "_blank", "noopener,noreferrer");
+    }
+  };
+
+  const handleArticleClick = (e) => {
+    e.preventDefault();
     setSelectedArticle({ title, image, date, category, description });
+    handleClick();
   };
 
   return (
     <div
       className='relative mb-8 w-full md:w-[50%] mx-auto cursor-pointer'
-      onClick={handleClick}>
+      onClick={handleArticleClick}>
       <img
         alt={title}
         className='w-full h-96 object-cover rounded-lg'
@@ -35,9 +44,12 @@ export default function FirstArticleCard({
             {description}
           </p>
           <a
-            href='#'
-            className='text-sm text-[var(--color-fuchsia)] hover:underline mt-4'
-            onClick={(e) => e.stopPropagation()}>
+            href={link}
+            className='text-sm text-[var(--color-fuchsia)] hover:underline mt-4 block'
+            onClick={(e) => {
+              e.stopPropagation();
+              handleClick();
+            }}>
             Voir l'article complet
           </a>
         </div>
