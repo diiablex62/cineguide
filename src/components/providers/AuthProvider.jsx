@@ -13,6 +13,7 @@ export default function AuthProvider({ children }) {
     postalCode: "",
     complement: "",
   };
+
   const [isLoggedIn, setIsLoggedIn] = useState(
     !!localStorage.getItem("session")
   );
@@ -49,14 +50,15 @@ export default function AuthProvider({ children }) {
   };
 
   const login = (data) => {
-    setUser(data);
+    console.log("Login values:", data);
+    saveSession(data);
     setConnectedUser(true);
-    localStorage.setItem("session", JSON.stringify(data));
   };
 
-  const register = (data) => {
+  const registerUser = (data) => {
     console.log("Register values:", data);
     saveSession(data);
+    setConnectedUser(true);
   };
 
   const logout = () => {
@@ -73,7 +75,7 @@ export default function AuthProvider({ children }) {
         fakeUser,
         login,
         logout,
-        register,
+        registerUser,
         login,
         connectedUser,
         isLoggedIn,
