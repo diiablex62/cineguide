@@ -1,11 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { LangageContext } from "../../../context/LangageContext";
 
 export default function MenuLangage() {
-  const { langage, handleLanguageChange, selectedLang, langageMenuRef } =
-    useContext(LangageContext);
+  const {
+    langage = [],
+    handleLanguageChange,
+    selectedLang = { id: null },
+    langageMenuRef,
+  } = useContext(LangageContext) || {};
+
+  useEffect(() => {
+    console.log("MenuLangage rendu. Langue active:", selectedLang);
+  }, [selectedLang]);
 
   const handleClick = (lang) => {
+    console.log("Sélection d'une langue :", lang, "Fermeture du menu langue");
     handleLanguageChange(lang);
   };
 

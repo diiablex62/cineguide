@@ -16,8 +16,11 @@ import { MenuContext } from "../../../context/MenuContext";
 
 export default function MenuBurger() {
   const { toggleTheme, theme } = useContext(ThemeContext);
-  const { langageMenu, setLangageMenu, selectedLang } =
-    useContext(LangageContext);
+  const {
+    langageMenu,
+    setLangageMenu,
+    selectedLang = { img: "", desc: "" },
+  } = useContext(LangageContext) || {};
   const { setMenuPlus, menuPlus, toggleBurger, menuRef } =
     useContext(MenuContext);
 

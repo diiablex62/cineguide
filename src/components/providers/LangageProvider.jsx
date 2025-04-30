@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { LangageContext } from "../../context/LangageContext";
 import fr from "../../assets/france.png";
 import uk from "../../assets/royaume_uni.png";
@@ -7,13 +7,12 @@ import de from "../../assets/allemagne.png";
 
 export default function LangageProvider({ children }) {
   const [langageMenu, setLangageMenu] = useState(false);
-  const langageMenuRef = useRef(null);
   const [selectedLang, setSelectedLang] = useState(() => {
     try {
       const saved = localStorage.getItem("selectedLang");
-      return saved
-        ? JSON.parse(saved)
-        : { id: 1, img: fr, desc: "drapeau langue française" };
+      const parsed = saved ? JSON.parse(saved) : null;
+      if (parsed && parsed.img) return parsed;
+      return { id: 1, img: fr, desc: "drapeau langue française" };
     } catch {
       return { id: 1, img: fr, desc: "drapeau langue française" };
     }
@@ -28,30 +27,9 @@ export default function LangageProvider({ children }) {
 
   const handleLanguageChange = (lang) => {
     setSelectedLang(lang);
-    setLangageMenu(false); // Force le menu à se fermer
+    setLangageMenu(false);
     localStorage.setItem("selectedLang", JSON.stringify(lang));
   };
-
-  const toggleLanguageMenu = (e) => {
-    e.stopPropagation(); // Empêche la propagation de l'événement
-    setLangageMenu((prev) => !prev); // Inverse l'état actuel
-  };
-
-  const handleClickOutside = (event) => {
-    if (
-      langageMenuRef.current &&
-      !langageMenuRef.current.contains(event.target)
-    ) {
-      setLangageMenu(false);
-    }
-  };
-
-  useEffect(() => {
-    if (langageMenu) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [langageMenu]);
 
   return (
     <LangageContext.Provider
@@ -61,8 +39,6 @@ export default function LangageProvider({ children }) {
         handleLanguageChange,
         langageMenu,
         setLangageMenu,
-        langageMenuRef,
-        toggleLanguageMenu, // Exporter la nouvelle fonction
       }}>
       {children}
     </LangageContext.Provider>
