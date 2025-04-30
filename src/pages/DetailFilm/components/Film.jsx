@@ -1,11 +1,13 @@
 import React, { useContext, useState } from "react";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { FilmContext } from "../../../context/FilmContext";
+import { AuthContext } from "../../../context/AuthContext";
 
 export default function Film() {
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const { detailFilm } = useContext(FilmContext);
+  const { connectedUser } = useContext(AuthContext);
 
   if (!detailFilm) {
     return <div className="p-4 text-center">Chargement du film...</div>;
@@ -35,11 +37,7 @@ export default function Film() {
                   onMouseLeave={() => setHoverRating(0)}
                   onClick={() => setRating(star)}
                 >
-                  {rating >= star || hoverRating >= star ? (
-                    <FaStar className="text-fuchsia" />
-                  ) : (
-                    <FaRegStar className="text-gray-fonce" />
-                  )}
+                  {<FaStar className="text-fuchsia" />}
                 </span>
               ))}
             </div>
@@ -53,9 +51,15 @@ export default function Film() {
             </button>
           </div>
           <div className="mt-4 text-xs flex justify-center w-full">
-            <button className="py-2 px-2 w-full text-center border border-gray-300 dark:border-gray-700  hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-              Connectez-vous pour synchroniser la Watchlist
-            </button>
+            {connectedUser ? (
+              <button className="py-2 px-2 w-full text-center border border-gray-300 dark:border-gray-700  hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                ajouter la Watchlist
+              </button>
+            ) : (
+              <button className="py-2 px-2 w-full text-center border border-gray-300 dark:border-gray-700  hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                Connectez-vous pour synchroniser la Watchlist
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -90,7 +94,6 @@ export default function Film() {
 
       <div className="mb-6 px-3">
         <div className="flex md:flex-col gap-y-4">
-         
           <div className="w-1/2 md:w-full">
             <h3 className="font-bold text-sm mb-2 text-black dark:text-gray-400">
               PAYS DE PRODUCTION

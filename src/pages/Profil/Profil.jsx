@@ -1,12 +1,11 @@
 import React, { useContext, useState } from "react";
 import ProfilForm from "./components/ProfilForm";
 import ProfilUtils from "./components/ProfilUtils";
-
 import { IoMdClose } from "react-icons/io";
 import { useForm } from "react-hook-form";
 import ProfilNav from "./components/ProfilNav";
 import ModalPassword from "../../components/modalPassword/ModalPassword";
-
+import UserData from "../../data/User.json";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 

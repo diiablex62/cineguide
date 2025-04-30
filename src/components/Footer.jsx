@@ -14,7 +14,7 @@ export default function Footer() {
   const { menuFooter, setMenuFooter } = useContext(MenuContext);
   const { theme } = useContext(ThemeContext);
   return (
-    <div className="border-t p-3 flex flex-col justify-center items-center md:flex-row md:justify-between">
+    <div className="border-t border-black dark:border-white p-3 flex flex-col justify-center items-center md:flex-row md:justify-between">
       <div className="">
         {theme === "dark" ? (
           <Link to="/">
@@ -27,10 +27,30 @@ export default function Footer() {
         )}
       </div>
       <div className="flex flex-col  md:flex-row items-center gap-3">
-        <NavLink to={"/"}>Accueil</NavLink>
-        <NavLink to={"/film"}>Films</NavLink>
-        <NavLink to={"/series"}>Séries</NavLink>
-        <NavLink to={"/actualites"}>Actualités</NavLink>
+        <NavLink
+          to={"/"}
+          className="mr-5 text-black  dark:text-white hover:text-fuchsia"
+        >
+          Accueil
+        </NavLink>
+        <NavLink
+          to={"/film"}
+          className="mr-5 text-black  dark:text-white hover:text-fuchsia"
+        >
+          Films
+        </NavLink>
+        <NavLink
+          to={"/series"}
+          className="mr-5 text-black  dark:text-white hover:text-fuchsia"
+        >
+          Séries
+        </NavLink>
+        <NavLink
+          to={"/actualites"}
+          className="mr-5 text-black  dark:text-white hover:text-fuchsia"
+        >
+          Actualités
+        </NavLink>
         {menuFooter ? (
           <div>
             <div

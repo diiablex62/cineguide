@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import { AuthContext } from "../../../components/providers/AuthProvider";
+import { AuthContext } from "../../../context/AuthContext";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-
+import UserData from "../../../data/User.json";
 export default function ProfilForm() {
   const { user } = useContext(AuthContext);
 
@@ -47,7 +47,7 @@ export default function ProfilForm() {
             className="text-black border dark:border-white dark:text-white px-3 py-3"
             type="text"
             id="lastname"
-            defaultValue={user.lastname}
+            defaultValue={UserData.lastname}
           />
           {errors.lastname && (
             <p className="text-red-500 dark:text-red-400">
@@ -64,7 +64,7 @@ export default function ProfilForm() {
             className="text-black border dark:border-white dark:text-white px-3 py-3"
             type="text"
             id="firstname"
-            defaultValue={user.firstname}
+            defaultValue={UserData.firstname}
           />
           {errors.firstname && (
             <p className="text-red-500 dark:text-red-400">
@@ -81,7 +81,7 @@ export default function ProfilForm() {
             className="text-black border dark:border-white dark:text-white px-3 py-3"
             type="email"
             id="email"
-            defaultValue={user.email}
+            defaultValue={UserData.email}
           />
           {errors.email && (
             <p className="text-red-500 dark:text-red-400">
@@ -98,7 +98,7 @@ export default function ProfilForm() {
             className="text-black border dark:border-white dark:text-white px-3 py-3"
             type="text"
             id="adress"
-            defaultValue={user.adress}
+            defaultValue={UserData.adress}
           />
           {errors.adress && (
             <p className="text-red-500 dark:text-red-400">
@@ -115,7 +115,7 @@ export default function ProfilForm() {
             className="text-black border dark:border-white dark:text-white px-3 py-3"
             type="text"
             id="city"
-            defaultValue={user.city}
+            defaultValue={UserData.city}
           />
           {errors.city && (
             <p className="text-red-500 dark:text-red-400">
@@ -132,7 +132,7 @@ export default function ProfilForm() {
             className="text-black border dark:border-white dark:text-white px-3 py-3"
             type="text"
             id="postalCode"
-            defaultValue={user.postalCode}
+            defaultValue={UserData.postalCode}
           />
           {errors.postalCode && (
             <p className="text-red-500 dark:text-red-400">
@@ -149,7 +149,7 @@ export default function ProfilForm() {
             className="text-black border dark:border-white dark:text-white px-3 py-3"
             type="text"
             id="complement"
-            defaultValue={user.complement}
+            defaultValue={UserData.complement}
           />
           {errors.complement && (
             <p className="text-red-500 dark:text-red-400">

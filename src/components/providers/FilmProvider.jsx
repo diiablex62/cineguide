@@ -124,6 +124,7 @@ export default function FilmProvider({ children }) {
         filterLanguage,
         filterAlreadySeen,
         filterNotSeen,
+        filmSeen
       }}
     >
       {children}

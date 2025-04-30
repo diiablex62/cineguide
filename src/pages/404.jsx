@@ -1,8 +1,18 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import astroImage from "../assets/astro.webp";
 
 export default function NotFound() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate('/');
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, [navigate]);
+
   return (
     <div
       className='relative flex items-center min-h-screen bg-black text-white overflow-hidden'

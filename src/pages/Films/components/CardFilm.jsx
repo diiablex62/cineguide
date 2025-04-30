@@ -64,9 +64,12 @@ export default function CardFilm() {
                       {goSeeStates[index] ? "+ A voir" : "Déjà ajouté"}
                     </button>
                     <div className="flex">
-                      <button className="mt-2 mr-2 cursor-pointer bg-fuchsia text-white w-[130px] h-[40px] lg:text-[15px]">
+                      <NavLink
+                        to={`/detailfilm/${film.id}`}
+                        className="mt-2 cursor-pointer flex items-center justify-center mr-2 bg-fuchsia text-white w-[130px] h-[40px] lg:text-[15px]"
+                      >
                         Regarder
-                      </button>
+                      </NavLink>
                       <button
                         onClick={() =>
                           toggleState(setAlreadySeenStates, film.id)
@@ -134,9 +137,12 @@ export default function CardFilm() {
                       >
                         {goSeeStates[index] ? "+ A voir" : "Déjà ajouté"}
                       </button>
-                      <button className="mt-2 cursor-pointer bg-fuchsia text-white w-[250px] h-[50px]">
+                      <NavLink
+                        to={`/detailfilm/${film.id}`}
+                        className="mt-2 cursor-pointer bg-fuchsia text-white w-[250px] h-[50px]"
+                      >
                         Regarder
-                      </button>
+                      </NavLink>
                       <button
                         onClick={() => toggleState(setAlreadySeenStates, index)}
                         className={`mt-2 cursor-pointer text-white w-[150px] h-[50px] ${
