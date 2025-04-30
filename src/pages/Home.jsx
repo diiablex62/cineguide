@@ -60,26 +60,24 @@ export default function Home() {
       return;
     }
 
-    // Filtrage
-    const results = series.filter((item) => {
+    // Filtrage des résultats correspondants aux critères
+    const matchingResults = series.filter((item) => {
       const matchesGenre = item.genre.includes(selectedGenre);
       const matchesType = selectedType.serie;
       const [minNote, maxNote] = selectedNote.split("-").map(Number);
-      const matchesNote =
-        !selectedNote || (item.note >= minNote && item.note <= maxNote);
+      const matchesNote = !selectedNote || (item.note >= minNote && item.note <= maxNote);
 
       return matchesGenre && matchesType && matchesNote;
     });
 
-    setFilteredResult(results.length > 0 ? results[0] : "no_results");
-  }, [
-    selectedGenre,
-    selectedType,
-    selectedNote,
-    series,
-    setErrors,
-    setFilteredResult,
-  ]);
+    // Sélection aléatoire parmi les résultats
+    if (matchingResults.length > 0) {
+      const randomIndex = Math.floor(Math.random() * matchingResults.length);
+      setFilteredResult(matchingResults[randomIndex]);
+    } else {
+      setFilteredResult("no_results");
+    }
+  }, [selectedGenre, selectedType, selectedNote, series, setErrors, setFilteredResult]);
 
   return (
     <div className="p-10">
@@ -366,13 +364,16 @@ export default function Home() {
                 </p>
               </div>
             ) : filteredResult ? (
-              <div className="flex gap-6">
-                <img
-                  src={filteredResult.image}
-                  alt={filteredResult.titre}
-                  className="w-32 h-48 object-cover rounded"
-                />
-                <div className="flex flex-col justify-between">
+              <div className="flex flex-col md:flex-row gap-6">
+                <div className="hidden md:block flex-shrink-0">
+                  <img
+                    src={filteredResult.image}
+                    alt={filteredResult.titre}
+                    className="w-32 h-48 object-cover rounded"
+                    style={{ minWidth: '128px' }}
+                  />
+                </div>
+                <div className="flex flex-col justify-between w-full">
                   <div>
                     <h3 className="text-xl font-bold text-gray-900 dark:text-white">
                       {filteredResult.titre}
