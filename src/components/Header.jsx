@@ -21,11 +21,16 @@ import { IoIosLogOut } from "react-icons/io";
 import { AuthContext } from "../context/AuthContext";
 
 export default function Header() {
-  const { langageMenu, toggleLangageMenu, selectedLang } =
+  const { langageMenu, toggleLanguageMenu, selectedLang } =
     useContext(LangageContext);
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { menu, setMenu, burger, toggleBurger } = useContext(MenuContext);
   const { logout, isLoggedIn } = useContext(AuthContext);
+
+  const handleLanguageClick = (e) => {
+    e.stopPropagation();
+    setLangageMenu(!langageMenu);
+  };
 
   return (
     <div className='flex items-center justify-between shadow-md p-4  gap-2.5 dark:bg-black dark:text-white dark:shadow-white'>
@@ -118,7 +123,7 @@ export default function Header() {
             </>
           )}
           <div
-            onClick={toggleLangageMenu}
+            onClick={toggleLanguageMenu}
             className='flex cursor-pointer items-center justify-between relative px-4 py-2.5 gap-2 w-fit border bg-white dark:bg-black dark:border-white h-[50px]'>
             <img
               src={selectedLang.img}

@@ -28,33 +28,29 @@ export default function LangageProvider({ children }) {
 
   const handleLanguageChange = (lang) => {
     setSelectedLang(lang);
-    setLangageMenu(false);
+    setLangageMenu(false); // Force le menu à se fermer
     localStorage.setItem("selectedLang", JSON.stringify(lang));
   };
 
-  const toggleLangageMenu = () => {
-    setLangageMenu(!langageMenu);
+  const toggleLanguageMenu = (e) => {
+    e.stopPropagation(); // Empêche la propagation de l'événement
+    setLangageMenu((prev) => !prev); // Inverse l'état actuel
+  };
+
+  const handleClickOutside = (event) => {
+    if (
+      langageMenuRef.current &&
+      !langageMenuRef.current.contains(event.target)
+    ) {
+      setLangageMenu(false);
+    }
   };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        langageMenuRef.current &&
-        !langageMenuRef.current.contains(event.target)
-      ) {
-        setLangageMenu(false);
-      }
-    };
-
     if (langageMenu) {
       document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
     }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [langageMenu]);
 
   return (
@@ -66,7 +62,7 @@ export default function LangageProvider({ children }) {
         langageMenu,
         setLangageMenu,
         langageMenuRef,
-        toggleLangageMenu,
+        toggleLanguageMenu, // Exporter la nouvelle fonction
       }}>
       {children}
     </LangageContext.Provider>
