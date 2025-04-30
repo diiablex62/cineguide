@@ -31,6 +31,26 @@ export default function LangageProvider({ children }) {
     localStorage.setItem("selectedLang", JSON.stringify(lang));
   };
 
+  const toggleLangageMenu = (e) => {
+    setLangageMenu((prev) => !prev); // Inverse l'état actuel
+    console.log(langageMenu);
+  };
+
+  const handleClickOutside = (event) => {
+    if (
+      langageMenuRef.current &&
+      !langageMenuRef.current.contains(event.target)
+    ) {
+      setLangageMenu(false);
+    }
+    if (langageMenu) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  };
+
+  useEffect(() => {}, [langageMenu]);
+
   return (
     <LangageContext.Provider
       value={{
@@ -39,7 +59,10 @@ export default function LangageProvider({ children }) {
         handleLanguageChange,
         langageMenu,
         setLangageMenu,
-      }}>
+        langageMenuRef,
+        toggleLangageMenu, // Exporter la nouvelle fonction
+      }}
+    >
       {children}
     </LangageContext.Provider>
   );
