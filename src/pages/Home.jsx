@@ -119,11 +119,9 @@ export default function Home() {
               <NavLink
                 className="cursor-pointer"
                 to={`/detailserie/${serie.id}`}
+                key={serie.id}
               >
-                <div
-                  key={serie.id}
-                  className="relative flex-shrink-0 w-40 h-60 bg-gray-200 dark:bg-gray-700 rounded-lg shadow scroll-snap-align-start group"
-                >
+                <div className="relative flex-shrink-0 w-40 h-60 bg-gray-200 dark:bg-gray-700 rounded-lg shadow scroll-snap-align-start group">
                   <div className="absolute bottom-[-50px] left-[-25px] transform -translate-x-1/2 text-[8rem] font-bold text-gray-800 dark:text-gray-400">
                     {index + 1}
                   </div>
@@ -146,11 +144,9 @@ export default function Home() {
               <NavLink
                 className="cursor-pointer"
                 to={`/detailserie/${serie.id}`}
+                key={serie.id}
               >
-                <div
-                  key={serie.id}
-                  className="flex h-24 bg-gray-200 dark:bg-gray-700"
-                >
+                <div className="flex h-24 bg-gray-200 dark:bg-gray-700">
                   <div className="relative w-[20%]">
                     <div className="absolute bottom-[20px] left-[-40px] text-5xl font-bold text-gray-800 dark:text-gray-400">
                       {index + 1}
@@ -185,11 +181,9 @@ export default function Home() {
               <NavLink
                 className="cursor-pointer"
                 to={`/detailserie/${serie.id}`}
+                key={serie.id}
               >
-                <div
-                  key={serie.id}
-                  className="relative flex-shrink-0 w-40 h-60 group"
-                >
+                <div className="relative flex-shrink-0 w-40 h-60 group">
                   <img
                     src={serie.image}
                     alt={serie.titre}
@@ -225,11 +219,9 @@ export default function Home() {
                 <NavLink
                   className="cursor-pointer"
                   to={`/detailserie/${serie.id}`}
+                  key={serie.id}
                 >
-                  <div
-                    key={serie.id}
-                    className="relative flex-shrink-0 w-40 h-60 group"
-                  >
+                  <div className="relative flex-shrink-0 w-40 h-60 group">
                     <img
                       src={serie.image}
                       alt={serie.titre}

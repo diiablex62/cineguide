@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function AuthProvider({ children }) {
@@ -13,6 +13,22 @@ export default function AuthProvider({ children }) {
     postalCode: "",
     complement: "",
   };
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    !!localStorage.getItem("session")
+  );
+
+  useEffect(() => {
+    const checkSession = () => {
+      const session = localStorage.getItem("session");
+      setIsLoggedIn(!!session);
+    };
+
+    window.addEventListener("storage", checkSession);
+
+    return () => {
+      window.removeEventListener("storage", checkSession);
+    };
+  }, []);
 
   const [user, setUser] = useState(() => {
     const savedSession = localStorage.getItem("session");
@@ -52,7 +68,17 @@ export default function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, fakeUser, login, logout, register: login, connectedUser }}>
+      value={{
+        user,
+        fakeUser,
+        login,
+        logout,
+        register,
+        login,
+        connectedUser,
+        isLoggedIn,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

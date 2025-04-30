@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import logo from "../assets/logo.png";
 import logoWhite from "../assets/logo_blanc.png";
 import { IoSearchOutline } from "react-icons/io5";
@@ -17,7 +17,6 @@ import { ThemeContext } from "../context/ThemeContext";
 import { RiMenu2Fill } from "react-icons/ri";
 import MenuBurger from "./menu/menuResponsive/MenuBurger";
 import { MenuContext } from "../context/MenuContext";
-
 import { IoIosLogOut } from "react-icons/io";
 import { AuthContext } from "../context/AuthContext";
 
@@ -25,23 +24,7 @@ export default function Header() {
   const { langageMenu, setLangageMenu } = useContext(LangageContext);
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { menu, setMenu, burger, toggleBurger } = useContext(MenuContext);
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    !!localStorage.getItem("session")
-  );
-  const { logout } = useContext(AuthContext);
-
-  useEffect(() => {
-    const checkSession = () => {
-      const session = localStorage.getItem("session");
-      setIsLoggedIn(!!session);
-    };
-
-    window.addEventListener("storage", checkSession);
-
-    return () => {
-      window.removeEventListener("storage", checkSession);
-    };
-  }, []);
+  const { logout, isLoggedIn } = useContext(AuthContext);
 
   return (
     <div className="flex items-center justify-between shadow-md p-4  gap-2.5 dark:bg-black dark:text-white dark:shadow-white">
