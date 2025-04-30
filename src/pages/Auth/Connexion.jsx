@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -40,7 +40,6 @@ export default function Connexion() {
 
   const onSubmit = (data) => {
     login(data);
-    localStorage.setItem("session", JSON.stringify(data));
     window.dispatchEvent(new Event("storage"));
     navigate("/");
   };
@@ -63,12 +62,12 @@ export default function Connexion() {
               className="h-12 max-w-full object-contain hidden dark:block"
             />
           </div>
-          <a
-            href="/"
+          <Link
+            to="/"
             className="text-sm text-gray-500 dark:text-gray-400 hover:underline self-start mb-8"
           >
             &lt; Retour vers la page d'accueil
-          </a>
+          </Link>
           <h2 className="text-center mb-4 text-2xl font-bold text-black dark:text-white">
             SE CONNECTER
           </h2>
@@ -140,12 +139,12 @@ export default function Connexion() {
           </form>
           <p className="text-center mt-4 text-sm text-gray-700 dark:text-gray-300">
             Pas encore inscrit ?{" "}
-            <a
-              href="/inscription"
+            <Link
+              to="/inscription"
               className="text-[var(--color-fuchsia)] underline"
             >
               S'inscrire
-            </a>
+            </Link>
           </p>
         </div>
       </div>
