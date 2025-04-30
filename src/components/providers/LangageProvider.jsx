@@ -6,35 +6,35 @@ import es from "../../assets/espagne.png";
 import de from "../../assets/allemagne.png";
 
 export default function LangageProvider({ children }) {
-  const [langage, setLangage] = useState([
-    {
-      id: 1,
-      langue: "fr",
-      img: fr,
-      desc: "drapeau langue française",
-    },
-    {
-      id: 2,
-      langue: "en",
-      img: uk,
-      desc: "drapeau langue anglaise",
-    },
-    {
-      id: 3,
-      langue: "es",
-      img: es,
-      desc: "drapeau langue espagnol",
-    },
-    {
-      id: 4,
-      langue: "de",
-      img: de,
-      desc: "drapeau langue allemande",
-    },
-  ]);
   const [langageMenu, setLangageMenu] = useState(false);
-
   const langageMenuRef = useRef(null);
+  const [selectedLang, setSelectedLang] = useState(() => {
+    try {
+      const saved = localStorage.getItem("selectedLang");
+      return saved
+        ? JSON.parse(saved)
+        : { id: 1, img: fr, desc: "drapeau langue française" };
+    } catch {
+      return { id: 1, img: fr, desc: "drapeau langue française" };
+    }
+  });
+
+  const langage = [
+    { id: 1, img: fr, desc: "drapeau langue française" },
+    { id: 2, img: uk, desc: "drapeau langue anglaise" },
+    { id: 3, img: es, desc: "drapeau langue espagnol" },
+    { id: 4, img: de, desc: "drapeau langue allemande" },
+  ];
+
+  const handleLanguageChange = (lang) => {
+    setSelectedLang(lang);
+    setLangageMenu(false);
+    localStorage.setItem("selectedLang", JSON.stringify(lang));
+  };
+
+  const toggleLangageMenu = () => {
+    setLangageMenu(!langageMenu);
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -59,7 +59,15 @@ export default function LangageProvider({ children }) {
 
   return (
     <LangageContext.Provider
-      value={{ langage, langageMenu, setLangageMenu, langageMenuRef }}>
+      value={{
+        langage,
+        selectedLang,
+        handleLanguageChange,
+        langageMenu,
+        setLangageMenu,
+        langageMenuRef,
+        toggleLangageMenu,
+      }}>
       {children}
     </LangageContext.Provider>
   );

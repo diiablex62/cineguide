@@ -21,7 +21,8 @@ import { IoIosLogOut } from "react-icons/io";
 import { AuthContext } from "../context/AuthContext";
 
 export default function Header() {
-  const { langageMenu, setLangageMenu } = useContext(LangageContext);
+  const { langageMenu, toggleLangageMenu, selectedLang } =
+    useContext(LangageContext);
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { menu, setMenu, burger, toggleBurger } = useContext(MenuContext);
   const { logout, isLoggedIn } = useContext(AuthContext);
@@ -117,12 +118,20 @@ export default function Header() {
             </>
           )}
           <div
-            onClick={() => setLangageMenu(true)}
-            className='flex cursor-pointer  items-center justify-between relative px-4 py-2.5 gap-2 w-fit border bg-white dark:bg-black dark:border-white'>
-            <img src={fr} alt='drapeau langue française' className='w-8' />
-            <FaChevronDown />
+            onClick={toggleLangageMenu}
+            className='flex cursor-pointer items-center justify-between relative px-4 py-2.5 gap-2 w-fit border bg-white dark:bg-black dark:border-white h-[50px]'>
+            <img
+              src={selectedLang.img}
+              alt={selectedLang.desc}
+              className='w-8 h-8'
+            />
+            <FaChevronDown
+              className={`transition-transform ${
+                langageMenu ? "rotate-180" : ""
+              }`}
+            />
+            {langageMenu && <MenuLangage />}
           </div>
-          {langageMenu && <MenuLangage />}
         </div>
         <div className='flex gap-[30px] items-center justify-end w-full'>
           <div
