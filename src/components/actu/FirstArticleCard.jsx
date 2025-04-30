@@ -24,10 +24,7 @@ export default function FirstArticleCard({
   };
 
   return (
-    <div
-      className="relative mb-8 w-full md:w-[50%] mx-auto cursor-pointer"
-      // onClick={handleArticleClick}
-    >
+    <div className="relative mb-8 w-full md:w-[50%] mx-auto">
       <img
         alt={title}
         className="w-full h-96 object-cover rounded-lg"
