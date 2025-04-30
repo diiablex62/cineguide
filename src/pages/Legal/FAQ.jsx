@@ -5,7 +5,7 @@ import OneQuestion from "../../components/Question/OneQuestion";
 
 export default function FAQ() {
   return (
-    <div className="flex flex-col items-center justify-center gap-12 mt-12">
+    <div className="flex flex-col items-center justify-center gap-12 mt-12 mb-10">
       <div className="flex items-center justify-center gap-5">
         <RiQuestionAnswerFill className="text-fuchsia text-4xl" />
         <h2 className="text-black text-4xl font-bold max-sm:text-2xl dark:text-white">

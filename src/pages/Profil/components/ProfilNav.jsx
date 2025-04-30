@@ -21,7 +21,7 @@ export default function ProfilNav() {
           end
         >
           <LuUserRound className="w-[30px] h-[30px] lg:mr-2" />
-          <span className="hidden lg:block">"Mon profil</span>
+          <span className="hidden lg:block">Mon profil</span>
         </NavLink>
       ) : (
         <></>
