@@ -1,41 +1,16 @@
 import React, { useContext, useState } from "react";
 import ProfilForm from "./components/ProfilForm";
 import ProfilUtils from "./components/ProfilUtils";
-import { IoMdClose } from "react-icons/io";
-import { useForm } from "react-hook-form";
+
 import ProfilNav from "./components/ProfilNav";
-import ModalPassword from "../../components/modalPassword/ModalPassword";
-import UserData from "../../data/User.json";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 
 import { Outlet, useLocation } from "react-router-dom";
 
 export default function profil() {
   const location = useLocation();
 
-  const [isModalOpen, setModalOpen] = useState(false);
-
-  const schema = yup.object({
-    citation: yup.string().required("Le champ est obligatoire"),
-  });
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-    mode: "onChange",
-  });
-
-  const onSubmit = (data) => {
-    setCitation(data.citation);
-    setModalOpen(false);
-  };
   return (
     <>
-      <ProfilNav></ProfilNav>
       <Outlet></Outlet>
       <div
         className={
@@ -51,10 +26,11 @@ export default function profil() {
               : "md:w-auto flex flex-col p-4"
           }
         >
+          <ProfilNav></ProfilNav>
           <ProfilForm></ProfilForm>
         </div>
 
-        <div className="w-full md:w-1/3">
+        <div className="w-full md:w-2/6">
           <ProfilUtils></ProfilUtils>
         </div>
       </div>
