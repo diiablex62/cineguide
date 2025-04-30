@@ -1,80 +1,84 @@
-import React, { useState } from "react";
+import React, { useContext, useCallback } from "react";
 import Netflix from "../components/home/Netflix";
 import Primevideo from "../components/home/Primevideo";
 import Disney from "../components/home/Disney";
 import Hulu from "../components/home/hulu";
-import series from "../data/Serie.json";
 import peakyBg from "../assets/peaky2.jpg";
-import genres from "../data/Genre.json";
-import films from "../data/Film.json";
+import { HomeContext } from "../context/HomeContext";
 
 export default function Home() {
-  const [selectedGenre, setSelectedGenre] = useState("");
-  const [selectedType, setSelectedType] = useState({
-    film: false,
-    serie: false,
-  });
-  const [selectedNote, setSelectedNote] = useState("");
-  const [filteredResult, setFilteredResult] = useState(null);
-  const [errors, setErrors] = useState({
-    genre: false,
-    type: false,
-    note: false,
-  });
+  const {
+    selectedGenre,
+    setSelectedGenre,
+    selectedType,
+    setSelectedType,
+    selectedNote,
+    setSelectedNote,
+    filteredResult,
+    setFilteredResult,
+    errors,
+    setErrors,
+    series,
+    genres,
+  } = useContext(HomeContext);
 
-  const handleSearch = () => {
+  const handleGenreChange = useCallback(
+    (e) => {
+      setSelectedGenre(e.target.value);
+    },
+    [setSelectedGenre]
+  );
+
+  const handleTypeChange = useCallback(
+    (type) => {
+      setSelectedType((prev) => ({
+        ...prev,
+        [type]: !prev[type],
+      }));
+    },
+    [setSelectedType]
+  );
+
+  const handleNoteChange = useCallback(
+    (e) => {
+      setSelectedNote(e.target.value);
+    },
+    [setSelectedNote]
+  );
+
+  const handleSearch = useCallback(() => {
     const newErrors = {
       genre: !selectedGenre,
       type: !selectedType.film && !selectedType.serie,
-      note: false, // optionnel
+      note: false,
     };
 
     setErrors(newErrors);
 
-    if (newErrors.genre || newErrors.type) {
+    if (Object.values(newErrors).some((error) => error)) {
       return;
     }
 
-    let mediaList = [];
-    if (selectedType.film) mediaList = [...films];
-    if (selectedType.serie) mediaList = [...series];
-
-    const filtered = mediaList.filter((item) => {
-      const matchesGenre =
-        selectedGenre === "" || item.genre.includes(selectedGenre);
+    // Filtrage
+    const results = series.filter((item) => {
+      const matchesGenre = item.genre.includes(selectedGenre);
+      const matchesType = selectedType.serie; 
+      const [minNote, maxNote] = selectedNote.split("-").map(Number);
       const matchesNote =
-        !selectedNote ||
-        (() => {
-          const [min, max] = selectedNote.split("-").map(Number);
-          return item.note >= min && item.note <= max;
-        })();
+        !selectedNote || (item.note >= minNote && item.note <= maxNote);
 
-      return matchesGenre && matchesNote;
+      return matchesGenre && matchesType && matchesNote;
     });
 
-    if (filtered.length > 0) {
-      const randomIndex = Math.floor(Math.random() * filtered.length);
-      setFilteredResult(filtered[randomIndex]);
-    } else {
-      setFilteredResult("no_results");
-    }
-  };
-
-  // Gestionnaires d'événements pour les filtres
-  const handleGenreChange = (e) => {
-    setSelectedGenre(e.target.value);
-  };
-
-  const handleNoteChange = (e) => {
-    setSelectedNote(e.target.value);
-  };
-
-  const handleTypeChange = (type) => {
-    setSelectedType((prev) => ({
-      ...prev,
-      [type]: !prev[type],
-    }));
-  };
+    setFilteredResult(results.length > 0 ? results[0] : "no_results");
+  }, [
+    selectedGenre,
+    selectedType,
+    selectedNote,
+    series,
+    setErrors,
+    setFilteredResult,
+  ]);
 
   return (
     <div className='p-10'>

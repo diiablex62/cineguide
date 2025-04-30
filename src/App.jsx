@@ -12,32 +12,35 @@ import ActorProvider from "./components/providers/ActorProvider";
 import ProfilProvider from "./components/providers/ProfilProvider";
 import CommentProvider from "./components/providers/CommentProvider";
 import Footer from "./components/Footer";
+import { HomeProvider } from "./components/providers/HomeProvider";
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col w-full dark:bg-black bg-white">
-      <ThemeProvider>
-        <MenuProvider>
-          <FiltreProvider>
-            <ProfilProvider>
-              <ActorProvider>
-                <FilmProvider>
-                  <SerieProvider>
-                    <LangageProvider>
-                      <CommentProvider>
-                      <Header />
-                      <Outlet />
-                      <Footer></Footer>
-                      </CommentProvider>
-                    </LangageProvider>
-                  </SerieProvider>
-                </FilmProvider>
-              </ActorProvider>
-            </ProfilProvider>
-          </FiltreProvider>
-        </MenuProvider>
-      </ThemeProvider>
-    </div>
+    <HomeProvider>
+      <div className='min-h-screen flex flex-col w-full dark:bg-black bg-white'>
+        <ThemeProvider>
+          <MenuProvider>
+            <FiltreProvider>
+              <ProfilProvider>
+                <ActorProvider>
+                  <FilmProvider>
+                    <SerieProvider>
+                      <LangageProvider>
+                        <CommentProvider>
+                          <Header />
+                          <Outlet />
+                          <Footer></Footer>
+                        </CommentProvider>
+                      </LangageProvider>
+                    </SerieProvider>
+                  </FilmProvider>
+                </ActorProvider>
+              </ProfilProvider>
+            </FiltreProvider>
+          </MenuProvider>
+        </ThemeProvider>
+      </div>
+    </HomeProvider>
   );
 }
 
