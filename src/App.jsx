@@ -13,6 +13,7 @@ import ProfilProvider from "./components/providers/ProfilProvider";
 import CommentProvider from "./components/providers/CommentProvider";
 import Footer from "./components/Footer";
 import { HomeProvider } from "./components/providers/HomeProvider";
+import { ActuProvider } from "./components/providers/ActuProvider";
 
 function App() {
   return (
@@ -27,9 +28,11 @@ function App() {
                     <SerieProvider>
                       <LangageProvider>
                         <CommentProvider>
-                          <Header />
-                          <Outlet />
-                          <Footer></Footer>
+                          <ActuProvider>
+                            <Header />
+                            <Outlet />
+                            <Footer></Footer>
+                          </ActuProvider>
                         </CommentProvider>
                       </LangageProvider>
                     </SerieProvider>

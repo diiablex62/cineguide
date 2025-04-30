@@ -1,18 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ActuContext } from "../../context/ActuContext";
 
 export default function FirstArticleCard({
   title,
   image,
   date,
   category,
-  link,
   description,
-  onClick,
 }) {
+  const { setSelectedArticle } = useContext(ActuContext);
+
+  const handleClick = () => {
+    setSelectedArticle({ title, image, date, category, description });
+  };
+
   return (
     <div
       className='relative mb-8 w-full md:w-[50%] mx-auto cursor-pointer'
-      onClick={onClick}>
+      onClick={handleClick}>
       <img
         alt={title}
         className='w-full h-96 object-cover rounded-lg'
