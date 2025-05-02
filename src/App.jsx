@@ -12,9 +12,14 @@ import CommentProvider from "./components/providers/CommentProvider";
 import Footer from "./components/Footer";
 import { HomeProvider } from "./components/providers/HomeProvider";
 import { ActuProvider } from "./components/providers/ActuProvider";
-import Chatbot from "./components/chatbot/Chatbot";
+import { ChatbotProvider } from "./components/providers/ChatbotProvider";
+import ChatbotUI from "./components/chatbot/ChatbotUI";
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
 
 function App() {
+  const { isLoggedIn } = useContext(AuthContext);
+
   return (
     <HomeProvider>
       <div className='min-h-screen flex flex-col w-full dark:bg-black bg-white'>
@@ -42,7 +47,9 @@ function App() {
           </LangageProvider>
         </ThemeProvider>
       </div>
-      <Chatbot />
+      <ChatbotProvider>
+        <ChatbotUI />
+      </ChatbotProvider>
     </HomeProvider>
   );
 }

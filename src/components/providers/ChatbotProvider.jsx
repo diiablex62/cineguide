@@ -10,6 +10,12 @@ import {
   serieRecoMenu,
   profilRedirects,
 } from "../chatbot/chatbotMenus";
+import {
+  MISTRAL_API_KEY,
+  MISTRAL_API_ENDPOINT,
+  MISTRAL_MODEL,
+  SYSTEM_PROMPT,
+} from "../chatbot/aiConfig";
 
 export function ChatbotProvider({ children }) {
   const [messages, setMessages] = useState([
@@ -94,27 +100,25 @@ export function ChatbotProvider({ children }) {
   };
 
   const callChatApi = async (userMessage) => {
-    const GEMINI_API_KEY = "AIzaSyBBt42ENjo3h-srM5vyxOw44u3R5K8MaSM";
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          contents: [
-            {
-              parts: [{ text: userMessage }],
-            },
-          ],
-        }),
-      }
-    );
+    const response = await fetch(MISTRAL_API_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${MISTRAL_API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: MISTRAL_MODEL,
+        messages: [SYSTEM_PROMPT, { role: "user", content: userMessage }],
+        max_tokens: 200,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error(
+        `Erreur API Mistral: ${response.status} ${response.statusText}`
+      );
+    }
     const data = await response.json();
-    return (
-      data?.candidates?.[0]?.content?.parts?.[0]?.text || "Erreur de réponse"
-    );
+    return data?.choices?.[0]?.message?.content || "Erreur de réponse";
   };
 
   const handleSend = async () => {
@@ -122,47 +126,29 @@ export function ChatbotProvider({ children }) {
     setMessages([...messages, { from: "user", text: input }]);
     const userInput = input;
     setInput("");
-    const botReply = await callChatApi(userInput);
-    setMessages((msgs) => [...msgs, { from: "bot", text: botReply }]);
+    try {
+      const botReply = await callChatApi(userInput);
+      setMessages((msgs) => [...msgs, { from: "bot", text: botReply }]);
+    } catch (err) {
+      // On propage l'erreur pour que le composant parent puisse gérer le statut
+      throw err;
+    }
   };
 
   const renderKeywords = (keywords, handleKeyword) =>
     keywords?.length ? (
       <div
-        style={{
-          display: "block",
-          overflowX: "auto",
-          whiteSpace: "nowrap",
-          padding: "12px 0 4px 0",
-          borderTop: "1px solid #eee",
-          background: "#faf9fa",
-        }}>
+        className='block w-full overflow-x-auto overflow-y-hidden whitespace-nowrap pt-2 pb-1 border-t border-transparent bg-transparent scrollbar-none'
+        style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}>
         {keywords.map((k) => (
           <button
             key={k}
             onClick={() => handleKeyword(k)}
+            className='inline-block bg-[#f6f7fa] text-[#222] border border-[#bdbdbd] rounded-[10px] px-3 py-1 cursor-pointer font-medium text-[13px] mr-2 mb-1 transition-colors duration-200 whitespace-nowrap shadow-sm'
             style={{
-              display: "inline-block",
-              background: "#fff",
-              color: "var(--color-fuchsia)",
-              border: "1px solid var(--color-fuchsia)",
-              borderRadius: 20,
-              padding: "6px 16px",
-              cursor: "pointer",
+              fontFamily: "inherit",
               fontWeight: 500,
-              fontSize: 14,
-              marginRight: 8,
-              marginBottom: 0,
-              transition: "background 0.2s, color 0.2s",
-              whiteSpace: "nowrap",
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.background = "var(--color-fuchsia)";
-              e.currentTarget.style.color = "#fff";
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.background = "#fff";
-              e.currentTarget.style.color = "var(--color-fuchsia)";
+              letterSpacing: 0,
             }}>
             {k}
           </button>

@@ -1,7 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { PiRobotThin } from "react-icons/pi";
 import { useChatbot } from "../../context/ChatbotContext";
-import { mainMenu } from "./chatbotMenus";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import {
+  MISTRAL_API_KEY,
+  MISTRAL_API_ENDPOINT,
+  MISTRAL_MODEL,
+} from "./aiConfig";
+
+const USER_AVATAR = "https://randomuser.me/api/portraits/men/3.jpg";
+
+const SendIcon = ({ color = "#f50057", size = 20 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox='0 0 28 28'
+    fill='none'
+    className='block'
+    xmlns='http://www.w3.org/2000/svg'>
+    <path
+      d='M6.5 21.5L21.5 14L6.5 6.5V12.25L16 14L6.5 15.75V21.5Z'
+      stroke={color}
+      strokeWidth='2'
+      strokeLinejoin='round'
+      fill='none'
+    />
+  </svg>
+);
+
+const MinimizeIcon = () => (
+  <svg width='22' height='22' viewBox='0 0 22 22' fill='none'>
+    <circle cx='11' cy='11' r='10' stroke='#fff' strokeWidth='2' />
+    <rect x='6.5' y='10.25' width='9' height='1.5' rx='0.75' fill='#fff' />
+  </svg>
+);
 
 const ChatbotUI = () => {
   const {
@@ -16,194 +49,203 @@ const ChatbotUI = () => {
     resetChatbot,
   } = useChatbot();
 
+  const { isLoggedIn } = useContext(AuthContext);
+
+  // Ajout de l'état pour le statut en ligne
+  const [isOnline, setIsOnline] = useState(true);
+
+  // Vérifie le statut de l'API Mistral
+  const checkApiStatus = async () => {
+    try {
+      const response = await fetch(MISTRAL_API_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${MISTRAL_API_KEY}`,
+        },
+        body: JSON.stringify({
+          model: MISTRAL_MODEL,
+          messages: [{ role: "user", content: "ping" }],
+          max_tokens: 5,
+        }),
+      });
+      if (!response.ok) throw new Error(`API Mistral: ${response.status}`);
+      setIsOnline(true);
+      console.log("Statut API : En ligne");
+    } catch (e) {
+      setIsOnline(false);
+      console.log("Statut API : Hors ligne", e);
+    }
+  };
+
+  // Wrapper pour handleSend qui vérifie l'API (pour la compatibilité)
+  const handleSendWithStatus = async () => {
+    if (!input.trim()) return;
+    try {
+      await handleSend();
+      setIsOnline(true);
+      console.log("Statut API : En ligne");
+    } catch (e) {
+      setIsOnline(false);
+      console.log("Statut API : Hors ligne", e);
+    }
+  };
+
+  if (!isLoggedIn) return null;
+
   return (
     <>
-      <div
-        style={{
-          position: "fixed",
-          bottom: 32,
-          right: 32,
-          zIndex: 1000,
-        }}>
+      <div className='fixed bottom-6 right-6 z-[1000]'>
         {!open && (
           <button
-            onClick={() => setOpen(true)}
-            style={{
-              background: "#fff",
-              border: "none",
-              borderRadius: "50%",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-              width: 60,
-              height: 60,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "pointer",
-              transition: "box-shadow 0.2s",
+            onClick={() => {
+              setOpen(true);
+              checkApiStatus();
             }}
+            className='bg-[white] rounded-full shadow-lg w-[44px] h-[44px] flex items-center justify-center cursor-pointer transition-shadow duration-200 hover:shadow-xl active:scale-95'
             aria-label='Ouvrir le chatbot'>
-            <PiRobotThin size={36} color='#f50057' />
+            <span className='rounded-full w-8 h-8 flex items-center justify-center'>
+              <PiRobotThin size={24} color='#f50057' />
+            </span>
           </button>
         )}
         {open && (
-          <div
-            style={{
-              position: "relative",
-              width: 350,
-              background: "#fff",
-              borderRadius: 18,
-              boxShadow: "0 4px 24px rgba(0,0,0,0.18)",
-              overflow: "hidden",
-              display: "flex",
-              flexDirection: "column",
-              minHeight: 500,
-              maxHeight: 600,
-            }}>
+          <div className='relative w-[290px] bg-[#faf9fa] rounded-[18px] shadow-2xl overflow-hidden flex flex-col min-h-[380px] max-h-[500px]'>
             {/* Header */}
-            <div
-              style={{
-                background: "#f50057",
-                color: "#fff",
-                padding: "18px 20px 12px 20px",
-                display: "flex",
-                alignItems: "center",
-                gap: 12,
-                fontWeight: 700,
-                fontSize: 20,
-                position: "relative",
-              }}>
-              <PiRobotThin size={28} color='#fff' />
-              <span>Chatbot</span>
-              <span
-                style={{
-                  fontSize: 13,
-                  fontWeight: 400,
-                  marginLeft: 10,
-                  background: "#fff",
-                  color: "#43d477",
-                  borderRadius: 8,
-                  padding: "2px 10px",
-                }}>
-                ● En ligne
+            <div className='bg-[#f50057] px-4 pt-3 pb-2 flex items-center rounded-t-[18px] relative'>
+              <span className='bg-white rounded-full w-9 h-9 flex items-center justify-center mr-3 border border-[#eee]'>
+                <PiRobotThin size={24} color='#f50057' />
               </span>
+              <div className='flex flex-col flex-1'>
+                <span className='font-bold text-white text-[18px] leading-[1.1] font-sans'>
+                  Chatbot
+                </span>
+                <span className='flex items-center mt-0.5'>
+                  <span
+                    className={`w-2 h-2 rounded-full mr-1 inline-block ${
+                      isOnline ? "bg-[#00e676]" : "bg-red-500"
+                    }`}></span>
+                  <span
+                    className={`text-[12px] font-medium ${
+                      isOnline ? "text-[#00e676]" : "text-red-500"
+                    }`}>
+                    {isOnline ? "En ligne" : "Hors ligne"}
+                  </span>
+                </span>
+              </div>
               <button
                 onClick={() => {
                   setOpen(false);
                   resetChatbot();
                 }}
-                style={{
-                  position: "absolute",
-                  top: 10,
-                  right: 12,
-                  background: "transparent",
-                  border: "none",
-                  fontSize: 22,
-                  color: "#fff",
-                  cursor: "pointer",
-                  zIndex: 2,
-                }}
+                className='absolute top-3 right-3 bg-transparent border-none p-0 m-0 cursor-pointer'
                 aria-label='Fermer le chatbot'>
-                ×
+                <MinimizeIcon />
               </button>
             </div>
             {/* Messages */}
-            <div
-              style={{
-                flex: 1,
-                padding: "16px 12px 0 12px",
-                background: "#faf9fa",
-                minHeight: 200,
-                maxHeight: 350,
-                overflow: "hidden",
-              }}>
-              {messages.map((msg, idx) => (
-                <div
-                  key={idx}
-                  style={{
-                    textAlign: msg.from === "user" ? "right" : "left",
-                    marginBottom: 10,
-                  }}>
-                  <span
-                    style={{
-                      background:
-                        msg.from === "user"
-                          ? "var(--color-gray-clair)"
-                          : "var(--color-fuchsia)",
-                      color: msg.from === "user" ? "#222" : "#fff",
-                      borderRadius: 12,
-                      padding: "10px 16px",
-                      display: "inline-block",
-                      fontSize: 15,
-                      boxShadow:
-                        msg.from === "bot"
-                          ? "0 1px 4px rgba(245,0,87,0.07)"
-                          : "none",
-                      border: "none",
-                      maxWidth: "85%",
-                      wordBreak: "break-word",
-                    }}>
-                    {msg.text}
-                  </span>
-                </div>
-              ))}
+            <div className='flex-1 px-2 pt-3 bg-[#faf9fa] min-h-[120px] max-h-[240px] overflow-y-auto overflow-x-hidden flex flex-col gap-1'>
+              {messages.map((msg, idx) => {
+                const date = msg.date ? new Date(msg.date) : new Date();
+                const time = date.toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                });
+                return (
+                  <div
+                    key={idx}
+                    className={`flex ${
+                      msg.from === "user"
+                        ? "flex-row-reverse items-end"
+                        : "flex-row items-start"
+                    } mb-0.5`}>
+                    {/* Avatar */}
+                    {msg.from === "bot" ? (
+                      <span className='bg-white rounded-full w-7 h-7 flex items-center justify-center mr-2 ml-0.5 shadow-sm flex-shrink-0 border border-[#eee]'>
+                        <PiRobotThin size={16} color='#f50057' />
+                      </span>
+                    ) : (
+                      <img
+                        src={USER_AVATAR}
+                        alt='avatar'
+                        className='w-7 h-7 rounded-full ml-2 mr-0.5 object-cover border-2 border-white shadow-sm flex-shrink-0'
+                      />
+                    )}
+                    {/* Message + heure */}
+                    <div
+                      className={`flex flex-col ${
+                        msg.from === "user" ? "items-end" : "items-start"
+                      } w-full min-w-0`}>
+                      <span
+                        className={`
+                          ${
+                            msg.from === "user"
+                              ? "bg-[#f3f3f3] text-[#222]"
+                              : "bg-[#f50057] text-white"
+                          }
+                          rounded-lg px-3 py-2 inline-block text-[13px] shadow-sm border-none max-w-[80%] min-w-[70px] break-words
+                          ${msg.from === "bot" ? "ml-0" : "ml-auto"}
+                          ${msg.from === "user" ? "mr-0" : "mr-auto"}
+                        `}>
+                        {msg.text}
+                      </span>
+                      <span
+                        className={`
+                          text-[10px] text-[#bdbdbd] mt-0.5
+                          ${
+                            msg.from === "bot"
+                              ? "ml-1 self-start text-left"
+                              : "mr-1 self-end text-right"
+                          }
+                          min-w-[40px]
+                        `}>
+                        {time}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
             {/* Keywords en bas */}
-            {messages[messages.length - 1]?.keywords &&
-              renderKeywords(
-                messages[messages.length - 1].keywords,
-                handleKeyword
-              )}
+            <div className='bg-white px-2 pt-1 border-t border-[#eee] min-h-[38px] no-horizontal-scroll'>
+              {messages[messages.length - 1]?.keywords &&
+                renderKeywords(
+                  messages[messages.length - 1].keywords,
+                  handleKeyword
+                )}
+            </div>
             {/* Input */}
-            <div
-              style={{
-                borderTop: "1px solid #eee",
-                background: "#fff",
-                padding: "10px 12px",
-                display: "flex",
-                alignItems: "center",
-                gap: 8,
-              }}>
-              <input
-                type='text'
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                style={{
-                  flex: 1,
-                  border: "1px solid #e0e0e0",
-                  borderRadius: 20,
-                  padding: "10px 16px",
-                  fontSize: 15,
-                  outline: "none",
-                  background: "#faf9fa",
-                }}
-                placeholder='Entrez votre message ici ...'
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") handleSend();
-                }}
-                className='chatbot-input'
-              />
-              <button
-                onClick={handleSend}
-                style={{
-                  background: "#f50057",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: 20,
-                  padding: "8px 18px",
-                  fontWeight: 600,
-                  fontSize: 15,
-                  cursor: "pointer",
-                }}>
-                Envoyer
-              </button>
+            <div className='bg-transparent px-2 py-2 flex items-center border-none rounded-2xl mb-1'>
+              <div className='flex-1 bg-[#edeef0] rounded-lg flex items-center px-2 min-h-[36px] shadow-none border-none'>
+                <input
+                  type='text'
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  className='flex-1 border-none bg-transparent text-[15px] outline-none text-[#222] py-2 placeholder-[#bdbdbd]'
+                  placeholder='Entrez votre message ici ...'
+                  onKeyDown={async (e) => {
+                    if (e.key === "Enter") await handleSendWithStatus();
+                  }}
+                />
+                <button
+                  onClick={handleSendWithStatus}
+                  className='bg-none border-none rounded-full p-0 ml-1 cursor-pointer flex items-center'
+                  aria-label='Envoyer'>
+                  <SendIcon size={20} />
+                </button>
+              </div>
             </div>
           </div>
         )}
       </div>
       <style>{`
-        .chatbot-input::placeholder {
-          color: var(--color-placeholder);
-          opacity: 1;
+        .no-horizontal-scroll::-webkit-scrollbar {
+          display: none !important;
+          height: 0 !important;
+        }
+        .no-horizontal-scroll {
+          scrollbar-width: none !important;
+          -ms-overflow-style: none !important;
         }
       `}</style>
     </>
