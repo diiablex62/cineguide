@@ -8,17 +8,12 @@ export default function MenuLangage() {
     handleLanguageChange,
     selectedLang = { id: null },
   } = useContext(LangageContext) || {};
-
-  // useEffect(() => {
-  //   console.log("MenuLangage rendu. Langue active:", selectedLang);
-  // }, [selectedLang]);
+  const { burger } = useContext(MenuContext);
 
   const handleClick = (lang) => {
     console.log("Clic sur langue :", lang); // Ajout log
     handleLanguageChange(lang);
   };
-
-  const { burger } = useContext(MenuContext);
 
   return (
     <div
