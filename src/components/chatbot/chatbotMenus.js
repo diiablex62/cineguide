@@ -1,8 +1,8 @@
 const USERNAME = "Alex";
 
 export const mainMenu = {
-  message: `Bonjour ${USERNAME} ! Vous cherchez quelque chose en particulier aujourd'hui ?`,
-  keywords: ["Trouver un film", "Trouver une série", "Mon profil", "Jeux"],
+  message: "Comment je peux vous aider ?",
+  keywords: ["Trouver un film", "Trouver une série", "Mon compte", "Jeux"],
 };
 export const filmMenu = {
   message: "Que recherchez-vous comme film ?",
@@ -28,12 +28,12 @@ export const serieMenu = {
   ],
 };
 export const profilMenu = {
-  message: "Que souhaitez-vous faire dans votre profil ?",
+  message: "Que souhaitez-vous faire dans votre compte ?",
   keywords: [
     "Modifier mon profil",
     "Ma liste",
     "Historique de mes factures",
-    "Changer mon mot de passe",
+    "Changer de mot de passe",
     "Gérer mon abonnement",
     "Autres demandes",
   ],
@@ -67,14 +67,12 @@ export const serieRecoMenu = {
   ],
 };
 export const profilRedirects = {
-  "Ma liste":
-    "Vous allez être redirigé vers votre [Ma liste](https://www.google.com/search?q=/profil/ma-liste).",
-  "Modifier mon profil":
-    "Vous allez être redirigé vers la page de modification de votre profil.",
-  "Gérer mon abonnement":
-    "Vous allez être redirigé vers la page correspondante.",
+  "Changer de mot de passe":
+    'Pour changer votre mot de passe, cliquez d\'abord sur "Mon compte" en haut ou rendez-vous sur http://localhost:5173/profil, puis sur "Changer de mot de passe".',
   "Historique de mes factures":
-    "Vous allez être redirigé vers la page correspondante.",
-  "Changer mon mot de passe":
-    "Vous allez être redirigé vers la page correspondante.",
+    'Pour consulter vos factures, cliquez sur "Mon compte" en haut ou allez sur http://localhost:5173/profil, puis sélectionnez "Historique de mes factures" dans le menu.',
+  "Modifier mon profil":
+    'Pour mettre à jour votre profil, cliquez sur "Mon compte" ou allez sur http://localhost:5173/profil, puis sélectionnez "Modifier mon profil".',
+  "Gérer mon abonnement":
+    'Pour gérer votre abonnement, cliquez sur "Mon compte" ou allez sur http://localhost:5173/profil, puis sélectionnez "Gérer mon abonnement".',
 };

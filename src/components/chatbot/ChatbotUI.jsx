@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { PiRobotThin } from "react-icons/pi";
 import { useChatbot } from "../../context/ChatbotContext";
 import { useContext } from "react";
@@ -36,6 +36,14 @@ const MinimizeIcon = () => (
   </svg>
 );
 
+const CloseIcon = () => (
+  <svg width='22' height='22' viewBox='0 0 22 22' fill='none'>
+    <circle cx='11' cy='11' r='10' stroke='#fff' strokeWidth='2' />
+    <line x1='7' y1='7' x2='15' y2='15' stroke='#fff' strokeWidth='2' />
+    <line x1='15' y1='7' x2='7' y2='15' stroke='#fff' strokeWidth='2' />
+  </svg>
+);
+
 const ChatbotUI = () => {
   const {
     messages,
@@ -47,12 +55,37 @@ const ChatbotUI = () => {
     handleSend,
     renderKeywords,
     resetChatbot,
+    handleTagClick, // <-- récupère la fonction
   } = useChatbot();
 
   const { isLoggedIn } = useContext(AuthContext);
 
   // Ajout de l'état pour le statut en ligne
   const [isOnline, setIsOnline] = useState(true);
+
+  const messagesEndRef = useRef(null);
+  const containerRef = useRef(null);
+  const inputRef = useRef(null);
+
+  // Scroll doux uniquement si l'utilisateur est déjà en bas
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    const isAtBottom =
+      container.scrollHeight - container.scrollTop - container.clientHeight <
+      60;
+    if (isAtBottom) {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+    // sinon, ne scroll pas automatiquement
+  }, [messages]);
+
+  // Scroll toujours vers le bas à chaque nouveau message
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
 
   // Vérifie le statut de l'API Mistral
   const checkApiStatus = async () => {
@@ -71,10 +104,10 @@ const ChatbotUI = () => {
       });
       if (!response.ok) throw new Error(`API Mistral: ${response.status}`);
       setIsOnline(true);
-      console.log("Statut API : En ligne");
+      console.log("Statut API Mistral d'Alex : En ligne");
     } catch (e) {
       setIsOnline(false);
-      console.log("Statut API : Hors ligne", e);
+      console.log("Statut API Mistral d'Alex  : Hors ligne", e);
     }
   };
 
@@ -84,10 +117,10 @@ const ChatbotUI = () => {
     try {
       await handleSend();
       setIsOnline(true);
-      console.log("Statut API : En ligne");
+      console.log("Statut API Mistral d'Alex : En ligne");
     } catch (e) {
       setIsOnline(false);
-      console.log("Statut API : Hors ligne", e);
+      console.log("Statut API Mistral d'Alex : Hors ligne", e);
     }
   };
 
@@ -123,6 +156,56 @@ const ChatbotUI = () => {
       throw error;
     }
   }
+
+  // Ajoute une fonction utilitaire pour tags contextuels
+  const getContextualTags = (msg) => {
+    // N'affiche pas les tags contextuels si des keywords sont déjà présents
+    if (
+      !msg.from ||
+      msg.from !== "bot" ||
+      (msg.keywords && msg.keywords.length > 0)
+    )
+      return [];
+    // Affiche les tags film seulement si la réponse ressemble à une recherche ou suggestion de film
+    if (
+      /\b(quel film|recherch|propos|film à voir|film conseillé|film préféré|film)\b/i.test(
+        msg.text
+      )
+    ) {
+      return [
+        "Titre",
+        "Genre",
+        "Acteur",
+        "Réalisateur",
+        "Recommandations",
+        "Revenir au début",
+      ];
+    }
+    // ...idem pour série si besoin...
+    if (
+      /\b(quelle série|recherch|propos|série à voir|série conseillée|série préférée|série|serie)\b/i.test(
+        msg.text
+      )
+    ) {
+      return [
+        "Titre",
+        "Genre",
+        "Acteur",
+        "Série longue",
+        "Série courte",
+        "Recommandations",
+        "Revenir au début",
+      ];
+    }
+    return [];
+  };
+
+  // Focus sur le champ de saisie à l'ouverture du chatbot
+  useEffect(() => {
+    if (open && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [open]);
 
   if (!isLoggedIn) return null;
 
@@ -166,6 +249,14 @@ const ChatbotUI = () => {
                   </span>
                 </span>
               </div>
+              {/* Bouton Minimize (ne réinitialise pas) */}
+              <button
+                onClick={() => setOpen(false)}
+                className='absolute top-3 right-10 bg-transparent border-none p-0 m-0 cursor-pointer'
+                aria-label='Abaisser le chatbot'>
+                <MinimizeIcon />
+              </button>
+              {/* Bouton Close (réinitialise) */}
               <button
                 onClick={() => {
                   setOpen(false);
@@ -173,11 +264,13 @@ const ChatbotUI = () => {
                 }}
                 className='absolute top-3 right-3 bg-transparent border-none p-0 m-0 cursor-pointer'
                 aria-label='Fermer le chatbot'>
-                <MinimizeIcon />
+                <CloseIcon />
               </button>
             </div>
             {/* Messages */}
-            <div className='flex-1 px-2 pt-3 bg-[#faf9fa] min-h-[120px] max-h-[240px] overflow-y-auto overflow-x-hidden flex flex-col gap-1'>
+            <div
+              ref={containerRef}
+              className='flex-1 px-2 pt-3 bg-[#faf9fa] min-h-[120px] max-h-[240px] overflow-y-auto overflow-x-hidden flex flex-col gap-1'>
               {messages.map((msg, idx) => {
                 const date = msg.date ? new Date(msg.date) : new Date();
                 const time = date.toLocaleTimeString([], {
@@ -222,6 +315,49 @@ const ChatbotUI = () => {
                         `}>
                         {msg.text}
                       </span>
+                      {/* Tags sous la bulle IA, style footer mais petit */}
+                      {msg.from === "bot" &&
+                        msg.tags &&
+                        msg.tags.length > 0 && (
+                          <div className='flex flex-wrap gap-2 mt-1 ml-1'>
+                            {msg.tags.map((tag, i) => (
+                              <button
+                                key={i}
+                                className='bg-[#f6f7fa] text-[#222] border border-[#bdbdbd] rounded-[10px] px-2 py-0.5 font-medium text-[11px] whitespace-nowrap cursor-pointer hover:bg-[#e0e0e0] transition'
+                                style={{
+                                  fontFamily: "inherit",
+                                  fontWeight: 500,
+                                  letterSpacing: 0,
+                                }}
+                                onClick={() =>
+                                  handleTagClick && handleTagClick(tag)
+                                }>
+                                {tag}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      {/* Tags contextuels pour film/série */}
+                      {msg.from === "bot" &&
+                        getContextualTags(msg).length > 0 && (
+                          <div className='flex flex-wrap gap-2 mt-1 ml-1'>
+                            {getContextualTags(msg).map((tag, i) => (
+                              <button
+                                key={i}
+                                className='bg-[#f6f7fa] text-[#222] border border-[#bdbdbd] rounded-[10px] px-2 py-0.5 font-medium text-[11px] whitespace-nowrap cursor-pointer hover:bg-[#e0e0e0] transition'
+                                style={{
+                                  fontFamily: "inherit",
+                                  fontWeight: 500,
+                                  letterSpacing: 0,
+                                }}
+                                onClick={() =>
+                                  handleKeyword && handleKeyword(tag)
+                                }>
+                                {tag}
+                              </button>
+                            ))}
+                          </div>
+                        )}
                       <span
                         className={`
                           text-[10px] text-[#bdbdbd] mt-0.5
@@ -238,19 +374,14 @@ const ChatbotUI = () => {
                   </div>
                 );
               })}
+              {/* Référence pour le scroll automatique */}
+              <div ref={messagesEndRef} />
             </div>
-            {/* Keywords en bas */}
-            <div className='bg-white px-2 pt-1 border-t border-[#eee] min-h-[38px] no-horizontal-scroll'>
-              {messages[messages.length - 1]?.keywords &&
-                renderKeywords(
-                  messages[messages.length - 1].keywords,
-                  handleKeyword
-                )}
-            </div>
-            {/* Input */}
+            {/* Footer : champ de saisie utilisateur */}
             <div className='bg-transparent px-2 py-2 flex items-center border-none rounded-2xl mb-1'>
               <div className='flex-1 bg-[#edeef0] rounded-lg flex items-center px-2 min-h-[36px] shadow-none border-none'>
                 <input
+                  ref={inputRef}
                   type='text'
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
