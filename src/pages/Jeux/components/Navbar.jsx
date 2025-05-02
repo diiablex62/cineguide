@@ -8,36 +8,50 @@ import house from "../../../assets/jeux/house.svg";
 import arrow from "../../../assets/jeux/arrow.svg";
 export default function Navbar() {
   return (
-    <div className="w-full flex flex-col justify-center items-center mt-2">
+    <div className="w-full flex flex-col justify-center items-center pt-2 lg:justify-between lg:h-screen lg:border-r ">
       <div className="flex justify-center items-center min-w-full">
         <img className="max-h-[100px]" src={logo} alt="" />
       </div>
-      <div className="flex justify-around items-center w-full mt-10">
-        <NavLink to="/jeux" className="flex flex-col items-center" end>
+      <div className="flex justify-around items-center w-full mt-10 lg:flex-col lg:items-start lg:mt-0 lg:pl-4">
+        <NavLink
+          to="/jeux"
+          className="flex flex-col items-center lg:flex-row lg:mb-6"
+          end
+        >
           <img src={house} alt="" /> <span className="lg:hidden">Accueil</span>
-          <span className="hidden lg:block">Accueil</span>
+          <span className="hidden lg:block ml-4">Accueil</span>
         </NavLink>
-        <NavLink className="flex flex-col items-center" to="/jeux/quizz" end>
+        <NavLink
+          className="flex flex-col items-center lg:flex-row lg:mb-6"
+          to="/jeux/quizz"
+          end
+        >
           <img src={quizz} alt="" /> <span className="lg:hidden">Quizz</span>
-          <span className="hidden lg:block">Quiz Personnalisé</span>
+          <span className="hidden lg:block ml-4">Quiz Personnalisé</span>
         </NavLink>
-        <NavLink className="flex flex-col items-center" to="/jeux/devine">
+        <NavLink
+          className="flex flex-col items-center lg:flex-row lg:mb-6"
+          to="/jeux/devine"
+        >
           <img src={devine} alt="" /> <span className="lg:hidden">Devine</span>
-          <span className="hidden lg:block">Devine le Film / Serie</span>
+          <span className="hidden lg:block  ml-4">Devine le Film / Serie</span>
         </NavLink>
-        <NavLink className="flex flex-col items-center" to="/jeux/affiche">
+        <NavLink
+          className="flex flex-col items-center lg:flex-row lg:mb-6"
+          to="/jeux/affiche"
+        >
           <img src={affiche} alt="" />{" "}
           <span className="lg:hidden">Affiche</span>
-          <span className="hidden lg:block">Affiches Brouillées</span>
+          <span className="hidden lg:block ml-4">Affiches Brouillées</span>
         </NavLink>
       </div>
       <div className="w-full mt-10">
         <NavLink
-          className="flex items-center justify-around border-b pb-4"
+          className="flex items-center justify-around border-b pb-4 lg:border-0 lg:p-5"
           to="/"
         >
           <img src={arrow} alt="" />
-          <span className="lg:hidden">Revenir sur Cineguide</span>
+          <span>Revenir sur Cineguide</span>
           <img src={house} alt="" />
         </NavLink>
       </div>
