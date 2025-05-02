@@ -38,6 +38,8 @@ import UserConnected from "./components/ProtectedRoutes/UserConnected";
 import UserNotConnected from "./components/ProtectedRoutes/UserNotConnected";
 import Jeux from "./pages/Jeux/Jeux";
 import Affiche from "./pages/Jeux/pages/Affiche";
+import Quizz from "./pages/Jeux/pages/Quizz";
+import Devine from "./pages/Jeux/pages/Devine";
 
 export const router = createBrowserRouter([
   {
@@ -73,6 +75,14 @@ export const router = createBrowserRouter([
       {
         path: "/jeux/affiche",
         element: <Affiche />,
+      },
+      {
+        path: "/jeux/quizz",
+        element: <Quizz />,
+      },
+      {
+        path: "/jeux/devine",
+        element: <Devine />,
       },
     ],
   },
