@@ -21,7 +21,7 @@ export default function LangButton() {
     };
     document.addEventListener("click", handleClick);
     return () => document.removeEventListener("click", handleClick);
-  }, []);
+  }, [langageMenu, setLangageMenu]);
 
   const handleToggle = () => {
     setLangageMenu((prev) => !prev);
