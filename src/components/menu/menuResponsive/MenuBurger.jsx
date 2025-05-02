@@ -6,17 +6,17 @@ import { FaChevronUp } from "react-icons/fa";
 import MenuHeaderMobile from "../menuPlus/MenuHeaderMobile";
 import { FaFacebookSquare } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
-import MenuLangage from "../menuLangage/MenuLangage";
 import { ThemeContext } from "../../../context/ThemeContext";
 import { BsFillMoonStarsFill } from "react-icons/bs";
 import { MdSunny } from "react-icons/md";
 import { LangageContext } from "../../../context/LangageContext";
 import { MenuContext } from "../../../context/MenuContext";
 import { AuthContext } from "../../../context/AuthContext";
+import LangButton from "../LangButton";
 
 export default function MenuBurger() {
   const { toggleTheme, theme } = useContext(ThemeContext);
-  const { langageMenu, setLangageMenu, selectedLang, toggleLangageMenu } =
+  const { langageMenu, selectedLang, toggleLangageMenu } =
     useContext(LangageContext);
   const { setMenuPlus, menuPlus, toggleBurger, menuRef } =
     useContext(MenuContext);
@@ -102,26 +102,7 @@ export default function MenuBurger() {
           <FaFacebookSquare className="dark:text-white" />
           <FaSquareXTwitter className="dark:text-white" />
         </div>
-        <div className="flex flex-col items-center w-full">
-          <div className="relative inline-block">
-            <div
-              onClick={() => toggleLangageMenu()}
-              className="flex items-center justify-between px-4 py-2.5 gap-2 w-fit border bg-white dark:bg-black dark:border-white cursor-pointer"
-            >
-              <img
-                src={selectedLang.img}
-                alt={selectedLang.desc}
-                className="w-8"
-              />
-              <FaChevronDown
-                className={`transition-transform ${
-                  langageMenu ? "rotate-180" : ""
-                }`}
-              />
-            </div>
-            {langageMenu && <MenuLangage />}
-          </div>
-        </div>
+        <LangButton />
       </div>
     </div>
   );
