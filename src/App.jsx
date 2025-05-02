@@ -1,6 +1,4 @@
 import { Outlet } from "react-router-dom";
-import Inscription from "./pages/Auth/Inscription";
-import Connexion from "./pages/Auth/Connexion";
 import FilmProvider from "./components/providers/FilmProvider";
 import ThemeProvider from "./components/providers/ThemeProvider";
 import FiltreProvider from "./components/providers/FiltreProvider";
@@ -14,6 +12,7 @@ import CommentProvider from "./components/providers/CommentProvider";
 import Footer from "./components/Footer";
 import { HomeProvider } from "./components/providers/HomeProvider";
 import { ActuProvider } from "./components/providers/ActuProvider";
+import Chatbot from "./components/chatbot/Chatbot";
 
 function App() {
   return (
@@ -43,6 +42,7 @@ function App() {
           </LangageProvider>
         </ThemeProvider>
       </div>
+      <Chatbot />
     </HomeProvider>
   );
 }
