@@ -17,33 +17,36 @@ import { ActuProvider } from "./components/providers/ActuProvider";
 
 function App() {
   return (
-    <HomeProvider>
-      <div className='min-h-screen flex flex-col w-full dark:bg-black bg-white'>
-        <ThemeProvider>
-          <LangageProvider>
-            <MenuProvider>
-              <FiltreProvider>
-                <ProfilProvider>
-                  <ActorProvider>
-                    <FilmProvider>
-                      <SerieProvider>
-                        <CommentProvider>
-                          <ActuProvider>
-                            <Header />
-                            <Outlet />
-                            <Footer></Footer>
-                          </ActuProvider>
-                        </CommentProvider>
-                      </SerieProvider>
-                    </FilmProvider>
-                  </ActorProvider>
-                </ProfilProvider>
-              </FiltreProvider>
-            </MenuProvider>
-          </LangageProvider>
-        </ThemeProvider>
-      </div>
-    </HomeProvider>
+    <>
+      <HomeProvider>
+        <div className="min-h-screen flex flex-col w-full dark:bg-black bg-white">
+          <ThemeProvider>
+            <LangageProvider>
+              <MenuProvider>
+                <FiltreProvider>
+                  <ProfilProvider>
+                    <ActorProvider>
+                      <FilmProvider>
+                        <SerieProvider>
+                          <CommentProvider>
+                            <ActuProvider>
+                              <Header />
+
+                              <Outlet />
+                              <Footer></Footer>
+                            </ActuProvider>
+                          </CommentProvider>
+                        </SerieProvider>
+                      </FilmProvider>
+                    </ActorProvider>
+                  </ProfilProvider>
+                </FiltreProvider>
+              </MenuProvider>
+            </LangageProvider>
+          </ThemeProvider>
+        </div>
+      </HomeProvider>
+    </>
   );
 }
 
