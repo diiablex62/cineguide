@@ -40,7 +40,7 @@ export default function Navbar() {
           className="flex flex-col items-center lg:flex-row lg:mb-6"
           to="/jeux/affiche"
         >
-          <img src={affiche} alt="" />{" "}
+          <img src={affiche} alt="" />
           <span className="lg:hidden">Affiche</span>
           <span className="hidden lg:block ml-4">Affiches Brouillées</span>
         </NavLink>
