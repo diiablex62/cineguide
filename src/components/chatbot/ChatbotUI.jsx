@@ -91,6 +91,39 @@ const ChatbotUI = () => {
     }
   };
 
+  async function sendMessageToMistral(messages) {
+    const body = {
+      model: "mistral-tiny",
+      messages: messages, // [{role, content}]
+    };
+    try {
+      const response = await fetch(
+        "https://api.mistral.ai/v1/chat/completions",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ZuLlbUj0bL1jO3APrVTnKLFBgomMdyrV`,
+          },
+          body: JSON.stringify(body),
+        }
+      );
+
+      if (!response.ok) {
+        // Affiche le body envoyé et la réponse brute
+        console.error("Body envoyé à l'API :", body);
+        const text = await response.text();
+        console.error("Réponse brute API Mistral :", text);
+        throw new Error(`API Mistral: ${response.status} - ${text}`);
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   if (!isLoggedIn) return null;
 
   return (

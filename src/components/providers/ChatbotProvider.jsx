@@ -100,6 +100,8 @@ export function ChatbotProvider({ children }) {
   };
 
   const callChatApi = async (userMessage) => {
+    // Construit le tableau de messages pour l'API
+    const apiMessages = [SYSTEM_PROMPT, { role: "user", content: userMessage }];
     const response = await fetch(MISTRAL_API_ENDPOINT, {
       method: "POST",
       headers: {
@@ -108,13 +110,20 @@ export function ChatbotProvider({ children }) {
       },
       body: JSON.stringify({
         model: MISTRAL_MODEL,
-        messages: [SYSTEM_PROMPT, { role: "user", content: userMessage }],
+        messages: apiMessages,
         max_tokens: 200,
       }),
     });
     if (!response.ok) {
+      const text = await response.text();
+      console.error("Body envoyé à l'API :", {
+        model: MISTRAL_MODEL,
+        messages: apiMessages,
+        max_tokens: 200,
+      });
+      console.error("Réponse brute API Mistral :", text);
       throw new Error(
-        `Erreur API Mistral: ${response.status} ${response.statusText}`
+        `Erreur API Mistral: ${response.status} ${response.statusText} - ${text}`
       );
     }
     const data = await response.json();
