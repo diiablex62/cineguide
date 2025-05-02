@@ -20,13 +20,13 @@ function App() {
     <HomeProvider>
       <div className='min-h-screen flex flex-col w-full dark:bg-black bg-white'>
         <ThemeProvider>
-          <MenuProvider>
-            <FiltreProvider>
-              <ProfilProvider>
-                <ActorProvider>
-                  <FilmProvider>
-                    <SerieProvider>
-                      <LangageProvider>
+          <LangageProvider>
+            <MenuProvider>
+              <FiltreProvider>
+                <ProfilProvider>
+                  <ActorProvider>
+                    <FilmProvider>
+                      <SerieProvider>
                         <CommentProvider>
                           <ActuProvider>
                             <Header />
@@ -34,13 +34,13 @@ function App() {
                             <Footer></Footer>
                           </ActuProvider>
                         </CommentProvider>
-                      </LangageProvider>
-                    </SerieProvider>
-                  </FilmProvider>
-                </ActorProvider>
-              </ProfilProvider>
-            </FiltreProvider>
-          </MenuProvider>
+                      </SerieProvider>
+                    </FilmProvider>
+                  </ActorProvider>
+                </ProfilProvider>
+              </FiltreProvider>
+            </MenuProvider>
+          </LangageProvider>
         </ThemeProvider>
       </div>
     </HomeProvider>
