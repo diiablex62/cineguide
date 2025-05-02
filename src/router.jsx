@@ -36,12 +36,15 @@ import NotFound from "./pages/404";
 
 import UserConnected from "./components/ProtectedRoutes/UserConnected";
 import UserNotConnected from "./components/ProtectedRoutes/UserNotConnected";
+import Jeux from "./pages/Jeux/Jeux";
+import Affiche from "./pages/Jeux/pages/Affiche";
 
 export const router = createBrowserRouter([
   {
     path: "*",
     element: <NotFound />,
   },
+
   {
     path: "/connexion",
     element: (
@@ -57,6 +60,21 @@ export const router = createBrowserRouter([
         <Inscription />
       </UserNotConnected>
     ),
+  },
+
+  {
+    path: "/jeux",
+
+    children: [
+      {
+        index: true,
+        element: <Jeux />,
+      },
+      {
+        path: "/jeux/affiche",
+        element: <Affiche />,
+      },
+    ],
   },
   {
     path: "/",
