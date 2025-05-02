@@ -6,7 +6,6 @@ export default function MenuLangage() {
     langage = [],
     handleLanguageChange,
     selectedLang = { id: null },
-    langageMenuRef,
   } = useContext(LangageContext) || {};
 
   useEffect(() => {
@@ -14,25 +13,22 @@ export default function MenuLangage() {
   }, [selectedLang]);
 
   const handleClick = (lang) => {
-    console.log("Sélection d'une langue :", lang, "Fermeture du menu langue");
+    console.log("Clic sur langue :", lang); // Ajout log
     handleLanguageChange(lang);
   };
 
   return (
     <div
-      ref={langageMenuRef}
-      className="absolute top-full left-0 bg-white dark:bg-black border shadow-lg z-50"
-      style={{ width: "100%" }}
-    >
+      className='absolute top-full left-0 bg-white dark:bg-black border shadow-lg z-50'
+      style={{ width: "100%" }}>
       {langage
         .filter((lang) => lang.id !== selectedLang.id)
         .map((lang) => (
           <button
             key={lang.id}
             onClick={() => handleClick(lang)}
-            className="flex items-center justify-center w-full px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-gray-700"
-          >
-            <img src={lang.img} alt={lang.desc} className="w-8" />
+            className='flex items-center justify-center w-full px-4 py-2.5 hover:bg-gray-100 dark:hover:bg-gray-700'>
+            <img src={lang.img} alt={lang.desc} className='w-8' />
           </button>
         ))}
     </div>

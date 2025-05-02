@@ -12,7 +12,6 @@ export default function LangButton() {
 
   const btnRef = useRef();
 
-  // Click outside pour fermer le menu
   useEffect(() => {
     if (!langageMenu) return;
     const handleClick = (e) => {
@@ -24,14 +23,16 @@ export default function LangButton() {
     return () => document.removeEventListener("mousedown", handleClick);
   }, [langageMenu, setLangageMenu]);
 
-  const handleToggle = () => {
+  const handleToggle = (e) => {
+    // Important : onMouseDown pour que ce handler soit appelé avant le click outside
+    e.preventDefault();
     setLangageMenu((prev) => !prev);
   };
 
   return (
     <div ref={btnRef} className='relative'>
       <div
-        onClick={handleToggle}
+        onMouseDown={handleToggle}
         className='flex cursor-pointer items-center justify-between px-4 py-2.5 gap-2 w-fit border bg-white dark:bg-black dark:border-white h-[50px]'>
         <img
           src={selectedLang.img || ""}
