@@ -32,9 +32,9 @@ export default function LangageProvider({ children }) {
     localStorage.setItem("selectedLang", JSON.stringify(lang));
   };
 
-  const toggleLanguageMenu = (e) => {
-    e.stopPropagation(); // Empêche la propagation de l'événement
+  const toggleLangageMenu = (e) => {
     setLangageMenu((prev) => !prev); // Inverse l'état actuel
+    console.log(langageMenu);
   };
 
   const handleClickOutside = (event) => {
@@ -44,14 +44,13 @@ export default function LangageProvider({ children }) {
     ) {
       setLangageMenu(false);
     }
-  };
-
-  useEffect(() => {
     if (langageMenu) {
       document.addEventListener("mousedown", handleClickOutside);
     }
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [langageMenu]);
+  };
+
+  useEffect(() => {}, [langageMenu]);
 
   return (
     <LangageContext.Provider
@@ -62,8 +61,9 @@ export default function LangageProvider({ children }) {
         langageMenu,
         setLangageMenu,
         langageMenuRef,
-        toggleLanguageMenu, // Exporter la nouvelle fonction
-      }}>
+        toggleLangageMenu, // Exporter la nouvelle fonction
+      }}
+    >
       {children}
     </LangageContext.Provider>
   );
