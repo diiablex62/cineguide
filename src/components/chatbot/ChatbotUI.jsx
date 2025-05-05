@@ -316,6 +316,8 @@ const ChatbotUI = () => {
                         {msg.text}
                       </span>
                       {/* Tags sous la bulle IA, style footer mais petit */}
+                      {/* SUPPRIMÉ : affichage des tags */}
+                      {/* 
                       {msg.from === "bot" &&
                         msg.tags &&
                         msg.tags.length > 0 && (
@@ -336,8 +338,11 @@ const ChatbotUI = () => {
                               </button>
                             ))}
                           </div>
-                        )}
+                        )} 
+                      */}
                       {/* Tags contextuels pour film/série */}
+                      {/* SUPPRIMÉ : affichage des tags contextuels */}
+                      {/* 
                       {msg.from === "bot" &&
                         getContextualTags(msg).length > 0 && (
                           <div className='flex flex-wrap gap-2 mt-1 ml-1'>
@@ -357,7 +362,8 @@ const ChatbotUI = () => {
                               </button>
                             ))}
                           </div>
-                        )}
+                        )} 
+                      */}
                       <span
                         className={`
                           text-[10px] text-[#bdbdbd] mt-0.5
