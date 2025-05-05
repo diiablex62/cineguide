@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useEffect } from "react";
+import React, { useContext, useRef, useEffect, useState } from "react";
 import { LangageContext } from "../../context/LangageContext";
 import MenuLangage from "./menuLangage/MenuLangage";
 import { FaChevronDown } from "react-icons/fa";
@@ -9,35 +9,39 @@ export default function LangButton() {
     setLangageMenu,
     selectedLang = { img: "", desc: "" },
   } = useContext(LangageContext);
-
   const btnRef = useRef();
 
   useEffect(() => {
+    console.log("Langage menu state:", langageMenu);
     if (!langageMenu) return;
     const handleClick = (e) => {
       if (btnRef.current && !btnRef.current.contains(e.target)) {
         setLangageMenu(false);
       }
     };
-    document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
   }, [langageMenu, setLangageMenu]);
 
-  const handleToggle = (e) => {
-    // Important : onMouseDown pour que ce handler soit appelé avant le click outside
-    e.preventDefault();
+  const handleToggle = () => {
     setLangageMenu((prev) => !prev);
   };
 
   return (
-    <div ref={btnRef} className='relative'>
+    <div ref={btnRef} className="relative">
       <div
-        onMouseDown={handleToggle}
-        className='flex cursor-pointer items-center justify-between px-4 py-2.5 gap-2 w-fit border bg-white dark:bg-black dark:border-white h-[50px]'>
+        onClick={(e) => {
+          e.stopPropagation();
+          handleToggle();
+        }}
+        id={`${langageMenu}`}
+        className="flex cursor-pointer items-center justify-between px-4 py-2.5 gap-2 w-fit border bg-white dark:bg-black dark:border-white h-[50px]"
+      >
         <img
+          id={`${selectedLang.desc}`}
           src={selectedLang.img || ""}
           alt={selectedLang.desc || ""}
-          className='w-8 h-8'
+          className="w-8 h-8"
         />
         <FaChevronDown
           className={`transition-transform ${langageMenu ? "rotate-180" : ""}`}

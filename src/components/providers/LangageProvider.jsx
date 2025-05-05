@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { LangageContext } from "../../context/LangageContext";
 import fr from "../../assets/france.png";
 import uk from "../../assets/royaume_uni.png";
@@ -27,15 +27,9 @@ export default function LangageProvider({ children }) {
     }
   });
 
-  const desktopMenu = [
-    { id: 1, label: "Accueil", path: "/" },
-    { id: 2, label: "Films", path: "/films" },
-    { id: 3, label: "Séries TV", path: "/series" },
-    { id: 4, label: "À propos", path: "/about" },
-  ];
-
   const handleLanguageChange = (lang) => {
     const found = LANGAGE_LIST.find((l) => l.id === lang.id);
+    console.log(found);
     if (found) {
       setSelectedLang(found);
       setLangageMenu(false);
@@ -44,26 +38,23 @@ export default function LangageProvider({ children }) {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     console.log("Provider rendu, selectedLang :", selectedLang);
   }, [selectedLang]);
 
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const toggleLangageMenu = () => setLangageMenu((prev) => !prev);
 
   return (
     <LangageContext.Provider
       value={{
         langage: LANGAGE_LIST,
-        desktopMenu,
         selectedLang,
         handleLanguageChange,
         langageMenu,
         setLangageMenu,
         toggleLangageMenu,
-        mobileMenuOpen,
-        setMobileMenuOpen,
-      }}>
+      }}
+    >
       {children}
     </LangageContext.Provider>
   );
