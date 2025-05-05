@@ -37,9 +37,11 @@ import NotFound from "./pages/404";
 import UserConnected from "./components/ProtectedRoutes/UserConnected";
 import UserNotConnected from "./components/ProtectedRoutes/UserNotConnected";
 import Jeux from "./pages/Jeux/Jeux";
-import Affiche from "./pages/Jeux/pages/Affiche";
-import Quizz from "./pages/Jeux/pages/Quizz";
-import Devine from "./pages/Jeux/pages/Devine";
+import Affiche from "./pages/Jeux/Affiche";
+import Quizz from "./pages/Jeux/Quizz";
+import Devine from "./pages/Jeux/Devine";
+import { AfficheContext } from "./context/AfficheContext";
+import { AfficheProvider } from "./components/providers/AfficheProvider";
 
 export const router = createBrowserRouter([
   {
@@ -74,7 +76,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/jeux/affiche",
-        element: <Affiche />,
+        element: (
+          <AfficheProvider>
+            <Affiche />
+          </AfficheProvider>
+        ),
       },
       {
         path: "/jeux/quizz",
