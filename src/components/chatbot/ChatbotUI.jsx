@@ -143,7 +143,6 @@ const ChatbotUI = () => {
       );
 
       if (!response.ok) {
-        // Affiche le body envoyé et la réponse brute
         console.error("Body envoyé à l'API :", body);
         const text = await response.text();
         console.error("Réponse brute API Mistral :", text);
@@ -156,49 +155,6 @@ const ChatbotUI = () => {
       throw error;
     }
   }
-
-  // Ajoute une fonction utilitaire pour tags contextuels
-  const getContextualTags = (msg) => {
-    // N'affiche pas les tags contextuels si des keywords sont déjà présents
-    if (
-      !msg.from ||
-      msg.from !== "bot" ||
-      (msg.keywords && msg.keywords.length > 0)
-    )
-      return [];
-    // Affiche les tags film seulement si la réponse ressemble à une recherche ou suggestion de film
-    if (
-      /\b(quel film|recherch|propos|film à voir|film conseillé|film préféré|film)\b/i.test(
-        msg.text
-      )
-    ) {
-      return [
-        "Titre",
-        "Genre",
-        "Acteur",
-        "Réalisateur",
-        "Recommandations",
-        "Revenir au début",
-      ];
-    }
-    // ...idem pour série si besoin...
-    if (
-      /\b(quelle série|recherch|propos|série à voir|série conseillée|série préférée|série|serie)\b/i.test(
-        msg.text
-      )
-    ) {
-      return [
-        "Titre",
-        "Genre",
-        "Acteur",
-        "Série longue",
-        "Série courte",
-        "Recommandations",
-        "Revenir au début",
-      ];
-    }
-    return [];
-  };
 
   // Focus sur le champ de saisie à l'ouverture du chatbot
   useEffect(() => {
@@ -218,10 +174,31 @@ const ChatbotUI = () => {
               setOpen(true);
               checkApiStatus();
             }}
-            className='bg-[white] rounded-full shadow-lg w-[44px] h-[44px] flex items-center justify-center cursor-pointer transition-shadow duration-200 hover:shadow-xl active:scale-95'
+            className='
+    group
+    bg-[color:var(--color-fuchsia)]
+    border
+    border-[color:var(--color-fuchsia)]
+    rounded-full
+    shadow-lg
+    w-[44px]
+    h-[44px]
+    flex
+    items-center
+    justify-center
+    cursor-pointer
+    transition-colors
+    duration-200
+    hover:bg-[white]
+    hover:shadow-xl
+    active:scale-95
+  '
             aria-label='Ouvrir le chatbot'>
-            <span className='rounded-full w-8 h-8 flex items-center justify-center'>
-              <PiRobotThin size={24} color='#f50057' />
+            <span className='rounded-full w-8 h-8 flex items-center justify-center transition-colors duration-200'>
+              <PiRobotThin
+                size={24}
+                className='text-white group-hover:text-[color:var(--color-fuchsia)] transition-colors duration-200'
+              />
             </span>
           </button>
         )}
@@ -315,55 +292,6 @@ const ChatbotUI = () => {
                         `}>
                         {msg.text}
                       </span>
-                      {/* Tags sous la bulle IA, style footer mais petit */}
-                      {/* SUPPRIMÉ : affichage des tags */}
-                      {/* 
-                      {msg.from === "bot" &&
-                        msg.tags &&
-                        msg.tags.length > 0 && (
-                          <div className='flex flex-wrap gap-2 mt-1 ml-1'>
-                            {msg.tags.map((tag, i) => (
-                              <button
-                                key={i}
-                                className='bg-[#f6f7fa] text-[#222] border border-[#bdbdbd] rounded-[10px] px-2 py-0.5 font-medium text-[11px] whitespace-nowrap cursor-pointer hover:bg-[#e0e0e0] transition'
-                                style={{
-                                  fontFamily: "inherit",
-                                  fontWeight: 500,
-                                  letterSpacing: 0,
-                                }}
-                                onClick={() =>
-                                  handleTagClick && handleTagClick(tag)
-                                }>
-                                {tag}
-                              </button>
-                            ))}
-                          </div>
-                        )} 
-                      */}
-                      {/* Tags contextuels pour film/série */}
-                      {/* SUPPRIMÉ : affichage des tags contextuels */}
-                      {/* 
-                      {msg.from === "bot" &&
-                        getContextualTags(msg).length > 0 && (
-                          <div className='flex flex-wrap gap-2 mt-1 ml-1'>
-                            {getContextualTags(msg).map((tag, i) => (
-                              <button
-                                key={i}
-                                className='bg-[#f6f7fa] text-[#222] border border-[#bdbdbd] rounded-[10px] px-2 py-0.5 font-medium text-[11px] whitespace-nowrap cursor-pointer hover:bg-[#e0e0e0] transition'
-                                style={{
-                                  fontFamily: "inherit",
-                                  fontWeight: 500,
-                                  letterSpacing: 0,
-                                }}
-                                onClick={() =>
-                                  handleKeyword && handleKeyword(tag)
-                                }>
-                                {tag}
-                              </button>
-                            ))}
-                          </div>
-                        )} 
-                      */}
                       <span
                         className={`
                           text-[10px] text-[#bdbdbd] mt-0.5
