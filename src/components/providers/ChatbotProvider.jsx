@@ -6,13 +6,27 @@ import {
   MISTRAL_MODEL,
   SYSTEM_PROMPT,
 } from "../chatbot/aiConfig";
-import { mainMenu } from "../chatbot/chatbotMenus"; // <-- Ajout de l'import
+
+// Génère une salutation variée à chaque ouverture
+function getRandomGreeting() {
+  const greetings = [
+    "Salut ! Tu veux que je t'aide à trouver un film ou une série ?",
+    "Coucou ! Dis-moi ce que tu cherches, je peux t'aider à trouver un film ou une série 😊",
+    "Hello ! Tu as besoin d'aide pour choisir un film ou une série ?",
+    "Bienvenue ! Je peux t'aider à dénicher un film ou une série, tu veux une suggestion ?",
+    "Hey ! Tu veux que je t'aide à rechercher un film ou une série ?",
+    "Besoin d'un coup de main pour trouver quoi regarder ? Je suis là pour t'aider !",
+    "Salut ! Dis-moi si tu veux une recommandation ou de l'aide pour ta recherche.",
+  ];
+  return greetings[Math.floor(Math.random() * greetings.length)];
+}
 
 export function ChatbotProvider({ children }) {
   const [messages, setMessages] = useState([
     {
       from: "bot",
-      text: mainMenu.message, // <-- Utilise le message d'accueil du menu
+      text: getRandomGreeting(),
+      date: new Date().toISOString(),
     },
   ]);
   const [input, setInput] = useState("");
@@ -52,22 +66,25 @@ export function ChatbotProvider({ children }) {
 
   const handleSend = async () => {
     if (!input.trim()) return;
-    const userMsg = { from: "user", text: input };
+    const now = new Date().toISOString();
+    const userMsg = { from: "user", text: input, date: now };
     setMessages((prev) => [...prev, userMsg]);
     setInput("");
     try {
       const botReply = await fetchBotReply(input);
-      setMessages((prev) => [
-        ...prev,
-        userMsg,
-        { from: "bot", text: botReply },
-      ]);
+      const botMsg = {
+        from: "bot",
+        text: botReply,
+        date: new Date().toISOString(),
+      };
+      setMessages((prev) => [...prev, botMsg]);
     } catch (e) {
-      setMessages((prev) => [
-        ...prev,
-        userMsg,
-        { from: "bot", text: "Désolé, je rencontre un problème technique." },
-      ]);
+      const botMsg = {
+        from: "bot",
+        text: "Désolé, je rencontre un problème technique.",
+        date: new Date().toISOString(),
+      };
+      setMessages((prev) => [...prev, botMsg]);
     }
   };
 
@@ -75,7 +92,8 @@ export function ChatbotProvider({ children }) {
     setMessages([
       {
         from: "bot",
-        text: mainMenu.message,
+        text: getRandomGreeting(),
+        date: new Date().toISOString(),
       },
     ]);
     setInput("");
@@ -92,7 +110,6 @@ export function ChatbotProvider({ children }) {
         setOpen,
         handleSend,
         resetChatbot,
-        // à compléter avec les nouvelles fonctions plus tard
       }}>
       {children}
     </ChatbotContext.Provider>

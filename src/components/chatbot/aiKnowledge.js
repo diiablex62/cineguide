@@ -10,7 +10,6 @@ export const siteMenu = [
   "Paramètres",
   "Aide",
   "CGU",
-  "Contact",
 ];
 
 export const menuDescriptions = {
@@ -29,7 +28,6 @@ export const menuDescriptions = {
   Paramètres:
     "Change ton mot de passe, ton adresse e-mail ou d'autres réglages du compte.",
   CGU: "Lis les conditions générales d'utilisation du site Cineguide.",
-  Contact: "Trouve les coordonnées pour contacter l'assistance Cineguide.",
 };
 
 export const pageContents = {
@@ -39,7 +37,7 @@ export const pageContents = {
     "La page Films affiche tous les films disponibles avec des filtres par genre, année, acteur, réalisateur et des suggestions selon tes goûts.",
   Séries:
     "La page Séries présente toutes les séries, avec des filtres pour trouver rapidement ce que tu veux regarder.",
-  Jeux: "Dans la section Jeux, tu peux jouer à des quiz, devinettes et mini-jeux autour du cinéma et des séries.",
+  Jeux: "Le site propose uniquement trois jeux autour du cinéma et des séries. Tu peux accéder directement aux jeux via les liens : /jeux1, /jeux2, /jeux3. Il n'existe pas d'autres jeux sur Cineguide.",
   "Mon compte":
     "La page Mon compte permet de gérer ton profil, consulter ton abonnement, voir l'historique de tes factures et modifier tes paramètres.",
   Profil:
@@ -50,15 +48,13 @@ export const pageContents = {
     "La page Factures liste toutes tes factures et paiements passés, avec la possibilité de télécharger les justificatifs.",
   Paramètres:
     "Dans Paramètres, tu peux changer ton mot de passe, ton adresse e-mail et ajuster d'autres réglages de ton compte.",
-  Aide: "La page Aide regroupe la FAQ, des conseils d'utilisation et un formulaire pour contacter le support. Il n'y a pas de bouton spécifique, il faut passer par la page dédiée.",
+  FAQ: "Pour accéder à la FAQ, clique sur 'Plus' dans le menu principal en haut, puis sur 'FAQ'. Tu peux aussi trouver le lien 'FAQ' en bas de page (footer).",
   CGU: "La page CGU présente les conditions générales d'utilisation du site Cineguide.",
-  Contact:
-    "Sur la page Contact, tu trouves toutes les coordonnées pour joindre l'équipe d'assistance Cineguide.",
   Home: "La page d'accueil propose : nouveautés, top 10 séries de la semaine, meilleures séries d'action, recommandations personnalisées, filtres de recherche par genre/type/note, suggestions de plateformes partenaires (Netflix, Prime Video, Disney+, Hulu), et une section spéciale pour les fans de 'Peaky Blinders'.",
 };
 
 export const globalSiteSummary = `
-Le site Cineguide est organisé autour de plusieurs composants et pages principales :
+Le site Cineguide est organisé autour de plusieurs composants et pages principales :
 
 Composants :
 - Header : barre de navigation principale avec accès aux menus et au logo qui redirige vers la page d'accueil.
@@ -69,7 +65,7 @@ Composants :
     • (Parfois) barre de recherche ou accès rapide à certaines fonctionnalités
 - Footer : pied de page avec informations légales et liens utiles.
   Composition du Footer :
-    • Liens vers les pages : Aide, CGU, Contact
+    • Liens vers les pages : Aide, CGU
     • Informations légales (copyright, mentions légales)
     • Réseaux sociaux ou partenaires éventuels
 - ChatbotUI : interface du chatbot Cineguide pour discuter et obtenir de l'aide.
@@ -85,13 +81,12 @@ Pages principales :
 - Acteurs : profils, biographies, filmographies et récompenses des acteurs.
 - Profil utilisateur : activités récentes, liste personnelle, avis laissés, gestion du compte.
 - Détail série : résumé, bande-annonce, commentaires, suggestions de séries similaires.
-- Jeux : section pour jouer à des quiz et mini-jeux autour du cinéma et des séries.
+- Jeux : section pour jouer à des quiz et mini-jeux autour du cinéma et des séries. Il n'y a que trois jeux disponibles sur Cineguide, accessibles via : /jeux1, /jeux2, /jeux3.
 - Aide : FAQ, conseils d'utilisation, formulaire de contact support.
 - CGU : conditions générales d'utilisation du site.
-- Contact : coordonnées pour joindre l'équipe Cineguide.
 - 404 : page d'erreur pour les routes non trouvées.
 
-Chaque page ou composant a un rôle précis pour faciliter la navigation, la découverte de contenu et la gestion du compte utilisateur.
+Chaque page ou composant a un rôle précis pour faciliter la navigation, la découverte de contenu, la gestion du compte utilisateur et l'accès aux jeux.
 `;
 
 export const headerSummary = `
@@ -148,3 +143,5 @@ export const abonnements = [
     ],
   },
 ];
+
+// Laisse le message d'accueil à la charge de l'IA selon le prompt système
