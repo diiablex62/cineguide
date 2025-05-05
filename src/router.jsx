@@ -33,6 +33,7 @@ import BandeAnnonceSerie from "./pages/DetailSerie/components/BandeAnnonceSerie"
 import CommentaireSerie from "./pages/DetailSerie/components/CommentaireSerie";
 import SerieProposer from "./pages/DetailSerie/components/SerieProposer";
 import NotFound from "./pages/404";
+
 import UserConnected from "./components/ProtectedRoutes/UserConnected";
 import UserNotConnected from "./components/ProtectedRoutes/UserNotConnected";
 import Jeux from "./pages/Jeux/Jeux";
@@ -49,7 +50,6 @@ export const router = createBrowserRouter([
     path: "*",
     element: <NotFound />,
   },
-
   {
     path: "/connexion",
     element: (
@@ -66,9 +66,9 @@ export const router = createBrowserRouter([
       </UserNotConnected>
     ),
   },
-
   {
     path: "/jeux",
+
     children: [
       {
         index: true,

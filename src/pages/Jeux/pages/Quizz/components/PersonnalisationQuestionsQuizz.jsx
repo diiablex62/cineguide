@@ -3,8 +3,9 @@ import { useContext } from "react";
 import { QuizzContext } from "../../../../../context/QuizzContext";
 
 export default function PersonnalisationQuestionsQuizz() {
-  const { test } = useContext(QuizzContext);
-  console.log(test);
+  const { questionsPerso, updateQuestionsPerso } = useContext(QuizzContext);
+
+  const onSubmit = () => {};
   return (
     <div className="flex flex-col gap-2.5 py-11 px-14 h-full">
       <div className="flex flex-col">
@@ -30,7 +31,10 @@ export default function PersonnalisationQuestionsQuizz() {
               </p>
             </div>
           </div>
-          <div className="flex flex-col gap-2.5 items-center w-full">
+          <form
+            onSubmit={updateQuestionsPerso}
+            className="flex flex-col gap-2.5 items-center w-full"
+          >
             <p className="text-fuchsia p-2.5 w-full font-medium">
               Veuillez répondre ci-dessous :
             </p>
@@ -38,7 +42,7 @@ export default function PersonnalisationQuestionsQuizz() {
               type="text"
               className="p-8 border border-black bg-white w-full"
             />
-          </div>
+          </form>
         </div>
       </div>
     </div>

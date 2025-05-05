@@ -14,40 +14,37 @@ import CommentProvider from "./components/providers/CommentProvider";
 import Footer from "./components/Footer";
 import { HomeProvider } from "./components/providers/HomeProvider";
 import { ActuProvider } from "./components/providers/ActuProvider";
-import QuizzProvider from "./components/providers/QuizzProvider";
 
 function App() {
   return (
     <>
-      <QuizzProvider>
-        <HomeProvider>
-          <div className="min-h-screen flex flex-col w-full dark:bg-black bg-white">
-            <ThemeProvider>
-              <LangageProvider>
-                <MenuProvider>
-                  <FiltreProvider>
-                    <ProfilProvider>
-                      <ActorProvider>
-                        <FilmProvider>
-                          <SerieProvider>
-                            <CommentProvider>
-                              <ActuProvider>
-                                <Header />
-                                <Outlet />
-                                <Footer />
-                              </ActuProvider>
-                            </CommentProvider>
-                          </SerieProvider>
-                        </FilmProvider>
-                      </ActorProvider>
-                    </ProfilProvider>
-                  </FiltreProvider>
-                </MenuProvider>
-              </LangageProvider>
-            </ThemeProvider>
-          </div>
-        </HomeProvider>
-      </QuizzProvider>
+      <HomeProvider>
+        <div className="min-h-screen flex flex-col w-full dark:bg-black bg-white">
+          <ThemeProvider>
+            <LangageProvider>
+              <MenuProvider>
+                <FiltreProvider>
+                  <ProfilProvider>
+                    <ActorProvider>
+                      <FilmProvider>
+                        <SerieProvider>
+                          <CommentProvider>
+                            <ActuProvider>
+                              <Header />
+                              <Outlet />
+                              <Footer />
+                            </ActuProvider>
+                          </CommentProvider>
+                        </SerieProvider>
+                      </FilmProvider>
+                    </ActorProvider>
+                  </ProfilProvider>
+                </FiltreProvider>
+              </MenuProvider>
+            </LangageProvider>
+          </ThemeProvider>
+        </div>
+      </HomeProvider>
     </>
   );
 }

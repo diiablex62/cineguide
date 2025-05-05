@@ -6,7 +6,6 @@ import Hulu from "../components/home/hulu";
 import peakyBg from "../assets/peaky2.jpg";
 import { HomeContext } from "../context/HomeContext";
 import { NavLink } from "react-router-dom";
-import { QuizzContext } from "../context/QuizzContext";
 
 export default function Home() {
   const {
@@ -23,9 +22,6 @@ export default function Home() {
     series,
     genres,
   } = useContext(HomeContext);
-
-  const { test } = useContext(QuizzContext);
-  console.log(test);
 
   const handleGenreChange = useCallback(
     (e) => {
