@@ -79,7 +79,9 @@ export const AfficheProvider = ({ children }) => {
 
     if (filteredAffichesByType.length > 0) {
       const filteredAffichesByGenre = filteredAffichesByType.filter((item) =>
-        genreList.some((genre) => item.genre?.includes(genre))
+        genreList.some((genre) =>
+          item.genre?.toLowerCase().includes(genre.toLowerCase())
+        )
       );
 
       if (filteredAffichesByGenre.length > 0) {
