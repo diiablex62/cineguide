@@ -1,0 +1,85 @@
+[
+  {
+    "titre": "The Lodge",
+    "type": "film",
+    "genre": ["Horreur", "Psychologique", "Huis clos"],
+    "acteurs": ["Riley Keough", "Jaeden Martell"],
+    "indices": [
+      "Chalet",
+      "Neige",
+      "Isolement",
+      "Culte",
+      "Secrets",
+      "Traumatisme",
+      "Enfants",
+      "Folie",
+      "Disparition",
+      "Terreur",
+      "Religion"
+    ],
+    "affiche": "https://media.senscritique.com/media/000019133487/0/the_lodge.jpg"
+  },
+  {
+    "titre": "Hereditary",
+    "type": "film",
+    "genre": ["Horreur", "Occulte", "Drame familial"],
+    "acteurs": ["Toni Collette", "Alex Wolff"],
+    "indices": [
+      "Famille",
+      "Secret",
+      "Secte",
+      "Maison",
+      "Mère",
+      "Possession",
+      "Décès",
+      "Tragédie",
+      "Rituels",
+      "Héritage",
+      "Peur",
+      "Choc",
+      "Décapitation"
+    ],
+    "affiche": "https://www.movieposters.com/products/hereditary-mpw-122595"
+  },
+  {
+    "titre": "The Haunting of Hill House",
+    "type": "série",
+    "genre": ["Horreur", "Fantastique", "Drame psychologique"],
+    "acteurs": ["Victoria Pedretti", "Oliver Jackson-Cohen"],
+    "indices": [
+      "Maison hantée",
+      "Famille",
+      "Souvenirs",
+      "Fantômes",
+      "Trauma",
+      "Secrets",
+      "Deuil",
+      "Comptine",
+      "Enfance",
+      "Vision",
+      "Cauchemar"
+    ],
+    "affiche": "https://www.amazon.com/Haunting-House-Poster-Reflection-Netflix/dp/B07KLNRKZ4"
+  },
+  {
+    "titre": "Midsommar",
+    "type": "film",
+    "genre": ["Horreur", "Psychologique", "Folk horror"],
+    "acteurs": ["Florence Pugh", "Jack Reynor"],
+    "indices": [
+      "Culte",
+      "Soleil",
+      "Suède",
+      "Fête",
+      "Rituel",
+      "Fleurs",
+      "Tensions",
+      "Rupture",
+      "Hallucinations",
+      "Mort",
+      "Sacrifice",
+      "Manipulation"
+    ],
+    "affiche": "https://shop.a24films.com/products/midsommar-may-queen-by-yuko-higuchi"
+  }
+]

@@ -35,6 +35,15 @@ import SerieProposer from "./pages/DetailSerie/components/SerieProposer";
 import NotFound from "./pages/404";
 import UserConnected from "./components/ProtectedRoutes/UserConnected";
 import UserNotConnected from "./components/ProtectedRoutes/UserNotConnected";
+import Jeux from "./pages/Jeux/Jeux";
+import Affiche from "./pages/Jeux/Affiche";
+import Quizz from "./pages/Jeux/pages/Quizz/Quizz";
+import Devine from "./pages/Jeux/Devine";
+import PersonnalisationQuestionsQuizz from "./pages/Jeux/pages/Quizz/components/PersonnalisationQuestionsQuizz";
+import QuestionsQuizz from "./pages/Jeux/pages/Quizz/components/QuestionsQuizz";
+import ResultatQuizz from "./pages/Jeux/pages/Quizz/components/ResultatQuizz";
+import QuizzAccueil from "./pages/Jeux/pages/Quizz/components/QuizzAccueil";
+import { AfficheProvider } from "./components/providers/AfficheProvider";
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +67,50 @@ export const router = createBrowserRouter([
     ),
   },
   {
+    path: "/jeux",
+
+    children: [
+      {
+        index: true,
+        element: <Jeux />,
+      },
+      {
+        path: "/jeux/affiche",
+        element: (
+          <AfficheProvider>
+            <Affiche />
+          </AfficheProvider>
+        ),
+      },
+      {
+        path: "/jeux/quizz",
+        element: <Quizz />,
+        children: [
+          {
+            index: true,
+            element: <QuizzAccueil />,
+          },
+          {
+            path: "personnalisation",
+            element: <PersonnalisationQuestionsQuizz />,
+          },
+          {
+            path: "questions",
+            element: <QuestionsQuizz />,
+          },
+          {
+            path: "resultat",
+            element: <ResultatQuizz />,
+          },
+        ],
+      },
+      {
+        path: "/jeux/devine",
+        element: <Devine />,
+      },
+    ],
+  },
+  {
     path: "/",
     element: <App />,
     children: [
@@ -67,26 +120,21 @@ export const router = createBrowserRouter([
       },
       {
         path: "/profil",
-        element: (
-          <UserConnected>
-            <Profil />
-          </UserConnected>
-        ),
         children: [
           {
             index: true,
             element: <Profil />,
           },
           {
-            path: "mon-activiter",
+            path: "/profil/mon-activiter",
             element: <ProfilActiviter />,
           },
           {
-            path: "ma-liste",
+            path: "/profil/ma-liste",
             element: <ProfilListe />,
           },
           {
-            path: "mes-reviews",
+            path: "/profil/mes-reviews",
             element: <ProfileReviews />,
           },
         ],

@@ -6,9 +6,7 @@ import { Link, NavLink } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
 import { FaChevronUp } from "react-icons/fa";
 import MenuHeaderDesktop from "./menu/menuPlus/MenuHeaderDesktop";
-import fr from "../assets/france.png";
 import MenuLangage from "./menu/menuLangage/MenuLangage";
-import { LangageContext } from "../context/LangageContext";
 import { FaFacebookSquare } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { BsFillMoonStarsFill } from "react-icons/bs";
@@ -19,18 +17,12 @@ import MenuBurger from "./menu/menuResponsive/MenuBurger";
 import { MenuContext } from "../context/MenuContext";
 import { IoIosLogOut } from "react-icons/io";
 import { AuthContext } from "../context/AuthContext";
+import LangButton from "./menu/LangButton";
 
 export default function Header() {
-  const { langageMenu, toggleLangageMenu, selectedLang } =
-    useContext(LangageContext);
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { menu, setMenu, burger, toggleBurger } = useContext(MenuContext);
   const { logout, isLoggedIn } = useContext(AuthContext);
-
-  const handleLanguageClick = (e) => {
-    e.stopPropagation();
-    setLangageMenu(!langageMenu);
-  };
 
   return (
     <div className="flex items-center justify-between shadow-md p-4  gap-2.5 dark:bg-black dark:text-white dark:shadow-white">
@@ -76,6 +68,12 @@ export default function Header() {
             className="mr-5 text-black  dark:text-white hover:text-fuchsia"
           >
             Actualités
+          </NavLink>
+          <NavLink
+            to="/jeux"
+            className="mr-5 text-black  dark:text-white hover:text-fuchsia"
+          >
+            Jeux
           </NavLink>
           {menu ? (
             <div>
@@ -132,22 +130,7 @@ export default function Header() {
               </NavLink>
             </>
           )}
-          <div
-            onClick={() => toggleLangageMenu()}
-            className="flex cursor-pointer items-center justify-between relative px-4 py-2.5 gap-2 w-fit border bg-white dark:bg-black dark:border-white h-[50px]"
-          >
-            <img
-              src={selectedLang.img}
-              alt={selectedLang.desc}
-              className="w-8 h-8"
-            />
-            <FaChevronDown
-              className={`transition-transform ${
-                langageMenu ? "rotate-180" : ""
-              }`}
-            />
-            {langageMenu ? <MenuLangage /> : null}
-          </div>
+          <LangButton />
         </div>
         <div className="flex gap-[30px] items-center justify-end w-full">
           <div
