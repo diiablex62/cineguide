@@ -54,6 +54,9 @@ export default function MenuBurger() {
           <NavLink to="/actualites" className="text-black  dark:text-white">
             Actualités
           </NavLink>
+          <NavLink to="/jeux" className="text-black  dark:text-white">
+            Jeux
+          </NavLink>
           {menuPlus ? (
             <div className="w-full flex flex-col gap-1">
               <div
