@@ -31,7 +31,7 @@ export default function PersonnalisationQuestionsQuizz() {
 
     // Store the question and response in localStorage
     const saved = localStorage.getItem("quizz_perso_reponses");
-    const obj = saved ? JSON.parse(saved) : [];
+    const obj = saved ? JSON.parse(saved) : updatedQuestions;
     obj[currentQuestion] = {
       ...updatedQuestions[currentQuestion],
       response: inputValue,
