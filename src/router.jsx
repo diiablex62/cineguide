@@ -33,20 +33,23 @@ import BandeAnnonceSerie from "./pages/DetailSerie/components/BandeAnnonceSerie"
 import CommentaireSerie from "./pages/DetailSerie/components/CommentaireSerie";
 import SerieProposer from "./pages/DetailSerie/components/SerieProposer";
 import NotFound from "./pages/404";
-
 import UserConnected from "./components/ProtectedRoutes/UserConnected";
 import UserNotConnected from "./components/ProtectedRoutes/UserNotConnected";
 import Jeux from "./pages/Jeux/Jeux";
-import Affiche from "./pages/Jeux/pages/Affiche";
-import Quizz from "./pages/Jeux/pages/Quizz";
-import Devine from "./pages/Jeux/pages/Devine";
+import Affiche from "./pages/Jeux/Affiche";
+import Quizz from "./pages/Jeux/pages/Quizz/Quizz";
+import Devine from "./pages/Jeux/Devine";
+import PersonnalisationQuestionsQuizz from "./pages/Jeux/pages/Quizz/components/PersonnalisationQuestionsQuizz";
+import QuestionsQuizz from "./pages/Jeux/pages/Quizz/components/QuestionsQuizz";
+import ResultatQuizz from "./pages/Jeux/pages/Quizz/components/ResultatQuizz";
+import QuizzAccueil from "./pages/Jeux/pages/Quizz/components/QuizzAccueil";
+import { AfficheProvider } from "./components/providers/AfficheProvider";
 
 export const router = createBrowserRouter([
   {
     path: "*",
     element: <NotFound />,
   },
-
   {
     path: "/connexion",
     element: (
@@ -63,7 +66,6 @@ export const router = createBrowserRouter([
       </UserNotConnected>
     ),
   },
-
   {
     path: "/jeux",
 
@@ -74,11 +76,33 @@ export const router = createBrowserRouter([
       },
       {
         path: "/jeux/affiche",
-        element: <Affiche />,
+        element: (
+          <AfficheProvider>
+            <Affiche />
+          </AfficheProvider>
+        ),
       },
       {
         path: "/jeux/quizz",
         element: <Quizz />,
+        children: [
+          {
+            index: true,
+            element: <QuizzAccueil />,
+          },
+          {
+            path: "personnalisation",
+            element: <PersonnalisationQuestionsQuizz />,
+          },
+          {
+            path: "questions",
+            element: <QuestionsQuizz />,
+          },
+          {
+            path: "resultat",
+            element: <ResultatQuizz />,
+          },
+        ],
       },
       {
         path: "/jeux/devine",

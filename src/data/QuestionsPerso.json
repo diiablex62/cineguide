@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "question": "Quel genre de film/série préfères-tu regarder ?"
+  },
+  {
+    "id": 2,
+    "question": "Comment regardes-tu le plus souvent des films/séries ?"
+  },
+  {
+    "id": 3,
+    "question": "Quelle durée de film te convient le mieux ?"
+  },
+  {
+    "id": 4,
+    "question": "Quel film culte tu n’as jamais vu ?"
+  },
+  {
+    "id": 5,
+    "question": "Quel film t’a profondément marqué ou fait pleurer ?"
+  },
+  {
+    "id": 6,
+    "question": "À quelle fréquence regardes-tu des films ?"
+  },
+  {
+    "id": 7,
+    "question": "Quel est le film que tu pourrais revoir encore et encore ?"
+  }
+]

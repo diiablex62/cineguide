@@ -102,7 +102,7 @@ export default function Devine() {
     setFeedback(`La réponse était "${answer}". 🎬`);
   };
   return (
-    <div className="flex flex-col lg:flex-row">
+    <div className="flex flex-col lg:flex-row container">
       <div className="w-full lg:w-2/8">
         <Navbar></Navbar>
       </div>

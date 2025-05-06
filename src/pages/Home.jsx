@@ -65,7 +65,8 @@ export default function Home() {
       const matchesGenre = item.genre.includes(selectedGenre);
       const matchesType = selectedType.serie;
       const [minNote, maxNote] = selectedNote.split("-").map(Number);
-      const matchesNote = !selectedNote || (item.note >= minNote && item.note <= maxNote);
+      const matchesNote =
+        !selectedNote || (item.note >= minNote && item.note <= maxNote);
 
       return matchesGenre && matchesType && matchesNote;
     });
@@ -77,7 +78,14 @@ export default function Home() {
     } else {
       setFilteredResult("no_results");
     }
-  }, [selectedGenre, selectedType, selectedNote, series, setErrors, setFilteredResult]);
+  }, [
+    selectedGenre,
+    selectedType,
+    selectedNote,
+    series,
+    setErrors,
+    setFilteredResult,
+  ]);
 
   return (
     <div className="p-10">
@@ -370,7 +378,7 @@ export default function Home() {
                     src={filteredResult.image}
                     alt={filteredResult.titre}
                     className="w-32 h-48 object-cover rounded"
-                    style={{ minWidth: '128px' }}
+                    style={{ minWidth: "128px" }}
                   />
                 </div>
                 <div className="flex flex-col justify-between w-full">
