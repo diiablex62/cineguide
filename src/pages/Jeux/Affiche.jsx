@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
-
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import Etape1 from "./pages/affiche/Etape1";
 import { AfficheContext } from "../../context/AfficheContext";
 import Etape2 from "./pages/affiche/Etape2";
