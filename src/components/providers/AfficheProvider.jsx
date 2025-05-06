@@ -1,20 +1,35 @@
 import { useState, useCallback } from "react";
 import { AfficheContext } from "../../context/AfficheContext";
 import afficheData from "../../data/Affiche.json";
+
+import toast, { Toaster } from "react-hot-toast";
 export const AfficheProvider = ({ children }) => {
   const [selectedTheme, setSelectedTheme] = useState("");
   const [stepGame, setStepGame] = useState(1);
   const [genreList, setGenreList] = useState([]);
-  const [affiche, setAffiche] = useState(afficheData[0]);
+  const [difficulty, setDifficulty] = useState(1);
+  const [affiche, setAffiche] = useState("");
+
+  const [blurLevel, setBlurLevel] = useState(0);
+  const [countDetails, setCountDetails] = useState(0);
+  const [countIndice, setCountIndice] = useState(0);
+  const [currentIndiceIndex, setCurrentIndiceIndex] = useState(0);
+
+  const [tryReponse, setTryReponse] = useState(0);
+  // Reponse
+  const [reponse, setReponse] = useState("");
+
+  // WIN ou LOOSE
+  const [winOrLoose, setWinOrLoose] = useState(false);
   // Selection des genres par l'utilisateur
   function removeGenre() {
     setGenreList("");
   }
 
-  // L'utilisateur ajoutes des genres
-  function addGenreList(e) {
-    e.preventDefault();
-    const genre = e.target.genre.value;
+  // Fonction qui gere les genres que l'utilisateur entre
+  function addGenreList(e, genreRef) {
+    const genre = genreRef.current.value.trim(); //
+
     if (genre === "") {
       toast.error("Le genre ne peut pas être vide.");
       return;
@@ -29,14 +44,85 @@ export const AfficheProvider = ({ children }) => {
     }
     setGenreList((prevGenreList) => [...prevGenreList, genre]);
     toast.success("Genre ajouté avec succès !");
-    e.target.genre.value = "";
+    genreRef.value = "";
   }
 
+  // On verifi si il y a un theme, un genre et un niveau de difficulté
+  function initGames(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const selectedTheme = formData.get("theme");
+    const difficulty = formData.get("difficulty");
+
+    if (!selectedTheme) {
+      toast.error("Veuillez sélectionner un thème.");
+      return;
+    }
+
+    if (!difficulty) {
+      toast.error("Veuillez sélectionner une difficulté.");
+      return;
+    }
+
+    if (!genreList) {
+      toast.error("Veuillez sélectionner un genre.");
+      return;
+    }
+
+    const filteredAffiches = afficheData.filter((item) =>
+      genreList.some((genre) => item.genre?.includes(genre))
+    );
+
+    const filteredAffichesByType = filteredAffiches.filter(
+      (item) => item.type === selectedTheme
+    );
+
+    if (filteredAffichesByType.length > 0) {
+      const filteredAffichesByGenre = filteredAffichesByType.filter((item) =>
+        genreList.some((genre) => item.genre?.includes(genre))
+      );
+
+      if (filteredAffichesByGenre.length > 0) {
+        const randomIndex = Math.floor(
+          Math.random() * filteredAffichesByGenre.length
+        );
+        setAffiche(filteredAffichesByGenre[randomIndex]);
+      } else {
+        toast.error("Aucune affiche ne correspond aux genres sélectionnés.");
+        return;
+      }
+    } else {
+      toast.error("Aucune affiche ne correspond au type sélectionné.");
+      return;
+    }
+
+    setSelectedTheme(selectedTheme);
+    setDifficulty(difficulty);
+    setBlurLevel(difficulty);
+    setCountDetails(difficulty);
+    setCountIndice(11 - difficulty);
+    setTryReponse(11 - difficulty);
+    setStepGame(2);
+  }
+
+  function endGame(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const inputValue = formData.get("reponse");
+
+    if (reponse.toLowerCase() === inputValue.toLowerCase()) {
+      setWinOrLoose(true);
+      setStepGame(3);
+    } else if (tryReponse > 0) {
+      setTryReponse(tryReponse - 1);
+      toast.success("Encore " + tryReponse + " essai(s)");
+    } else {
+      setWinOrLoose(false);
+      setStepGame(3);
+    }
+  }
   // Etape 2
-  const [blurLevel, setBlurLevel] = useState(10);
-  const [countDetails, setCountDetails] = useState(10);
-  const [countIndice, setCountIndice] = useState(affiche.indices.length - 1);
-  const [currentIndiceIndex, setCurrentIndiceIndex] = useState(0);
+
   // Reveal de l'image en fonction de la difficulté
   const handleRevealClick = () => {
     if (blurLevel > 0) {
@@ -54,6 +140,7 @@ export const AfficheProvider = ({ children }) => {
       }
     }
   };
+
   // Révéler = loose
   const handleRevealAllClick = () => {
     setWinOrLoose(false);
@@ -69,11 +156,6 @@ export const AfficheProvider = ({ children }) => {
     setCurrentIndiceIndex(0);
   };
 
-  // Reponse
-  const [reponse, setReponse] = useState(affiche.titre);
-
-  // WIN ou LOOSE
-  const [winOrLoose, setWinOrLoose] = useState(false);
   return (
     <AfficheContext.Provider
       value={{
@@ -98,6 +180,12 @@ export const AfficheProvider = ({ children }) => {
         setWinOrLoose,
         winOrLoose,
         affiche,
+        difficulty,
+        setDifficulty,
+        initGames,
+        setGenreList,
+        endGame,
+        setReponse,
       }}
     >
       {children}

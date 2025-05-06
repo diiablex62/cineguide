@@ -144,4 +144,3 @@ export const abonnements = [
   },
 ];
 
-// Laisse le message d'accueil à la charge de l'IA selon le prompt système

@@ -8,8 +8,7 @@ export default function Etape3() {
   const { reponse, reset, winOrLoose, affiche } = useContext(AfficheContext);
 
   return (
-    <div className="w-full lg:w-6/8 lg:flex lg:flex-col  lg:h-screen  px-10 mb-20">
-      <Confetti></Confetti>
+    <div className="w-full lg:w-6/8 lg:flex lg:flex-col  px-10 bg-white mt-5 shadow rounded-r-xl ">
       <div className="flex flex-col justify-center lg:flex-start mt-5 w-full">
         <h2 className="font-medium text-center lg:text-start text-xl ">
           Bienvenue dans Affiche brouillées
@@ -25,7 +24,7 @@ export default function Etape3() {
       </div>
 
       <div className="flex flex-col  lg:flex-row lg: mt-30">
-        <div className="lg:min-w-[350px] lg:max-w-[350px] w-full flex justify-center">
+        <div className="lg:min-w-[350px] lg:max-w-[350px] w-full flex justify-center items-center">
           <img src={affiche.affiche} alt="" />
         </div>
 
