@@ -5,7 +5,9 @@ import { QuizzContext } from "../../../../../context/QuizzContext";
 export default function PersonnalisationQuestionsQuizz() {
   const { questionsPerso, updateQuestionsPerso } = useContext(QuizzContext);
 
-  const onSubmit = () => {};
+  const onSubmit = (values) => {
+    updateQuestionsPerso(values);
+  };
   return (
     <div className="flex flex-col gap-2.5 py-11 px-14 h-full">
       <div className="flex flex-col">
@@ -32,7 +34,7 @@ export default function PersonnalisationQuestionsQuizz() {
             </div>
           </div>
           <form
-            onSubmit={updateQuestionsPerso}
+            onSubmit={onSubmit}
             className="flex flex-col gap-2.5 items-center w-full"
           >
             <p className="text-fuchsia p-2.5 w-full font-medium">
@@ -42,6 +44,12 @@ export default function PersonnalisationQuestionsQuizz() {
               type="text"
               className="p-8 border border-black bg-white w-full"
             />
+            <button
+              type="submit"
+              className="bg-fuchsia flex justify-center items-center h-[50px] px-2 text-white cursor-pointer"
+            >
+              Passer à la question suivante
+            </button>
           </form>
         </div>
       </div>
