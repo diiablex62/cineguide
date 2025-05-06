@@ -1,10 +1,7 @@
 import React from "react";
-<<<<<<<< HEAD:src/pages/Jeux/pages/Quizz/Quizz.jsx
 import Navbar from "../../components/Navbar";
 import { Outlet } from "react-router-dom";
-========
-import Navbar from "./components/Navbar";
->>>>>>>> 6584b8beac1abaaebde7760b09fae7acffea44d5:src/pages/Jeux/Quizz.jsx
+import Navbar from "../../components/Navbar";
 
 export default function Quizz() {
   return (
