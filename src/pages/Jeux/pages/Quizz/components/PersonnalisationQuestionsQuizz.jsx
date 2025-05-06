@@ -5,8 +5,10 @@ import { QuizzContext } from "../../../../../context/QuizzContext";
 export default function PersonnalisationQuestionsQuizz() {
   const { questionsPerso, updateQuestionsPerso } = useContext(QuizzContext);
 
-  const onSubmit = (values) => {
-    updateQuestionsPerso(values);
+  const onSubmit = (event) => {
+    event.preventDefault();
+    console.log(event.target[0].value);
+    updateQuestionsPerso(event.target[0].value);
   };
   return (
     <div className="flex flex-col gap-2.5 py-11 px-14 h-full">
@@ -23,27 +25,29 @@ export default function PersonnalisationQuestionsQuizz() {
       <h3 className="font-bold text-xl">Etape 1 :</h3>
       <div className="flex py-7">
         <div className="flex flex-col gap-9 items-center justify-center w-full">
-          <div className="flex flex-col gap-2.5 items-center w-full">
-            <p className="text-fuchsia p-2.5 w-full font-medium">
-              Question 1 / 7
-            </p>
-            <div className="p-8 border border-black bg-white w-full">
-              <p className="font-medium text-center">
-                Quelles plateformes de streaming utilisez-vous régulièrement ?
-              </p>
-            </div>
-          </div>
           <form
-            onSubmit={console.log("lol")}
-            className="flex flex-col gap-2.5 items-center w-full"
+            onSubmit={onSubmit}
+            className="flex flex-col gap-9 items-center w-full"
           >
-            <p className="text-fuchsia p-2.5 w-full font-medium">
-              Veuillez répondre ci-dessous :
-            </p>
-            <input
-              type="text"
-              className="p-8 border border-black bg-white w-full"
-            />
+            <div className="flex flex-col gap-2.5 items-center w-full">
+              <p className="text-fuchsia p-2.5 w-full font-medium">
+                Question 1 / 7
+              </p>
+              <div className="p-8 border border-black bg-white w-full">
+                <p className="font-medium text-center">
+                  Quelles plateformes de streaming utilisez-vous régulièrement ?
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col gap-2.5 items-center w-full">
+              <p className="text-fuchsia p-2.5 w-full font-medium">
+                Veuillez répondre ci-dessous :
+              </p>
+              <input
+                type="text"
+                className="p-8 border border-black bg-white w-full"
+              />
+            </div>
             <button
               type="submit"
               className="bg-fuchsia flex justify-center items-center h-[50px] px-2 text-white cursor-pointer"
