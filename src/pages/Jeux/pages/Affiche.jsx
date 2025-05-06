@@ -5,6 +5,7 @@ import serie from "../../../assets/jeux/serie.svg";
 import actor from "../../../assets/jeux/actor.svg";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+
 export default function Affiche() {
   const [selectedTheme, setSelectedTheme] = useState("");
   const [genreList, setGenreList] = useState([]);
