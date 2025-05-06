@@ -39,11 +39,11 @@
       "Choc",
       "Décapitation"
     ],
-    "affiche": "https://www.movieposters.com/products/hereditary-mpw-122595"
+    "affiche": "https://m.media-amazon.com/images/I/715S7D8QY2L.jpg"
   },
   {
     "titre": "The Haunting of Hill House",
-    "type": "série",
+    "type": "serie",
     "genre": ["Horreur", "Fantastique", "Drame psychologique"],
     "acteurs": ["Victoria Pedretti", "Oliver Jackson-Cohen"],
     "indices": [
@@ -59,7 +59,7 @@
       "Vision",
       "Cauchemar"
     ],
-    "affiche": "https://www.amazon.com/Haunting-House-Poster-Reflection-Netflix/dp/B07KLNRKZ4"
+    "affiche": "https://fr.web.img2.acsta.net/pictures/18/09/19/18/46/2766026.jpg"
   },
   {
     "titre": "Midsommar",
@@ -80,6 +80,6 @@
       "Sacrifice",
       "Manipulation"
     ],
-    "affiche": "https://shop.a24films.com/products/midsommar-may-queen-by-yuko-higuchi"
+    "affiche": "https://fr.web.img6.acsta.net/pictures/19/06/21/16/39/3513823.jpg"
   }
 ]
