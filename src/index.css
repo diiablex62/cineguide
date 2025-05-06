@@ -87,3 +87,14 @@ html {
 .scrollbar-hide::-webkit-scrollbar {
   display: none; 
 }
+
+.container {
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+@media only screen and (min-width: 1600px) {
+  .container {
+    padding: 0 8%;
+  }
+}

@@ -76,7 +76,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/jeux/affiche",
-        element: <Affiche />,
+        element: (
+          <AfficheProvider>
+            <Affiche />
+          </AfficheProvider>
+        ),
       },
       {
         path: "/jeux/quizz",

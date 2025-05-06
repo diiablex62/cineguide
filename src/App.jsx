@@ -1,6 +1,4 @@
 import { Outlet } from "react-router-dom";
-import Inscription from "./pages/Auth/Inscription";
-import Connexion from "./pages/Auth/Connexion";
 import FilmProvider from "./components/providers/FilmProvider";
 import ThemeProvider from "./components/providers/ThemeProvider";
 import FiltreProvider from "./components/providers/FiltreProvider";
@@ -14,38 +12,45 @@ import CommentProvider from "./components/providers/CommentProvider";
 import Footer from "./components/Footer";
 import { HomeProvider } from "./components/providers/HomeProvider";
 import { ActuProvider } from "./components/providers/ActuProvider";
+import { ChatbotProvider } from "./components/providers/ChatbotProvider";
+import ChatbotUI from "./components/chatbot/ChatbotUI";
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
 
 function App() {
+  const { isLoggedIn } = useContext(AuthContext);
+
   return (
-    <>
-      <HomeProvider>
-        <div className="min-h-screen flex flex-col w-full dark:bg-black bg-white">
-          <ThemeProvider>
-            <LangageProvider>
-              <MenuProvider>
-                <FiltreProvider>
-                  <ProfilProvider>
-                    <ActorProvider>
-                      <FilmProvider>
-                        <SerieProvider>
-                          <CommentProvider>
-                            <ActuProvider>
-                              <Header />
-                              <Outlet />
-                              <Footer />
-                            </ActuProvider>
-                          </CommentProvider>
-                        </SerieProvider>
-                      </FilmProvider>
-                    </ActorProvider>
-                  </ProfilProvider>
-                </FiltreProvider>
-              </MenuProvider>
-            </LangageProvider>
-          </ThemeProvider>
-        </div>
-      </HomeProvider>
-    </>
+    <HomeProvider>
+      <div className="min-h-screen flex flex-col w-full dark:bg-black bg-white">
+        <ThemeProvider>
+          <LangageProvider>
+            <MenuProvider>
+              <FiltreProvider>
+                <ProfilProvider>
+                  <ActorProvider>
+                    <FilmProvider>
+                      <SerieProvider>
+                        <CommentProvider>
+                          <ActuProvider>
+                            <Header />
+                            <Outlet />
+                            <Footer></Footer>
+                          </ActuProvider>
+                        </CommentProvider>
+                      </SerieProvider>
+                    </FilmProvider>
+                  </ActorProvider>
+                </ProfilProvider>
+              </FiltreProvider>
+            </MenuProvider>
+          </LangageProvider>
+        </ThemeProvider>
+      </div>
+      <ChatbotProvider>
+        <ChatbotUI />
+      </ChatbotProvider>
+    </HomeProvider>
   );
 }
 
