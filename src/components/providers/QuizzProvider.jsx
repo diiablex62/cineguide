@@ -6,7 +6,7 @@ export default function QuizzProvider({ children }) {
   const [questionsPerso, setQuestionsPerso] = useState([dataPerso]);
 
   const updateQuestionsPerso = (values) => {
-    setQuestionsPerso([...questionsPerso, values]);
+    // setQuestionsPerso([...questionsPerso, values]);
     console.log(questionsPerso);
   };
   return (

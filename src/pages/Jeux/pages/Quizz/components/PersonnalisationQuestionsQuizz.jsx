@@ -34,7 +34,7 @@ export default function PersonnalisationQuestionsQuizz() {
             </div>
           </div>
           <form
-            onSubmit={onSubmit}
+            onSubmit={console.log("lol")}
             className="flex flex-col gap-2.5 items-center w-full"
           >
             <p className="text-fuchsia p-2.5 w-full font-medium">
