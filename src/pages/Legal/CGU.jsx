@@ -4,11 +4,11 @@ import { useTranslation } from "react-i18next";
 const CGU_CONTENT = {
   fr: [
     {
-      titre: "Objet",
+      titre: "Condition General d'Utilisation (CGU)",
       contenu: `Les présentes Conditions Générales d’Utilisation ont pour objet de définir les modalités et conditions d’accès et d’utilisation de l’application [Nom de l’application] par les utilisateurs. En accédant et/ou en utilisant l'application, vous acceptez sans réserve les présentes CGU.`,
     },
     {
-      titre: "Accès au service",
+      titre: "Accès au service", 
       contenu: `L’accès à l'application est possible via un navigateur web à l’adresse suivante : [URL de l'application]. Le service est accessible gratuitement à tout utilisateur disposant d’un accès à Internet. Certains services peuvent nécessiter la création d’un compte utilisateur.`,
     },
     {
@@ -110,7 +110,7 @@ const CGU_CONTENT = {
   ],
   es: [
     {
-      titre: "Objeto",
+      titre: "Propósito",
       contenu: `Estas Condiciones Generales de Uso tienen por objeto definir las modalidades y condiciones de acceso y uso de la aplicación [Nombre de la aplicación] por parte de los usuarios. Al acceder y/o utilizar la aplicación, usted acepta sin reservas estas CGU.`,
     },
     {
@@ -165,7 +165,7 @@ const CGU_CONTENT = {
   ],
   de: [
     {
-      titre: "Zweck",
+      titre: "Nutzungsbedingungen",
       contenu: `Diese Allgemeinen Nutzungsbedingungen regeln die Zugangs- und Nutzungsbedingungen der Anwendung [Name der Anwendung] durch die Nutzer. Durch den Zugriff auf und/oder die Nutzung der Anwendung akzeptieren Sie diese AGB uneingeschränkt.`,
     },
     {

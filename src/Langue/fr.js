@@ -73,6 +73,44 @@ export default {
       regarder: "Regarder",
       dejaAjoute: "Déjà ajouté",
       noFilmAvailable: "Aucun film n'est disponible d'après vos recherches",
+      // Ajout pour les filtres dynamiques
+      plateformes: {
+        Netflix: "Netflix",
+        "Amazon Prime": "Amazon Prime",
+        "Disney+": "Disney+",
+        DisneyPlus: "Disney+",
+        Hulu: "Hulu",
+        // Ajoute toutes les plateformes utilisées dans PlatformeData
+      },
+      genresList: {
+        Action: "Action",
+        Comédie: "Comédie",
+        Drame: "Drame",
+        Horreur: "Horreur",
+        Thriller: "Thriller",
+        "Science-fiction": "Science-fiction",
+        Animation: "Animation",
+        Aventure: "Aventure",
+        Fantastique: "Fantastique",
+        Documentaire: "Documentaire",
+        Romance: "Romance",
+        Policier: "Policier",
+        Psychologique: "Psychologique",
+        "Huis clos": "Huis clos",
+        // Ajoute tous les genres utilisés dans GenreData
+      },
+      languesList: {
+        Français: "Français",
+        Anglais: "Anglais",
+        Espagnol: "Espagnol",
+        Allemand: "Allemand",
+        Italien: "Italien",
+        Portugais: "Portugais",
+        Arabe: "Arabe",
+        Chinois: "Chinois",
+        Japonais: "Japonais",
+        // Ajoute toutes les langues utilisées dans Langue
+      },
     },
     series: {
       noSerieAvailable: "Aucune série n'est disponible d'après vos recherches",

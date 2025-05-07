@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 const CGV_CONTENT = {
   fr: [
     {
-      titre: "Objet",
+      titre: "Conditions Générales de Vente (CGV)",
       contenu: `Les présentes Conditions Générales de Vente ont pour objet de définir les droits et obligations des parties dans le cadre de la vente de services accessibles via l’application [Nom de l’application]. En passant une commande, l’utilisateur accepte sans réserve les présentes CGV.`,
     },
     {
@@ -54,7 +54,7 @@ const CGV_CONTENT = {
   ],
   en: [
     {
-      titre: "Purpose",
+      titre: "General Terms and Conditions of Sale (GTC)",
       contenu: `These General Terms and Conditions of Sale define the rights and obligations of the parties in the context of the sale of services accessible via the [Application Name] application. By placing an order, the user unreservedly accepts these Terms and Conditions.`,
     },
     {
@@ -104,7 +104,7 @@ const CGV_CONTENT = {
   ],
   es: [
     {
-      titre: "Objeto",
+      titre: "Condiciones Generales de Venta (CGV)",
       contenu: `Estas Condiciones Generales de Venta tienen por objeto definir los derechos y obligaciones de las partes en el marco de la venta de servicios accesibles a través de la aplicación [Nombre de la aplicación]. Al realizar un pedido, el usuario acepta sin reservas estas CGV.`,
     },
     {
@@ -154,7 +154,7 @@ const CGV_CONTENT = {
   ],
   de: [
     {
-      titre: "Zweck",
+      titre: " Allgemeine Verkaufsbedingungen (AGB)",
       contenu: `Diese Allgemeinen Verkaufsbedingungen regeln die Rechte und Pflichten der Parteien im Rahmen des Verkaufs von über die Anwendung [Name der Anwendung] zugänglichen Dienstleistungen. Mit der Aufgabe einer Bestellung akzeptiert der Nutzer diese AGB vorbehaltlos.`,
     },
     {

@@ -97,6 +97,43 @@ export default {
       regarder: "Ansehen",
       dejaAjoute: "Bereits hinzugefügt",
       noFilmAvailable: "Kein Film ist entsprechend Ihrer Suche verfügbar",
+      plateformes: {
+        Netflix: "Netflix",
+        "Amazon Prime": "Amazon Prime",
+        "Disney+": "Disney+",
+        DisneyPlus: "Disney+",
+        Hulu: "Hulu",
+        // Füge alle Plattformen aus PlatformeData hinzu
+      },
+      genresList: {
+        Action: "Action",
+        Comédie: "Komödie",
+        Drame: "Drama",
+        Horreur: "Horror",
+        Thriller: "Thriller",
+        "Science-fiction": "Science-Fiction",
+        Animation: "Animation",
+        Aventure: "Abenteuer",
+        Fantastique: "Fantasy",
+        Documentaire: "Dokumentarfilm",
+        Romance: "Romanze",
+        Policier: "Krimi",
+        Psychologique: "Psychologisch",
+        "Huis clos": "Kammerspiel",
+        // Füge alle Genres aus GenreData hinzu
+      },
+      languesList: {
+        Français: "Französisch",
+        Anglais: "Englisch",
+        Espagnol: "Spanisch",
+        Allemand: "Deutsch",
+        Italien: "Italienisch",
+        Portugais: "Portugiesisch",
+        Arabe: "Arabisch",
+        Chinois: "Chinesisch",
+        Japonais: "Japanisch",
+        // Füge alle Sprachen aus Langue hinzu
+      },
     },
     actualites: {
       chargement: "Lade Artikel...",

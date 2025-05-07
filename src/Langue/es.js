@@ -73,6 +73,43 @@ export default {
       regarder: "Ver",
       dejaAjoute: "Ya añadido",
       noFilmAvailable: "Ninguna película está disponible según tu búsqueda",
+      plateformes: {
+        Netflix: "Netflix",
+        "Amazon Prime": "Amazon Prime",
+        "Disney+": "Disney+",
+        DisneyPlus: "Disney+",
+        Hulu: "Hulu",
+        // Agrega todas las plataformas de PlatformeData
+      },
+      genresList: {
+        Action: "Acción",
+        Comédie: "Comedia",
+        Drame: "Drama",
+        Horreur: "Terror",
+        Thriller: "Suspense",
+        "Science-fiction": "Ciencia ficción",
+        Animation: "Animación",
+        Aventure: "Aventura",
+        Fantastique: "Fantasía",
+        Documentaire: "Documental",
+        Romance: "Romance",
+        Policier: "Policíaco",
+        Psychologique: "Psicológico",
+        "Huis clos": "A puerta cerrada",
+        // Agrega todos los géneros de GenreData
+      },
+      languesList: {
+        Français: "Francés",
+        Anglais: "Inglés",
+        Espagnol: "Español",
+        Allemand: "Alemán",
+        Italien: "Italiano",
+        Portugais: "Portugués",
+        Arabe: "Árabe",
+        Chinois: "Chino",
+        Japonais: "Japonés",
+        // Agrega todos los idiomas de Langue
+      },
     },
     actualites: {
       chargement: "Cargando artículos...",

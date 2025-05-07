@@ -19,7 +19,27 @@ export default function Filtre() {
     filterNotSeen,
   } = useContext(FilmContext);
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  // Pour obtenir la valeur d'origine à partir de la traduction (pour le filtre)
+  const getPlatformOriginal = (translated) => {
+    const found = PlatformeData.find(
+      (p) => t(`filter.platformes.${p.name}`, p.name) === translated
+    );
+    return found ? found.name : translated;
+  };
+  const getGenreOriginal = (translated) => {
+    const found = GenreData.find(
+      (g) => t(`filter.genresList.${g.type}`, g.type) === translated
+    );
+    return found ? found.type : translated;
+  };
+  const getLangueOriginal = (translated) => {
+    const found = Langue.find(
+      (l) => t(`filter.languesList.${l.name}`, l.name) === translated
+    );
+    return found ? found.name : translated;
+  };
 
   return (
     <>
@@ -30,7 +50,7 @@ export default function Filtre() {
             openFilter ? "hidden" : "flex"
           }`}>
           <img src='../src/assets/filter.svg' className='w-[20px]' alt='' />
-          {t("home.filtrer", "Filtrer")}
+          {t("filter.filtrer", "Filtrer")}
         </button>
       </div>
       <div
@@ -44,36 +64,44 @@ export default function Filtre() {
             </button>
           </div>
           <h2 className='font-bold text-3xl dark:text-white'>
-            {t("home.trier", "Trier")}
+            {t("filter.trier", "Trier")}
           </h2>
           <p className='dark:text-white'>
-            {t("home.parPlateforme", "Par plateforme :")}
+            {t("filter.parPlateforme", "Par plateforme :")}
           </p>
           <div className='flex flex-wrap gap-3 items-center mt-4'>
-            {PlatformeData.map((platforme, index) => (
-              <a
-                onClick={(e) => {
-                  e.preventDefault();
-                  filterPlatform(platforme.name);
-                  document.querySelectorAll(".platform-link").forEach((el) => {
-                    el.classList.remove("bg-black!", "text-white!");
-                  });
-                  e.target.classList.add("bg-black!", "text-white!");
-                  document
-                    .querySelectorAll('input[name="see"]')
-                    .forEach((el) => {
-                      el.checked = false;
-                    });
-                }}
-                href='#'
-                key={index}
-                className='platform-link text-[12px] bg-white hover:bg-black hover:text-white text-black border flex rounded items-center justify-center text-center w-[50px] h-[50px]'>
-                {platforme.name}
-              </a>
-            ))}
+            {PlatformeData.map((platforme, index) => {
+              const translated = t(
+                `filter.platformes.${platforme.name}`,
+                platforme.name
+              );
+              return (
+                <a
+                  onClick={(e) => {
+                    e.preventDefault();
+                    filterPlatform(platforme.name);
+                    document
+                      .querySelectorAll(".platform-link")
+                      .forEach((el) => {
+                        el.classList.remove("bg-black!", "text-white!");
+                      });
+                    e.target.classList.add("bg-black!", "text-white!");
+                    document
+                      .querySelectorAll('input[name="see"]')
+                      .forEach((el) => {
+                        el.checked = false;
+                      });
+                  }}
+                  href='#'
+                  key={index}
+                  className='platform-link text-[12px] bg-white hover:bg-black hover:text-white text-black border flex rounded items-center justify-center text-center w-[50px] h-[50px]'>
+                  {translated}
+                </a>
+              );
+            })}
           </div>
           <p className='mt-5 mb-2 dark:text-white'>
-            {t("home.afficher", "Afficher :")}
+            {t("filter.afficher", "Afficher :")}
           </p>
           <div className='flex items-center gap-1 mb-2'>
             <input
@@ -93,7 +121,7 @@ export default function Filtre() {
               }}
             />
             <label htmlFor='all' className='dark:text-white'>
-              {t("home.tous", "Tous")}
+              {t("filter.tous", "Tous")}
             </label>
           </div>
           <div className='flex items-center gap-1 mb-2'>
@@ -114,7 +142,7 @@ export default function Filtre() {
               className='peer appearance-none w-5 h-5 border-2 dark:border-white border-black rounded-full bg-white checked:bg-black transition-colors duration-300'
             />
             <label htmlFor='see' className='dark:text-white'>
-              {t("home.filmDejaVu", "Film que j’ai déjà vu")}
+              {t("filter.filmDejaVu", "Film que j’ai déjà vu")}
             </label>
           </div>
 
@@ -136,55 +164,68 @@ export default function Filtre() {
               className='peer appearance-none w-5 h-5 border-2 dark:border-white border-black rounded-full bg-white checked:bg-black transition-colors duration-300'
             />
             <label htmlFor='notsee' className='dark:text-white'>
-              {t("home.filmPasVu", "Film que je n'ai pas vu")}
+              {t("filter.filmPasVu", "Film que je n'ai pas vu")}
             </label>
           </div>
 
           <p className='mt-5 mb-2 dark:text-white'>
-            {t("home.genres", "Genres :")}
+            {t("filter.genres", "Genres :")}
           </p>
           <div className='flex flex-wrap gap-3 items-center mt-4'>
-            {GenreData.map((genre, index) => (
-              <a
-                href='#'
-                onClick={(e) => {
-                  e.preventDefault();
-                  filterGender(genre.type);
-                  document.querySelectorAll(".genre-link").forEach((el) => {
-                    el.classList.remove("bg-black!", "text-white!");
-                  });
-                  e.target.classList.add("bg-black!", "text-white!");
-                  document
-                    .querySelectorAll('input[name="see"]')
-                    .forEach((el) => {
-                      el.checked = false;
+            {GenreData.map((genre, index) => {
+              const translated = t(
+                `filter.genresList.${genre.type}`,
+                genre.type
+              );
+              return (
+                <a
+                  href='#'
+                  onClick={(e) => {
+                    e.preventDefault();
+                    filterGender(genre.type);
+                    document.querySelectorAll(".genre-link").forEach((el) => {
+                      el.classList.remove("bg-black!", "text-white!");
                     });
-                }}
-                key={index}
-                className='genre-link text-[12px] bg-white hover:bg-black hover:text-white text-black border flex rounded items-center justify-center text-center p-2'>
-                {genre.type}
-              </a>
-            ))}
+                    e.target.classList.add("bg-black!", "text-white!");
+                    document
+                      .querySelectorAll('input[name="see"]')
+                      .forEach((el) => {
+                        el.checked = false;
+                      });
+                  }}
+                  key={index}
+                  className='genre-link text-[12px] bg-white hover:bg-black hover:text-white text-black border flex rounded items-center justify-center text-center p-2'>
+                  {translated}
+                </a>
+              );
+            })}
           </div>
           <p className='mt-5 mb-2 dark:text-white'>
-            {t("home.langues", "Langues :")}
+            {t("filter.langues", "Langues :")}
           </p>
           <select
             className='bg-white w-full text-black border border-black rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-black'
-            onChange={(e) => filterLanguage(e.target.value)}>
+            onChange={(e) => {
+              // Trouver la langue d'origine à partir de la valeur traduite
+              const selected = e.target.value;
+              const original = getLangueOriginal(selected);
+              filterLanguage(original);
+            }}>
             {Langue.map((langue) => (
-              <option key={langue.id} value={langue.name}>
-                {langue.name}
+              <option
+                key={langue.id}
+                value={t(`filter.languesList.${langue.name}`, langue.name)}>
+                {t(`filter.languesList.${langue.name}`, langue.name)}
               </option>
             ))}
           </select>
           <p className='mt-5 mb-2 dark:text-white'>
-            {t("home.motsCles", "Mots-clés :")}
+            {t("filter.motsCles", "Mots-clés :")}
           </p>
           <input
             type='text'
             onChange={(e) => searchMovie(e.target.value)}
-            placeholder={t("home.filtrerParMotCles", "Filtrer par mot clés")}
+            placeholder={t("filter.filtrerParMotCles", "Filtrer par mot clés")}
             className='w-full px-4 py-1 border border-black rounded bg-white text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-black'
           />
         </div>

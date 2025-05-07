@@ -128,5 +128,13 @@ export default {
       titre: "Games",
       contenu: "Have fun with Cineguide games.",
     },
+    plateformes: {
+      Netflix: "Netflix",
+      "Amazon Prime": "Amazon Prime",
+      "Disney+": "Disney+",
+      DisneyPlus: "Disney+",
+      Hulu: "Hulu",
+      // ...autres plateformes...
+    },
   },
 };
