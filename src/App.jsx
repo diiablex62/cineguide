@@ -16,6 +16,7 @@ import { ChatbotProvider } from "./components/providers/ChatbotProvider";
 import ChatbotUI from "./components/chatbot/ChatbotUI";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
+import "./Langue/i18n";
 
 function App() {
   const { isLoggedIn } = useContext(AuthContext);
