@@ -1,0 +1,18 @@
+[
+  {
+    "type": { "fr": "Action", "en": "Action", "es": "Acción", "de": "Action" }
+  },
+  {
+    "type": {
+      "fr": "Comédie",
+      "en": "Comedy",
+      "es": "Comedia",
+      "de": "Komödie"
+    }
+  },
+  { "type": { "fr": "Drame", "en": "Drama", "es": "Drama", "de": "Drama" } },
+  {
+    "type": { "fr": "Horreur", "en": "Horror", "es": "Terror", "de": "Horror" }
+  }
+  // ...ajoute tous les genres nécessaires
+]

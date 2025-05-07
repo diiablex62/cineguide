@@ -11,7 +11,7 @@ export default function ResumeSerie() {
   }
 
   return (
-    <div className="w-full flex-1">
+    <div className="md:w-2/3 w-full">
       <div className="w-full text-center justify-center items-center">
         <div className="mb-8">
           <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-200">

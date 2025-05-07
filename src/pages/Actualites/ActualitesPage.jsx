@@ -87,8 +87,8 @@ export default function ActualitesPage() {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-white dark:bg-black">
-        <p className="text-gray-800 dark:text-white">
+      <div className='flex justify-center items-center min-h-screen bg-white dark:bg-black'>
+        <p className='text-gray-800 dark:text-white'>
           Chargement des articles...
         </p>
       </div>
@@ -96,12 +96,12 @@ export default function ActualitesPage() {
   }
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold text-[var(--color-fuchsia)] mb-6 w-full md:w-[50%] mx-auto text-left">
+    <div className='p-6'>
+      <h2 className='text-2xl font-bold text-[var(--color-fuchsia)] mb-6 w-full md:w-[50%] mx-auto text-left'>
         ACTUALITÉS
       </h2>
       {renderArticles()}
-      <div className="flex justify-center mt-6">
+      <div className='flex justify-center mt-6'>
         {Array.from(
           { length: Math.ceil(articles.length / articlesPerPage) },
           (_, index) => (
@@ -112,9 +112,8 @@ export default function ActualitesPage() {
                 currentPage === index + 1
                   ? "bg-[var(--color-fuchsia)] text-white"
                   : "bg-white text-black border-gray-300 hover:bg-gray-100"
-              }`}
-            >
-              {index + 1}
+              }`}>
+              Page {index + 1}
             </button>
           )
         )}
