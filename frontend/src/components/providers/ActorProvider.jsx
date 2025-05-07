@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { ActorContext } from "../../context/ActorContext";
-import ActorData from "../../data/Acteurs.json";
 import { useNavigate } from "react-router-dom";
 import FilmParActeur from "../../data/FilmParActeur.json";
 import Recompenses from "../../data/Recompense.json";
