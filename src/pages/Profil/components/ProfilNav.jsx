@@ -11,6 +11,7 @@ import { IoMdClose } from "react-icons/io";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import avatar from "../../../assets/profil/avatar.svg";
 
 export default function ProfilNav() {
   const [citation, setCitation] = useState(userData.textPerso);
@@ -34,7 +35,7 @@ export default function ProfilNav() {
     setCitation(data.citation);
     setModalOpen(false);
   };
-  const [previewImage, setPreviewImage] = useState(userData.avatar);
+  const [previewImage, setPreviewImage] = useState(avatar);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
