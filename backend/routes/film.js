@@ -1,6 +1,5 @@
-const { add, getAll } = require("../controllers/film-controller");
-
 const router = require("express").Router();
+const { add, getAll } = require("../controllers/film-controller");
 
 router.post("/add", add);
 router.get("/getAll", getAll);
