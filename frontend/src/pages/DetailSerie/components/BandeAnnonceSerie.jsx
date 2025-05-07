@@ -10,7 +10,7 @@ export default function BandeAnnonce() {
           Vidéos: Trailer, Teaser, Bandes-annonces
         </h2>
         <div className="flex  justify-center items-center">
-          <div className="relative w-full">
+          <div className="relative w-full flex  justify-center items-center">
             <div className="bg-gray-800 w-full md:w-1/2 h-80 flex items-center justify-center  overflow-hidden shadow-lg">
               <iframe
                 width="100%"
