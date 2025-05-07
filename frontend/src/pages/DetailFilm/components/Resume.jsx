@@ -29,7 +29,7 @@ export default function Resume() {
           <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-200">
             Casting
           </h2>
-          <div className="flex flex-wrap gap-2 justify-center items-center">
+          <div className=" mb-8 flex flex-wrap gap-2 justify-center items-center">
             {detailFilm.acteurs.map((actor) => (
               <div
                 key={actor}
