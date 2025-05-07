@@ -16,7 +16,11 @@ export default function AccueilActeur() {
         <div className="flex flex-col justify-between gap-5 px-5 py-3.5 max-1100:items-center max-1100:w-full">
           <p className="max-1100:text-center">
             Métiers :{" "}
-            <span className="font-bold">{actor.metiers.join(", ")}</span>
+            <span className="font-bold">
+              {Array.isArray(actor.metiers)
+                ? actor.metiers.join(", ")
+                : actor.metiers}
+            </span>
           </p>
           <p className="max-1100:text-center">
             Nom de naissance :{" "}
