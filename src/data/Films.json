@@ -1,0 +1,19 @@
+[
+  {
+    "titre": {
+      "fr": "Le Lodge",
+      "en": "The Lodge",
+      "es": "El Refugio",
+      "de": "The Lodge"
+    },
+    "synopsis": {
+      "fr": "Un thriller psychologique dans un chalet isolé.",
+      "en": "A psychological thriller in an isolated lodge.",
+      "es": "Un thriller psicológico en un refugio aislado.",
+      "de": "Ein psychologischer Thriller in einer abgelegenen Hütte."
+    },
+    "genre": ["Horreur", "Psychologique", "Huis clos"]
+    // ...autres champs...
+  }
+  // ...autres films...
+]

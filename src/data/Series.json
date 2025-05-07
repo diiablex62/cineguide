@@ -1,0 +1,19 @@
+[
+  {
+    "titre": {
+      "fr": "La Casa de Papel",
+      "en": "Money Heist",
+      "es": "La Casa de Papel",
+      "de": "Haus des Geldes"
+    },
+    "synopsis": {
+      "fr": "Un groupe de braqueurs attaque la Fabrique nationale de la monnaie.",
+      "en": "A group of robbers attacks the national mint.",
+      "es": "Un grupo de atracadores asalta la Fábrica Nacional de Moneda.",
+      "de": "Eine Gruppe von Räubern überfällt die nationale Münzprägeanstalt."
+    },
+    "genre": ["Action", "Drame", "Thriller"]
+    // ...autres champs...
+  }
+  // ...autres séries...
+]

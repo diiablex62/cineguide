@@ -23,7 +23,7 @@ function App() {
 
   return (
     <HomeProvider>
-      <div className="min-h-screen flex flex-col w-full dark:bg-black bg-white">
+      <div className='min-h-screen flex flex-col w-full dark:bg-black bg-white'>
         <ThemeProvider>
           <LangageProvider>
             <MenuProvider>

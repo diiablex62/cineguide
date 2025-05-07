@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ArticleCard from "../../components/actu/ArticleCard";
 import FirstArticleCard from "../../components/actu/FirstArticleCard";
-import { useTranslation } from "react-i18next"; // Ajout
 
 const fetchRSSArticles = async (rssUrl) => {
   const proxyUrl = "https://api.allorigins.win/get?url=";
@@ -32,7 +31,6 @@ export default function ActualitesPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const articlesPerPage = 5;
   const navigate = useNavigate();
-  const { t } = useTranslation(); // Ajout
 
   useEffect(() => {
     const loadArticles = async () => {
@@ -89,21 +87,21 @@ export default function ActualitesPage() {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-white dark:bg-black">
-        <p className="text-gray-800 dark:text-white">
-          {t("actualites.chargement", "Chargement des articles...")}
+      <div className='flex justify-center items-center min-h-screen bg-white dark:bg-black'>
+        <p className='text-gray-800 dark:text-white'>
+          Chargement des articles...
         </p>
       </div>
     );
   }
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold text-[var(--color-fuchsia)] mb-6 w-full md:w-[50%] mx-auto text-left">
-        {t("actualites.titre", "ACTUALITÉS")}
+    <div className='p-6'>
+      <h2 className='text-2xl font-bold text-[var(--color-fuchsia)] mb-6 w-full md:w-[50%] mx-auto text-left'>
+        ACTUALITÉS
       </h2>
       {renderArticles()}
-      <div className="flex justify-center mt-6">
+      <div className='flex justify-center mt-6'>
         {Array.from(
           { length: Math.ceil(articles.length / articlesPerPage) },
           (_, index) => (
@@ -114,9 +112,8 @@ export default function ActualitesPage() {
                 currentPage === index + 1
                   ? "bg-[var(--color-fuchsia)] text-white"
                   : "bg-white text-black border-gray-300 hover:bg-gray-100"
-              }`}
-            >
-              {t("actualites.page", "Page")} {index + 1}
+              }`}>
+              Page {index + 1}
             </button>
           )
         )}

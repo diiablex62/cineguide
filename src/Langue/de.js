@@ -33,8 +33,108 @@ export default {
       repondreIntro: "Beantworte diese Fragen, um das Quiz zu personalisieren:",
       maReponse: "Meine Antwort",
       resultat: "Quiz-Ergebnis",
-      question: "Frage {{num}}:"
-    }
-    // ...weitere Schlüssel nach Bedarf hinzufügen...
-  }
+      question: "Frage {{num}}:",
+    },
+    header: {
+      accueil: "Startseite",
+      films: "Filme",
+      series: "Serien",
+      actualites: "Nachrichten",
+      jeux: "Spiele",
+      plus: "Mehr",
+      connexion: "Anmelden",
+      inscription: "Registrieren",
+      monCompte: "Mein Konto",
+      deconnexion: "Abmelden",
+      rechercherPlaceholder:
+        "Suche nach einem Film, einer Serie, einem Schauspieler ...",
+    },
+    footer: {
+      accueil: "Startseite",
+      films: "Filme",
+      series: "Serien",
+      actualites: "Nachrichten",
+      plus: "Mehr",
+      mentionsLegales: "Impressum",
+      cgu: "Nutzungsbedingungen",
+      cgv: "Verkaufsbedingungen",
+      faq: "FAQ",
+    },
+    home: {
+      titre: "CINEGUIDE: Alle deine Lieblingsfilme und -serien an einem Ort",
+      slogan:
+        "Durchsuche, finde und schaue Filme und Serien von über 300 Diensten.",
+      etBienDautres: "und viele mehr",
+      top10: "Top 10 diese Woche >",
+      meilleuresSeriesAction: "Beste Actionserien >",
+      parceQueVousAimez: 'Weil du "Peaky Blinders" magst',
+      onRegardeQuoi: "Was schauen wir heute Abend?",
+      erreurGenre: "Bitte wähle ein Genre aus",
+      genre: "GENRE:",
+      selectionnezGenre: "Wähle ein Genre",
+      erreurType: "Bitte wähle mindestens einen Typ aus",
+      type: "TYP:",
+      film: "Film",
+      serie: "Serie",
+      note: "BEWERTUNG:",
+      selectionnezNote: "Wähle eine Bewertung",
+      noteChefOeuvre: "9 bis 10 - Meisterwerk",
+      noteTresBon: "7 bis 9 - Sehr gut",
+      noteMoyen: "4 bis 7 - Mittelmäßig",
+      noteMauvais: "0 bis 4 - Schlecht",
+      trouverUnFilm: "FILM FINDEN",
+      aucunResultat: "Kein ",
+      filmOuSerie: "Film oder Serie",
+      neCorrespond: "entspricht deinen Kriterien nicht 😕",
+      essayezFiltres:
+        "Versuche, die Filter zu ändern, um mehr Ergebnisse zu erhalten",
+      pasInspiration: "Keine Inspiration für heute Abend? 🎬",
+      utilisezFiltres:
+        'Nutze die Filter und klicke auf "FILM FINDEN", um eine personalisierte Empfehlung zu erhalten!',
+      aVoir: "Zu sehen",
+      dejaVu: "Schon gesehen",
+      pasEncoreVu: "Noch nicht gesehen",
+      regarder: "Ansehen",
+      dejaAjoute: "Bereits hinzugefügt",
+      noFilmAvailable: "Kein Film ist entsprechend Ihrer Suche verfügbar",
+    },
+    actualites: {
+      chargement: "Lade Artikel...",
+      titre: "NACHRICHTEN",
+      page: "Seite",
+    },
+    cgu: {
+      titre: "Nutzungsbedingungen",
+      contenu: "Hier sind die Nutzungsbedingungen von Cineguide.",
+    },
+    cgv: {
+      titre: "Verkaufsbedingungen",
+      contenu: "Hier sind die Verkaufsbedingungen von Cineguide.",
+    },
+    mentionsLegales: {
+      titre: "Impressum",
+      contenu: "Hier ist das Impressum von Cineguide.",
+    },
+    faq: {
+      titre: "FAQ",
+      contenu: "Hier ist der FAQ-Bereich von Cineguide.",
+    },
+    profil: {
+      titre: "Mein Profil",
+      contenu: "Willkommen in deinem Cineguide-Profil.",
+    },
+    film: {
+      titre: "Filme",
+      contenu: "Durchsuche alle auf Cineguide verfügbaren Filme.",
+    },
+    series: {
+      titre: "Serien",
+      contenu: "Durchsuche alle auf Cineguide verfügbaren Serien.",
+      noSerieAvailable: "Keine Serie ist entsprechend Ihrer Suche verfügbar",
+    },
+    jeux: {
+      titre: "Spiele",
+      contenu: "Viel Spaß mit den Cineguide-Spielen.",
+    },
+  },
 };

@@ -9,7 +9,7 @@ export default function NotFound() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate('/');
+      navigate("/");
     }, 5000);
 
     return () => clearTimeout(timer);
@@ -34,7 +34,10 @@ export default function NotFound() {
           {t("notfound.title", "Vous vous êtes égaré ?")}
         </h1>
         <p className='text-base md:text-lg mb-8'>
-          {t("notfound.text", "Désolé, nous n'avons pas trouvé cette page. Vous trouverez d'autres films et séries à explorer sur la page d'accueil.")}
+          {t(
+            "notfound.text",
+            "Désolé, nous n'avons pas trouvé cette page. Vous trouverez d'autres films et séries à explorer sur la page d'accueil."
+          )}
         </p>
         <Link
           to='/'
