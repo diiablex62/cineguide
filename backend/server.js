@@ -8,8 +8,11 @@ const serieRoutes = require("./routes/serie");
 const saisonRoutes = require("./routes/saison");
 const episodeRoutes = require("./routes/episode");
 
+const acteurRoutes = require("./routes/acteurs");
+const filmRoutes = require("./routes/film");
 const app = express();
 app.use(express.json());
+
 app.use(
   cors({
     origin: "*",
@@ -23,12 +26,13 @@ app.use("/api/users", userRoutes);
 app.use("/api/series", serieRoutes);
 app.use("/api/saisons", saisonRoutes);
 app.use("/api/episodes", episodeRoutes);
+app.use("/api/acteurs", acteurRoutes);
+app.use("/api/films", filmRoutes);
 
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    app.listen(port, () => {
-      console.log(`Connected to db & listening on port: ${port}`);
-    });
+    console.log("Connexion Mongo DB OK");
   })
   .catch((err) => console.log(err));
+app.listen(process.env.PORT);
