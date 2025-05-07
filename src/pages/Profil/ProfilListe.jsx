@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ListeFilm from "../../data/Film.json";
 import Pagination from "../../components/pagination/Pagination";
 import ProfilNav from "./components/ProfilNav";
+import { NavLink } from "react-router-dom";
 export default function ProfilListe() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 18;
@@ -12,9 +13,9 @@ export default function ProfilListe() {
       <ProfilNav></ProfilNav>
       <div className="flex flex-wrap items-center justify-center gap-4">
         {films.map((film) => (
-          <a href="#">
+          <NavLink to={`/detailfilm/${film.id}`}>
             <img className="w-[180px]" src={film.image} alt="" />
-          </a>
+          </NavLink>
         ))}
       </div>
       <div className="flex justify-center">

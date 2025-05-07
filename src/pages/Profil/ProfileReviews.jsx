@@ -3,6 +3,7 @@ import Review from "../../data/Activiter.json";
 import Film from "../../data/Film.json";
 import Pagination from "../../components/pagination/Pagination";
 import ProfilNav from "./components/ProfilNav";
+import { NavLink } from "react-router-dom";
 export default function ProfileReviews() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -16,7 +17,7 @@ export default function ProfileReviews() {
           const film = Film.find((f) => f.id === item.idFilm);
           if (!film) return null;
           return (
-            <a href="">
+            <NavLink to={`/detailfilm/${film.id}`}>
               <div
                 key={item.id}
                 className="review-item flex flex-col items-center border p-4 mb-3 mt-3 min-w-[300px] max-w-[300px] min-h-[550px] max-h-[550px] "
@@ -34,7 +35,7 @@ export default function ProfileReviews() {
                   Voir
                 </button>
               </div>
-            </a>
+            </NavLink>
           );
         })}
       </div>

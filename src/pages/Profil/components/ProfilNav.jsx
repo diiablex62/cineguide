@@ -11,6 +11,7 @@ import { IoMdClose } from "react-icons/io";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import avatar from "../../../assets/profil/avatar.svg";
 
 export default function ProfilNav() {
   const [citation, setCitation] = useState(userData.textPerso);
@@ -34,10 +35,40 @@ export default function ProfilNav() {
     setCitation(data.citation);
     setModalOpen(false);
   };
+  const [previewImage, setPreviewImage] = useState(avatar);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
-    <div className="p-5">
+    <div className="p-5 dark:text-white">
       <div className="flex items-end">
-        <img src={userData.avatar} alt="" />
+        <label
+          htmlFor="upload-avatar"
+          className="cursor-pointer flex justify-center items-center relative group"
+        >
+          <FaPen className="absolute text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <img
+            className="w-[100px] h-[100px] object-cover"
+            src={previewImage}
+            alt="Avatar"
+          />
+        </label>
+        <input
+          type="file"
+          id="upload-avatar"
+          accept="image/*"
+          className="hidden"
+          onChange={handleImageChange}
+        />
         <p className="font-bold text-4xl mb-3">
           {userData.firstname}.{userData.lastname.charAt(0)}
         </p>

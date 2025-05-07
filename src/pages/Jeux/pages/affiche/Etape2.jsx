@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import image from "../../../../assets/jeux/affichetest.svg";
 import { AfficheContext } from "../../../../context/AfficheContext";
 export default function Etape2() {
@@ -16,27 +16,19 @@ export default function Etape2() {
     stepGame,
     winOrLoose,
     setWinOrLoose,
+    setReponse,
     affiche,
+    endGame,
   } = useContext(AfficheContext);
 
-  function submitReponse(event) {
-    event.preventDefault();
-    const inputValue = event.target.reponse.value;
-    console.log(reponse.toLowerCase() === inputValue.toLowerCase());
-
-    if (reponse.toLowerCase() === inputValue.toLowerCase()) {
-      setWinOrLoose(true);
-      setStepGame(3);
-    } else if (countDetails === 0 && countIndice === 0) {
-      setStepGame(3);
-      setWinOrLoose(false);
-    } else {
-      console.log(bug);
+  useEffect(() => {
+    if (affiche) {
+      setReponse(affiche.titre.toLowerCase());
     }
-  }
+  }, [affiche]);
 
   return (
-    <div className="w-full lg:w-6/8 lg:flex lg:flex-col  lg:h-screen  px-10">
+    <div className="w-full lg:w-6/8 lg:flex lg:flex-col  px-10 bg-white mt-5 shadow rounded-r-xl ">
       <div className="flex flex-col justify-center lg:flex-start mt-5 w-full">
         <h2 className="font-medium text-center lg:text-start text-xl">
           Bienvenue dans Affiche brouillées
@@ -51,9 +43,10 @@ export default function Etape2() {
         </div>
       </div>
 
-      <div className="flex flex-col  lg:flex-row lg: mt-30">
-        <div className="lg:min-w-[350px] lg:max-w-[350px] w-full flex justify-center">
+      <div className="flex flex-col  lg:flex-row lg: mt-2 mb-10">
+        <div className="lg:min-w-[310px] lg:max-w-[310px] w-full flex items-center justify-center">
           <img
+            className="object-cover"
             style={{ filter: `blur(${blurLevel}px)` }}
             src={affiche.affiche}
             alt=""
@@ -105,15 +98,16 @@ export default function Etape2() {
             </div>
           </div>
           <form
-            onSubmit={submitReponse}
+            onSubmit={endGame}
             className="flex flex-col items-center justify-center mt-10"
           >
-            <label htmlFor="reponse" className="mt-5">
+            <label htmlFor="reponse " className="mt-5">
               Taper votre réponse :
             </label>
             <input
               className="border my-5 w-full h-[40px] px-2"
               id="reponse"
+              name="reponse"
               type="text"
             />
             <button className="bg-fuchsia text-white px-4 py-2 cursor-pointer">

@@ -27,7 +27,7 @@ export default function FilmProposer() {
   return (
     <div className="w-full flex-1 text-center justify-center items-center">
       <div className="mt-8">
-        <h2 className="font-bold mb-4 text-sm uppercase text-black dark:text-gray-400">
+        <h2 className="font-bold mb-4 text-sm uppercase text-black dark:text-gray-200">
           Ça pourrait vous intéresser
         </h2>
         <div className="flex overflow-x-auto gap-4 pb-4">
@@ -37,7 +37,7 @@ export default function FilmProposer() {
         </div>
 
         <div className="mt-12">
-          <h2 className="font-bold mb-4 text-sm uppercase text-black dark:text-gray-400">
+          <h2 className="font-bold mb-4 text-sm uppercase text-black dark:text-gray-200">
             Films populaires
           </h2>
           <div className="flex overflow-x-auto gap-4 pb-4">
@@ -48,7 +48,7 @@ export default function FilmProposer() {
         </div>
 
         <div className="mt-8">
-          <h2 className="font-bold mb-4 text-sm uppercase text-black dark:text-gray-400">
+          <h2 className="font-bold mb-4 text-sm uppercase text-black dark:text-gray-200">
             Films Drame
           </h2>
           <div className="flex overflow-x-auto gap-4 pb-4">

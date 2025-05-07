@@ -55,7 +55,7 @@ const ChatbotUI = () => {
     handleSend,
     renderKeywords,
     resetChatbot,
-    handleTagClick, // <-- récupère la fonction
+    handleTagClick, 
   } = useChatbot();
 
   const { isLoggedIn } = useContext(AuthContext);
@@ -77,7 +77,6 @@ const ChatbotUI = () => {
     if (isAtBottom) {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
-    // sinon, ne scroll pas automatiquement
   }, [messages]);
 
   // Scroll toujours vers le bas à chaque nouveau message
@@ -127,7 +126,7 @@ const ChatbotUI = () => {
   async function sendMessageToMistral(messages) {
     const body = {
       model: "mistral-tiny",
-      messages: messages, // [{role, content}]
+      messages: messages, 
     };
     try {
       const response = await fetch(
