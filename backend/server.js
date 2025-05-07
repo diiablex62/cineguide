@@ -20,9 +20,7 @@ const routes = require("./routes");
 app.use(routes);
 
 mongoose
-  .connect(
-    "mongodb+srv://devbaptiste15:8wJfZ7jjNysuvMrw@cineguide.9erb8yt.mongodb.net/cineguide"
-  )
+  .connect(process.env.MONGO_URI)
   .then(() => {
     console.log("Connexion Mongo DB OK");
   })
