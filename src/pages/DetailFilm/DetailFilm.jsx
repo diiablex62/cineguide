@@ -3,6 +3,7 @@ import { Link, NavLink, Outlet, useParams } from "react-router-dom";
 import Film from "./components/Film";
 import { FilmContext } from "../../context/FilmContext";
 import { ActorContext } from "../../context/ActorContext";
+import Resume from "./components/Resume";
 
 export default function DetailFilm() {
   const { id } = useParams();
@@ -30,12 +31,7 @@ export default function DetailFilm() {
           >
             Afficher tout
           </NavLink>
-          <NavLink
-            to={"resume"}
-            className={`bg-fuchsia hover:bg-fuchsia-hover text-white px-3 py-1 text-xs md:text-lg transition-colors`}
-          >
-            Résumé
-          </NavLink>
+         
           <NavLink
             to={"bandeannonce"}
             className={`bg-fuchsia hover:bg-fuchsia-hover text-white px-3 py-1 text-xs md:text-lg transition-colors`}
@@ -58,8 +54,11 @@ export default function DetailFilm() {
       </nav>
 
       <div className="w-full p-4">
-        <div className="flex flex-col md:flex-row-reverse">
-          <Film />
+        <div className="flex flex-col ">
+          <div className="flex md:flex-row-reverse flex-col w-full ">
+            <Film />
+            <Resume />
+          </div>
           <Outlet />
         </div>
       </div>

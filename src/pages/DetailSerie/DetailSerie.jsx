@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Link, NavLink, Outlet, useParams } from "react-router-dom";
 import Serie from "./components/Serie";
+import ResumeSerie from "./components/ResumeSerie";
 import { SerieContext } from "../../context/SerieContext";
 
 export default function DetailSerie() {
@@ -25,12 +26,7 @@ export default function DetailSerie() {
           >
             Afficher tout
           </NavLink>
-          <NavLink
-            to={"resumeserie"}
-            className={`bg-fuchsia hover:bg-fuchsia-hover text-white px-3 py-1 text-xs md:text-lg transition-colors`}
-          >
-            Résumé
-          </NavLink>
+
           <NavLink
             to={"bandeannonceserie"}
             className={`bg-fuchsia hover:bg-fuchsia-hover text-white px-3 py-1 text-xs md:text-lg transition-colors`}
@@ -53,8 +49,11 @@ export default function DetailSerie() {
       </nav>
 
       <div className="w-full p-4">
-        <div className="flex flex-col md:flex-row-reverse w-full">
-          <Serie />
+        <div className="flex flex-col  w-full">
+          <div className="flex md:flex-row-reverse flex-col w-full ">
+            <Serie />
+            <ResumeSerie />
+          </div>
           <Outlet />
         </div>
       </div>
