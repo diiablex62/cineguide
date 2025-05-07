@@ -2,24 +2,29 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const port = process.env.PORT || 4000;
-const userRoutes = require("./routes/users");
 
 const app = express();
 app.use(express.json());
+
 app.use(
   cors({
     origin: "*",
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    credentials: true,
+    allowedHeaders: ["Content-Type"],
   })
 );
 
-app.use("/api/users", userRoutes);
+const routes = require("./routes");
+
+app.use(routes);
 
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(
+    "mongodb+srv://devbaptiste15:8wJfZ7jjNysuvMrw@cineguide.9erb8yt.mongodb.net/cineguide"
+  )
   .then(() => {
-    app.listen(port, () => {
-      console.log(`Connected to db & listening on port: ${port}`);
-    });
+    console.log("Connexion Mongo DB OK");
   })
   .catch((err) => console.log(err));
+app.listen(process.env.PORT);
