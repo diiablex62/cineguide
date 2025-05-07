@@ -57,19 +57,19 @@ export default function CardSerie() {
                   <div className="flex flex-col ">
                     <button
                       onClick={() => toggleState(setGoSeeStates, index)}
-                      className={`mt-2 cursor-pointer text-white w-[150px] h-[50px] lg:text-[15px] ${
+                      className={`mt-2 cursor-pointer text-white w-[130px] h-[40px] lg:text-[15px] ${
                         goSeeStates[index] ? "bg-gray-fonce" : "bg-gray-400"
                       }`}
                     >
                       {goSeeStates[index] ? "+ A voir" : "Déjà ajouté"}
                     </button>
                     <div className="flex">
-                      <button className="mt-2 mr-2 cursor-pointer bg-fuchsia text-white w-[250px] h-[50px] lg:text-[15px]">
+                      <button className="mt-2 mr-2 cursor-pointer bg-fuchsia text-white w-[130px] h-[40px] lg:text-[15px]">
                         Regarder
                       </button>
                       <button
                         onClick={() => toggleState(setAlreadySeenStates, index)}
-                        className={`mt-2 cursor-pointer text-white w-[150px] h-[50px] lg:text-[15px] ${
+                        className={`mt-2 cursor-pointer text-white w-[130px] h-[40px] lg:text-[15px] ${
                           alreadySeenStates[index]
                             ? "bg-green-600"
                             : "bg-red-400"
