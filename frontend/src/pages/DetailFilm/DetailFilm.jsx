@@ -31,7 +31,7 @@ export default function DetailFilm() {
           >
             Afficher tout
           </NavLink>
-         
+
           <NavLink
             to={"bandeannonce"}
             className={`bg-fuchsia hover:bg-fuchsia-hover text-white px-3 py-1 text-xs md:text-lg transition-colors`}
