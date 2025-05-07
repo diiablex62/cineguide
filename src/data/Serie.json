@@ -1,0 +1,3392 @@
+[
+  {
+    "id": 1,
+    "titre": "Breaking Bad",
+    "synopsis": "Un professeur de chimie atteint d'un cancer devient fabricant de méthamphétamine pour assurer l'avenir financier de sa famille.",
+    "image": "https://fr.web.img4.acsta.net/c_310_420/pictures/19/06/18/12/11/3956503.jpg",
+    "acteurs": ["Bryan Cranston", "Aaron Paul", "Anna Gunn"],
+    "note": 9.5,
+    "dateDebut": "2008-01-20",
+    "dateFin": "2013-09-29",
+    "createur": "Vince Gilligan",
+    "bandeAnnonce": "https://www.youtube.com/watch?v=HhesaQXLuRY",
+    "genre": ["Drame", "Crime", "Thriller"],
+    "paysProduction": ["États-Unis"],
+    "platforms": ["Netflix", "AMC"],
+    "langues": ["Anglais", "Français", "Espagnol"],
+    "dureeEpisodeMoyenne": "48 min",
+    "saisons": [
+      {
+        "numero": 1,
+        "annee": 2008,
+        "nbEpisodes": 7,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Pilot",
+            "synopsis": "Walter White, professeur de chimie, apprend qu'il est atteint d'un cancer en phase terminale et décide de se lancer dans la fabrication de méthamphétamine.",
+            "duree": "58 min",
+            "dateDiffusion": "2008-01-20"
+          },
+          {
+            "numero": 2,
+            "titre": "Cat's in the Bag...",
+            "synopsis": "Walter et Jesse doivent gérer les conséquences de leur première production et éliminer deux corps.",
+            "duree": "48 min",
+            "dateDiffusion": "2008-01-27"
+          },
+          {
+            "numero": 3,
+            "titre": "...And the Bag's in the River",
+            "synopsis": "Walt doit décider s'il va éliminer Krazy-8 tandis que sa famille s'inquiète de son absence.",
+            "duree": "48 min",
+            "dateDiffusion": "2008-02-10"
+          },
+          {
+            "numero": 4,
+            "titre": "Cancer Man",
+            "synopsis": "Walt révèle à sa famille qu'il a un cancer. Jesse rend visite à ses parents.",
+            "duree": "48 min",
+            "dateDiffusion": "2008-02-17"
+          },
+          {
+            "numero": 5,
+            "titre": "Gray Matter",
+            "synopsis": "Walt refuse l'aide financière de ses anciens associés et reprend la fabrication de drogue.",
+            "duree": "48 min",
+            "dateDiffusion": "2008-02-24"
+          },
+          {
+            "numero": 6,
+            "titre": "Crazy Handful of Nothin'",
+            "synopsis": "Walt commence sa chimiothérapie et adopte un nouveau look intimidant pour traiter avec Tuco.",
+            "duree": "48 min",
+            "dateDiffusion": "2008-03-02"
+          },
+          {
+            "numero": 7,
+            "titre": "A No-Rough-Stuff-Type Deal",
+            "synopsis": "Walt et Jesse doivent produire une grande quantité de méthamphétamine pour Tuco.",
+            "duree": "48 min",
+            "dateDiffusion": "2008-03-09"
+          }
+        ]
+      },
+      {
+        "numero": 2,
+        "annee": 2009,
+        "nbEpisodes": 13,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Seven Thirty-Seven",
+            "synopsis": "Après une transaction violente avec Tuco, Walt et Jesse se rendent compte qu'ils sont en danger.",
+            "duree": "47 min",
+            "dateDiffusion": "2009-03-08"
+          },
+          {
+            "numero": 2,
+            "titre": "Grilled",
+            "synopsis": "Walt et Jesse sont retenus en otage par Tuco.",
+            "duree": "47 min",
+            "dateDiffusion": "2009-03-15"
+          },
+          {
+            "numero": 3,
+            "titre": "Bit by a Dead Bee",
+            "synopsis": "Walt et Jesse élaborent des plans pour couvrir leur disparition.",
+            "duree": "47 min",
+            "dateDiffusion": "2009-03-22"
+          },
+          {
+            "numero": 4,
+            "titre": "Down",
+            "synopsis": "La vie de Jesse s'effondre tandis que Walt tente de recoller les morceaux avec Skyler.",
+            "duree": "47 min",
+            "dateDiffusion": "2009-03-29"
+          },
+          {
+            "numero": 5,
+            "titre": "Breakage",
+            "synopsis": "Walt confie à Jesse la tâche de gérer les ventes.",
+            "duree": "47 min",
+            "dateDiffusion": "2009-04-05"
+          },
+          {
+            "numero": 6,
+            "titre": "Peekaboo",
+            "synopsis": "Jesse fait face à des junkies imprévisibles.",
+            "duree": "47 min",
+            "dateDiffusion": "2009-04-12"
+          },
+          {
+            "numero": 7,
+            "titre": "Negro y Azul",
+            "synopsis": "Une ballade raconte la montée en puissance de Heisenberg.",
+            "duree": "47 min",
+            "dateDiffusion": "2009-04-19"
+          },
+          {
+            "numero": 8,
+            "titre": "Better Call Saul",
+            "synopsis": "Walt et Jesse engagent un avocat peu conventionnel.",
+            "duree": "47 min",
+            "dateDiffusion": "2009-04-26"
+          },
+          {
+            "numero": 9,
+            "titre": "4 Days Out",
+            "synopsis": "Walt et Jesse se retrouvent bloqués dans le désert.",
+            "duree": "47 min",
+            "dateDiffusion": "2009-05-03"
+          },
+          {
+            "numero": 10,
+            "titre": "Over",
+            "synopsis": "Walt essaie de prendre sa retraite, mais découvre qu'il ne peut pas rester loin de la chimie.",
+            "duree": "47 min",
+            "dateDiffusion": "2009-05-10"
+          },
+          {
+            "numero": 11,
+            "titre": "Mandala",
+            "synopsis": "Un tragique événement pousse Walt et Jesse à chercher un nouveau distributeur.",
+            "duree": "47 min",
+            "dateDiffusion": "2009-05-17"
+          },
+          {
+            "numero": 12,
+            "titre": "Phoenix",
+            "synopsis": "Walt fait face aux conséquences de son choix.",
+            "duree": "47 min",
+            "dateDiffusion": "2009-05-24"
+          },
+          {
+            "numero": 13,
+            "titre": "ABQ",
+            "synopsis": "Un accident tragique survient en conséquence indirecte des actions de Walt.",
+            "duree": "47 min",
+            "dateDiffusion": "2009-05-31"
+          }
+        ]
+      },
+      {
+        "numero": 3,
+        "annee": 2010,
+        "nbEpisodes": 13,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "No Más",
+            "synopsis": "Walt fait face aux conséquences de l'accident d'avion.",
+            "duree": "47 min",
+            "dateDiffusion": "2010-03-21"
+          },
+          {
+            "numero": 2,
+            "titre": "Caballo Sin Nombre",
+            "synopsis": "Walt emménage seul et affronte les répercussions de son double vie.",
+            "duree": "47 min",
+            "dateDiffusion": "2010-03-28"
+          },
+          {
+            "numero": 3,
+            "titre": "I.F.T.",
+            "synopsis": "Skyler confronte Walt, tandis que Jesse tente de reconstruire sa vie.",
+            "duree": "47 min",
+            "dateDiffusion": "2010-04-04"
+          },
+          {
+            "numero": 4,
+            "titre": "Green Light",
+            "synopsis": "Walt propose ses services à Gus.",
+            "duree": "47 min",
+            "dateDiffusion": "2010-04-11"
+          },
+          {
+            "numero": 5,
+            "titre": "Mas",
+            "synopsis": "Gus persuade Walt de reprendre la fabrication.",
+            "duree": "47 min",
+            "dateDiffusion": "2010-04-18"
+          },
+          {
+            "numero": 6,
+            "titre": "Sunset",
+            "synopsis": "Hank se rapproche de la vérité sur Heisenberg.",
+            "duree": "47 min",
+            "dateDiffusion": "2010-04-25"
+          },
+          {
+            "numero": 7,
+            "titre": "One Minute",
+            "synopsis": "Hank fait face à une menace mortelle.",
+            "duree": "47 min",
+            "dateDiffusion": "2010-05-02"
+          },
+          {
+            "numero": 8,
+            "titre": "I See You",
+            "synopsis": "Walt se rend à l'hôpital après l'attaque contre Hank.",
+            "duree": "47 min",
+            "dateDiffusion": "2010-05-09"
+          },
+          {
+            "numero": 9,
+            "titre": "Kafkaesque",
+            "synopsis": "Jesse envisage de tricher Gus.",
+            "duree": "47 min",
+            "dateDiffusion": "2010-05-16"
+          },
+          {
+            "numero": 10,
+            "titre": "Fly",
+            "synopsis": "Walt devient obsédé par une mouche dans le labo.",
+            "duree": "47 min",
+            "dateDiffusion": "2010-05-23"
+          },
+          {
+            "numero": 11,
+            "titre": "Abiquiú",
+            "synopsis": "Jesse établit un lien avec Andrea.",
+            "duree": "47 min",
+            "dateDiffusion": "2010-05-30"
+          },
+          {
+            "numero": 12,
+            "titre": "Half Measures",
+            "synopsis": "Mike donne à Walt un précieux conseil.",
+            "duree": "47 min",
+            "dateDiffusion": "2010-06-06"
+          },
+          {
+            "numero": 13,
+            "titre": "Full Measure",
+            "synopsis": "Walt prend une décision drastique pour se protéger.",
+            "duree": "47 min",
+            "dateDiffusion": "2010-06-13"
+          }
+        ]
+      },
+      {
+        "numero": 4,
+        "annee": 2011,
+        "nbEpisodes": 13,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Box Cutter",
+            "synopsis": "Gus impose son autorité brutalement.",
+            "duree": "47 min",
+            "dateDiffusion": "2011-07-17"
+          },
+          {
+            "numero": 2,
+            "titre": "Thirty-Eight Snub",
+            "synopsis": "Walt achète une arme.",
+            "duree": "47 min",
+            "dateDiffusion": "2011-07-24"
+          },
+          {
+            "numero": 3,
+            "titre": "Open House",
+            "synopsis": "Skyler fait pression sur Saul.",
+            "duree": "47 min",
+            "dateDiffusion": "2011-07-31"
+          },
+          {
+            "numero": 4,
+            "titre": "Bullet Points",
+            "synopsis": "Hank poursuit son enquête.",
+            "duree": "47 min",
+            "dateDiffusion": "2011-08-07"
+          },
+          {
+            "numero": 5,
+            "titre": "Shotgun",
+            "synopsis": "Jesse accompagne Mike dans ses livraisons.",
+            "duree": "47 min",
+            "dateDiffusion": "2011-08-14"
+          },
+          {
+            "numero": 6,
+            "titre": "Cornered",
+            "synopsis": "Skyler s'inquiète du comportement de Walt.",
+            "duree": "47 min",
+            "dateDiffusion": "2011-08-21"
+          },
+          {
+            "numero": 7,
+            "titre": "Problem Dog",
+            "synopsis": "Jesse lutte avec sa culpabilité.",
+            "duree": "47 min",
+            "dateDiffusion": "2011-08-28"
+          },
+          {
+            "numero": 8,
+            "titre": "Hermanos",
+            "synopsis": "On découvre le passé de Gus.",
+            "duree": "47 min",
+            "dateDiffusion": "2011-09-04"
+          },
+          {
+            "numero": 9,
+            "titre": "Bug",
+            "synopsis": "Tensions entre Walt et Jesse.",
+            "duree": "47 min",
+            "dateDiffusion": "2011-09-11"
+          },
+          {
+            "numero": 10,
+            "titre": "Salud",
+            "synopsis": "Gus se venge du cartel.",
+            "duree": "47 min",
+            "dateDiffusion": "2011-09-18"
+          },
+          {
+            "numero": 11,
+            "titre": "Crawl Space",
+            "synopsis": "Walt est acculé financièrement.",
+            "duree": "47 min",
+            "dateDiffusion": "2011-09-25"
+          },
+          {
+            "numero": 12,
+            "titre": "End Times",
+            "synopsis": "Walt pense que Gus veut l'éliminer.",
+            "duree": "47 min",
+            "dateDiffusion": "2011-10-02"
+          },
+          {
+            "numero": 13,
+            "titre": "Face Off",
+            "synopsis": "Walt affronte Gus dans un dernier combat.",
+            "duree": "47 min",
+            "dateDiffusion": "2011-10-09"
+          }
+        ]
+      },
+      {
+        "numero": 5,
+        "annee": 2012,
+        "nbEpisodes": 16,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Live Free or Die",
+            "synopsis": "Walt et Jesse doivent effacer les preuves.",
+            "duree": "47 min",
+            "dateDiffusion": "2012-07-15"
+          },
+          {
+            "numero": 2,
+            "titre": "Madrigal",
+            "synopsis": "Walt cherche un nouveau partenaire.",
+            "duree": "47 min",
+            "dateDiffusion": "2012-07-22"
+          },
+          {
+            "numero": 3,
+            "titre": "Hazard Pay",
+            "synopsis": "Walt met en place un nouveau labo.",
+            "duree": "47 min",
+            "dateDiffusion": "2012-07-29"
+          },
+          {
+            "numero": 4,
+            "titre": "Fifty-One",
+            "synopsis": "Walt célèbre son 51ᵉ anniversaire.",
+            "duree": "47 min",
+            "dateDiffusion": "2012-08-05"
+          },
+          {
+            "numero": 5,
+            "titre": "Dead Freight",
+            "synopsis": "Walt, Jesse et Mike organisent un braquage de train.",
+            "duree": "47 min",
+            "dateDiffusion": "2012-08-12"
+          },
+          {
+            "numero": 6,
+            "titre": "Buyout",
+            "synopsis": "Mike veut quitter le business.",
+            "duree": "47 min",
+            "dateDiffusion": "2012-08-19"
+          },
+          {
+            "numero": 7,
+            "titre": "Say My Name",
+            "synopsis": "Walt fait preuve d'autorité.",
+            "duree": "47 min",
+            "dateDiffusion": "2012-08-26"
+          },
+          {
+            "numero": 8,
+            "titre": "Gliding Over All",
+            "synopsis": "Walt consolide son empire.",
+            "duree": "47 min",
+            "dateDiffusion": "2012-09-02"
+          },
+          {
+            "numero": 9,
+            "titre": "Blood Money",
+            "synopsis": "Hank confronte Walt.",
+            "duree": "47 min",
+            "dateDiffusion": "2013-08-11"
+          },
+          {
+            "numero": 10,
+            "titre": "Buried",
+            "synopsis": "Walt cache son argent.",
+            "duree": "47 min",
+            "dateDiffusion": "2013-08-18"
+          },
+          {
+            "numero": 11,
+            "titre": "Confessions",
+            "synopsis": "Walt manipule Jesse.",
+            "duree": "47 min",
+            "dateDiffusion": "2013-08-25"
+          },
+          {
+            "numero": 12,
+            "titre": "Rabid Dog",
+            "synopsis": "Walt tente de calmer Jesse.",
+            "duree": "47 min",
+            "dateDiffusion": "2013-09-01"
+          },
+          {
+            "numero": 13,
+            "titre": "To'hajiilee",
+            "synopsis": "Un piège est tendu à Walt.",
+            "duree": "47 min",
+            "dateDiffusion": "2013-09-08"
+          },
+          {
+            "numero": 14,
+            "titre": "Ozymandias",
+            "synopsis": "Tout s'effondre pour Walt.",
+            "duree": "47 min",
+            "dateDiffusion": "2013-09-15"
+          },
+          {
+            "numero": 15,
+            "titre": "Granite State",
+            "synopsis": "Walt disparaît.",
+            "duree": "47 min",
+            "dateDiffusion": "2013-09-22"
+          },
+          {
+            "numero": 16,
+            "titre": "Felina",
+            "synopsis": "Walt revient pour se venger.",
+            "duree": "55 min",
+            "dateDiffusion": "2013-09-29"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "titre": "Stranger Things",
+    "synopsis": "Dans les années 80, un groupe d'enfants affronte des forces surnaturelles et des expériences gouvernementales secrètes.",
+    "image": "https://fr.web.img2.acsta.net/c_310_420/pictures/22/05/18/14/31/5186184.jpg",
+    "acteurs": ["Millie Bobby Brown", "Finn Wolfhard", "Winona Ryder"],
+    "note": 8.7,
+    "dateDebut": "2016-07-15",
+    "dateFin": null,
+    "createur": "Matt Duffer, Ross Duffer",
+    "bandeAnnonce": "https://www.youtube.com/watch?v=b9EkMc79ZSU",
+    "genre": ["Drame", "Fantastique", "Horreur"],
+    "paysProduction": ["États-Unis"],
+    "platforms": ["Netflix"],
+    "langues": ["Anglais", "Français", "Espagnol"],
+    "dureeEpisodeMoyenne": "51 min",
+    "saisons": [
+      {
+        "numero": 1,
+        "annee": 2016,
+        "nbEpisodes": 8,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Chapter One: The Vanishing of Will Byers",
+            "synopsis": "Un garçon disparaît mystérieusement, et une fille étrange dotée de pouvoirs surnaturels apparaît.",
+            "duree": "49 min",
+            "dateDiffusion": "2016-07-15"
+          },
+          {
+            "numero": 2,
+            "titre": "Chapter Two: The Weirdo on Maple Street",
+            "synopsis": "Mike cache Eleven chez lui tandis que la police commence son enquête.",
+            "duree": "56 min",
+            "dateDiffusion": "2016-07-15"
+          },
+          {
+            "numero": 3,
+            "titre": "Chapter Three: Holly, Jolly",
+            "synopsis": "Joyce est convaincue que Will tente de communiquer avec elle à travers les lumières.",
+            "duree": "52 min",
+            "dateDiffusion": "2016-07-15"
+          },
+          {
+            "numero": 4,
+            "titre": "Chapter Four: The Body",
+            "synopsis": "Le corps de Will est retrouvé, mais Joyce refuse d’y croire.",
+            "duree": "51 min",
+            "dateDiffusion": "2016-07-15"
+          },
+          {
+            "numero": 5,
+            "titre": "Chapter Five: The Flea and the Acrobat",
+            "synopsis": "Les garçons découvrent la possibilité d'un monde parallèle : l'Upside Down.",
+            "duree": "53 min",
+            "dateDiffusion": "2016-07-15"
+          },
+          {
+            "numero": 6,
+            "titre": "Chapter Six: The Monster",
+            "synopsis": "Nancy et Jonathan forment une alliance, tandis qu'Eleven est en fuite.",
+            "duree": "47 min",
+            "dateDiffusion": "2016-07-15"
+          },
+          {
+            "numero": 7,
+            "titre": "Chapter Seven: The Bathtub",
+            "synopsis": "Le groupe construit un réservoir sensoriel pour trouver Will.",
+            "duree": "41 min",
+            "dateDiffusion": "2016-07-15"
+          },
+          {
+            "numero": 8,
+            "titre": "Chapter Eight: The Upside Down",
+            "synopsis": "Le groupe affronte le Demogorgon pour sauver Will.",
+            "duree": "55 min",
+            "dateDiffusion": "2016-07-15"
+          }
+        ]
+      },
+      {
+        "numero": 2,
+        "annee": 2017,
+        "nbEpisodes": 9,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Chapter One: MADMAX",
+            "synopsis": "De nouveaux arrivants attirent l'attention de nos héros.",
+            "duree": "48 min",
+            "dateDiffusion": "2017-10-27"
+          },
+          {
+            "numero": 2,
+            "titre": "Chapter Two: Trick or Treat, Freak",
+            "synopsis": "Lors d'Halloween, Will fait face à d'étranges visions.",
+            "duree": "56 min",
+            "dateDiffusion": "2017-10-27"
+          },
+          {
+            "numero": 3,
+            "titre": "Chapter Three: The Pollywog",
+            "synopsis": "Dustin découvre une étrange créature.",
+            "duree": "52 min",
+            "dateDiffusion": "2017-10-27"
+          },
+          {
+            "numero": 4,
+            "titre": "Chapter Four: Will the Wise",
+            "synopsis": "Will révèle des détails inquiétants sur ses visions.",
+            "duree": "46 min",
+            "dateDiffusion": "2017-10-27"
+          },
+          {
+            "numero": 5,
+            "titre": "Chapter Five: Dig Dug",
+            "synopsis": "Hopper se retrouve piégé et Joyce tente de le sauver.",
+            "duree": "53 min",
+            "dateDiffusion": "2017-10-27"
+          },
+          {
+            "numero": 6,
+            "titre": "Chapter Six: The Spy",
+            "synopsis": "Le Mind Flayer montre son emprise sur Will.",
+            "duree": "52 min",
+            "dateDiffusion": "2017-10-27"
+          },
+          {
+            "numero": 7,
+            "titre": "Chapter Seven: The Lost Sister",
+            "synopsis": "Eleven part en quête de ses origines et rencontre une sœur d'armes.",
+            "duree": "45 min",
+            "dateDiffusion": "2017-10-27"
+          },
+          {
+            "numero": 8,
+            "titre": "Chapter Eight: The Mind Flayer",
+            "synopsis": "Le groupe se barricade au laboratoire de Hawkins.",
+            "duree": "62 min",
+            "dateDiffusion": "2017-10-27"
+          },
+          {
+            "numero": 9,
+            "titre": "Chapter Nine: The Gate",
+            "synopsis": "Eleven tente de fermer la porte vers l'Upside Down.",
+            "duree": "62 min",
+            "dateDiffusion": "2017-10-27"
+          }
+        ]
+      },
+      {
+        "numero": 3,
+        "annee": 2019,
+        "nbEpisodes": 8,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Chapter One: Suzie, Do You Copy?",
+            "synopsis": "Des perturbations bizarres surgissent alors que l'été commence à Hawkins.",
+            "duree": "51 min",
+            "dateDiffusion": "2019-07-04"
+          },
+          {
+            "numero": 2,
+            "titre": "Chapter Two: The Mall Rats",
+            "synopsis": "Les amis enquêtent sur des comportements étranges.",
+            "duree": "50 min",
+            "dateDiffusion": "2019-07-04"
+          },
+          {
+            "numero": 3,
+            "titre": "Chapter Three: The Case of the Missing Lifeguard",
+            "synopsis": "Max et Eleven soupçonnent Billy de cacher quelque chose.",
+            "duree": "50 min",
+            "dateDiffusion": "2019-07-04"
+          },
+          {
+            "numero": 4,
+            "titre": "Chapter Four: The Sauna Test",
+            "synopsis": "Le groupe teste Billy pour savoir s’il est possédé.",
+            "duree": "53 min",
+            "dateDiffusion": "2019-07-04"
+          },
+          {
+            "numero": 5,
+            "titre": "Chapter Five: The Flayed",
+            "synopsis": "La menace se propage dans Hawkins.",
+            "duree": "53 min",
+            "dateDiffusion": "2019-07-04"
+          },
+          {
+            "numero": 6,
+            "titre": "Chapter Six: E Pluribus Unum",
+            "synopsis": "Onze plonge dans les souvenirs de Billy.",
+            "duree": "54 min",
+            "dateDiffusion": "2019-07-04"
+          },
+          {
+            "numero": 7,
+            "titre": "Chapter Seven: The Bite",
+            "synopsis": "Les créatures du Mind Flayer attaquent pendant la fête nationale.",
+            "duree": "53 min",
+            "dateDiffusion": "2019-07-04"
+          },
+          {
+            "numero": 8,
+            "titre": "Chapter Eight: The Battle of Starcourt",
+            "synopsis": "Le destin de Hawkins se joue au centre commercial.",
+            "duree": "77 min",
+            "dateDiffusion": "2019-07-04"
+          }
+        ]
+      },
+      {
+        "numero": 4,
+        "annee": 2022,
+        "nbEpisodes": 9,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Chapter One: The Hellfire Club",
+            "synopsis": "Hawkins est à nouveau frappée par des événements macabres.",
+            "duree": "76 min",
+            "dateDiffusion": "2022-05-27"
+          },
+          {
+            "numero": 2,
+            "titre": "Chapter Two: Vecna's Curse",
+            "synopsis": "Un nouveau mal rôde à Hawkins.",
+            "duree": "77 min",
+            "dateDiffusion": "2022-05-27"
+          },
+          {
+            "numero": 3,
+            "titre": "Chapter Three: The Monster and the Superhero",
+            "synopsis": "Onze doit affronter ses démons.",
+            "duree": "64 min",
+            "dateDiffusion": "2022-05-27"
+          },
+          {
+            "numero": 4,
+            "titre": "Chapter Four: Dear Billy",
+            "synopsis": "Max est en grave danger.",
+            "duree": "78 min",
+            "dateDiffusion": "2022-05-27"
+          },
+          {
+            "numero": 5,
+            "titre": "Chapter Five: The Nina Project",
+            "synopsis": "Onze part en quête de retrouver ses pouvoirs.",
+            "duree": "76 min",
+            "dateDiffusion": "2022-05-27"
+          },
+          {
+            "numero": 6,
+            "titre": "Chapter Six: The Dive",
+            "synopsis": "Steve plonge dans une découverte terrifiante.",
+            "duree": "75 min",
+            "dateDiffusion": "2022-05-27"
+          },
+          {
+            "numero": 7,
+            "titre": "Chapter Seven: The Massacre at Hawkins Lab",
+            "synopsis": "Les secrets du passé d'Onze sont révélés.",
+            "duree": "99 min",
+            "dateDiffusion": "2022-05-27"
+          },
+          {
+            "numero": 8,
+            "titre": "Chapter Eight: Papa",
+            "synopsis": "Onze confronte son passé.",
+            "duree": "85 min",
+            "dateDiffusion": "2022-07-01"
+          },
+          {
+            "numero": 9,
+            "titre": "Chapter Nine: The Piggyback",
+            "synopsis": "L'ultime bataille contre Vecna débute.",
+            "duree": "139 min",
+            "dateDiffusion": "2022-07-01"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "titre": "Game of Thrones",
+    "synopsis": "Plusieurs familles nobles rivalisent pour le contrôle du Trône de Fer dans un monde fantastique où l'hiver peut durer plusieurs années.",
+    "image": "https://m.media-amazon.com/images/I/71P+4DslKmL._AC_UF1000,1000_QL80_.jpg",
+    "acteurs": ["Emilia Clarke", "Kit Harington", "Peter Dinklage"],
+    "note": 9.2,
+    "dateDebut": "2011-04-17",
+    "dateFin": "2019-05-19",
+    "createur": "David Benioff, D.B. Weiss",
+    "bandeAnnonce": "https://www.youtube.com/watch?v=KPLWWIOCOOQ",
+    "genre": ["Drame", "Aventure", "Fantasy"],
+    "paysProduction": ["États-Unis", "Royaume-Uni"],
+    "platforms": ["HBO Max", "OCS"],
+    "langues": ["Anglais", "Français", "Allemand"],
+    "dureeEpisodeMoyenne": "57 min",
+    "saisons": [
+      {
+        "numero": 1,
+        "annee": 2011,
+        "nbEpisodes": 10,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Winter Is Coming",
+            "synopsis": "Ned Stark est sollicité par le roi Robert Baratheon pour devenir sa Main du Roi.",
+            "duree": "62 min",
+            "dateDiffusion": "2011-04-17"
+          },
+          {
+            "numero": 2,
+            "titre": "The Kingsroad",
+            "synopsis": "Les Stark se séparent, Jon part rejoindre la Garde de Nuit.",
+            "duree": "56 min",
+            "dateDiffusion": "2011-04-24"
+          },
+          {
+            "numero": 3,
+            "titre": "Lord Snow",
+            "synopsis": "Jon découvre la dure réalité du Mur, tandis que Ned arrive à Port-Réal.",
+            "duree": "58 min",
+            "dateDiffusion": "2011-05-01"
+          },
+          {
+            "numero": 4,
+            "titre": "Cripples, Bastards, and Broken Things",
+            "synopsis": "Tyrion aide Bran tandis que Ned enquête sur la mort de Jon Arryn.",
+            "duree": "56 min",
+            "dateDiffusion": "2011-05-08"
+          },
+          {
+            "numero": 5,
+            "titre": "The Wolf and the Lion",
+            "synopsis": "Ned affronte des complots à Port-Réal, Catelyn capture Tyrion.",
+            "duree": "55 min",
+            "dateDiffusion": "2011-05-15"
+          },
+          {
+            "numero": 6,
+            "titre": "A Golden Crown",
+            "synopsis": "Viserys reçoit la récompense qu'il pense mériter, Ned prend une décision majeure.",
+            "duree": "53 min",
+            "dateDiffusion": "2011-05-22"
+          },
+          {
+            "numero": 7,
+            "titre": "You Win or You Die",
+            "synopsis": "Ned confronte Cersei sur les héritiers du roi Robert.",
+            "duree": "58 min",
+            "dateDiffusion": "2011-05-29"
+          },
+          {
+            "numero": 8,
+            "titre": "The Pointy End",
+            "synopsis": "Après l'arrestation de Ned, la guerre se prépare.",
+            "duree": "59 min",
+            "dateDiffusion": "2011-06-05"
+          },
+          {
+            "numero": 9,
+            "titre": "Baelor",
+            "synopsis": "Robb Stark mène son armée, Ned doit faire un choix.",
+            "duree": "57 min",
+            "dateDiffusion": "2011-06-12"
+          },
+          {
+            "numero": 10,
+            "titre": "Fire and Blood",
+            "synopsis": "Les conséquences du destin de Ned secouent Westeros.",
+            "duree": "53 min",
+            "dateDiffusion": "2011-06-19"
+          }
+        ]
+      },
+      {
+        "numero": 2,
+        "annee": 2012,
+        "nbEpisodes": 10,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "The North Remembers",
+            "synopsis": "La guerre fait rage, Tyrion arrive comme Main du Roi.",
+            "duree": "53 min",
+            "dateDiffusion": "2012-04-01"
+          },
+          {
+            "numero": 2,
+            "titre": "The Night Lands",
+            "synopsis": "Arya rencontre des compagnons en fuite, Theon revient chez lui.",
+            "duree": "54 min",
+            "dateDiffusion": "2012-04-08"
+          },
+          {
+            "numero": 3,
+            "titre": "What Is Dead May Never Die",
+            "synopsis": "Renly revendique la couronne, Tyrion manœuvre au Conseil.",
+            "duree": "53 min",
+            "dateDiffusion": "2012-04-15"
+          },
+          {
+            "numero": 4,
+            "titre": "Garden of Bones",
+            "synopsis": "Catelyn négocie avec Renly, Tyrion libère des prisonniers.",
+            "duree": "50 min",
+            "dateDiffusion": "2012-04-22"
+          },
+          {
+            "numero": 5,
+            "titre": "The Ghost of Harrenhal",
+            "synopsis": "Renly est assassiné, Arya sert Tywin Lannister.",
+            "duree": "53 min",
+            "dateDiffusion": "2012-04-29"
+          },
+          {
+            "numero": 6,
+            "titre": "The Old Gods and the New",
+            "synopsis": "Theon prend Winterfell, Daenerys cherche des navires.",
+            "duree": "52 min",
+            "dateDiffusion": "2012-05-06"
+          },
+          {
+            "numero": 7,
+            "titre": "A Man Without Honor",
+            "synopsis": "Jaime Lannister tente de s'échapper, Daenerys subit une trahison.",
+            "duree": "56 min",
+            "dateDiffusion": "2012-05-13"
+          },
+          {
+            "numero": 8,
+            "titre": "The Prince of Winterfell",
+            "synopsis": "Robb apprend une trahison, Stannis approche de Port-Réal.",
+            "duree": "53 min",
+            "dateDiffusion": "2012-05-20"
+          },
+          {
+            "numero": 9,
+            "titre": "Blackwater",
+            "synopsis": "La bataille de la Néra fait rage à Port-Réal.",
+            "duree": "55 min",
+            "dateDiffusion": "2012-05-27"
+          },
+          {
+            "numero": 10,
+            "titre": "Valar Morghulis",
+            "synopsis": "La guerre continue, Daenerys explore les mystères de Qarth.",
+            "duree": "64 min",
+            "dateDiffusion": "2012-06-03"
+          }
+        ]
+      },
+      {
+        "numero": 3,
+        "annee": 2013,
+        "nbEpisodes": 10,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Valar Dohaeris",
+            "synopsis": "Jon Snow rencontre Mance Rayder, Daenerys engage des Immaculés.",
+            "duree": "55 min",
+            "dateDiffusion": "2013-03-31"
+          },
+          {
+            "numero": 2,
+            "titre": "Dark Wings, Dark Words",
+            "synopsis": "Bran rencontre Jojen et Meera Reed.",
+            "duree": "57 min",
+            "dateDiffusion": "2013-04-07"
+          },
+          {
+            "numero": 3,
+            "titre": "Walk of Punishment",
+            "synopsis": "Jaime subit une punition cruelle.",
+            "duree": "53 min",
+            "dateDiffusion": "2013-04-14"
+          },
+          {
+            "numero": 4,
+            "titre": "And Now His Watch Is Ended",
+            "synopsis": "La mutinerie éclate au Mur, Daenerys prend Astapor.",
+            "duree": "57 min",
+            "dateDiffusion": "2013-04-21"
+          },
+          {
+            "numero": 5,
+            "titre": "Kissed by Fire",
+            "synopsis": "Jon rompt ses vœux, Jaime ouvre son cœur.",
+            "duree": "56 min",
+            "dateDiffusion": "2013-04-28"
+          },
+          {
+            "numero": 6,
+            "titre": "The Climb",
+            "synopsis": "Littlefinger révèle ses ambitions, Jon gravit le Mur.",
+            "duree": "53 min",
+            "dateDiffusion": "2013-05-05"
+          },
+          {
+            "numero": 7,
+            "titre": "The Bear and the Maiden Fair",
+            "synopsis": "Brienne affronte un ours, Daenerys exige des alliances.",
+            "duree": "57 min",
+            "dateDiffusion": "2013-05-12"
+          },
+          {
+            "numero": 8,
+            "titre": "Second Sons",
+            "synopsis": "Daenerys négocie avec les Second Sons, Sansa se marie.",
+            "duree": "57 min",
+            "dateDiffusion": "2013-05-19"
+          },
+          {
+            "numero": 9,
+            "titre": "The Rains of Castamere",
+            "synopsis": "Le tristement célèbre Red Wedding a lieu.",
+            "duree": "51 min",
+            "dateDiffusion": "2013-06-02"
+          },
+          {
+            "numero": 10,
+            "titre": "Mhysa",
+            "synopsis": "La situation politique évolue après les tragédies récentes.",
+            "duree": "63 min",
+            "dateDiffusion": "2013-06-09"
+          }
+        ]
+      },
+      {
+        "numero": 4,
+        "annee": 2014,
+        "nbEpisodes": 10,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Two Swords",
+            "synopsis": "Tywin forge deux épées à partir de Glace, la lame des Stark.",
+            "duree": "58 min",
+            "dateDiffusion": "2014-04-06"
+          },
+          {
+            "numero": 2,
+            "titre": "The Lion and the Rose",
+            "synopsis": "Le mariage royal vire au cauchemar.",
+            "duree": "52 min",
+            "dateDiffusion": "2014-04-13"
+          },
+          {
+            "numero": 3,
+            "titre": "Breaker of Chains",
+            "synopsis": "Tyrion est accusé, Daenerys attaque Meereen.",
+            "duree": "57 min",
+            "dateDiffusion": "2014-04-20"
+          },
+          {
+            "numero": 4,
+            "titre": "Oathkeeper",
+            "synopsis": "Brienne reçoit une mission sacrée, Jon organise une expédition.",
+            "duree": "54 min",
+            "dateDiffusion": "2014-04-27"
+          },
+          {
+            "numero": 5,
+            "titre": "First of His Name",
+            "synopsis": "Tommen est couronné roi, Sansa trouve refuge.",
+            "duree": "52 min",
+            "dateDiffusion": "2014-05-04"
+          },
+          {
+            "numero": 6,
+            "titre": "The Laws of Gods and Men",
+            "synopsis": "Le procès de Tyrion commence.",
+            "duree": "51 min",
+            "dateDiffusion": "2014-05-11"
+          },
+          {
+            "numero": 7,
+            "titre": "Mockingbird",
+            "synopsis": "Tyrion choisit un champion, Littlefinger révèle ses plans.",
+            "duree": "52 min",
+            "dateDiffusion": "2014-05-18"
+          },
+          {
+            "numero": 8,
+            "titre": "The Mountain and the Viper",
+            "synopsis": "Un duel à mort pour sauver Tyrion.",
+            "duree": "52 min",
+            "dateDiffusion": "2014-06-01"
+          },
+          {
+            "numero": 9,
+            "titre": "The Watchers on the Wall",
+            "synopsis": "La bataille du Mur débute.",
+            "duree": "51 min",
+            "dateDiffusion": "2014-06-08"
+          },
+          {
+            "numero": 10,
+            "titre": "The Children",
+            "synopsis": "De lourdes pertes et de nouveaux départs.",
+            "duree": "66 min",
+            "dateDiffusion": "2014-06-15"
+          }
+        ]
+      },
+      {
+        "numero": 5,
+        "annee": 2015,
+        "nbEpisodes": 10,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "The Wars to Come",
+            "synopsis": "Cersei affronte les prophéties, Jon se retrouve face à un choix difficile.",
+            "duree": "55 min",
+            "dateDiffusion": "2015-04-12"
+          },
+          {
+            "numero": 2,
+            "titre": "The House of Black and White",
+            "synopsis": "Arya arrive à Braavos, Brienne retrouve Sansa.",
+            "duree": "55 min",
+            "dateDiffusion": "2015-04-19"
+          },
+          {
+            "numero": 3,
+            "titre": "High Sparrow",
+            "synopsis": "Tommen épouse Margaery, Cersei rencontre le Grand Moineau.",
+            "duree": "59 min",
+            "dateDiffusion": "2015-04-26"
+          },
+          {
+            "numero": 4,
+            "titre": "Sons of the Harpy",
+            "synopsis": "La rébellion gronde à Meereen, Jaime et Bronn partent pour Dorne.",
+            "duree": "50 min",
+            "dateDiffusion": "2015-05-03"
+          },
+          {
+            "numero": 5,
+            "titre": "Kill the Boy",
+            "synopsis": "Jon prend une décision risquée avec les Sauvageons.",
+            "duree": "56 min",
+            "dateDiffusion": "2015-05-10"
+          },
+          {
+            "numero": 6,
+            "titre": "Unbowed, Unbent, Unbroken",
+            "synopsis": "Arya poursuit son initiation, Sansa subit un mariage cruel.",
+            "duree": "56 min",
+            "dateDiffusion": "2015-05-17"
+          },
+          {
+            "numero": 7,
+            "titre": "The Gift",
+            "synopsis": "Jon part au-delà du Mur, Cersei paie ses manipulations.",
+            "duree": "59 min",
+            "dateDiffusion": "2015-05-24"
+          },
+          {
+            "numero": 8,
+            "titre": "Hardhome",
+            "synopsis": "Jon Snow affronte les Marcheurs Blancs.",
+            "duree": "59 min",
+            "dateDiffusion": "2015-05-31"
+          },
+          {
+            "numero": 9,
+            "titre": "The Dance of Dragons",
+            "synopsis": "Daenerys fait face à une attaque brutale à Meereen.",
+            "duree": "53 min",
+            "dateDiffusion": "2015-06-07"
+          },
+          {
+            "numero": 10,
+            "titre": "Mother's Mercy",
+            "synopsis": "Cersei traverse la honte, Jon est trahi.",
+            "duree": "60 min",
+            "dateDiffusion": "2015-06-14"
+          }
+        ]
+      },
+      {
+        "numero": 6,
+        "annee": 2016,
+        "nbEpisodes": 10,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "The Red Woman",
+            "synopsis": "Le destin de Jon Snow est révélé.",
+            "duree": "51 min",
+            "dateDiffusion": "2016-04-24"
+          },
+          {
+            "numero": 2,
+            "titre": "Home",
+            "synopsis": "Bran découvre le passé, Jon Snow est ramené.",
+            "duree": "54 min",
+            "dateDiffusion": "2016-05-01"
+          },
+          {
+            "numero": 3,
+            "titre": "Oathbreaker",
+            "synopsis": "Jon Snow rend justice à Castle Black.",
+            "duree": "53 min",
+            "dateDiffusion": "2016-05-08"
+          },
+          {
+            "numero": 4,
+            "titre": "Book of the Stranger",
+            "synopsis": "Sansa et Jon sont réunis.",
+            "duree": "59 min",
+            "dateDiffusion": "2016-05-15"
+          },
+          {
+            "numero": 5,
+            "titre": "The Door",
+            "synopsis": "Le sacrifice d'Hodor est révélé.",
+            "duree": "57 min",
+            "dateDiffusion": "2016-05-22"
+          },
+          {
+            "numero": 6,
+            "titre": "Blood of My Blood",
+            "synopsis": "Sam retourne à sa famille, Arya prend une décision.",
+            "duree": "52 min",
+            "dateDiffusion": "2016-05-29"
+          },
+          {
+            "numero": 7,
+            "titre": "The Broken Man",
+            "synopsis": "Le Limier est de retour.",
+            "duree": "51 min",
+            "dateDiffusion": "2016-06-05"
+          },
+          {
+            "numero": 8,
+            "titre": "No One",
+            "synopsis": "Arya achève son apprentissage à Braavos.",
+            "duree": "59 min",
+            "dateDiffusion": "2016-06-12"
+          },
+          {
+            "numero": 9,
+            "titre": "Battle of the Bastards",
+            "synopsis": "Jon Snow affronte Ramsay Bolton.",
+            "duree": "60 min",
+            "dateDiffusion": "2016-06-19"
+          },
+          {
+            "numero": 10,
+            "titre": "The Winds of Winter",
+            "synopsis": "Cersei déclenche un plan dévastateur.",
+            "duree": "69 min",
+            "dateDiffusion": "2016-06-26"
+          }
+        ]
+      },
+      {
+        "numero": 7,
+        "annee": 2017,
+        "nbEpisodes": 7,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Dragonstone",
+            "synopsis": "Daenerys arrive enfin à Westeros.",
+            "duree": "59 min",
+            "dateDiffusion": "2017-07-16"
+          },
+          {
+            "numero": 2,
+            "titre": "Stormborn",
+            "synopsis": "Daenerys planifie son invasion.",
+            "duree": "59 min",
+            "dateDiffusion": "2017-07-23"
+          },
+          {
+            "numero": 3,
+            "titre": "The Queen's Justice",
+            "synopsis": "Daenerys rencontre Jon Snow.",
+            "duree": "63 min",
+            "dateDiffusion": "2017-07-30"
+          },
+          {
+            "numero": 4,
+            "titre": "The Spoils of War",
+            "synopsis": "Daenerys attaque les Lannister.",
+            "duree": "50 min",
+            "dateDiffusion": "2017-08-06"
+          },
+          {
+            "numero": 5,
+            "titre": "Eastwatch",
+            "synopsis": "Un groupe est formé pour capturer un Marcheur Blanc.",
+            "duree": "59 min",
+            "dateDiffusion": "2017-08-13"
+          },
+          {
+            "numero": 6,
+            "titre": "Beyond the Wall",
+            "synopsis": "L'expédition au nord du Mur tourne mal.",
+            "duree": "70 min",
+            "dateDiffusion": "2017-08-20"
+          },
+          {
+            "numero": 7,
+            "titre": "The Dragon and the Wolf",
+            "synopsis": "Les puissances s'allient contre la menace des Marcheurs Blancs.",
+            "duree": "79 min",
+            "dateDiffusion": "2017-08-27"
+          }
+        ]
+      },
+      {
+        "numero": 8,
+        "annee": 2019,
+        "nbEpisodes": 6,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Winterfell",
+            "synopsis": "Jon et Daenerys arrivent à Winterfell.",
+            "duree": "54 min",
+            "dateDiffusion": "2019-04-14"
+          },
+          {
+            "numero": 2,
+            "titre": "A Knight of the Seven Kingdoms",
+            "synopsis": "Veille de la bataille, des liens forts se tissent.",
+            "duree": "58 min",
+            "dateDiffusion": "2019-04-21"
+          },
+          {
+            "numero": 3,
+            "titre": "The Long Night",
+            "synopsis": "La bataille contre le Roi de la Nuit fait rage.",
+            "duree": "82 min",
+            "dateDiffusion": "2019-04-28"
+          },
+          {
+            "numero": 4,
+            "titre": "The Last of the Starks",
+            "synopsis": "De lourdes pertes, la guerre pour le trône reprend.",
+            "duree": "78 min",
+            "dateDiffusion": "2019-05-05"
+          },
+          {
+            "numero": 5,
+            "titre": "The Bells",
+            "synopsis": "Daenerys prend une décision drastique à Port-Réal.",
+            "duree": "80 min",
+            "dateDiffusion": "2019-05-12"
+          },
+          {
+            "numero": 6,
+            "titre": "The Iron Throne",
+            "synopsis": "Le destin de Westeros est scellé.",
+            "duree": "79 min",
+            "dateDiffusion": "2019-05-19"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "titre": "The Walking Dead",
+    "synopsis": "Un groupe de survivants tente de rester en vie dans un monde post-apocalyptique envahi par les zombies.",
+    "image": "https://i.redd.it/there-was-a-vibe-to-2010-2013-twd-both-the-show-and-the-v0-a7zpb1qylgne1.jpg?width=250&format=pjpg&auto=webp&s=148dbd3d062e86f3dc1fa73da0ce3580778679ff",
+    "acteurs": ["Andrew Lincoln", "Norman Reedus", "Melissa McBride"],
+    "note": 8.2,
+    "dateDebut": "2010-10-31",
+    "dateFin": "2022-11-20",
+    "createur": "Frank Darabont",
+    "bandeAnnonce": "https://www.youtube.com/watch?v=sfAc2U20uyg",
+    "genre": ["Horreur", "Drame", "Thriller"],
+    "paysProduction": ["États-Unis"],
+    "platforms": ["AMC", "Netflix"],
+    "langues": ["Anglais", "Français", "Espagnol"],
+    "dureeEpisodeMoyenne": "50 min",
+    "saisons": [
+      {
+        "numero": 1,
+        "annee": 2010,
+        "nbEpisodes": 6,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Days Gone Bye",
+            "synopsis": "Après s'être réveillé d'un coma, Rick Grimes découvre un monde envahi par des morts-vivants et part à la recherche de sa famille.",
+            "duree": "67 min",
+            "dateDiffusion": "2010-10-31"
+          },
+          {
+            "numero": 2,
+            "titre": "Guts",
+            "synopsis": "Rick rejoint un groupe de survivants à Atlanta et doit trouver un moyen de s'échapper après s'être retrouvé piégé dans une horde de zombies.",
+            "duree": "45 min",
+            "dateDiffusion": "2010-11-07"
+          },
+          {
+            "numero": 3,
+            "titre": "Tell It to the Frogs",
+            "synopsis": "Rick retrouve sa femme Lori et son fils Carl, mais des tensions éclatent parmi les survivants.",
+            "duree": "45 min",
+            "dateDiffusion": "2010-11-14"
+          },
+          {
+            "numero": 4,
+            "titre": "Vatos",
+            "synopsis": "Le groupe tente de sauver un membre kidnappé à Atlanta, mais une révélation surprenante change tout.",
+            "duree": "45 min",
+            "dateDiffusion": "2010-11-21"
+          },
+          {
+            "numero": 5,
+            "titre": "Wildfire",
+            "synopsis": "Alors que les tensions montent après une attaque tragique, Rick décide de conduire le groupe vers le CDC à Atlanta.",
+            "duree": "45 min",
+            "dateDiffusion": "2010-11-28"
+          },
+          {
+            "numero": 6,
+            "titre": "TS-19",
+            "synopsis": "Le groupe cherche des réponses au CDC, mais découvre que la fin est plus proche qu'ils ne le pensaient.",
+            "duree": "45 min",
+            "dateDiffusion": "2010-12-05"
+          }
+        ]
+      },
+      {
+        "numero": 2,
+        "annee": 2011,
+        "nbEpisodes": 13,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "What Lies Ahead",
+            "synopsis": "Le groupe cherche un nouvel abri mais est confronté à des dangers inattendus sur l'autoroute.",
+            "duree": "60 min",
+            "dateDiffusion": "2011-10-16"
+          },
+          {
+            "numero": 2,
+            "titre": "Bloodletting",
+            "synopsis": "Carl est blessé par balle, Rick et Shane tentent de sauver sa vie en trouvant de l'aide.",
+            "duree": "45 min",
+            "dateDiffusion": "2011-10-23"
+          },
+          {
+            "numero": 3,
+            "titre": "Save the Last One",
+            "synopsis": "Alors que Carl lutte pour survivre, Shane prend une décision radicale pour récupérer les fournitures médicales nécessaires.",
+            "duree": "45 min",
+            "dateDiffusion": "2011-10-30"
+          },
+          {
+            "numero": 4,
+            "titre": "Cherokee Rose",
+            "synopsis": "Le groupe s'installe temporairement dans la ferme d'Hershel et organise une recherche pour retrouver Sophia.",
+            "duree": "45 min",
+            "dateDiffusion": "2011-11-06"
+          },
+          {
+            "numero": 5,
+            "titre": "Chupacabra",
+            "synopsis": "Daryl part seul à la recherche de Sophia et fait une chute dangereuse.",
+            "duree": "45 min",
+            "dateDiffusion": "2011-11-13"
+          },
+          {
+            "numero": 6,
+            "titre": "Secrets",
+            "synopsis": "Glenn découvre le secret que cache la grange d'Hershel.",
+            "duree": "45 min",
+            "dateDiffusion": "2011-11-20"
+          },
+          {
+            "numero": 7,
+            "titre": "Pretty Much Dead Already",
+            "synopsis": "La tension atteint son paroxysme quand le groupe confronte Hershel au sujet de la grange.",
+            "duree": "45 min",
+            "dateDiffusion": "2011-11-27"
+          },
+          {
+            "numero": 8,
+            "titre": "Nebraska",
+            "synopsis": "Rick et Glenn rencontrent deux étrangers hostiles dans un bar.",
+            "duree": "45 min",
+            "dateDiffusion": "2012-02-12"
+          },
+          {
+            "numero": 9,
+            "titre": "Triggerfinger",
+            "synopsis": "Rick, Glenn et Hershel tentent de s'échapper après une fusillade.",
+            "duree": "45 min",
+            "dateDiffusion": "2012-02-19"
+          },
+          {
+            "numero": 10,
+            "titre": "18 Miles Out",
+            "synopsis": "Rick et Shane débattent sur le sort d'un prisonnier tandis que Lori et Andrea se disputent à la ferme.",
+            "duree": "45 min",
+            "dateDiffusion": "2012-02-26"
+          },
+          {
+            "numero": 11,
+            "titre": "Judge, Jury, Executioner",
+            "synopsis": "Le groupe doit décider s'il exécute ou non Randall, un prisonnier dangereux.",
+            "duree": "45 min",
+            "dateDiffusion": "2012-03-04"
+          },
+          {
+            "numero": 12,
+            "titre": "Better Angels",
+            "synopsis": "Alors que des tensions montent, Shane agit de manière irréversible.",
+            "duree": "45 min",
+            "dateDiffusion": "2012-03-11"
+          },
+          {
+            "numero": 13,
+            "titre": "Beside the Dying Fire",
+            "synopsis": "Le groupe affronte une horde de zombies qui envahit la ferme d'Hershel.",
+            "duree": "45 min",
+            "dateDiffusion": "2012-03-18"
+          }
+        ]
+      },
+
+      {
+        "numero": 3,
+        "annee": 2012,
+        "nbEpisodes": 16,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Seed",
+            "synopsis": "Le groupe trouve une prison abandonnée et tente de la sécuriser comme nouvel abri.",
+            "duree": "45 min",
+            "dateDiffusion": "2012-10-14"
+          },
+          {
+            "numero": 2,
+            "titre": "Sick",
+            "synopsis": "Rick doit négocier avec des survivants déjà présents dans la prison.",
+            "duree": "45 min",
+            "dateDiffusion": "2012-10-21"
+          },
+          {
+            "numero": 3,
+            "titre": "Walk with Me",
+            "synopsis": "Andrea et Michonne découvrent une communauté apparemment idyllique dirigée par le Gouverneur.",
+            "duree": "45 min",
+            "dateDiffusion": "2012-10-28"
+          },
+          {
+            "numero": 4,
+            "titre": "Killer Within",
+            "synopsis": "Un sabotage à l'intérieur de la prison mène à une tragédie.",
+            "duree": "45 min",
+            "dateDiffusion": "2012-11-04"
+          },
+          {
+            "numero": 5,
+            "titre": "Say the Word",
+            "synopsis": "Rick lutte pour faire face à une perte dévastatrice tandis que Michonne commence à douter du Gouverneur.",
+            "duree": "45 min",
+            "dateDiffusion": "2012-11-11"
+          },
+          {
+            "numero": 6,
+            "titre": "Hounded",
+            "synopsis": "Merle poursuit Michonne alors que Rick tente de renouer le contact avec quelqu'un à travers un téléphone mystérieux.",
+            "duree": "45 min",
+            "dateDiffusion": "2012-11-18"
+          },
+          {
+            "numero": 7,
+            "titre": "When the Dead Come Knocking",
+            "synopsis": "Le Gouverneur torture Glenn et Maggie pour obtenir des informations sur la prison.",
+            "duree": "45 min",
+            "dateDiffusion": "2012-11-25"
+          },
+          {
+            "numero": 8,
+            "titre": "Made to Suffer",
+            "synopsis": "Rick et son groupe lancent une attaque pour sauver Glenn et Maggie.",
+            "duree": "45 min",
+            "dateDiffusion": "2012-12-02"
+          },
+          {
+            "numero": 9,
+            "titre": "The Suicide King",
+            "synopsis": "Daryl doit faire face à un choix difficile concernant son frère Merle.",
+            "duree": "45 min",
+            "dateDiffusion": "2013-02-10"
+          },
+          {
+            "numero": 10,
+            "titre": "Home",
+            "synopsis": "Rick hallucine Lori tandis que le Gouverneur prépare une attaque contre la prison.",
+            "duree": "45 min",
+            "dateDiffusion": "2013-02-17"
+          },
+          {
+            "numero": 11,
+            "titre": "I Ain't a Judas",
+            "synopsis": "Andrea tente de négocier entre Woodbury et la prison.",
+            "duree": "45 min",
+            "dateDiffusion": "2013-02-24"
+          },
+          {
+            "numero": 12,
+            "titre": "Clear",
+            "synopsis": "Rick, Carl et Michonne retrouvent Morgan, devenu instable.",
+            "duree": "45 min",
+            "dateDiffusion": "2013-03-03"
+          },
+          {
+            "numero": 13,
+            "titre": "Arrow on the Doorpost",
+            "synopsis": "Rick et le Gouverneur tentent une négociation fragile pour éviter la guerre.",
+            "duree": "45 min",
+            "dateDiffusion": "2013-03-10"
+          },
+          {
+            "numero": 14,
+            "titre": "Prey",
+            "synopsis": "Andrea découvre les véritables intentions du Gouverneur et tente de s'échapper de Woodbury.",
+            "duree": "45 min",
+            "dateDiffusion": "2013-03-17"
+          },
+          {
+            "numero": 15,
+            "titre": "This Sorrowful Life",
+            "synopsis": "Merle prend une décision héroïque pour protéger le groupe.",
+            "duree": "45 min",
+            "dateDiffusion": "2013-03-24"
+          },
+          {
+            "numero": 16,
+            "titre": "Welcome to the Tombs",
+            "synopsis": "L'affrontement final entre Rick et le Gouverneur conduit à des pertes majeures.",
+            "duree": "45 min",
+            "dateDiffusion": "2013-03-31"
+          }
+        ]
+      },
+
+      {
+        "numero": 4,
+        "annee": 2013,
+        "nbEpisodes": 16,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "30 Days Without an Accident",
+            "synopsis": "Le groupe tente de se reconstruire après l'attaque du Gouverneur, mais une menace intérieure émerge.",
+            "duree": "45 min",
+            "dateDiffusion": "2013-10-13"
+          },
+          {
+            "numero": 2,
+            "titre": "Infected",
+            "synopsis": "Un groupe de survivants tente de se défendre contre une épidémie de virus qui se propage rapidement dans la prison.",
+            "duree": "45 min",
+            "dateDiffusion": "2013-10-20"
+          },
+          {
+            "numero": 3,
+            "titre": "Isolation",
+            "synopsis": "Le groupe est séparé, et chacun cherche une solution pour survivre à la contagion.",
+            "duree": "45 min",
+            "dateDiffusion": "2013-10-27"
+          },
+          {
+            "numero": 4,
+            "titre": "Indifference",
+            "synopsis": "Rick et Carol partent en mission pour sauver les blessés, mais Carol fait une révélation choquante.",
+            "duree": "45 min",
+            "dateDiffusion": "2013-11-03"
+          },
+          {
+            "numero": 5,
+            "titre": "Internment",
+            "synopsis": "Rick et le groupe font tout leur possible pour éviter que la maladie se propage davantage à la prison.",
+            "duree": "45 min",
+            "dateDiffusion": "2013-11-10"
+          },
+          {
+            "numero": 6,
+            "titre": "Live Bait",
+            "synopsis": "Le Gouverneur revient sur la scène après son départ et trouve une nouvelle communauté.",
+            "duree": "45 min",
+            "dateDiffusion": "2013-11-17"
+          },
+          {
+            "numero": 7,
+            "titre": "Dead Weight",
+            "synopsis": "Le Gouverneur prend une décision difficile concernant sa nouvelle communauté.",
+            "duree": "45 min",
+            "dateDiffusion": "2013-11-24"
+          },
+          {
+            "numero": 8,
+            "titre": "Too Far Gone",
+            "synopsis": "Le Gouverneur attaque la prison, et un affrontement violent met en péril la vie de plusieurs membres du groupe.",
+            "duree": "45 min",
+            "dateDiffusion": "2013-12-01"
+          },
+          {
+            "numero": 9,
+            "titre": "After",
+            "synopsis": "Après l'attaque, le groupe se retrouve séparé, et Rick lutte pour maintenir sa famille en vie.",
+            "duree": "45 min",
+            "dateDiffusion": "2014-02-09"
+          },
+          {
+            "numero": 10,
+            "titre": "Inmates",
+            "synopsis": "Des membres du groupe cherchent d'autres survivants et découvrent une nouvelle menace.",
+            "duree": "45 min",
+            "dateDiffusion": "2014-02-16"
+          },
+          {
+            "numero": 11,
+            "titre": "Claimed",
+            "synopsis": "Rick et ses compagnons se retrouvent confrontés à un groupe de survivants hostiles.",
+            "duree": "45 min",
+            "dateDiffusion": "2014-02-23"
+          },
+          {
+            "numero": 12,
+            "titre": "Still",
+            "synopsis": "Daryl et Beth se retrouvent dans une situation périlleuse en cherchant un refuge.",
+            "duree": "45 min",
+            "dateDiffusion": "2014-03-02"
+          },
+          {
+            "numero": 13,
+            "titre": "Alone",
+            "synopsis": "Des membres du groupe cherchent un endroit sûr, mais ils sont attaqués par de nouveaux ennemis.",
+            "duree": "45 min",
+            "dateDiffusion": "2014-03-09"
+          },
+          {
+            "numero": 14,
+            "titre": "The Grove",
+            "synopsis": "Un groupe d'enfants et d'adultes se réfugient dans une maison isolée, mais des événements tragiques surviennent.",
+            "duree": "45 min",
+            "dateDiffusion": "2014-03-16"
+          },
+          {
+            "numero": 15,
+            "titre": "Us",
+            "synopsis": "Les survivants font face à une nouvelle menace alors qu'ils se rapprochent d'un camp de réfugiés.",
+            "duree": "45 min",
+            "dateDiffusion": "2014-03-23"
+          },
+          {
+            "numero": 16,
+            "titre": "A",
+            "synopsis": "Le groupe se rassemble à Terminus, mais le danger se cache sous une forme inattendue.",
+            "duree": "45 min",
+            "dateDiffusion": "2014-03-30"
+          }
+        ]
+      },
+      {
+        "numero": 5,
+        "annee": 2014,
+        "nbEpisodes": 16,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "No Sanctuary",
+            "synopsis": "Le groupe fait face à une menace dans Terminus, et la survie devient plus compliquée que jamais.",
+            "duree": "45 min",
+            "dateDiffusion": "2014-10-12"
+          },
+          {
+            "numero": 2,
+            "titre": "Strangers",
+            "synopsis": "Le groupe rencontre de nouveaux alliés, mais tout ne semble pas être ce qu'il paraît.",
+            "duree": "45 min",
+            "dateDiffusion": "2014-10-19"
+          },
+          {
+            "numero": 3,
+            "titre": "Four Walls and a Roof",
+            "synopsis": "Le groupe fait face à des menaces internes et externes, mettant à l'épreuve leur moralité.",
+            "duree": "45 min",
+            "dateDiffusion": "2014-10-26"
+          },
+          {
+            "numero": 4,
+            "titre": "The Slabtown",
+            "synopsis": "Beth se retrouve dans une communauté étrange et doit décider comment agir.",
+            "duree": "45 min",
+            "dateDiffusion": "2014-11-02"
+          },
+          {
+            "numero": 5,
+            "titre": "Self Help",
+            "synopsis": "Le groupe se rend dans une autre ville, mais ils sont confrontés à des obstacles imprévus.",
+            "duree": "45 min",
+            "dateDiffusion": "2014-11-09"
+          },
+          {
+            "numero": 6,
+            "titre": "Consumed",
+            "synopsis": "Daryl et Carol cherchent un abri tout en cherchant un moyen de revenir au groupe.",
+            "duree": "45 min",
+            "dateDiffusion": "2014-11-16"
+          },
+          {
+            "numero": 7,
+            "titre": "Crossed",
+            "synopsis": "Le groupe doit prendre des décisions difficiles pour sauver leurs camarades.",
+            "duree": "45 min",
+            "dateDiffusion": "2014-11-23"
+          },
+          {
+            "numero": 8,
+            "titre": "Coda",
+            "synopsis": "Les événements à Terminus prennent une tournure dramatique, avec des conséquences majeures pour le groupe.",
+            "duree": "45 min",
+            "dateDiffusion": "2014-11-30"
+          },
+          {
+            "numero": 9,
+            "titre": "What Happened and What's Going On",
+            "synopsis": "Le groupe fait face à une tragédie inattendue.",
+            "duree": "45 min",
+            "dateDiffusion": "2015-02-08"
+          },
+          {
+            "numero": 10,
+            "titre": "Them",
+            "synopsis": "Le groupe est confronté à une situation désastreuse alors qu'ils continuent leur voyage.",
+            "duree": "45 min",
+            "dateDiffusion": "2015-02-15"
+          },
+          {
+            "numero": 11,
+            "titre": "The Distance",
+            "synopsis": "Le groupe rencontre un nouvel allié mais doit évaluer ses véritables intentions.",
+            "duree": "45 min",
+            "dateDiffusion": "2015-02-22"
+          },
+          {
+            "numero": 12,
+            "titre": "Remember",
+            "synopsis": "Le groupe arrive à une nouvelle communauté et doit apprendre à s'adapter à de nouvelles règles.",
+            "duree": "45 min",
+            "dateDiffusion": "2015-03-01"
+          },
+          {
+            "numero": 13,
+            "titre": "Forget",
+            "synopsis": "Les membres du groupe sont confrontés à des révélations qui mettent leur confiance à l'épreuve.",
+            "duree": "45 min",
+            "dateDiffusion": "2015-03-08"
+          },
+          {
+            "numero": 14,
+            "titre": "Spend",
+            "synopsis": "Un nouveau danger surgit alors que le groupe doit gérer des menaces extérieures.",
+            "duree": "45 min",
+            "dateDiffusion": "2015-03-15"
+          },
+          {
+            "numero": 15,
+            "titre": "Try",
+            "synopsis": "Les tensions internes du groupe deviennent de plus en plus intenses.",
+            "duree": "45 min",
+            "dateDiffusion": "2015-03-22"
+          },
+          {
+            "numero": 16,
+            "titre": "Conquer",
+            "synopsis": "Le groupe fait face à un ultime affrontement, avec des pertes irréparables.",
+            "duree": "45 min",
+            "dateDiffusion": "2015-03-29"
+          }
+        ]
+      },
+      {
+        "numero": 6,
+        "annee": 2015,
+        "nbEpisodes": 16,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "First Time Again",
+            "synopsis": "Rick et le groupe de survivants s'efforcent de trouver une solution pour défendre la communauté d'Alexandria contre les menaces extérieures.",
+            "duree": "45 min",
+            "dateDiffusion": "2015-10-11"
+          },
+          {
+            "numero": 2,
+            "titre": "JSS",
+            "synopsis": "Les membres d'Alexandria se battent pour leur survie face à un groupe d'envahisseurs dangereux.",
+            "duree": "45 min",
+            "dateDiffusion": "2015-10-18"
+          },
+          {
+            "numero": 3,
+            "titre": "Thank You",
+            "synopsis": "Alors que le groupe est en mission de ravitaillement, les choses tournent mal et ils sont confrontés à des pertes importantes.",
+            "duree": "45 min",
+            "dateDiffusion": "2015-10-25"
+          },
+          {
+            "numero": 4,
+            "titre": "Here’s Not Here",
+            "synopsis": "L'épisode se concentre sur la rencontre entre Morgan et un mystérieux homme qui va profondément changer sa vision du monde.",
+            "duree": "45 min",
+            "dateDiffusion": "2015-11-01"
+          },
+          {
+            "numero": 5,
+            "titre": "Now",
+            "synopsis": "Les survivants d'Alexandria s'efforcent de faire face à la perte d'un de leurs membres et à la menace grandissante des Saviors.",
+            "duree": "45 min",
+            "dateDiffusion": "2015-11-08"
+          },
+          {
+            "numero": 6,
+            "titre": "Always Accountable",
+            "synopsis": "Daryl, Abraham et Sasha se retrouvent isolés et confrontés à une série de défis dans une zone inconnue.",
+            "duree": "45 min",
+            "dateDiffusion": "2015-11-15"
+          },
+          {
+            "numero": 7,
+            "titre": "Heads Up",
+            "synopsis": "Alors que le groupe revient à Alexandria, une menace inattendue fait surface et le danger s'intensifie.",
+            "duree": "45 min",
+            "dateDiffusion": "2015-11-22"
+          },
+          {
+            "numero": 8,
+            "titre": "Start to Finish",
+            "synopsis": "La communauté d'Alexandria est prise en otage par un groupe d'ennemis, et le groupe se bat pour sa survie.",
+            "duree": "45 min",
+            "dateDiffusion": "2015-11-29"
+          },
+          {
+            "numero": 9,
+            "titre": "No Way Out",
+            "synopsis": "Les membres du groupe doivent lutter contre les walkers et les menaces humaines pour échapper à la destruction imminente.",
+            "duree": "45 min",
+            "dateDiffusion": "2016-02-14"
+          },
+          {
+            "numero": 10,
+            "titre": "The Next World",
+            "synopsis": "Un groupe part en mission pour explorer de nouveaux territoires et ramener des ressources, mais ils rencontrent de nouveaux ennemis.",
+            "duree": "45 min",
+            "dateDiffusion": "2016-02-21"
+          },
+          {
+            "numero": 11,
+            "titre": "Knots Untie",
+            "synopsis": "Les membres d'Alexandria rencontrent un groupe de survivants et négocient une alliance pour faire face à la menace des Saviors.",
+            "duree": "45 min",
+            "dateDiffusion": "2016-02-28"
+          },
+          {
+            "numero": 12,
+            "titre": "Not Tomorrow Yet",
+            "synopsis": "Rick et le groupe prennent une décision risquée pour éliminer une menace immédiate des Saviors.",
+            "duree": "45 min",
+            "dateDiffusion": "2016-03-06"
+          },
+          {
+            "numero": 13,
+            "titre": "The Same Boat",
+            "synopsis": "Des membres d'Alexandria sont capturés par les Saviors et doivent faire face à des choix difficiles.",
+            "duree": "45 min",
+            "dateDiffusion": "2016-03-13"
+          },
+          {
+            "numero": 14,
+            "titre": "Twice as Far",
+            "synopsis": "Abraham et Eugene partent en mission, mais ils sont confrontés à un défi inattendu.",
+            "duree": "45 min",
+            "dateDiffusion": "2016-03-20"
+          },
+          {
+            "numero": 15,
+            "titre": "East",
+            "synopsis": "Un membre du groupe disparaît mystérieusement et les autres partent à sa recherche dans un territoire dangereux.",
+            "duree": "45 min",
+            "dateDiffusion": "2016-03-27"
+          },
+          {
+            "numero": 16,
+            "titre": "Last Day on Earth",
+            "synopsis": "Le groupe se prépare à une confrontation violente avec les Saviors, mais l'épisode se termine sur un cliffhanger qui remet tout en question.",
+            "duree": "45 min",
+            "dateDiffusion": "2016-04-03"
+          }
+        ]
+      },
+      {
+        "numero": 7,
+        "annee": 2016,
+        "nbEpisodes": 16,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "The Day Will Come When You Won’t Be",
+            "synopsis": "Le groupe est confronté à la brutalité de Negan et de son groupe des Saviors, tandis que la communauté d'Alexandria est brisée.",
+            "duree": "45 min",
+            "dateDiffusion": "2016-10-23"
+          },
+          {
+            "numero": 2,
+            "titre": "The Well",
+            "synopsis": "Morgan et Carol découvrent une nouvelle communauté qui a un mode de vie différent de celui du groupe.",
+            "duree": "45 min",
+            "dateDiffusion": "2016-10-30"
+          },
+          {
+            "numero": 3,
+            "titre": "The Cell",
+            "synopsis": "Daryl est capturé et emprisonné par les Saviors, tandis que nous découvrons leur mode de fonctionnement.",
+            "duree": "45 min",
+            "dateDiffusion": "2016-11-06"
+          },
+          {
+            "numero": 4,
+            "titre": "Service",
+            "synopsis": "Rick et son groupe sont confrontés à la dure réalité du contrôle exercé par Negan et les Saviors.",
+            "duree": "45 min",
+            "dateDiffusion": "2016-11-13"
+          },
+          {
+            "numero": 5,
+            "titre": "Go Getters",
+            "synopsis": "Maggie et Sasha trouvent un refuge, mais un groupe de survivants se trouve à proximité et les choses tournent mal.",
+            "duree": "45 min",
+            "dateDiffusion": "2016-11-20"
+          },
+          {
+            "numero": 6,
+            "titre": "Swear",
+            "synopsis": "Tara et Heath partent en mission, mais ils rencontrent un groupe de survivants qui les défient.",
+            "duree": "45 min",
+            "dateDiffusion": "2016-11-27"
+          },
+          {
+            "numero": 7,
+            "titre": "Sing Me a Song",
+            "synopsis": "Carl se retrouve face à face avec Negan et apprend davantage sur sa manière de gouverner.",
+            "duree": "45 min",
+            "dateDiffusion": "2016-12-04"
+          },
+          {
+            "numero": 8,
+            "titre": "Hearts Still Beating",
+            "synopsis": "Les tensions entre les Saviors et le groupe d'Alexandria atteignent leur paroxysme, et un acte de rébellion bouleverse tout.",
+            "duree": "45 min",
+            "dateDiffusion": "2016-12-11"
+          },
+          {
+            "numero": 9,
+            "titre": "Rock in the Road",
+            "synopsis": "Rick et le groupe forment une alliance avec un autre groupe pour affronter les Saviors.",
+            "duree": "45 min",
+            "dateDiffusion": "2017-02-12"
+          },
+          {
+            "numero": 10,
+            "titre": "New Best Friends",
+            "synopsis": "Le groupe poursuit sa recherche d'alliés pour faire face aux Saviors, mais tout ne se passe pas comme prévu.",
+            "duree": "45 min",
+            "dateDiffusion": "2017-02-19"
+          },
+          {
+            "numero": 11,
+            "titre": "Hostiles and Calamities",
+            "synopsis": "Eugene se retrouve dans une situation dangereuse alors qu'il cherche un moyen d'échapper à la domination de Negan.",
+            "duree": "45 min",
+            "dateDiffusion": "2017-02-26"
+          },
+          {
+            "numero": 12,
+            "titre": "Say Yes",
+            "synopsis": "Rick et Michonne se retrouvent à explorer de nouveaux territoires et à faire face à de nouveaux dangers.",
+            "duree": "45 min",
+            "dateDiffusion": "2017-03-05"
+          },
+          {
+            "numero": 13,
+            "titre": "Bury Me Here",
+            "synopsis": "La communauté d'Ezekiel et son groupe sont confrontés à un problème interne alors qu'une guerre se profile à l'horizon.",
+            "duree": "45 min",
+            "dateDiffusion": "2017-03-12"
+          },
+          {
+            "numero": 14,
+            "titre": "The Other Side",
+            "synopsis": "Maggie, Sasha et d'autres membres du groupe font face à un dilemme moral alors qu'ils se préparent pour la guerre.",
+            "duree": "45 min",
+            "dateDiffusion": "2017-03-19"
+          },
+          {
+            "numero": 15,
+            "titre": "Something They Need",
+            "synopsis": "Rick et le groupe se préparent pour une confrontation décisive contre les Saviors.",
+            "duree": "45 min",
+            "dateDiffusion": "2017-03-26"
+          },
+          {
+            "numero": 16,
+            "titre": "The First Day of the Rest of Your Life",
+            "synopsis": "La guerre contre Negan et les Saviors commence enfin, avec des conséquences dramatiques pour tous les groupes.",
+            "duree": "45 min",
+            "dateDiffusion": "2017-04-02"
+          }
+        ]
+      },
+
+      {
+        "numero": 8,
+        "annee": 2017,
+        "nbEpisodes": 16,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Mercy",
+            "synopsis": "La guerre entre les Saviors et les groupes alliés débute, avec des batailles décisives et des pertes à prévoir.",
+            "duree": "45 min",
+            "dateDiffusion": "2017-10-22"
+          },
+          {
+            "numero": 2,
+            "titre": "The Damned",
+            "synopsis": "Les alliés mènent une offensive contre les Saviors, mais des complications surviennent dans les lignes ennemies.",
+            "duree": "45 min",
+            "dateDiffusion": "2017-10-29"
+          },
+          {
+            "numero": 3,
+            "titre": "Monsters",
+            "synopsis": "Le groupe fait face à des conséquences imprévues après une victoire importante.",
+            "duree": "45 min",
+            "dateDiffusion": "2017-11-05"
+          },
+          {
+            "numero": 4,
+            "titre": "Some Guy",
+            "synopsis": "Les alliances sont mises à l'épreuve alors que les Saviors subissent une perte importante.",
+            "duree": "45 min",
+            "dateDiffusion": "2017-11-12"
+          },
+          {
+            "numero": 5,
+            "titre": "The Big Scary U",
+            "synopsis": "Les tensions au sein du camp de Negan augmentent, avec des révélations sur la loyauté des membres.",
+            "duree": "45 min",
+            "dateDiffusion": "2017-11-19"
+          },
+          {
+            "numero": 6,
+            "titre": "The King, the Widow, and Rick",
+            "synopsis": "Rick, Ezekiel et Maggie prennent des mesures pour contrer les Saviors.",
+            "duree": "45 min",
+            "dateDiffusion": "2017-11-26"
+          },
+          {
+            "numero": 7,
+            "titre": "Time for After",
+            "synopsis": "Des plans se forment pour vaincre Negan, mais des obstacles imprévus se dressent sur le chemin.",
+            "duree": "45 min",
+            "dateDiffusion": "2017-12-03"
+          },
+          {
+            "numero": 8,
+            "titre": "How It's Gotta Be",
+            "synopsis": "La situation devient encore plus tendue avec des sacrifices nécessaires pour la cause.",
+            "duree": "45 min",
+            "dateDiffusion": "2017-12-10"
+          },
+          {
+            "numero": 9,
+            "titre": "Honor",
+            "synopsis": "Un membre clé du groupe fait un sacrifice ultime pour la cause.",
+            "duree": "45 min",
+            "dateDiffusion": "2018-02-25"
+          },
+          {
+            "numero": 10,
+            "titre": "The Lost and the Plunderers",
+            "synopsis": "Les conflits internes rendent difficile l'unité du groupe alors qu'ils affrontent les Saviors.",
+            "duree": "45 min",
+            "dateDiffusion": "2018-03-04"
+          },
+          {
+            "numero": 11,
+            "titre": "Dead or Alive Or",
+            "synopsis": "Un conflit intérieur explose alors que les membres du groupe prennent des décisions difficiles.",
+            "duree": "45 min",
+            "dateDiffusion": "2018-03-11"
+          },
+          {
+            "numero": 12,
+            "titre": "The Key",
+            "synopsis": "Les tensions entre les groupes opposés atteignent un nouveau sommet, avec des choix dangereux à faire.",
+            "duree": "45 min",
+            "dateDiffusion": "2018-03-18"
+          },
+          {
+            "numero": 13,
+            "titre": "Do Not Send Us Astray",
+            "synopsis": "Les stratégies de guerre sont confrontées à la réalité de la lutte pour la survie.",
+            "duree": "45 min",
+            "dateDiffusion": "2018-03-25"
+          },
+          {
+            "numero": 14,
+            "titre": "Still Gotta Mean Something",
+            "synopsis": "Le groupe fait face à des pertes humaines dramatiques, mais l'espoir demeure.",
+            "duree": "45 min",
+            "dateDiffusion": "2018-04-01"
+          },
+          {
+            "numero": 15,
+            "titre": "Worth",
+            "synopsis": "Les groupes sont plus que jamais confrontés à leurs démons, et de nouvelles alliances se forment.",
+            "duree": "45 min",
+            "dateDiffusion": "2018-04-08"
+          },
+          {
+            "numero": 16,
+            "titre": "Wrath",
+            "synopsis": "Le combat final contre Negan et les Saviors arrive à son terme, avec des conséquences majeures pour tous les personnages.",
+            "duree": "45 min",
+            "dateDiffusion": "2018-04-15"
+          }
+        ]
+      },
+      {
+        "numero": 9,
+        "annee": 2018,
+        "nbEpisodes": 16,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "A New Beginning",
+            "synopsis": "Le groupe essaie de reconstruire la civilisation après la guerre contre les Saviors, mais de nouvelles menaces apparaissent.",
+            "duree": "45 min",
+            "dateDiffusion": "2018-10-07"
+          },
+          {
+            "numero": 2,
+            "titre": "The Bridge",
+            "synopsis": "Le groupe travaille sur un projet de pont, mais des tensions internes surgissent alors que des anciens ennemis refont surface.",
+            "duree": "45 min",
+            "dateDiffusion": "2018-10-14"
+          },
+          {
+            "numero": 3,
+            "titre": "Warning Signs",
+            "synopsis": "Le groupe fait face à une nouvelle menace, et certains membres prennent des décisions difficiles pour garantir la sécurité de la communauté.",
+            "duree": "45 min",
+            "dateDiffusion": "2018-10-21"
+          },
+          {
+            "numero": 4,
+            "titre": "The Obliged",
+            "synopsis": "Les relations avec de nouveaux personnages deviennent de plus en plus complexes alors que le groupe fait face à des choix cruciaux.",
+            "duree": "45 min",
+            "dateDiffusion": "2018-10-28"
+          },
+          {
+            "numero": 5,
+            "titre": "What Comes After",
+            "synopsis": "Rick Grimes doit faire face à une situation désespérée, et la dynamique du groupe change de manière irréversible.",
+            "duree": "45 min",
+            "dateDiffusion": "2018-11-04"
+          },
+          {
+            "numero": 6,
+            "titre": "Who Are You Now?",
+            "synopsis": "Le groupe tente de se relever après une perte tragique, et des choix difficiles doivent être faits pour leur survie.",
+            "duree": "45 min",
+            "dateDiffusion": "2018-11-11"
+          },
+          {
+            "numero": 7,
+            "titre": "Stradivarius",
+            "synopsis": "Une tentative de rapprochement avec des communautés voisines tourne mal, forçant certains à se battre pour leur vie.",
+            "duree": "45 min",
+            "dateDiffusion": "2018-11-18"
+          },
+          {
+            "numero": 8,
+            "titre": "Evolution",
+            "synopsis": "De nouveaux dangers surgissent dans le monde des morts-vivants alors que le groupe fait face à des créatures encore plus terrifiantes.",
+            "duree": "45 min",
+            "dateDiffusion": "2018-11-25"
+          },
+          {
+            "numero": 9,
+            "titre": "Adaptation",
+            "synopsis": "Les mystères s'épaississent et des alliances improbables se forment alors que des découvertes sur les morts-vivants bouleversent l'équilibre du groupe.",
+            "duree": "45 min",
+            "dateDiffusion": "2019-02-10"
+          },
+          {
+            "numero": 10,
+            "titre": "Omega",
+            "synopsis": "Un ancien membre du groupe revient, et des secrets sont révélés qui auront des répercussions importantes pour l'avenir du groupe.",
+            "duree": "45 min",
+            "dateDiffusion": "2019-02-17"
+          },
+          {
+            "numero": 11,
+            "titre": "Bounty",
+            "synopsis": "Le groupe est forcé de faire face à un groupe de survivants impitoyables, et des décisions difficiles sont prises sous pression.",
+            "duree": "45 min",
+            "dateDiffusion": "2019-02-24"
+          },
+          {
+            "numero": 12,
+            "titre": "Guardians",
+            "synopsis": "Le groupe se retrouve confronté à un nouvel ennemi tout en gérant les tensions internes qui mettent en péril leur unité.",
+            "duree": "45 min",
+            "dateDiffusion": "2019-03-03"
+          },
+          {
+            "numero": 13,
+            "titre": "Chokepoint",
+            "synopsis": "Des choix impossibles font face aux survivants, et des sacrifices sont faits pour leur survie.",
+            "duree": "45 min",
+            "dateDiffusion": "2019-03-10"
+          },
+          {
+            "numero": 14,
+            "titre": "Scars",
+            "synopsis": "Des secrets du passé sont dévoilés, et de nouveaux alliés sont trouvés dans un monde où la confiance devient un luxe.",
+            "duree": "45 min",
+            "dateDiffusion": "2019-03-17"
+          },
+          {
+            "numero": 15,
+            "titre": "The Calm Before",
+            "synopsis": "Les tensions avec un groupe rivale atteignent leur apogée, et le groupe doit faire face à une tragédie inimaginable.",
+            "duree": "45 min",
+            "dateDiffusion": "2019-03-24"
+          },
+          {
+            "numero": 16,
+            "titre": "The Storm",
+            "synopsis": "La guerre contre les menaces externes atteint son point culminant, et des sacrifices doivent être faits pour l'avenir du groupe.",
+            "duree": "45 min",
+            "dateDiffusion": "2019-03-31"
+          }
+        ]
+      },
+      {
+        "numero": 10,
+        "annee": 2019,
+        "nbEpisodes": 22,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Lines We Cross",
+            "synopsis": "Le groupe fait face à de nouvelles menaces alors qu'ils tentent de se reconstruire après les événements de la saison précédente.",
+            "duree": "45 min",
+            "dateDiffusion": "2019-10-06"
+          },
+          {
+            "numero": 2,
+            "titre": "We Are the End of the World",
+            "synopsis": "Les mystères entourant le groupe des Whisperers sont explorés, dévoilant des secrets du passé.",
+            "duree": "45 min",
+            "dateDiffusion": "2019-10-13"
+          },
+          {
+            "numero": 3,
+            "titre": "Ghosts",
+            "synopsis": "Les survivants se retrouvent face à une situation de plus en plus désastreuse alors que les menaces externes se multiplient.",
+            "duree": "45 min",
+            "dateDiffusion": "2019-10-20"
+          },
+          {
+            "numero": 4,
+            "titre": "Silence the Whisperers",
+            "synopsis": "Les Whisperers révèlent leur vrai visage et le groupe se retrouve pris dans une spirale de violence incontrôlable.",
+            "duree": "45 min",
+            "dateDiffusion": "2019-10-27"
+          },
+          {
+            "numero": 5,
+            "titre": "What It Always Is",
+            "synopsis": "Des révélations sur le passé des personnages changent la dynamique du groupe et forcent des choix difficiles.",
+            "duree": "45 min",
+            "dateDiffusion": "2019-11-03"
+          },
+          {
+            "numero": 6,
+            "titre": "Bonds",
+            "synopsis": "Les tensions internes du groupe sont exacerbées, et certains membres cherchent à obtenir de l'aide à l'extérieur.",
+            "duree": "45 min",
+            "dateDiffusion": "2019-11-10"
+          },
+          {
+            "numero": 7,
+            "titre": "Open Your Eyes",
+            "synopsis": "Un nouvel ennemi mystérieux apparaît, et des combats de survie font rage parmi les groupes rivaux.",
+            "duree": "45 min",
+            "dateDiffusion": "2019-11-17"
+          },
+          {
+            "numero": 8,
+            "titre": "The World Before",
+            "synopsis": "Le groupe se trouve confronté à des dangers croissants alors que des secrets de leurs ennemis sont mis à jour.",
+            "duree": "45 min",
+            "dateDiffusion": "2019-11-24"
+          },
+          {
+            "numero": 9,
+            "titre": "Squeeze",
+            "synopsis": "Les tensions internes et externes s'intensifient à mesure que le groupe essaie de survivre à une nouvelle menace.",
+            "duree": "45 min",
+            "dateDiffusion": "2020-02-23"
+          },
+          {
+            "numero": 10,
+            "titre": "Stalker",
+            "synopsis": "Un nouvel ennemi mystérieux apparaît, et des combats de survie font rage parmi les groupes rivaux.",
+            "duree": "45 min",
+            "dateDiffusion": "2020-03-01"
+          },
+          {
+            "numero": 11,
+            "titre": "Morning Star",
+            "synopsis": "Les loyautés sont mises à l'épreuve alors que le groupe tente de faire face à un ennemi implacable.",
+            "duree": "45 min",
+            "dateDiffusion": "2020-03-08"
+          },
+          {
+            "numero": 12,
+            "titre": "Walk with Us",
+            "synopsis": "Des batailles spectaculaires se déclenchent alors que les rôles de leadership sont renégociés au sein du groupe.",
+            "duree": "45 min",
+            "dateDiffusion": "2020-03-15"
+          },
+          {
+            "numero": 13,
+            "titre": "What We Become",
+            "synopsis": "Des choix désespérés sont faits dans l'espoir de préserver l'avenir du groupe.",
+            "duree": "45 min",
+            "dateDiffusion": "2020-03-22"
+          },
+          {
+            "numero": 14,
+            "titre": "Look at the Flowers",
+            "synopsis": "Les pertes et les sacrifices deviennent une constante alors que des figures importantes du groupe sont confrontées à des dilemmes moraux.",
+            "duree": "45 min",
+            "dateDiffusion": "2020-03-29"
+          },
+          {
+            "numero": 15,
+            "titre": "The Tower",
+            "synopsis": "Les personnages font face à des décisions cruciales qui déterminent la direction future du groupe.",
+            "duree": "45 min",
+            "dateDiffusion": "2020-04-05"
+          },
+          {
+            "numero": 16,
+            "titre": "A Certain Doom",
+            "synopsis": "L'ultime confrontation se prépare, et des événements dramatiques bouleversent l'ordre établi dans la survie du groupe.",
+            "duree": "45 min",
+            "dateDiffusion": "2020-04-12"
+          },
+          {
+            "numero": 17,
+            "titre": "One More",
+            "synopsis": "Une menace inattendue émerge alors que les survivants font face à des changements irréversibles dans leur groupe.",
+            "duree": "45 min",
+            "dateDiffusion": "2020-10-04"
+          },
+          {
+            "numero": 18,
+            "titre": "Splinter",
+            "synopsis": "Le groupe se retrouve isolé, devant faire face à des ennemis à la fois visibles et invisibles.",
+            "duree": "45 min",
+            "dateDiffusion": "2020-10-11"
+          },
+          {
+            "numero": 19,
+            "titre": "Find Me",
+            "synopsis": "Des secrets du passé refont surface, modifiant la trajectoire des personnages et des décisions cruciales sont prises.",
+            "duree": "45 min",
+            "dateDiffusion": "2020-10-18"
+          },
+          {
+            "numero": 20,
+            "titre": "Diverged",
+            "synopsis": "Des tensions internes se transforment en conflits ouverts, menaçant la stabilité du groupe.",
+            "duree": "45 min",
+            "dateDiffusion": "2020-10-25"
+          },
+          {
+            "numero": 21,
+            "titre": "The Waiting Room",
+            "synopsis": "Un nouveau défi se dresse devant le groupe, les forçant à se préparer à une confrontation inévitable.",
+            "duree": "45 min",
+            "dateDiffusion": "2020-11-01"
+          },
+          {
+            "numero": 22,
+            "titre": "Here's Negan",
+            "synopsis": "Le passé de Negan est exploré, offrant des éclaircissements sur ses motivations et sa transformation en l'un des personnages les plus redoutés.",
+            "duree": "45 min",
+            "dateDiffusion": "2020-11-08"
+          }
+        ]
+      },
+
+      {
+        "numero": 11,
+        "annee": 2021,
+        "nbEpisodes": 24,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Acheron: Part I",
+            "synopsis": "Le groupe fait face à des défis insurmontables alors qu'ils tentent de traverser une zone dangereuse pour trouver une nouvelle maison.",
+            "duree": "45 min",
+            "dateDiffusion": "2021-08-22"
+          },
+          {
+            "numero": 2,
+            "titre": "Acheron: Part II",
+            "synopsis": "Les tensions montent à l'intérieur du groupe alors qu'ils se battent pour leur survie dans des conditions de plus en plus périlleuses.",
+            "duree": "45 min",
+            "dateDiffusion": "2021-08-29"
+          },
+          {
+            "numero": 3,
+            "titre": "Hunted",
+            "synopsis": "Le groupe se retrouve séparé, poursuivi par un ennemi invisible, et chacun doit faire face à des choix cruciaux pour sa survie.",
+            "duree": "45 min",
+            "dateDiffusion": "2021-09-05"
+          },
+          {
+            "numero": 4,
+            "titre": "Rendition",
+            "synopsis": "Des alliances inattendues se forment alors que des membres du groupe sont capturés et doivent trouver un moyen de s'échapper.",
+            "duree": "45 min",
+            "dateDiffusion": "2021-09-12"
+          },
+          {
+            "numero": 5,
+            "titre": "Out of the Ashes",
+            "synopsis": "Le groupe fait face à de nouvelles menaces et doit prendre des décisions difficiles alors qu'ils tentent de reconstruire leur vie.",
+            "duree": "45 min",
+            "dateDiffusion": "2021-09-19"
+          },
+          {
+            "numero": 6,
+            "titre": "On the Inside",
+            "synopsis": "Des secrets sont révélés tandis que des personnages sont confrontés à leurs peurs et à leur passé, tout en luttant pour leur avenir.",
+            "duree": "45 min",
+            "dateDiffusion": "2021-09-26"
+          },
+          {
+            "numero": 7,
+            "titre": "Promises Broken",
+            "synopsis": "Le groupe se trouve sur le point de se séparer alors que des conflits internes explosent, mettant leur avenir en jeu.",
+            "duree": "45 min",
+            "dateDiffusion": "2021-10-03"
+          },
+          {
+            "numero": 8,
+            "titre": "For Blood",
+            "synopsis": "Une bataille décisive se prépare alors que les ennemis se rapprochent, et chaque personnage doit faire face à ses choix.",
+            "duree": "45 min",
+            "dateDiffusion": "2021-10-10"
+          },
+          {
+            "numero": 9,
+            "titre": "No Other Way",
+            "synopsis": "La confrontation finale approche, et les survivants sont prêts à tout pour avoir une chance de reconstruire un monde meilleur.",
+            "duree": "45 min",
+            "dateDiffusion": "2021-10-17"
+          },
+          {
+            "numero": 10,
+            "titre": "New Haunts",
+            "synopsis": "Le groupe trouve un refuge, mais des tensions et des conflits internes surviennent, menaçant de faire échouer leurs efforts.",
+            "duree": "45 min",
+            "dateDiffusion": "2021-10-24"
+          },
+          {
+            "numero": 11,
+            "titre": "The Lucky Ones",
+            "synopsis": "Des personnages font face à des défis moraux difficiles alors qu'ils se battent pour ce qui reste de leur humanité.",
+            "duree": "45 min",
+            "dateDiffusion": "2021-10-31"
+          },
+          {
+            "numero": 12,
+            "titre": "The Rotten Core",
+            "synopsis": "Les membres du groupe sont confrontés à des choix impossibles alors que de nouveaux ennemis se dressent contre eux.",
+            "duree": "45 min",
+            "dateDiffusion": "2021-11-07"
+          },
+          {
+            "numero": 13,
+            "titre": "Beneath the Ashes",
+            "synopsis": "Le groupe est confronté à des événements tragiques qui les forcent à repenser leur stratégie et leurs alliances.",
+            "duree": "45 min",
+            "dateDiffusion": "2021-11-14"
+          },
+          {
+            "numero": 14,
+            "titre": "The Bitter End",
+            "synopsis": "Des batailles intenses et des sacrifices personnels définissent l'issue de la guerre, et les survivants doivent se préparer à l'après-guerre.",
+            "duree": "45 min",
+            "dateDiffusion": "2021-11-21"
+          },
+          {
+            "numero": 15,
+            "titre": "Finale: Part I",
+            "synopsis": "L'issue de la guerre approche, et des révélations importantes changent le cours des événements.",
+            "duree": "45 min",
+            "dateDiffusion": "2022-02-27"
+          },
+          {
+            "numero": 16,
+            "titre": "Finale: Part II",
+            "synopsis": "La dernière bataille éclate dans un conflit de proportions épiques, mettant en jeu le destin de tous les personnages.",
+            "duree": "45 min",
+            "dateDiffusion": "2022-03-06"
+          },
+          {
+            "numero": 17,
+            "titre": "Through the Darkness",
+            "synopsis": "Les survivants naviguent dans un monde incertain, où la paix semble de plus en plus lointaine.",
+            "duree": "45 min",
+            "dateDiffusion": "2022-03-13"
+          },
+          {
+            "numero": 18,
+            "titre": "After the Storm",
+            "synopsis": "Les personnages cherchent à reconstruire ce qui a été détruit, mais des menaces imprévues viennent perturber leurs efforts.",
+            "duree": "45 min",
+            "dateDiffusion": "2022-03-20"
+          },
+          {
+            "numero": 19,
+            "titre": "Eternal Shadows",
+            "synopsis": "Les survivants affrontent une nouvelle menace en plein cœur de la reconstruction, menaçant de tout détruire à nouveau.",
+            "duree": "45 min",
+            "dateDiffusion": "2022-03-27"
+          },
+          {
+            "numero": 20,
+            "titre": "The Last Stand",
+            "synopsis": "Le groupe doit se préparer pour un dernier combat, mettant à l'épreuve les loyautés et les décisions prises au cours de la guerre.",
+            "duree": "45 min",
+            "dateDiffusion": "2022-04-03"
+          },
+          {
+            "numero": 21,
+            "titre": "New Dawn",
+            "synopsis": "L'aube d'une nouvelle ère commence pour les survivants, mais des défis de taille se profilent à l'horizon.",
+            "duree": "45 min",
+            "dateDiffusion": "2022-04-10"
+          },
+          {
+            "numero": 22,
+            "titre": "Survival's End",
+            "synopsis": "Le groupe se bat pour un avenir incertain, mais une nouvelle menace se dessine à l'horizon.",
+            "duree": "45 min",
+            "dateDiffusion": "2022-04-17"
+          },
+          {
+            "numero": 23,
+            "titre": "Hope Remains",
+            "synopsis": "La lutte pour la survie continue, mais un rayon d'espoir apparait à mesure que des alliés inattendus arrivent.",
+            "duree": "45 min",
+            "dateDiffusion": "2022-04-24"
+          },
+          {
+            "numero": 24,
+            "titre": "Endgame",
+            "synopsis": "La guerre atteint son apogée, et l'issue du combat décidera du destin de tous les personnages, marquant la fin de l'ère des morts-vivants.",
+            "duree": "45 min",
+            "dateDiffusion": "2022-05-01"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "titre": "The Crown",
+    "synopsis": "L'histoire du règne de la reine Elizabeth II et les événements qui ont façonné la seconde moitié du 20e siècle.",
+    "image": "https://m.media-amazon.com/images/I/71f97nf-u9L._AC_UF1000,1000_QL80_.jpg",
+    "acteurs": ["Claire Foy", "Olivia Colman", "Imelda Staunton"],
+    "note": 8.7,
+    "dateDebut": "2016-11-04",
+    "dateFin": "2023-12-14",
+    "createur": "Peter Morgan",
+    "bandeAnnonce": "https://www.youtube.com/watch?v=JWtnJjn6ng0",
+    "genre": ["Drame", "Historique", "Biographie"],
+    "paysProduction": ["Royaume-Uni"],
+    "platforms": ["Netflix"],
+    "langues": ["Anglais", "Français", "Allemand"],
+    "dureeEpisodeMoyenne": "59 min",
+    "saisons": [
+      {
+        "numero": 1,
+        "annee": 2016,
+        "nbEpisodes": 10,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Wolferton Splash",
+            "synopsis": "La princesse Elizabeth devient reine après la mort de son père, mais elle fait face à de nouveaux défis alors qu'elle essaie de comprendre son rôle et son pouvoir.",
+            "duree": "60 min",
+            "dateDiffusion": "2016-11-04"
+          },
+          {
+            "numero": 2,
+            "titre": "Hyde Park Corner",
+            "synopsis": "Elizabeth et son mari, le prince Philip, prennent leurs marques, tandis que des tensions surgissent au sein de la famille royale.",
+            "duree": "59 min",
+            "dateDiffusion": "2016-11-04"
+          },
+          {
+            "numero": 3,
+            "titre": "Windsor",
+            "synopsis": "La couronne de la reine Elizabeth est mise à l'épreuve lors de la guerre de Suez, ce qui entraîne un débat sur le rôle du Royaume-Uni sur la scène internationale.",
+            "duree": "60 min",
+            "dateDiffusion": "2016-11-04"
+          },
+          {
+            "numero": 4,
+            "titre": "Act of God",
+            "synopsis": "Un incident tragique met à l'épreuve les relations de la famille royale et la capacité d'Elizabeth à diriger pendant une crise.",
+            "duree": "59 min",
+            "dateDiffusion": "2016-11-04"
+          },
+          {
+            "numero": 5,
+            "titre": "Smoke and Mirrors",
+            "synopsis": "Les problèmes personnels et politiques prennent de l'ampleur alors qu'Elizabeth prend des décisions difficiles concernant la direction de son gouvernement.",
+            "duree": "59 min",
+            "dateDiffusion": "2016-11-04"
+          },
+          {
+            "numero": 6,
+            "titre": "Gelignite",
+            "synopsis": "Les relations entre Elizabeth et son mari, Philip, continuent de se détériorer à mesure qu'ils font face à de nouveaux défis.",
+            "duree": "60 min",
+            "dateDiffusion": "2016-11-04"
+          },
+          {
+            "numero": 7,
+            "titre": "Shadows",
+            "synopsis": "Le mariage d'Elizabeth et de Philip traverse une nouvelle épreuve, et les deux doivent naviguer dans une mer de tensions politiques et familiales.",
+            "duree": "60 min",
+            "dateDiffusion": "2016-11-04"
+          },
+          {
+            "numero": 8,
+            "titre": "Pride and Joy",
+            "synopsis": "La naissance d'un enfant met une pression supplémentaire sur la jeune reine, tandis que la famille royale doit se réorganiser pour faire face aux nouveaux défis.",
+            "duree": "60 min",
+            "dateDiffusion": "2016-11-04"
+          },
+          {
+            "numero": 9,
+            "titre": "Assassins",
+            "synopsis": "Les tensions au sein de la famille royale augmentent, et Elizabeth doit faire face à des menaces tant externes qu'internes.",
+            "duree": "59 min",
+            "dateDiffusion": "2016-11-04"
+          },
+          {
+            "numero": 10,
+            "titre": "Gloriana",
+            "synopsis": "Le premier ministre Winston Churchill et la reine Elizabeth affrontent des défis qui modifient le paysage politique britannique pour toujours.",
+            "duree": "60 min",
+            "dateDiffusion": "2016-11-04"
+          }
+        ]
+      },{
+        "numero": 2,
+        "annee": 2017,
+        "nbEpisodes": 10,
+        "episodes": [
+          {
+        "numero": 1,
+        "titre": "Misalliance",
+        "synopsis": "La famille royale fait face à un scandale public, et Elizabeth doit décider si elle doit intervenir ou laisser les choses suivre leur cours.",
+        "duree": "60 min",
+        "dateDiffusion": "2017-12-08"
+      },
+      {
+        "numero": 2,
+        "titre": "A Company of Men",
+        "synopsis": "Les tensions au sein du mariage royal augmentent, et Philip lutte avec ses propres frustrations sur son rôle et sa position.",
+        "duree": "60 min",
+        "dateDiffusion": "2017-12-08"
+      },
+      {
+        "numero": 3,
+        "titre": "Lisbon",
+        "synopsis": "Le voyage d'Elizabeth et Philip à Lisbonne est l'occasion pour la reine de réfléchir à son mariage et à sa vie.",
+        "duree": "60 min",
+        "dateDiffusion": "2017-12-08"
+      },
+      {
+        "numero": 4,
+        "titre": "Beryl",
+        "synopsis": "Un membre de la famille royale fait face à des difficultés personnelles, mettant une pression supplémentaire sur la famille.",
+        "duree": "60 min",
+        "dateDiffusion": "2017-12-08"
+      },
+      {
+        "numero": 5,
+        "titre": "The Turk",
+        "synopsis": "La pression de maintenir la monarchie s'intensifie, et Elizabeth fait face à des décisions difficiles concernant sa position en tant que dirigeante et mère.",
+        "duree": "60 min",
+        "dateDiffusion": "2017-12-08"
+      },
+      {
+        "numero": 6,
+        "titre": "Vergangenheit",
+        "synopsis": "Les tensions entre Elizabeth et Philip augmentent, tandis que la famille royale continue de se débattre avec les défis de la modernité.",
+        "duree": "60 min",
+        "dateDiffusion": "2017-12-08"
+      },
+      {
+        "numero": 7,
+        "titre": "Belgravia",
+        "synopsis": "Elizabeth et Philip traversent une crise dans leur mariage, mais il est évident que la reine a plus de responsabilités qu'un simple rôle de femme de roi.",
+        "duree": "60 min",
+        "dateDiffusion": "2017-12-08"
+      },
+      {
+        "numero": 8,
+        "titre": "The Beginning of the End",
+        "synopsis": "Les membres de la famille royale font face à des conséquences dévastatrices de leurs actions passées, et la monarchie traverse des tempêtes politiques et personnelles.",
+        "duree": "60 min",
+        "dateDiffusion": "2017-12-08"
+      },
+      {
+        "numero": 9,
+        "titre": "The Wedding",
+        "synopsis": "Un mariage royal attire l'attention du monde entier, mais il s'accompagne de secrets et de tensions qui perturbent l'événement.",
+        "duree": "60 min",
+        "dateDiffusion": "2017-12-08"
+      },
+      {
+        "numero": 10,
+        "titre": "The Crown",
+        "synopsis": "La fin de la saison marque un tournant pour Elizabeth, avec des moments importants qui redéfinissent le rôle de la reine et de la monarchie.",
+        "duree": "60 min",
+        "dateDiffusion": "2017-12-08"
+      }
+    ]
+  }, {
+    "numero": 3,
+    "annee": 2019,
+    "nbEpisodes": 10,
+    "episodes": [
+      {
+        "numero": 1,
+        "titre": "Olding",
+        "synopsis": "La couronne britannique navigue dans une époque de changements sociaux, politiques et économiques, et Elizabeth se prépare à un futur incertain.",
+        "duree": "60 min",
+        "dateDiffusion": "2019-11-17"
+      },
+      {
+        "numero": 2,
+        "titre": "Ambitious",
+        "synopsis": "La nouvelle génération de la famille royale prend de plus en plus de place, mais des tensions émergent à mesure que le monde moderne entre en jeu.",
+        "duree": "60 min",
+        "dateDiffusion": "2019-11-17"
+      },
+      {
+        "numero": 3,
+        "titre": "Defying",
+        "synopsis": "Elizabeth fait face à de nouvelles questions sur son rôle en tant que reine, et ses décisions mettront à l'épreuve sa capacité à mener.",
+        "duree": "60 min",
+        "dateDiffusion": "2019-11-17"
+      },
+      {
+        "numero": 4,
+        "titre": "Discovering",
+        "synopsis": "Les changements politiques et personnels bouleversent la monarchie britannique et mettent les membres de la famille royale à l'épreuve.",
+        "duree": "60 min",
+        "dateDiffusion": "2019-11-17"
+      },
+      {
+        "numero": 5,
+        "titre": "Unrevealing",
+        "synopsis": "De nouveaux scandales émergent, testant la famille royale et les décisions difficiles qu'ils doivent prendre pour l'avenir.",
+        "duree": "60 min",
+        "dateDiffusion": "2019-11-17"
+      },
+      {
+        "numero": 6,
+        "titre": "Unseen",
+        "synopsis": "Les luttes politiques de l'époque continuent d'influencer la monarchie britannique, avec des changements à venir.",
+        "duree": "60 min",
+        "dateDiffusion": "2019-11-17"
+      },
+      {
+        "numero": 7,
+        "titre": "Emerging",
+        "synopsis": "De nouveaux visages et de nouveaux défis viennent réorienter l'histoire de la famille royale, alors que le monde change.",
+        "duree": "60 min",
+        "dateDiffusion": "2019-11-17"
+      },
+      {
+        "numero": 8,
+        "titre": "Resurging",
+        "synopsis": "Les anciens membres de la famille royale se retrouvent en compétition avec la jeune génération, tandis qu'un bouleversement dans la politique britannique secoue tout le royaume.",
+        "duree": "60 min",
+        "dateDiffusion": "2019-11-17"
+      },
+      {
+        "numero": 9,
+        "titre": "Realizing",
+        "synopsis": "La série explore l'impact de l'héritage de la monarchie sur les relations personnelles et politiques de la famille royale.",
+        "duree": "60 min",
+        "dateDiffusion": "2019-11-17"
+      },
+      {
+        "numero": 10,
+        "titre": "A New Era",
+        "synopsis": "Le règne d'Elizabeth II continue, et la saison se termine sur une réflexion sur son héritage et la manière dont elle a façonné le futur de la famille royale.",
+        "duree": "60 min",
+        "dateDiffusion": "2019-11-17"
+      }
+    ]
+  },{
+    "numero": 4,
+    "annee": 2020,
+    "nbEpisodes": 10,
+    "episodes": [
+      {
+        "numero": 1,
+        "titre": "Gold Stick",
+        "synopsis": "Les tensions politiques et personnelles augmentent lorsque la reine Elizabeth doit gérer un conflit avec Margaret Thatcher, la nouvelle Première ministre.",
+        "duree": "60 min",
+        "dateDiffusion": "2020-11-15"
+      },
+      {
+        "numero": 2,
+        "titre": "The Darkest Hour",
+        "synopsis": "Les relations entre Margaret Thatcher et la reine Elizabeth se compliquent, alors que la politique intérieure et les conflits familiaux deviennent de plus en plus intenses.",
+        "duree": "60 min",
+        "dateDiffusion": "2020-11-15"
+      },
+      {
+        "numero": 3,
+        "titre": "The Lady's Not for Turning",
+        "synopsis": "Le monde politique est agité avec l'arrivée de la guerre des Malouines, et la famille royale doit gérer la pression de l'opinion publique et des relations diplomatiques.",
+        "duree": "60 min",
+        "dateDiffusion": "2020-11-15"
+      },
+      {
+        "numero": 4,
+        "titre": "Crisis of Conscience",
+        "synopsis": "Les tensions politiques montent à nouveau alors que la reine et Thatcher doivent naviguer dans des moments difficiles, tout en gérant leurs propres relations personnelles.",
+        "duree": "60 min",
+        "dateDiffusion": "2020-11-15"
+      },
+      {
+        "numero": 5,
+        "titre": "The Crown's Conscience",
+        "synopsis": "Les dilemmes moraux et politiques se font de plus en plus difficiles à résoudre pour la reine, et la famille royale fait face à des bouleversements internes.",
+        "duree": "60 min",
+        "dateDiffusion": "2020-11-15"
+      },
+      {
+        "numero": 6,
+        "titre": "Crisis of Leadership",
+        "synopsis": "Margaret Thatcher prend des décisions controversées, et les tensions entre la reine et la Première ministre atteignent de nouveaux sommets.",
+        "duree": "60 min",
+        "dateDiffusion": "2020-11-15"
+      },
+      {
+        "numero": 7,
+        "titre": "Battle for the Future",
+        "synopsis": "Les conflits familiaux s'intensifient, et la reine Elizabeth fait face à des décisions critiques pour l'avenir de la monarchie.",
+        "duree": "60 min",
+        "dateDiffusion": "2020-11-15"
+      },
+      {
+        "numero": 8,
+        "titre": "Diplomatic Dilemma",
+        "synopsis": "La guerre des Malouines atteint son paroxysme, mettant la famille royale sous pression. Le gouvernement de Margaret Thatcher se trouve en crise.",
+        "duree": "60 min",
+        "dateDiffusion": "2020-11-15"
+      },
+      {
+        "numero": 9,
+        "titre": "Troubled Waters",
+        "synopsis": "Les conséquences de la guerre des Malouines se font sentir sur le gouvernement britannique et la monarchie.",
+        "duree": "60 min",
+        "dateDiffusion": "2020-11-15"
+      },
+      {
+        "numero": 10,
+        "titre": "A New Beginning",
+        "synopsis": "La saison se termine sur une note de transformation pour la famille royale, avec des tensions entre Margaret Thatcher et la reine Elizabeth.",
+        "duree": "60 min",
+        "dateDiffusion": "2020-11-15"
+      }
+    ]
+  },{
+    "numero": 5,
+    "annee": 2022,
+    "nbEpisodes": 10,
+    "episodes": [
+      {
+        "numero": 1,
+        "titre": "The Fall of the House of Windsor",
+        "synopsis": "La reine Elizabeth et sa famille naviguent à travers des crises intérieures et des bouleversements mondiaux qui redéfiniront leur héritage.",
+        "duree": "60 min",
+        "dateDiffusion": "2022-11-09"
+      },
+      {
+        "numero": 2,
+        "titre": "A New Dawn",
+        "synopsis": "Des changements dans la monarchie créent une nouvelle dynamique familiale et politique, mettant les membres de la famille royale à l'épreuve.",
+        "duree": "60 min",
+        "dateDiffusion": "2022-11-09"
+      },
+      {
+        "numero": 3,
+        "titre": "Exile",
+        "synopsis": "La reine Elizabeth fait face à des critiques croissantes alors que des événements mondiaux perturbent l'ordre établi.",
+        "duree": "60 min",
+        "dateDiffusion": "2022-11-09"
+      },
+      {
+        "numero": 4,
+        "titre": "Unbroken",
+        "synopsis": "La famille royale essaie de maintenir l'unité malgré des luttes internes et des défis extérieurs.",
+        "duree": "60 min",
+        "dateDiffusion": "2022-11-09"
+      },
+      {
+        "numero": 5,
+        "titre": "The Crown's End",
+        "synopsis": "Des décisions difficiles doivent être prises alors que la famille royale fait face à un futur incertain et que des scandales personnels menacent la stabilité.",
+        "duree": "60 min",
+        "dateDiffusion": "2022-11-09"
+      },
+      {
+        "numero": 6,
+        "titre": "The Royal Scandal",
+        "synopsis": "Les tensions familiales atteignent un nouveau sommet, et la monarchie est confrontée à des défis publics et privés.",
+        "duree": "60 min",
+        "dateDiffusion": "2022-11-09"
+      },
+      {
+        "numero": 7,
+        "titre": "A Monarchy in Crisis",
+        "synopsis": "Les luttes pour maintenir l'autorité de la monarchie royale se poursuivent alors que la famille royale fait face à une période de bouleversements politiques.",
+        "duree": "60 min",
+        "dateDiffusion": "2022-11-09"
+      },
+      {
+        "numero": 8,
+        "titre": "The Last Goodbye",
+        "synopsis": "Le destin de la famille royale prend une tournure dramatique alors que de nouveaux défis mettent à l'épreuve leur héritage et leur rôle dans le monde.",
+        "duree": "60 min",
+        "dateDiffusion": "2022-11-09"
+      },
+      {
+        "numero": 9,
+        "titre": "A New Hope",
+        "synopsis": "La saison se termine sur une note de réconciliation et de transformation, alors que la monarchie se tourne vers un avenir incertain.",
+        "duree": "60 min",
+        "dateDiffusion": "2022-11-09"
+      },
+      {
+        "numero": 10,
+        "titre": "The End of the Line",
+        "synopsis": "La saison se termine sur une réflexion sur l'héritage de la reine Elizabeth et l'avenir de la monarchie britannique.",
+        "duree": "60 min",
+        "dateDiffusion": "2022-11-09"
+      }
+    ]
+  }
+      
+    ]
+  },
+  {
+    "id": 6,
+    "titre": "Friends",
+    "synopsis": "Les aventures quotidiennes de six amis à New York.",
+    "image": "https://m.media-amazon.com/images/I/81SnesJUN4L.jpg",
+    "acteurs": [
+      "Jennifer Aniston",
+      "Courteney Cox",
+      "Lisa Kudrow",
+      "Matt LeBlanc",
+      "Matthew Perry",
+      "David Schwimmer"
+    ],
+    "note": 8.9,
+    "dateDebut": "1994-09-22",
+    "dateFin": "2004-05-06",
+    "createur": "David Crane, Marta Kauffman",
+    "bandeAnnonce": "https://www.youtube.com/watch?v=IEEbUzffzrk",
+    "genre": ["Comédie", "Romance"],
+    "paysProduction": ["États-Unis"],
+    "platforms": ["Netflix", "HBO Max"],
+    "langues": ["Anglais", "Français", "Espagnol"],
+    "dureeEpisodeMoyenne": "22 min",
+    "saisons": [
+      {
+        "numero": 1,
+        "annee": 1994,
+        "nbEpisodes": 24,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Celui qui déménage",
+            "synopsis": "Rachel abandonne son fiancé à l'autel et retrouve son ancienne amie Monica. Ross est déprimé après son divorce.",
+            "duree": "22 min",
+            "dateDiffusion": "1994-09-22"
+          },
+          {
+            "numero": 2,
+            "titre": "Celui qui est perdu",
+            "synopsis": "Ross tente de demander à Rachel de sortir avec lui. Chandler et Joey convainquent Ross d'acheter un nouveau mobilier.",
+            "duree": "22 min",
+            "dateDiffusion": "1994-09-29"
+          },
+          {
+            "numero": 3,
+            "titre": "Celui qui a un rôle",
+            "synopsis": "Joey décroche un rôle dans un feuilleton. Chandler commence à fumer à nouveau.",
+            "duree": "22 min",
+            "dateDiffusion": "1994-10-06"
+          },
+          {
+            "numero": 4,
+            "titre": "Celui avec George Stephanopoulos",
+            "synopsis": "Ross est déprimé pour l'anniversaire de son premier rapport sexuel avec Carol. Rachel reçoit son premier salaire.",
+            "duree": "22 min",
+            "dateDiffusion": "1994-10-13"
+          },
+          {
+            "numero": 5,
+            "titre": "Celui qui lave plus blanc",
+            "synopsis": "Phoebe reçoit 500 dollars qu'elle pense provenir de sa mère décédée. Ross fait sa lessive avec Rachel.",
+            "duree": "22 min",
+            "dateDiffusion": "1994-10-20"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "titre": "The Office",
+    "synopsis": "Le quotidien des employés d'une entreprise de papier dirigée par un patron maladroit et socialement incompétent.",
+    "image": "https://static.thcdn.com/images/large/original//productimg/1600/1600/10282452-2894833937186551.jpg",
+    "acteurs": ["Steve Carell", "John Krasinski", "Jenna Fischer"],
+    "note": 8.9,
+    "dateDebut": "2005-03-24",
+    "dateFin": "2013-05-16",
+    "createur": "Greg Daniels",
+    "bandeAnnonce": "https://www.youtube.com/watch?v=tNcDHWpselE",
+    "genre": ["Comédie"],
+    "paysProduction": ["États-Unis"],
+    "platforms": ["Netflix", "Peacock"],
+    "langues": ["Anglais", "Français", "Espagnol"],
+    "dureeEpisodeMoyenne": "22 min",
+    "saisons": [
+      {
+        "numero": 1,
+        "annee": 2005,
+        "nbEpisodes": 6,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Pilote",
+            "synopsis": "Michael Scott, directeur régional de Dunder Mifflin, apprend à ses employés qu'un poste va être supprimé.",
+            "duree": "23 min",
+            "dateDiffusion": "2005-03-24"
+          },
+          {
+            "numero": 2,
+            "titre": "La Diversité",
+            "synopsis": "Michael organise un atelier sur la diversité après avoir raconté une blague raciste.",
+            "duree": "22 min",
+            "dateDiffusion": "2005-03-29"
+          },
+          {
+            "numero": 3,
+            "titre": "L'Alliance",
+            "synopsis": "Michael organise une fête d'anniversaire, tandis que Dwight forme une alliance avec Jim pour protéger leurs emplois.",
+            "duree": "22 min",
+            "dateDiffusion": "2005-04-05"
+          },
+          {
+            "numero": 4,
+            "titre": "La Soirée du personnel",
+            "synopsis": "Le personnel de bureau assiste à une soirée chez Michael qui espère faire bonne impression.",
+            "duree": "22 min",
+            "dateDiffusion": "2005-04-12"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "titre": "Sherlock",
+    "synopsis": "Version moderne des enquêtes du célèbre détective Sherlock Holmes et de son fidèle ami, le Dr John Watson.",
+    "image": "https://i1.sndcdn.com/artworks-000078267232-d5qxu4-t500x500.jpg",
+    "acteurs": ["Benedict Cumberbatch", "Martin Freeman", "Andrew Scott"],
+    "note": 9.1,
+    "dateDebut": "2010-07-25",
+    "dateFin": "2017-01-15",
+    "createur": "Mark Gatiss, Steven Moffat",
+    "bandeAnnonce": "https://www.youtube.com/watch?v=IrBKwzL3K7s",
+    "genre": ["Crime", "Drame", "Mystère"],
+    "paysProduction": ["Royaume-Uni"],
+    "platforms": ["Netflix", "BBC iPlayer"],
+    "langues": ["Anglais", "Français", "Allemand"],
+    "dureeEpisodeMoyenne": "89 min",
+    "saisons": [
+      {
+        "numero": 1,
+        "annee": 2010,
+        "nbEpisodes": 3,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Une étude en rose",
+            "synopsis": "John Watson, médecin militaire revenu d'Afghanistan, rencontre Sherlock Holmes et devient son colocataire. Ils enquêtent sur une série de suicides inexpliqués.",
+            "duree": "88 min",
+            "dateDiffusion": "2010-07-25"
+          },
+          {
+            "numero": 2,
+            "titre": "Le Banquier aveugle",
+            "synopsis": "Sherlock est approché par un ancien camarade de classe pour enquêter sur un message crypté laissé dans une banque.",
+            "duree": "89 min",
+            "dateDiffusion": "2010-08-01"
+          },
+          {
+            "numero": 3,
+            "titre": "Le Grand Jeu",
+            "synopsis": "Un mystérieux criminel pose des énigmes à Sherlock avec des vies en jeu comme enjeu.",
+            "duree": "89 min",
+            "dateDiffusion": "2010-08-08"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "titre": "Peaky Blinders",
+    "synopsis": "Une famille de gangsters dans l'Angleterre de l'après-Première Guerre mondiale, dirigée par le redoutable Tommy Shelby.",
+    "image": "https://www.tallengestore.com/cdn/shop/products/PeakyBlinders-ThomasShelby-GarrisonBombing-NetflixTVShow-ArtPoster_7fef60c1-eddd-41e8-89fd-ac6edeba5038.jpg?v=1619864662",
+    "acteurs": ["Cillian Murphy", "Paul Anderson", "Helen McCrory"],
+    "note": 8.8,
+    "dateDebut": "2013-09-12",
+    "dateFin": "2022-04-03",
+    "createur": "Steven Knight",
+    "bandeAnnonce": "https://www.youtube.com/watch?v=oVzVdvGIC7U",
+    "genre": ["Crime", "Drame"],
+    "paysProduction": ["Royaume-Uni"],
+    "platforms": ["Netflix", "BBC"],
+    "langues": ["Anglais", "Français", "Allemand"],
+    "dureeEpisodeMoyenne": "57 min",
+    "saisons": [
+      {
+        "numero": 1,
+        "annee": 2013,
+        "nbEpisodes": 6,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Épisode 1",
+            "synopsis": "Tommy Shelby, leader du gang des Peaky Blinders à Birmingham, s'empare d'une cargaison d'armes destinée à la Libye.",
+            "duree": "58 min",
+            "dateDiffusion": "2013-09-12"
+          },
+          {
+            "numero": 2,
+            "titre": "Épisode 2",
+            "synopsis": "L'inspecteur Campbell mène l'enquête à Birmingham. Tommy développe un plan pour contrôler les courses de chevaux.",
+            "duree": "57 min",
+            "dateDiffusion": "2013-09-19"
+          },
+          {
+            "numero": 3,
+            "titre": "Épisode 3",
+            "synopsis": "Tommy se rapproche de Grace, ignorant qu'elle est une informatrice de Campbell. Un nouveau venu menace les affaires des Shelby.",
+            "duree": "55 min",
+            "dateDiffusion": "2013-09-26"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "titre": "Black Mirror",
+    "synopsis": "Série d'anthologie explorant les conséquences inquiétantes de la technologie moderne sur notre vie.",
+    "image": "https://fr.web.img5.acsta.net/img/31/7d/317dfe58cfd3e82986e4c5953bfe2ce6.jpeg",
+    "acteurs": ["Diverses distributions"],
+    "note": 8.8,
+    "dateDebut": "2011-12-04",
+    "dateFin": null,
+    "createur": "Charlie Brooker",
+    "bandeAnnonce": "https://www.youtube.com/watch?v=V0XOApF5nLU",
+    "genre": ["Science-fiction", "Drame", "Thriller"],
+    "paysProduction": ["Royaume-Uni"],
+    "platforms": ["Netflix"],
+    "langues": ["Anglais", "Français", "Espagnol"],
+    "dureeEpisodeMoyenne": "48 min",
+    "saisons": [
+      {
+        "numero": 1,
+        "annee": 2011,
+        "nbEpisodes": 3,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "L'Hymne national",
+            "synopsis": "Le Premier ministre britannique est confronté à un dilemme moral choquant lorsqu'un membre de la famille royale est kidnappé.",
+            "duree": "44 min",
+            "dateDiffusion": "2011-12-04"
+          },
+          {
+            "numero": 2,
+            "titre": "15 millions de mérites",
+            "synopsis": "Dans un monde futuriste, les individus doivent pédaler sur des vélos stationnaires pour gagner des mérites et échapper à leur routine.",
+            "duree": "62 min",
+            "dateDiffusion": "2011-12-11"
+          },
+          {
+            "numero": 3,
+            "titre": "Retour sur image",
+            "synopsis": "Dans un monde où chaque souvenir est enregistré, un homme devient obsédé par la recherche d'indices de l'infidélité de sa femme.",
+            "duree": "49 min",
+            "dateDiffusion": "2011-12-18"
+          }
+        ]
+      },
+      {
+        "numero": 2,
+        "annee": 2013,
+        "nbEpisodes": 3,
+        "episodes": [
+          {
+            "numero": 1,
+            "titre": "Bientôt de retour",
+            "synopsis": "Une jeune femme endeuillée découvre un service qui permet de communiquer avec les morts via l'intelligence artificielle.",
+            "duree": "48 min",
+            "dateDiffusion": "2013-02-11"
+          },
+          {
+            "numero": 2,
+            "titre": "L'Ours blanc",
+            "synopsis": "Une femme se réveille sans aucun souvenir et se retrouve pourchassée par des personnes mystérieuses dans un monde où tout le monde la filme.",
+            "duree": "42 min",
+            "dateDiffusion": "2013-02-18"
+          },
+          {
+            "numero": 3,
+            "titre": "Le Show de Waldo",
+            "synopsis": "Un comédien contrôlant un ours animé bleu nommé Waldo se retrouve impliqué dans la politique.",
+            "duree": "43 min",
+            "dateDiffusion": "2013-02-25"
+          }
+        ]
+      }
+    ]
+  }
+]

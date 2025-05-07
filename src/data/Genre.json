@@ -1,0 +1,23 @@
+[
+  { "type": "Drame" },
+  { "type": "Crime" },
+  { "type": "Science-fiction" },
+  { "type": "Action" },
+  { "type": "Thriller" },
+  { "type": "Aventure" },
+  { "type": "Romance" },
+  { "type": "Comédie" },
+  { "type": "Fantasy" },
+  { "type": "Animé" },
+  { "type": "Documentaire" },
+  { "type": "Policier" },
+  { "type": "Horreur" },
+  { "type": "Historique" },
+  { "type": "Guerre" },
+  { "type": "Western" },
+  { "type": "Musical" },
+  { "type": "Biopic" },
+  { "type": "Sportif" },
+  { "type": "Fantastique" },
+  { "type": "Animation" }
+]

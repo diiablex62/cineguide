@@ -1,0 +1,11 @@
+{
+  "email": "jean.dupont@example.com",
+  "firstname": "Jean",
+  "lastname": "Dupont",
+  "avatar": "src/assets/profil/avatar.svg",
+  "textPerso": "Passionné de randonnée et de photographie.",
+  "adress": "12 rue des Lilas",
+  "city": "Lyon",
+  "postalCode": "69003",
+  "complement": "Appartement 5B"
+}

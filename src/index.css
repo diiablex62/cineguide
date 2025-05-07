@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+.active {
+  @apply underline;
+}
+
+.activeActeur {
+  @apply bg-black text-white dark:text-white dark:border-white;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    @apply transition-colors duration-500 ease-in-out;
+  }
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+body.dark {
+  background-color: black;
+}
+
+@theme {
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-white: #ffffff;
+  --color-purple: #3f3cbb;
+  --color-midnight: #121063;
+  --color-metal: #565584;
+  --color-tahitiLight: #67e8f9;
+  --color-tahitiDefault: #06b6d4;
+  --color-tahitiDark: #0e7490;
+  --color-silver: #ecebff;
+  --color-bubble-gum: #ff77e9;
+  --color-bermuda: #78dcca;
+  --color-fuchsia: #d91468;
+  --color-fuchsia-hover: #b01e5c;
+  --color-gray-fonce: #31373b;
+  --color-placeholder: #81888e;
+  --color-gray-clair: #d0d5dd;
+  --font-poppins: "Poppins", sans-serif;
+  --breakpoint-1500: 1500px;
+  --breakpoint-1100: 1100px;
+}
+
+* {
+  font-family: Poppins;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: black !important;
+}
+html {
+  font-family: var(--font-poppins);
+}
+
+@keyframes animation-fuchsia {
+  0% {
+    background-color: #d91468;
+  }
+  25% {
+    background-color: #c2185b;
+  }
+  50% {
+    background-color: #b01e5c;
+  }
+  75% {
+    background-color: #e91e63;
+  }
+  100% {
+    background-color: #d91468;
+  }
+}
+
+.animate-fuchsia {
+  animation: animation-fuchsia 4s linear infinite alternate both;
+  --font-poppins: Poppins, sans-serif;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; 
+}
+
+.container {
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+
+
+.swiper-button-next{
+  color: white !important;
+  margin-top: -100px !important;
+}
+
+.swiper-button-prev{
+  color: white !important;
+  margin-top: -100px !important;
+  
+}
