@@ -49,7 +49,7 @@ export default function ProfilNav() {
   };
 
   return (
-    <div className="p-5">
+    <div className="p-5 dark:text-white">
       <div className="flex items-end">
         <label
           htmlFor="upload-avatar"

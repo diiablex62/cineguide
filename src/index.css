@@ -93,3 +93,15 @@ html {
   margin: 0 auto;
 }
 
+
+
+.swiper-button-next{
+  color: white !important;
+  margin-top: -100px !important;
+}
+
+.swiper-button-prev{
+  color: white !important;
+  margin-top: -100px !important;
+  
+}

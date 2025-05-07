@@ -16,7 +16,7 @@ export default function ProfilActiviter() {
   return (
     <>
       <ProfilNav></ProfilNav>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap dark:text-white">
         {selectedActiviter && selectedActiviter.length > 0 ? (
           selectedActiviter.map((activity) => (
             <div key={activity.id} className="w-full md:w-1/2 p-4">
