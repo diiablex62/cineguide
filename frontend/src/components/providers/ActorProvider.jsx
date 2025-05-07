@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ActorContext } from "../../context/ActorContext";
 import ActorData from "../../data/Acteurs.json";
 import { useNavigate } from "react-router-dom";
 import FilmParActeur from "../../data/FilmParActeur.json";
 import Recompenses from "../../data/Recompense.json";
+import { url } from "../../url";
 export default function ActorProvider({ children }) {
-  const [allActors, setAllActors] = useState(ActorData);
+  const [allActors, setAllActors] = useState();
   const [detailActor, setDetailActor] = useState({
     id: 0,
     nom: "Chargement...",
@@ -18,6 +19,21 @@ export default function ActorProvider({ children }) {
   });
   const navigate = useNavigate();
   const [actor, setActor] = useState("");
+
+  useEffect(() => {
+    async function getAllActors() {
+      try {
+        const response = await fetch(`${url}/acteurs`);
+        if (response.ok) {
+          const actorsFromApi = await response.json();
+          setAllActors(actorsFromApi);
+        }
+      } catch (error) {
+        console.error("Vidéo introuvable", error);
+      }
+    }
+    getAllActors();
+  }, []);
 
   const toggleActor = (params) => {
     setActor(params);

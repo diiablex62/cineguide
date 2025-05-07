@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const port = process.env.PORT || 4000;
 const userRoutes = require("./routes/users");
+const acteurRoutes = require("./routes/acteurs");
 
 const app = express();
 app.use(express.json());
@@ -14,6 +15,7 @@ app.use(
 );
 
 app.use("/api/users", userRoutes);
+app.use("/api/acteurs", acteurRoutes);
 
 mongoose
   .connect(process.env.MONGO_URI)
