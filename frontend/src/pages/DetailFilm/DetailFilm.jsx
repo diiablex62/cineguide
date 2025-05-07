@@ -12,10 +12,12 @@ export default function DetailFilm() {
 
   useEffect(() => {
     const detail = film.find((f) => f.id === Number(id));
-    const oneActor = allActors.find((a) => detail.acteurs.includes(a.nom));
+    if (detail && allActors && allActors.length > 0) {
+      const oneActor = allActors.find((a) => detail.acteurs.includes(a.nom));
+      setDetailActor(oneActor);
+    }
     if (detail) {
       setDetailFilm(detail);
-      setDetailActor(oneActor);
     } else {
       console.error("Film not found with id:", id);
     }
@@ -31,7 +33,7 @@ export default function DetailFilm() {
           >
             Afficher tout
           </NavLink>
-         
+
           <NavLink
             to={"bandeannonce"}
             className={`bg-fuchsia hover:bg-fuchsia-hover text-white px-3 py-1 text-xs md:text-lg transition-colors`}
