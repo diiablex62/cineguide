@@ -102,11 +102,11 @@ export default function Devine() {
     setFeedback(`La réponse était "${answer}". 🎬`);
   };
   return (
-    <div className="flex flex-col lg:flex-row container">
-      <div className="w-full lg:w-2/8">
+    <div className="flex flex-col lg:flex-row mb-5 lg:justify-between container w-full rounded min-h-screen  bg-gray-300 rounded-l p-5">
+      <div className="w-full lg:w-2/8 bg-white mt-5  shadow rounded lg:rounded-l-xl lg:mr-2">
         <Navbar></Navbar>
       </div>
-      <div className="w-full lg:w-6/8">
+      <div className="w-full lg:w-6/8 lg:flex lg:flex-col  lg:items-center px-10 bg-white mt-5 shadow rounded lg:rounded-r-xl h-auto">
         <div className="min-h-screen    flex flex-col items-center justify-center p-4">
           <div className="w-full max-w-md  rounded-xl shadow-2xl overflow-hidden">
             <div className="p-8">

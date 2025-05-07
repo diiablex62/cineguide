@@ -92,7 +92,7 @@ export default function CardFilm() {
           </div>
 
           {/* Affichage mobile (Swiper) */}
-          <div className="flex items-center justify-center md:hidden">
+          <div className="flex items-center justify-center md:hidden p-5">
             <Swiper
               modules={[Navigation]}
               navigation

@@ -93,8 +93,15 @@ html {
   margin: 0 auto;
 }
 
-@media only screen and (min-width: 1600px) {
-  .container {
-    padding: 0 8%;
-  }
+
+
+.swiper-button-next{
+  color: white !important;
+  margin-top: -100px !important;
+}
+
+.swiper-button-prev{
+  color: white !important;
+  margin-top: -100px !important;
+  
 }

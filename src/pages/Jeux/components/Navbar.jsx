@@ -8,11 +8,11 @@ import house from "../../../assets/jeux/house.svg";
 import arrow from "../../../assets/jeux/arrow.svg";
 export default function Navbar() {
   return (
-    <div className="w-full flex flex-col justify-center items-center pt-2 lg:justify-between lg:h-screen lg:border-r ">
+    <div className="w-full flex flex-col justify-center items-center pt-2 lg:justify-around h-full ">
       <div className="flex justify-center items-center min-w-full">
         <img className="max-h-[100px]" src={logo} alt="" />
       </div>
-      <div className="flex justify-around items-center w-full mt-10 lg:flex-col lg:items-start lg:mt-0 lg:pl-4">
+      <div className="flex justify-around items-center w-full lg:flex-col lg:items-start lg:mt-0 lg:pl-4">
         <NavLink
           to="/jeux"
           className="flex flex-col items-center lg:flex-row lg:mb-6"
