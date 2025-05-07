@@ -14,7 +14,7 @@ export default function ResumeSerie() {
     <div className="w-full flex-1">
       <div className="w-full text-center justify-center items-center">
         <div className="mb-8">
-          <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-400">
+          <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-200">
             {detailSerie.saisons.length} SAISONS
           </h2>
           <div className="flex overflow-x-auto space-x-6 pb-2 md:justify-center md:items-center">
@@ -52,7 +52,7 @@ export default function ResumeSerie() {
         {/* Affichage des épisodes de la saison sélectionnée */}
         {detailSerie.saisons.length > 0 && (
           <div className="space-y-2 mb-8">
-            <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-400">
+            <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-200">
               ÉPISODES - SAISON {detailSerie.saisons[selectedSeason].numero}
             </h2>
             {detailSerie.saisons[selectedSeason].episodes.map((episode) => (
@@ -64,11 +64,11 @@ export default function ResumeSerie() {
                   <span className="text-sm text-start font-medium">
                     {episode.numero}. {episode.titre}
                   </span>
-                  <p className="text-xs text-start text-gray-500 mt-1">
+                  <p className="text-xs text-start text-gray-500 dark:text-gray-200 mt-1">
                     {episode.synopsis}
                   </p>
                 </div>
-                <span className="text-xs text-start text-gray-500">
+                <span className="text-xs text-start text-gray-500 dark:text-gray-200">
                   {episode.duree}
                 </span>
               </div>
@@ -77,7 +77,7 @@ export default function ResumeSerie() {
         )}
 
         <div className="mb-8">
-          <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-400">
+          <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-200">
             RÉSUMÉ
           </h2>
           <p className="text-sm text-gray-800 dark:text-gray-300 leading-relaxed">
@@ -86,7 +86,7 @@ export default function ResumeSerie() {
         </div>
 
         <div className="mb-8">
-          <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-400">
+          <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-200">
             CASTING
           </h2>
           <div className="flex flex-wrap gap-2">

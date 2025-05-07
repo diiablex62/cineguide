@@ -67,7 +67,7 @@ export default function Film() {
       <div className="mb-6 px-3">
         <div className="flex md:flex-col gap-y-4">
           <div className="w-1/2 md:w-full">
-            <h3 className="font-bold text-sm mb-2 text-black dark:text-gray-400">
+            <h3 className="font-bold text-sm mb-2 text-black dark:text-gray-200">
               GENRES
             </h3>
             <div className="flex flex-wrap gap-2">
@@ -82,7 +82,7 @@ export default function Film() {
             </div>
           </div>
           <div className="w-1/2 md:w-full">
-            <h3 className="font-bold text-sm mb-2 text-black dark:text-gray-400">
+            <h3 className="font-bold text-sm mb-2 text-black dark:text-gray-200">
               DURÉE
             </h3>
             <p className="text-xs text-gray-600 dark:text-gray-300">
@@ -95,7 +95,7 @@ export default function Film() {
       <div className="mb-6 px-3">
         <div className="flex md:flex-col gap-y-4">
           <div className="w-1/2 md:w-full">
-            <h3 className="font-bold text-sm mb-2 text-black dark:text-gray-400">
+            <h3 className="font-bold text-sm mb-2 text-black dark:text-gray-200">
               PAYS DE PRODUCTION
             </h3>
             <div className="flex flex-wrap gap-2">
@@ -115,7 +115,7 @@ export default function Film() {
       <div className="mb-6 px-3">
         <div className="flex md:flex-col gap-y-4">
           <div className="w-1/2 md:w-full">
-            <h3 className="font-bold text-sm mb-2 text-black dark:text-gray-400">
+            <h3 className="font-bold text-sm mb-2 text-black dark:text-gray-200">
               DATE DE SORTIE
             </h3>
             <p className="text-xs text-gray-600 dark:text-gray-300">
@@ -123,7 +123,7 @@ export default function Film() {
             </p>
           </div>
           <div className="w-1/2 md:w-full">
-            <h3 className="font-bold text-sm mb-2 text-black dark:text-gray-400">
+            <h3 className="font-bold text-sm mb-2 text-black dark:text-gray-200">
               RÉALISATEUR
             </h3>
             <p className="text-xs text-gray-600 dark:text-gray-300">
