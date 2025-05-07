@@ -18,7 +18,7 @@ export default function DetailSerie() {
   }, [id, serie, setDetailSerie]);
   return (
     <div className="bg-white dark:bg-black text-gray-900 dark:text-white font-poppins">
-      <nav className="py-2 sticky top-0 z-10 shadow-md">
+      <nav className="pb-2 sticky top-0 z-10 shadow-md">
         <div className="flex  space-x-2 px-4 py-4 overflow-auto md:justify-center bg-white dark:bg-black">
           <NavLink
             to={""}
