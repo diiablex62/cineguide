@@ -43,8 +43,8 @@ export default function Etape2() {
         </div>
       </div>
 
-      <div className="flex flex-col  lg:flex-row lg: mt-10">
-        <div className="lg:min-w-[350px] lg:max-w-[350px] w-full flex items-center justify-center">
+      <div className="flex flex-col  lg:flex-row lg: mt-2 mb-10">
+        <div className="lg:min-w-[310px] lg:max-w-[310px] w-full flex items-center justify-center">
           <img
             className="object-cover"
             style={{ filter: `blur(${blurLevel}px)` }}
