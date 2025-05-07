@@ -1,13 +1,13 @@
 import React, { useContext, useState } from "react";
 import ProfilForm from "./components/ProfilForm";
 import ProfilUtils from "./components/ProfilUtils";
-
 import ProfilNav from "./components/ProfilNav";
-
 import { Outlet, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next"; // Ajout
 
 export default function profil() {
   const location = useLocation();
+  const { t } = useTranslation(); // Ajout
 
   return (
     <>
@@ -29,7 +29,6 @@ export default function profil() {
           <ProfilNav></ProfilNav>
           <ProfilForm></ProfilForm>
         </div>
-
         <div className="w-full md:w-2/6">
           <ProfilUtils></ProfilUtils>
         </div>

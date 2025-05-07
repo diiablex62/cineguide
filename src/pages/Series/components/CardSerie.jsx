@@ -5,6 +5,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { SerieContext } from "../../../context/SerieContext";
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next"; // Ajout
 
 export default function CardSerie() {
   const {
@@ -17,6 +18,8 @@ export default function CardSerie() {
     setAlreadySeenStates,
     setOpenInfoStates,
   } = useContext(SerieContext);
+
+  const { t } = useTranslation(); // Ajout
 
   return (
     <>
@@ -76,8 +79,8 @@ export default function CardSerie() {
                         }`}
                       >
                         {alreadySeenStates[index]
-                          ? "Déjà vu"
-                          : "+ Pas encore vu"}
+                          ? t("home.dejaVu", "Déjà vu")
+                          : "+ " + t("home.pasEncoreVu", "Pas encore vu")}
                       </button>
                     </div>
                   </div>
@@ -144,8 +147,8 @@ export default function CardSerie() {
                         }`}
                       >
                         {alreadySeenStates[index]
-                          ? "Déjà vu"
-                          : "+ Pas encore vu"}
+                          ? t("home.dejaVu", "Déjà vu")
+                          : "+ " + t("home.pasEncoreVu", "Pas encore vu")}
                       </button>
                     </div>
                   </div>
