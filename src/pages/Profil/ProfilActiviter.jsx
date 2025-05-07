@@ -3,6 +3,7 @@ import { IoStar } from "react-icons/io5";
 import Activiter from "../../data/Activiter.json";
 import Pagination from "../../components/pagination/Pagination";
 import ProfilNav from "./components/ProfilNav";
+import { NavLink } from "react-router-dom";
 
 export default function ProfilActiviter() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -29,9 +30,12 @@ export default function ProfilActiviter() {
                   </h3>
                   <p>{activity.commentaire}</p>
                   <div className="flex justify-end mt-2">
-                    <button className="border px-10 py-1 hover:bg-black hover:text-white cursor-pointer">
+                    <NavLink
+                      to={`/detailfilm/1`}
+                      className="border px-10 py-1 hover:bg-black hover:text-white cursor-pointer"
+                    >
                       Voir
-                    </button>
+                    </NavLink>
                   </div>
                 </div>
               ) : (
@@ -56,9 +60,12 @@ export default function ProfilActiviter() {
                     ))}
                   </p>
                   <div className="flex justify-end mt-2">
-                    <button className="border px-10 py-1 hover:bg-black hover:text-white cursor-pointer">
+                    <NavLink
+                      to={`/detailfilm/1`}
+                      className="border px-10 py-1 hover:bg-black hover:text-white cursor-pointer"
+                    >
                       Voir
-                    </button>
+                    </NavLink>
                   </div>
                 </div>
               )}
