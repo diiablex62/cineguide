@@ -66,7 +66,7 @@ export default function Serie() {
       </div>
 
       <div className="mb-6 px-3 ">
-        <div className="flex md:flex-col gap-y-4">
+        <div className="flex  gap-y-4">
           <div className="w-1/2 md:w-full">
             <h3 className="font-bold text-sm mb-2 text-black dark:text-gray-200">
               GENRES
@@ -94,7 +94,7 @@ export default function Serie() {
       </div>
 
       <div className="mb-6 px-3">
-        <div className="flex md:flex-col gap-y-4">
+        <div className="flex  gap-y-4">
           <div className="w-1/2 md:w-full">
             <h3 className="font-bold text-sm mb-2 text-black dark:text-gray-200">
               PAYS DE PRODUCTION

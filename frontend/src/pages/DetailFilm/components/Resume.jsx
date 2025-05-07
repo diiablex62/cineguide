@@ -14,9 +14,9 @@ export default function Resume() {
   }, [detailFilm, detailActor]);
 
   return (
-    <div className="w-full flex-1">
-      <div className="w-full text-center justify-center items-center">
-        <div className="mb-8">
+    <div className=" md:w-2/3 w-full ">
+      <div className="w-full h-full ">
+        <div className="mb-8 flex-col  text-center  items-center">
           <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-200">
             Résumé
           </h2>
@@ -25,11 +25,11 @@ export default function Resume() {
           </p>
         </div>
 
-        <div className="mb-8">
+        <div className=" flex-col  text-center justify-center">
           <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-200">
             Casting
           </h2>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 justify-center items-center">
             {detailFilm.acteurs.map((actor) => (
               <div
                 key={actor}

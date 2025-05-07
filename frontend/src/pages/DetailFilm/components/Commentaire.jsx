@@ -29,8 +29,8 @@ export default function Commentaire() {
   };
 
   return (
-    <div className="w-full flex-1">
-      <div className="w-full text-center justify-center items-center">
+    <div className="w-full md:w-3/4 ">
+      <div className="w-full  text-center justify-center items-center">
         <h2 className="font-bold mb-3 text-sm uppercase text-gray-500 dark:text-gray-200">
           Commentaires
         </h2>

@@ -29,13 +29,13 @@ export default function CommentaireSerie() {
   };
 
   return (
-    <div className="w-full flex-1">
+    <div className="w-full md:w-3/4  ">
       <div className="w-full text-center justify-center items-center">
         <h2 className="font-bold mb-3 text-sm uppercase text-gray-500 dark:text-gray-200">
           Commentaires
         </h2>
         <form
-          className="bg-gray-100 dark:bg-gray-800 p-4 mb-4"
+          className="bg-gray-100 dark:bg-gray-800 p-4 mb-4  justify-center items-center"
           onSubmit={handleSubmit}
         >
           <div className="flex mt-1 gap-2 mb-2">

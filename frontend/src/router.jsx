@@ -153,10 +153,7 @@ export const router = createBrowserRouter([
             index: true,
             element: <TousSerie />,
           },
-          {
-            path: "resumeserie",
-            element: <ResumeSerie />,
-          },
+        
           {
             path: "bandeannonceserie",
             element: <BandeAnnonceSerie />,
@@ -208,10 +205,7 @@ export const router = createBrowserRouter([
             index: true,
             element: <Tous />,
           },
-          {
-            path: "resume",
-            element: <Resume />,
-          },
+         
           {
             path: "bandeannonce",
             element: <BandeAnnonce />,

@@ -5,8 +5,8 @@ import ResumeSerie from "./ResumeSerie";
 
 export default function Tous() {
   return (
-    <div className="md:w-2/3 flex-1 flex-col w-full ">
-      <ResumeSerie />
+    <div className=" flex-col w-full ">
+      
       <BandeAnnonce />
       <SerieProposer />
     </div>
