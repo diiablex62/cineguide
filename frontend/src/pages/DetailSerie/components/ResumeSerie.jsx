@@ -1,9 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SerieContext } from "../../../context/SerieContext";
+import { ActorContext } from "../../../context/ActorContext";
 
 export default function ResumeSerie() {
   const { detailSerie } = useContext(SerieContext);
   const [selectedSeason, setSelectedSeason] = useState(0); // Index de la saison sélectionnée
+  const { detailActor, actorRedirect } = useContext(ActorContext);
+
+  useEffect(() => {
+    const movieActors = detailSerie.acteurs;
+    {
+      movieActors.find((m, index) => m);
+    }
+  }, [detailSerie, detailActor]);
 
   // Vérifier si detailSerie existe et a des saisons
   if (!detailSerie || !detailSerie.saisons) {
@@ -93,6 +102,7 @@ export default function ResumeSerie() {
             {detailSerie.acteurs.map((actor, index) => (
               <div
                 key={index}
+                onClick={actorRedirect}
                 className="bg-gray-200 dark:bg-gray-800 px-3 py-1 text-xs hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer transition-colors"
               >
                 {actor}

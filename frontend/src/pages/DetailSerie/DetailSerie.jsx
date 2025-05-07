@@ -3,12 +3,19 @@ import { Link, NavLink, Outlet, useParams } from "react-router-dom";
 import Serie from "./components/Serie";
 import ResumeSerie from "./components/ResumeSerie";
 import { SerieContext } from "../../context/SerieContext";
+import { ActorContext } from "../../context/ActorContext";
 
 export default function DetailSerie() {
   const { id } = useParams();
   const { serie, setDetailSerie } = useContext(SerieContext);
+  const { setDetailActor, allActors } = useContext(ActorContext);
+
   useEffect(() => {
     const detail = serie.find((s) => s.id === Number(id));
+    if (detail && allActors && allActors.length > 0) {
+      const oneActor = allActors.find((a) => detail.acteurs.includes(a.nom));
+      setDetailActor(oneActor);
+    }
     console.log("Serie detail found:", detail);
     if (detail) {
       setDetailSerie(detail);
