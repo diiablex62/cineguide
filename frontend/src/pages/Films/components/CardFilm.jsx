@@ -42,7 +42,7 @@ export default function CardFilm() {
                 key={index}
                 className="flex md:w-full lg:w-[48%] gap-4 border p-4 mr-2 mb-4"
               >
-                <NavLink to={`/detailfilm/${film.id}`} className="w-48 h-64">
+                <NavLink to={`/detailfilm/${film._id}`} className="w-48 h-64">
                   <img
                     className="w-full h-full object-cover"
                     src={film.image}
@@ -78,7 +78,7 @@ export default function CardFilm() {
                     </button>
                     <div className="flex">
                       <NavLink
-                        to={`/detailfilm/${film.id}`}
+                        to={`/detailfilm/${film._id}`}
                         className="mt-2 cursor-pointer flex items-center justify-center mr-2 bg-fuchsia text-white w-[130px] h-[40px] lg:text-[15px]"
                       >
                         {t("home.regarder", "Regarder")}
@@ -119,7 +119,7 @@ export default function CardFilm() {
                 >
                   <div className="relative">
                     <NavLink
-                      to={`/detailfilm/${film.id}`}
+                      to={`/detailfilm/${film._id}`}
                       className="w-[375px]"
                     >
                       <img className="w-[375px]" src={film.image} alt="" />
@@ -155,7 +155,7 @@ export default function CardFilm() {
                           : t("home.dejaAjoute", "Déjà ajouté")}
                       </button>
                       <NavLink
-                        to={`/detailfilm/${film.id}`}
+                        to={`/detailfilm/${film._id}`}
                         className="mt-2 cursor-pointer bg-fuchsia text-white w-[250px] h-[50px]"
                       >
                         {t("home.regarder", "Regarder")}

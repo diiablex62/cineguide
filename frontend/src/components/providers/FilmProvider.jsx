@@ -11,6 +11,22 @@ export default function FilmProvider({ children }) {
   const [film, setFilm] = useState([]);
   const [filteredFilm, setFilteredFilm] = useState([]);
   const [filmSeen, setFilmSeen] = useState([]);
+  const [detailFilm, setDetailFilm] = useState({
+    id: 0,
+    titre: "Chargement...",
+    synopsis: "Chargement des informations du film...",
+    image: "https://via.placeholder.com/300x450?text=Chargement...",
+    acteurs: [],
+    duree: "",
+    note: 0,
+    dateSortie: "",
+    realisateur: "",
+    bandeAnnonce: "",
+    genre: [],
+    paysProduction: [],
+    platforms: [],
+    langues: [],
+  });
 
   // A chaque fois qu'un utilsateur utilise un boutton d'un film il s'adapte son setter change
   useEffect(() => {
@@ -96,22 +112,6 @@ export default function FilmProvider({ children }) {
       )
     );
   }
-  const [detailFilm, setDetailFilm] = useState({
-    id: 0,
-    titre: "Chargement...",
-    synopsis: "Chargement des informations du film...",
-    image: "https://via.placeholder.com/300x450?text=Chargement...",
-    acteurs: [],
-    duree: "",
-    note: 0,
-    dateSortie: "",
-    realisateur: "",
-    bandeAnnonce: "",
-    genre: [],
-    paysProduction: [],
-    platforms: [],
-    langues: [],
-  });
 
   return (
     <FilmContext.Provider

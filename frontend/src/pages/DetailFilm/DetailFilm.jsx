@@ -11,15 +11,19 @@ export default function DetailFilm() {
   const { setDetailActor, allActors } = useContext(ActorContext);
 
   useEffect(() => {
-    const detail = film.find((f) => f.id === Number(id));
-    if (detail && allActors && allActors.length > 0) {
-      const oneActor = allActors.find((a) => detail.acteurs.includes(a.nom));
-      setDetailActor(oneActor);
-    }
-    if (detail) {
-      setDetailFilm(detail);
-    } else {
-      console.error("Film not found with id:", id);
+    if (film && film.length > 0) {
+      const detail = film.find((f) => f._id === id);
+      console.log(detail);
+
+      if (detail && allActors && allActors.length > 0) {
+        const oneActor = allActors.find((a) => detail.acteurs.includes(a.nom));
+        setDetailActor(oneActor);
+      }
+      if (detail) {
+        setDetailFilm(detail);
+      } else {
+        console.error("Film not found with id:", id);
+      }
     }
   }, [id, film, setDetailFilm]);
 
