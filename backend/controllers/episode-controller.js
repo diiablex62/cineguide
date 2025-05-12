@@ -30,42 +30,7 @@ const getEpisodesBySaison = async (req, res) => {
   }
 };
 
-// Récupérer un épisode spécifique
-const getEpisodeByNumero = async (req, res) => {
-  try {
-    const serieId = req.params.id;
-    const saisonNumero = req.params.saisonNumero;
-    const episodeNumero = req.params.episodeNumero;
-    
-    const serie = await Serie.findById(serieId);
-    
-    if (!serie) {
-      return res.status(404).json({ message: 'Série non trouvée' });
-    }
-    
-    const saison = await Saison.findOne({
-      serie: serieId,
-      numero: saisonNumero
-    });
-    
-    if (!saison) {
-      return res.status(404).json({ message: 'Saison non trouvée' });
-    }
-    
-    const episode = await Episode.findOne({
-      saison: saison._id,
-      numero: episodeNumero
-    });
-    
-    if (!episode) {
-      return res.status(404).json({ message: 'Épisode non trouvé' });
-    }
-    
-    res.status(200).json(episode);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+
 
 // Ajouter un épisode
 const createEpisode = async (req, res) => {
@@ -105,4 +70,4 @@ const createEpisode = async (req, res) => {
   }
 };
 
-module.exports = {getEpisodesBySaison, getEpisodeByNumero, createEpisode};
+module.exports = {getEpisodesBySaison, createEpisode};

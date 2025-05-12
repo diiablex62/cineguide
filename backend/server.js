@@ -24,8 +24,8 @@ app.use(
 
 app.use("/api/users", userRoutes);
 app.use("/api/series", serieRoutes);
-app.use("/api/saisons", saisonRoutes);
-app.use("/api/episodes", episodeRoutes);
+app.use("/api/series", saisonRoutes);
+app.use("/api/series", episodeRoutes);
 app.use("/api/acteurs", acteurRoutes);
 app.use("/api/films", filmRoutes);
 

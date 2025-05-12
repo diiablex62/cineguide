@@ -7,8 +7,8 @@ const {
 } = require("../controllers/saison-controller");
 
 // Routes pour les saisons
-router.get("/:id", getSaisonsBySerie);
-router.get("/:id/:numero", getSaisonByNumero);
+router.get("/:id/saisons", getSaisonsBySerie);
+router.get("/:id/saisons/numero", getSaisonByNumero);
 router.post("/:id", addSaison);
 
 module.exports = router;
