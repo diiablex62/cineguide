@@ -2,9 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function Card({ serie, currentSerieId }) {
-  if (serie.id === currentSerieId) {
+  const currentId = String(currentSerieId);
+  const serieId = String(serie.id);
+  
+  if (serieId === currentId) {
     return null;
   }
+  
   return (
     <Link
       to={`/detailserie/${serie.id}`}

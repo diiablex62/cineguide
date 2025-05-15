@@ -16,6 +16,7 @@ export async function getAllSeries() {
 
 export async function getSerieById(id) {
   try {
+    // Utilisation correcte de l'ID dans l'URL
     const response = await fetch(`${BASE_URL}/series/${id}`, {
       method: "GET",
     });
@@ -26,6 +27,6 @@ export async function getSerieById(id) {
     return serie;
   } catch (error) {
     console.error(`Error fetching serie with id ${id}:`, error);
-    throw error; // Propager l'erreur pour la gérer dans le composant
+    throw error;
   }
 }
