@@ -2,6 +2,7 @@
   "dependencies": {
     "crypto": "^1.0.1",
     "js-cookie": "^3.0.5",
+    "node-fetch": "^2.7.0",
     "nodemailer": "^7.0.3"
   }
 }

@@ -2,15 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ArticleCard from "../../components/actu/ArticleCard";
 import FirstArticleCard from "../../components/actu/FirstArticleCard";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 const fetchRSSArticles = async (rssUrl) => {
   const proxyUrl = "https://api.allorigins.win/get?url=";
   try {
+    console.log("Début du chargement des articles RSS...");
     const response = await fetch(proxyUrl + encodeURIComponent(rssUrl));
     const data = await response.json();
     const parser = new DOMParser();
     const xml = parser.parseFromString(data.contents, "application/xml");
-    return Array.from(xml.querySelectorAll("item")).map((item) => ({
+    const articles = Array.from(xml.querySelectorAll("item")).map((item) => ({
       title: item.querySelector("title")?.textContent || "Titre indisponible",
       link: item.querySelector("link")?.textContent || "#",
       pubDate: item.querySelector("pubDate")?.textContent || "",
@@ -19,6 +21,8 @@ const fetchRSSArticles = async (rssUrl) => {
         item.querySelector("enclosure")?.getAttribute("url") ||
         "https://via.placeholder.com/150",
     }));
+    console.log(`${articles.length} articles chargés avec succès`);
+    return articles;
   } catch (error) {
     console.error("Erreur lors de la récupération du flux RSS :", error);
     return [];
@@ -86,13 +90,7 @@ export default function ActualitesPage() {
   };
 
   if (isLoading) {
-    return (
-      <div className='flex justify-center items-center min-h-screen bg-white dark:bg-black'>
-        <p className='text-gray-800 dark:text-white'>
-          Chargement des articles...
-        </p>
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
   return (

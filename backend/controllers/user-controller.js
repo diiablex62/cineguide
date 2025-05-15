@@ -131,11 +131,9 @@ const validateAccount = async (req, res) => {
     if (now > tempUser.tokenExpiration) {
       console.log("Token expiré");
       await TempUser.deleteOne({ token });
-      return res
-        .status(400)
-        .json({
-          message: "Token de validation expiré. Veuillez vous réinscrire.",
-        });
+      return res.status(400).json({
+        message: "Token de validation expiré. Veuillez vous réinscrire.",
+      });
     }
 
     // Créer l'utilisateur définitif
@@ -188,12 +186,10 @@ const validateAccount = async (req, res) => {
     console.error("Erreur détaillée:", error);
     console.log("Erreur de validation:", error.message);
     console.log("Stack trace:", error.stack);
-    res
-      .status(500)
-      .json({
-        message: "Erreur lors de la validation du compte",
-        error: error.message,
-      });
+    res.status(500).json({
+      message: "Erreur lors de la validation du compte",
+      error: error.message,
+    });
   }
 };
 
@@ -366,12 +362,10 @@ const resendValidationEmail = async (req, res) => {
     console.error("Erreur détaillée:", error);
     console.log("Erreur de renvoi d'email:", error.message);
     console.log("Stack trace:", error.stack);
-    res
-      .status(500)
-      .json({
-        message: "Erreur lors du renvoi de l'email",
-        error: error.message,
-      });
+    res.status(500).json({
+      message: "Erreur lors du renvoi de l'email",
+      error: error.message,
+    });
   }
 };
 

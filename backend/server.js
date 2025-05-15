@@ -6,6 +6,7 @@ const port = process.env.PORT || 4000;
 const acteurRoutes = require("./routes/acteurs");
 const filmRoutes = require("./routes/film");
 const userRoutes = require("./routes/users");
+const { verifyEmailConfig } = require("./utils/email/config");
 const app = express();
 app.use(express.json());
 
@@ -32,8 +33,12 @@ app.get("/api/test", (req, res) => {
 
 mongoose
   .connect(process.env.MONGO_URI)
-  .then(() => {
+  .then(async () => {
     console.log("Connexion Mongo DB OK");
+
+    // Vérifier la configuration des emails
+    await verifyEmailConfig();
+
     console.log(`Serveur en écoute sur le port ${process.env.PORT}`);
   })
   .catch((err) => console.log("Erreur de connexion MongoDB:", err));
