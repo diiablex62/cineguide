@@ -5,10 +5,12 @@ export async function getAllSeries() {
     const response = await fetch(`${BASE_URL}/series/`, {
       method: "GET",
     });
+    if (!response.ok) throw new Error(`Erreur serveur: ${response.status}`);
     const series = await response.json();
     return series;
   } catch (error) {
-    console.log(error);
+    console.error("Error fetching all series:", error);
+    throw error; // Propager l'erreur pour la gérer dans le composant
   }
 }
 
@@ -17,10 +19,13 @@ export async function getSerieById(id) {
     const response = await fetch(`${BASE_URL}/series/${id}`, {
       method: "GET",
     });
-
+    
+    if (!response.ok) throw new Error(`Erreur serveur: ${response.status}`);
+    
     const serie = await response.json();
     return serie;
   } catch (error) {
-    console.error(error);
+    console.error(`Error fetching serie with id ${id}:`, error);
+    throw error; // Propager l'erreur pour la gérer dans le composant
   }
 }

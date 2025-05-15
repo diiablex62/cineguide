@@ -3,7 +3,7 @@ import { ActorContext } from "../../context/ActorContext";
 import { useNavigate } from "react-router-dom";
 import FilmParActeur from "../../data/FilmParActeur.json";
 import Recompenses from "../../data/Recompense.json";
-import { url } from "../../url";
+import { BASE_URL } from "../../utils/url";
 export default function ActorProvider({ children }) {
   const [allActors, setAllActors] = useState();
   const [detailActor, setDetailActor] = useState({
@@ -22,7 +22,7 @@ export default function ActorProvider({ children }) {
   useEffect(() => {
     async function getAllActors() {
       try {
-        const response = await fetch(`${url}/acteurs`);
+        const response = await fetch(`${BASE_URL}/acteurs`);
         if (response.ok) {
           const actorsFromApi = await response.json();
           setAllActors(actorsFromApi);

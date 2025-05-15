@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { SerieContext } from "../../context/SerieContext";
 import { getAllSeries, getSerieById } from "../../apis/serie.api";
+import { getSaisonsBySerie } from "../../apis/saison.api";
+import { getEpisodesBySaison } from "../../apis/episode.api";
 
 export default function SerieProvider({ children }) {
   const [goSeeStates, setGoSeeStates] = useState({});
@@ -59,8 +61,45 @@ export default function SerieProvider({ children }) {
 
     setLoading(true);
     try {
+      // Récupérer les détails de base de la série
       const serieDetails = await getSerieById(id);
-      setDetailSerie(serieDetails);
+      
+      // S'assurer que les saisons sont bien remplies avec leurs épisodes
+      const saisonsCompletes = [];
+      
+      // Si les saisons sont des références (IDs) et non des objets complets
+      if (serieDetails.saisons && Array.isArray(serieDetails.saisons)) {
+        for (const saison of serieDetails.saisons) {
+          // Si c'est juste un ID ou un objet avec seulement numero/annee/nbEpisodes
+          const saisonId = saison._id || saison;
+          const saisonNumero = saison.numero;
+          
+          try {
+            // Récupérer les épisodes de cette saison
+            const episodes = await getEpisodesBySaison(id, saisonNumero);
+            
+            // Ajouter la saison complète avec ses épisodes
+            saisonsCompletes.push({
+              ...saison,
+              episodes: episodes || []
+            });
+          } catch (episodeError) {
+            console.error(`Erreur lors du chargement des épisodes pour la saison ${saisonNumero}:`, episodeError);
+            // Ajouter la saison sans épisodes en cas d'erreur
+            saisonsCompletes.push({
+              ...saison,
+              episodes: []
+            });
+          }
+        }
+      }
+      
+      // Mettre à jour les détails de la série avec les saisons complètes
+      setDetailSerie({
+        ...serieDetails,
+        saisons: saisonsCompletes.length > 0 ? saisonsCompletes : serieDetails.saisons || []
+      });
+      
       setError(null);
     } catch (error) {
       console.error(
