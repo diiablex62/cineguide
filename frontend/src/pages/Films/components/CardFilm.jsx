@@ -146,7 +146,7 @@ export default function CardFilm() {
                     <div className="flex flex-col items-center">
                       <button
                         onClick={() => toggleState(setGoSeeStates, index)}
-                        className={`mt-2 cursor-pointer text-white w-[150px] h-[50px] ${
+                        className={`mt-2 cursor-pointer text-white w-[150px] h-[50px] flex justify-center items-center ${
                           goSeeStates[index] ? "bg-gray-fonce" : "bg-gray-400"
                         }`}
                       >
@@ -156,13 +156,13 @@ export default function CardFilm() {
                       </button>
                       <NavLink
                         to={`/detailfilm/${film._id}`}
-                        className="mt-2 cursor-pointer bg-fuchsia text-white w-[250px] h-[50px]"
+                        className="mt-2 cursor-pointer bg-fuchsia text-white w-[150px]  flex justify-center items-center h-[50px]"
                       >
                         {t("home.regarder", "Regarder")}
                       </NavLink>
                       <button
                         onClick={() => toggleState(setAlreadySeenStates, index)}
-                        className={`mt-2 cursor-pointer text-white w-[150px] h-[50px] ${
+                        className={`mt-2 cursor-pointer text-white w-[150px] h-[50px]  flex justify-center items-center ${
                           alreadySeenStates[index]
                             ? "bg-green-600"
                             : "bg-red-400"
