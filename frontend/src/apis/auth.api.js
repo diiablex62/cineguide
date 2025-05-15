@@ -89,6 +89,28 @@ export async function login(credentials) {
   } catch (error) {
     console.error("Erreur de connexion:", error);
     console.error("Détails de l'erreur:", error.message);
+
+    // Gérer spécifiquement l'erreur "Failed to fetch"
+    if (error.message === "Failed to fetch") {
+      throw {
+        message:
+          "Impossible de contacter le serveur. Veuillez vérifier votre connexion internet ou réessayer plus tard.",
+        status: 0,
+        data: null,
+        originalError: error,
+      };
+    }
+
+    // Si l'erreur n'a pas de format spécifique, créer un objet d'erreur standard
+    if (!error.status && !error.data) {
+      throw {
+        message: error.message || "Une erreur inattendue s'est produite",
+        status: 0,
+        data: null,
+        originalError: error,
+      };
+    }
+
     throw error;
   }
 }

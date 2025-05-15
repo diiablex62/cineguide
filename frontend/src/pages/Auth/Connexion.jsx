@@ -53,12 +53,23 @@ export default function Connexion() {
     } catch (error) {
       console.error("Erreur lors de la connexion:", error);
 
-      // Afficher l'erreur spécifique
-      const errorMessage =
-        error.message || "Une erreur est survenue lors de la connexion";
-      setLoginError(errorMessage);
+      // Message générique pour les erreurs d'authentification
+      let errorMessage = "L'email ou le mot de passe est incorrect";
 
-      // Afficher une notification d'erreur
+      // Pour les erreurs de connexion réseau, utiliser le message spécifique
+      if (
+        error.message &&
+        error.message.includes("Impossible de contacter le serveur")
+      ) {
+        errorMessage = error.message;
+      }
+      // Message spécifique pour les comptes en attente de validation
+      else if (error.status === 403 && error.data?.isPending) {
+        errorMessage =
+          "Votre compte est en attente de validation. Veuillez vérifier votre email.";
+      }
+
+      setLoginError(errorMessage);
       toast.error(errorMessage);
 
       // Si le compte est en attente de validation, proposer de renvoyer l'email

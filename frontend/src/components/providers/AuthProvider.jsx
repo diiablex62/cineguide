@@ -153,8 +153,21 @@ export default function AuthProvider({ children }) {
         setError(
           "Votre compte est en attente de validation. Veuillez vérifier votre email."
         );
-      } else {
-        setError(error.message || "Erreur lors de la connexion");
+      }
+      // Gérer les erreurs réseau
+      else if (
+        error.message &&
+        error.message.includes("Impossible de contacter le serveur")
+      ) {
+        setError(error.message);
+      }
+      // Pour toute autre erreur d'authentification, utiliser un message générique
+      else if (error.status === 400 || error.status === 401) {
+        setError("L'email ou le mot de passe est incorrect");
+      }
+      // Message par défaut pour les autres types d'erreurs
+      else {
+        setError("Une erreur est survenue lors de la connexion");
       }
 
       throw error;
