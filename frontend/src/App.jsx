@@ -31,7 +31,6 @@ const CGV = lazy(() => import("./pages/Legal/CGV"));
 const FAQ = lazy(() => import("./pages/Legal/FAQ"));
 const MentionsLegales = lazy(() => import("./pages/Legal/MentionsLegales"));
 const NotFound = lazy(() => import("./pages/404"));
-
 const Header = lazy(() => import("./components/Header"));
 const Footer = lazy(() => import("./components/Footer"));
 
