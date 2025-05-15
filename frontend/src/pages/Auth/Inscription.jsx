@@ -28,12 +28,20 @@ export default function Inscription() {
       .string()
       .required("Le prénom est obligatoire")
       .min(2, "Le prénom doit contenir au moins 2 caractères")
-      .max(50, "Le prénom ne peut pas dépasser 50 caractères"),
+      .max(50, "Le prénom ne peut pas dépasser 50 caractères")
+      .matches(
+        /^[a-zA-ZÀ-ÿ-\s']+$/,
+        "Le prénom ne peut contenir que des lettres, espaces, tirets et apostrophes"
+      ),
     nom: yup
       .string()
       .required("Le nom est obligatoire")
       .min(2, "Le nom doit contenir au moins 2 caractères")
-      .max(50, "Le nom ne peut pas dépasser 50 caractères"),
+      .max(50, "Le nom ne peut pas dépasser 50 caractères")
+      .matches(
+        /^[a-zA-ZÀ-ÿ-\s']+$/,
+        "Le nom ne peut contenir que des lettres, espaces, tirets et apostrophes"
+      ),
     username: yup
       .string()
       .required("Le nom d'utilisateur est obligatoire")
@@ -46,12 +54,25 @@ export default function Inscription() {
     email: yup
       .string()
       .required("L'email est obligatoire")
-      .email("Format d'email invalide"),
+      .email("Format d'email invalide")
+      .test(
+        "email-format",
+        "L'email doit contenir un @ et un domaine valide",
+        (value) => {
+          if (!value) return true; // déjà géré par required
+          console.log("Validation email:", value);
+          return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value);
+        }
+      ),
     password: yup
       .string()
       .required("Le mot de passe est obligatoire")
       .min(5, "Le mot de passe doit contenir au moins 5 caractères")
-      .max(20, "Le mot de passe ne peut pas dépasser 20 caractères"),
+      .max(20, "Le mot de passe ne peut pas dépasser 20 caractères")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/,
+        "Le mot de passe doit contenir au moins une majuscule, une minuscule et un chiffre"
+      ),
     confirmPassword: yup
       .string()
       .required("La confirmation du mot de passe est obligatoire")
@@ -89,8 +110,8 @@ export default function Inscription() {
         navigate("/validation");
       } else {
         // Si l'inscription est directe (sans validation par email)
-        toast.success("Inscription réussie !");
-        navigate("/");
+        toast.success("Inscription réussie ! Veuillez vous connecter.");
+        navigate("/connexion");
       }
     } catch (error) {
       console.error("Erreur lors de l'inscription:", error);
@@ -110,38 +131,43 @@ export default function Inscription() {
         errorMessage.includes("already exists")
       ) {
         toast.custom(
-          (t) => (
-            <div className='bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 rounded shadow-md'>
-              <div className='flex'>
-                <div className='py-1'>
-                  <svg
-                    className='h-6 w-6 text-blue-500 mr-4'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    stroke='currentColor'>
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth='2'
-                      d='M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <p className='font-bold'>Compte existant</p>
-                  <p className='text-sm'>
-                    Un compte avec cet email existe déjà.
-                  </p>
+          () => (
+            <div className='bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden flex'>
+              <div className='w-1.5 bg-yellow-400'></div>
+              <div className='flex-1 p-4'>
+                <div className='flex'>
+                  <div className='flex-1'>
+                    <p className='font-bold text-gray-900 dark:text-white'>
+                      Compte existant
+                    </p>
+                    <p className='text-sm text-gray-600 dark:text-gray-300 mt-1'>
+                      Un compte avec cet email existe déjà.
+                    </p>
+
+                    <div className='mt-4 flex space-x-2'>
+                      <button
+                        onClick={() => navigate("/connexion")}
+                        className='px-3 py-1.5 text-white text-xs font-medium rounded-md bg-[#E71CA5] hover:opacity-90'>
+                        Se connecter
+                      </button>
+                      <button
+                        onClick={() => toast.dismiss()}
+                        className='px-3 py-1.5 text-gray-700 dark:text-gray-200 text-xs font-medium rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>
+                        Fermer
+                      </button>
+                    </div>
+                  </div>
+
                   <button
-                    onClick={() => navigate("/connexion")}
-                    className='mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-xs'>
-                    Se connecter
+                    onClick={() => toast.dismiss()}
+                    className='ml-4 text-gray-400 hover:text-gray-600 transition-colors'>
+                    ×
                   </button>
                 </div>
               </div>
             </div>
           ),
-          { duration: 10000 }
+          { duration: 15000 }
         );
       }
     } finally {

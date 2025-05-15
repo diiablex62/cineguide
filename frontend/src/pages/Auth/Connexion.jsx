@@ -24,7 +24,16 @@ export default function Connexion() {
     email: yup
       .string()
       .required("L'email est obligatoire")
-      .email("Format d'email invalide"),
+      .email("Format d'email invalide")
+      .test(
+        "email-format",
+        "L'email doit contenir un @ et un domaine valide",
+        (value) => {
+          if (!value) return true;
+          console.log("Validation email connexion:", value);
+          return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value);
+        }
+      ),
     password: yup
       .string()
       .required("Le mot de passe est obligatoire")
@@ -75,39 +84,51 @@ export default function Connexion() {
       // Si le compte est en attente de validation, proposer de renvoyer l'email
       if (error.status === 403 && error.data?.isPending) {
         toast.custom(
-          (t) => (
-            <div className='bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 rounded shadow-md'>
-              <div className='flex'>
-                <div className='py-1'>
-                  <svg
-                    className='h-6 w-6 text-orange-500 mr-4'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    stroke='currentColor'>
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth='2'
-                      d='M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z'
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <p className='font-bold'>Compte en attente de validation</p>
-                  <p className='text-sm'>
-                    Veuillez vérifier votre email et cliquer sur le lien de
-                    validation.
-                  </p>
+          () => (
+            <div className='bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden flex'>
+              <div className='w-1.5 bg-yellow-400'></div>
+              <div className='flex-1 p-4'>
+                <div className='flex'>
+                  <div className='flex-1'>
+                    <p className='font-bold text-gray-900 dark:text-white'>
+                      Validation de compte en attente
+                    </p>
+                    <p className='text-sm text-gray-600 dark:text-gray-300 mt-1'>
+                      Votre compte{" "}
+                      <span className='font-medium'>{data.email}</span> est en
+                      attente de validation. Veuillez vérifier votre boîte de
+                      réception et cliquer sur le lien de validation.
+                    </p>
+
+                    <p className='text-sm text-green-500 mt-3 font-medium'>
+                      Inscription réussie! Veuillez consulter votre email pour
+                      valider votre compte.
+                    </p>
+
+                    <div className='mt-4 flex space-x-2'>
+                      <button
+                        onClick={() => navigate("/validation")}
+                        className='px-3 py-1.5 text-white text-xs font-medium rounded-md bg-[#E71CA5] hover:opacity-90'>
+                        Renvoyer l'email
+                      </button>
+                      <button
+                        onClick={() => toast.dismiss()}
+                        className='px-3 py-1.5 text-gray-700 dark:text-gray-200 text-xs font-medium rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>
+                        Fermer
+                      </button>
+                    </div>
+                  </div>
+
                   <button
-                    onClick={() => navigate("/validation")}
-                    className='mt-2 bg-orange-500 hover:bg-orange-700 text-white font-bold py-1 px-2 rounded text-xs'>
-                    Renvoyer l'email
+                    onClick={() => toast.dismiss()}
+                    className='ml-4 text-gray-400 hover:text-gray-600 transition-colors'>
+                    ×
                   </button>
                 </div>
               </div>
             </div>
           ),
-          { duration: 10000 }
+          { duration: 15000 }
         );
       }
     } finally {

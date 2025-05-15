@@ -35,7 +35,7 @@ export default function PendingAccountNotification() {
   };
 
   return (
-    <div className='fixed bottom-4 right-4 max-w-md w-full bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 z-50 border-l-4 border-yellow-500'>
+    <div className='fixed bottom-4 right-4 max-w-md w-full bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 z-50 border-l-4 border-fuchsia'>
       <div className='flex justify-between items-start'>
         <div className='flex-grow'>
           <h3 className='text-lg font-semibold text-gray-900 dark:text-white'>
@@ -63,7 +63,7 @@ export default function PendingAccountNotification() {
             <button
               onClick={handleResendEmail}
               disabled={resending}
-              className='px-3 py-1.5 bg-fuchsia-600 text-white text-sm rounded hover:bg-fuchsia-700 disabled:opacity-50 disabled:cursor-not-allowed'>
+              className='px-3 py-1.5 bg-fuchsia text-white text-sm rounded hover:bg-fuchsia-700 disabled:opacity-50 disabled:cursor-not-allowed'>
               {resending ? "Envoi en cours..." : "Renvoyer l'email"}
             </button>
             <button
