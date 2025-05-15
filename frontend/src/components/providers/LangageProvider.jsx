@@ -13,7 +13,7 @@ const LANGAGE_LIST = [
   { id: 4, code: "de", img: de, desc: "drapeau langue allemande" },
 ];
 
-export default function LangageProvider({ children }) {
+export function LangageProvider({ children }) {
   const [langageMenu, setLangageMenu] = useState(false);
 
   const [selectedLang, setSelectedLang] = useState(() => {

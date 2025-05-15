@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import FilmParActeur from "../../data/FilmParActeur.json";
 import Recompenses from "../../data/Recompense.json";
 import { url } from "../../url";
-export default function ActorProvider({ children }) {
+
+export function ActorProvider({ children }) {
   const [allActors, setAllActors] = useState();
   const [detailActor, setDetailActor] = useState({
     id: 0,
@@ -25,6 +26,7 @@ export default function ActorProvider({ children }) {
         const response = await fetch(`${url}/acteurs`);
         if (response.ok) {
           const actorsFromApi = await response.json();
+          console.log("Acteurs chargés:", actorsFromApi);
           setAllActors(actorsFromApi);
         }
       } catch (error) {
@@ -35,10 +37,12 @@ export default function ActorProvider({ children }) {
   }, []);
 
   const toggleActor = (params) => {
+    console.log("Actor toggled:", params);
     setActor(params);
   };
 
   const actorRedirect = () => {
+    console.log("Redirection vers acteur:", detailActor.id);
     navigate(`/acteurs/${detailActor.id}`);
   };
 
@@ -64,8 +68,7 @@ export default function ActorProvider({ children }) {
         actor,
         filmsByActor,
         recompenseByActor,
-      }}
-    >
+      }}>
       {children}
     </ActorContext.Provider>
   );

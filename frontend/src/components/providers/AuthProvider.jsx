@@ -34,51 +34,55 @@ export default function AuthProvider({ children }) {
   // État pour gérer le chargement initial
   const [isLoading, setIsLoading] = useState(true);
 
+  // État pour stocker les messages d'erreur
+  const [error, setError] = useState(null);
+
+  // État pour stocker les messages de confirmation
+  const [notification, setNotification] = useState(null);
+  
+  // État pour suivre si un compte est en attente de validation
+  const [pendingAccount, setPendingAccount] = useState(null);
+
   const [fakeUser] = useState({
     email: "default@example.com",
   });
-
+  
   // Effet pour charger les données de session au chargement de l'application
   useEffect(() => {
     const verifyAuthentication = async () => {
       console.log("Vérification des données d'authentification sauvegardées");
       setIsLoading(true);
-
+      
       try {
         // Récupération des données depuis les cookies
         const savedToken = getCookie("token");
         const savedUserId = getCookie("userId");
         const savedUserData = getCookie("userData");
-
+    
         if (savedToken && savedUserId) {
           console.log("Données d'authentification trouvées dans les cookies");
-
+          
           // Vérifier que le token est toujours valide
           const { isValid, userData } = await authAPI.verifyToken(savedToken);
-
+          
           if (isValid) {
             console.log("Token valide, restauration de la session");
             setToken(savedToken);
             setUserId(savedUserId);
             setIsLoggedIn(true);
             setConnectedUser(true);
-
+            
             // Utiliser les données actualisées ou celles des cookies
             if (savedUserData) {
               try {
                 const parsedUserData = JSON.parse(savedUserData);
                 setUser({
                   ...defaultUser,
-                  ...parsedUserData,
+                  ...parsedUserData
                 });
-                console.log(
-                  "Données utilisateur restaurées depuis les cookies"
-                );
+                console.log("Données utilisateur restaurées depuis les cookies");
               } catch (error) {
-                console.error(
-                  "Erreur lors du parsing des données utilisateur:",
-                  error
-                );
+                console.error("Erreur lors du parsing des données utilisateur:", error);
               }
             }
           } else {
@@ -90,16 +94,13 @@ export default function AuthProvider({ children }) {
           console.log("Aucune donnée d'authentification trouvée");
         }
       } catch (error) {
-        console.error(
-          "Erreur lors de la vérification de l'authentification:",
-          error
-        );
+        console.error("Erreur lors de la vérification de l'authentification:", error);
         logout();
       } finally {
         setIsLoading(false);
       }
     };
-
+    
     verifyAuthentication();
   }, []);
 
@@ -107,6 +108,7 @@ export default function AuthProvider({ children }) {
   const login = async (credentials) => {
     try {
       console.log("Tentative de connexion avec:", credentials);
+      setError(null);
       const data = await authAPI.login(credentials);
 
       // Sauvegarder dans le state
@@ -124,7 +126,7 @@ export default function AuthProvider({ children }) {
 
       setUser({
         ...defaultUser,
-        ...userData,
+        ...userData
       });
 
       // Persister dans les cookies
@@ -136,6 +138,15 @@ export default function AuthProvider({ children }) {
       return data;
     } catch (error) {
       console.error("Échec de connexion:", error);
+      
+      // Gérer le cas où le compte est en attente de validation
+      if (error.status === 403 && error.data?.isPending) {
+        setPendingAccount(credentials.email);
+        setError("Votre compte est en attente de validation. Veuillez vérifier votre email.");
+      } else {
+        setError(error.message || "Erreur lors de la connexion");
+      }
+      
       throw error;
     }
   };
@@ -144,6 +155,7 @@ export default function AuthProvider({ children }) {
   const registerUser = async (userData) => {
     try {
       console.log("Tentative d'inscription avec:", userData);
+      setError(null);
 
       // Adapter le format des données si nécessaire
       const formattedData = {
@@ -155,6 +167,15 @@ export default function AuthProvider({ children }) {
 
       const data = await authAPI.register(formattedData);
 
+      // Pour le nouveau système, l'inscription retourne uniquement un message
+      // et l'utilisateur doit valider son compte par email
+      if (data && data.message && data.email) {
+        setPendingAccount(data.email);
+        setNotification(data.message);
+        return data;
+      }
+
+      // Ancien comportement (au cas où)
       if (data && data.token && data.user) {
         // Sauvegarder dans le state
         setToken(data.token);
@@ -172,21 +193,86 @@ export default function AuthProvider({ children }) {
         // Mettre à jour les données utilisateur
         setUser({
           ...defaultUser,
-          ...userInfo,
+          ...userInfo
         });
 
         // Persister dans les cookies
         setCookie("token", data.token);
         setCookie("userId", data.user._id);
         setCookie("userData", JSON.stringify(userInfo));
-        console.log(
-          "Données d'authentification sauvegardées dans les cookies après inscription"
-        );
+        console.log("Données d'authentification sauvegardées dans les cookies après inscription");
       }
 
       return data;
     } catch (error) {
       console.error("Échec d'inscription:", error);
+      setError(error.message || "Erreur lors de l'inscription");
+      throw error;
+    }
+  };
+
+  // Fonction pour valider un compte utilisateur
+  const validateAccount = async (token) => {
+    try {
+      console.log("Tentative de validation de compte avec token:", token);
+      setError(null);
+      
+      const data = await authAPI.validateAccount(token);
+      
+      if (data && data.token && data.user) {
+        // Sauvegarder dans le state
+        setToken(data.token);
+        setUserId(data.user._id);
+        setIsLoggedIn(true);
+        setConnectedUser(true);
+        setPendingAccount(null);
+
+        // Préparer les données utilisateur
+        const userInfo = {
+          email: data.user.email,
+          firstname: data.user.prenom,
+          lastname: data.user.nom,
+        };
+
+        // Mettre à jour les données utilisateur
+        setUser({
+          ...defaultUser,
+          ...userInfo
+        });
+
+        // Persister dans les cookies
+        setCookie("token", data.token);
+        setCookie("userId", data.user._id);
+        setCookie("userData", JSON.stringify(userInfo));
+        console.log("Données d'authentification sauvegardées dans les cookies après validation");
+        
+        setNotification(data.message || "Votre compte a été validé avec succès!");
+      }
+      
+      return data;
+    } catch (error) {
+      console.error("Échec de validation de compte:", error);
+      setError(error.message || "Erreur lors de la validation du compte");
+      throw error;
+    }
+  };
+
+  // Fonction pour renvoyer l'email de validation
+  const resendValidationEmail = async (email) => {
+    try {
+      console.log("Tentative de renvoi d'email de validation pour:", email);
+      setError(null);
+      
+      const data = await authAPI.resendValidationEmail(email || pendingAccount);
+      
+      if (data && data.message) {
+        setNotification(data.message);
+      }
+      
+      return data;
+    } catch (error) {
+      console.error("Échec du renvoi d'email de validation:", error);
+      setError(error.message || "Erreur lors du renvoi de l'email de validation");
       throw error;
     }
   };
@@ -199,12 +285,25 @@ export default function AuthProvider({ children }) {
     setUser(defaultUser);
     setIsLoggedIn(false);
     setConnectedUser(false);
-
+    setPendingAccount(null);
+    setError(null);
+    setNotification(null);
+    
     // Supprimer des cookies
     removeCookie("token");
     removeCookie("userId");
     removeCookie("userData");
     console.log("Données d'authentification supprimées des cookies");
+  };
+
+  // Fonction pour effacer les messages d'erreur
+  const clearError = () => {
+    setError(null);
+  };
+
+  // Fonction pour effacer les notifications
+  const clearNotification = () => {
+    setNotification(null);
   };
 
   return (
@@ -215,11 +314,18 @@ export default function AuthProvider({ children }) {
         login,
         logout,
         registerUser,
+        validateAccount,
+        resendValidationEmail,
         connectedUser,
         isLoggedIn,
         token,
         userId,
         isLoading,
+        error,
+        notification,
+        pendingAccount,
+        clearError,
+        clearNotification
       }}>
       {children}
     </AuthContext.Provider>

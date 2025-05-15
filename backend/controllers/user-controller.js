@@ -1,8 +1,14 @@
 const User = require("../models/user.schema");
+const TempUser = require("../models/temp-user.schema");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const crypto = require("crypto");
+const {
+  sendValidationEmail,
+  sendConfirmationEmail,
+} = require("../utils/email/config");
 
-// Inscription d'un nouvel utilisateur (simplifié sans vérification d'email)
+// Inscription d'un nouvel utilisateur avec vérification d'email
 const register = async (req, res) => {
   console.log("--- Début fonction register ---");
   try {
@@ -18,11 +24,20 @@ const register = async (req, res) => {
         .json({ message: "Toutes les informations sont requises" });
     }
 
-    // Vérifier si l'utilisateur existe déjà
+    // Vérifier si l'utilisateur existe déjà dans users ou tempUsers
     const existingUser = await User.findOne({ email });
+    const existingTempUser = await TempUser.findOne({ email });
+
     if (existingUser) {
       console.log("Email déjà utilisé:", email);
       return res.status(400).json({ message: "Cet email est déjà utilisé" });
+    }
+
+    // Si l'utilisateur existe déjà dans tempUsers, on le supprime pour le recréer
+    if (existingTempUser) {
+      console.log("Email déjà en attente de validation:", email);
+      await TempUser.deleteOne({ email });
+      console.log("Ancien utilisateur temporaire supprimé");
     }
 
     // Hachage du mot de passe
@@ -31,44 +46,52 @@ const register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
     console.log("Mot de passe haché avec succès");
 
-    // Création du nouvel utilisateur (directement validé)
-    const newUser = new User({
+    // Génération du token de validation
+    const token = crypto.randomBytes(32).toString("hex");
+    console.log("Token de validation généré");
+
+    // Date d'expiration du token (60 minutes)
+    const tokenExpiration = new Date();
+    tokenExpiration.setMinutes(tokenExpiration.getMinutes() + 60);
+
+    // Création d'un nouvel utilisateur temporaire
+    const newTempUser = new TempUser({
       nom,
       prenom,
       email,
       password: hashedPassword,
+      token,
+      tokenExpiration,
     });
 
-    // Enregistrement de l'utilisateur
-    console.log("Enregistrement de l'utilisateur dans la base de données...");
-    const savedUser = await newUser.save();
-    console.log("Nouvel utilisateur créé:", savedUser._id);
-
-    // Renvoyer les données sans le mot de passe
-    const userWithoutPassword = {
-      _id: savedUser._id,
-      nom: savedUser.nom,
-      prenom: savedUser.prenom,
-      email: savedUser.email,
-      role: savedUser.role,
-    };
-
-    // Générer un token JWT
-    console.log("Génération du token JWT...");
-    const token = jwt.sign(
-      {
-        userId: savedUser._id,
-        role: savedUser.role,
-      },
-      process.env.JWT_SECRET,
-      { expiresIn: "24h" }
+    // Enregistrement de l'utilisateur temporaire
+    console.log(
+      "Enregistrement de l'utilisateur temporaire dans la base de données..."
     );
-    console.log("Token JWT généré avec succès");
+    const savedTempUser = await newTempUser.save();
+    console.log("Nouvel utilisateur temporaire créé:", savedTempUser._id);
+
+    // Envoi de l'email de validation
+    console.log("Préparation de l'envoi de l'email de validation...");
+    const emailResult = await sendValidationEmail(email, prenom, token);
+
+    if (!emailResult.success) {
+      console.log(
+        "Échec de l'envoi de l'email de validation:",
+        emailResult.error
+      );
+      return res.status(500).json({
+        message:
+          "Inscription réussie mais échec de l'envoi de l'email de validation",
+        error: emailResult.error,
+      });
+    }
 
     console.log("--- Fin fonction register (succès) ---");
     res.status(201).json({
-      user: userWithoutPassword,
-      token,
+      message:
+        "Inscription réussie! Veuillez consulter votre email pour valider votre compte.",
+      email: email,
     });
   } catch (error) {
     console.log("--- Erreur dans fonction register ---");
@@ -78,6 +101,99 @@ const register = async (req, res) => {
     res
       .status(500)
       .json({ message: "Erreur lors de l'inscription", error: error.message });
+  }
+};
+
+// Validation de l'inscription avec le token envoyé par email
+const validateAccount = async (req, res) => {
+  console.log("--- Début fonction validateAccount ---");
+  try {
+    const { token } = req.params;
+    console.log("Tentative de validation avec le token:", token);
+
+    if (!token) {
+      console.log("Token manquant");
+      return res.status(400).json({ message: "Token de validation requis" });
+    }
+
+    // Recherche de l'utilisateur temporaire avec ce token
+    const tempUser = await TempUser.findOne({ token });
+
+    if (!tempUser) {
+      console.log("Token invalide ou expiré");
+      return res
+        .status(400)
+        .json({ message: "Token de validation invalide ou expiré" });
+    }
+
+    // Vérifier si le token a expiré
+    const now = new Date();
+    if (now > tempUser.tokenExpiration) {
+      console.log("Token expiré");
+      await TempUser.deleteOne({ token });
+      return res
+        .status(400)
+        .json({
+          message: "Token de validation expiré. Veuillez vous réinscrire.",
+        });
+    }
+
+    // Créer l'utilisateur définitif
+    const newUser = new User({
+      nom: tempUser.nom,
+      prenom: tempUser.prenom,
+      email: tempUser.email,
+      password: tempUser.password,
+      role: tempUser.role,
+    });
+
+    // Enregistrer l'utilisateur définitif
+    console.log("Création de l'utilisateur définitif...");
+    const savedUser = await newUser.save();
+    console.log("Utilisateur définitif créé:", savedUser._id);
+
+    // Supprimer l'utilisateur temporaire
+    await TempUser.deleteOne({ token });
+    console.log("Utilisateur temporaire supprimé");
+
+    // Envoi de l'email de confirmation
+    await sendConfirmationEmail(tempUser.email, tempUser.prenom);
+
+    // Générer un token JWT
+    console.log("Génération du token JWT...");
+    const jwtToken = jwt.sign(
+      {
+        userId: savedUser._id,
+        role: savedUser.role,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "24h" }
+    );
+    console.log("Token JWT généré avec succès");
+
+    console.log("--- Fin fonction validateAccount (succès) ---");
+    res.status(200).json({
+      message: "Votre compte a été validé avec succès!",
+      token: jwtToken,
+      user: {
+        _id: savedUser._id,
+        nom: savedUser.nom,
+        prenom: savedUser.prenom,
+        email: savedUser.email,
+        role: savedUser.role,
+      },
+    });
+  } catch (error) {
+    console.log("--- Erreur dans fonction validateAccount ---");
+    console.error("Erreur détaillée:", error);
+    console.log("Erreur de validation:", error.message);
+    console.log("Stack trace:", error.stack);
+    res
+      .status(500)
+      .json({
+        message: "Erreur lors de la validation du compte",
+        error: error.message,
+      });
   }
 };
 
@@ -93,6 +209,17 @@ const login = async (req, res) => {
     if (!email || !password) {
       console.log("Données de connexion incomplètes");
       return res.status(400).json({ message: "Email et mot de passe requis" });
+    }
+
+    // Vérifier s'il y a un utilisateur temporaire en attente de validation
+    const tempUser = await TempUser.findOne({ email });
+    if (tempUser) {
+      console.log("Utilisateur en attente de validation:", email);
+      return res.status(403).json({
+        message:
+          "Votre compte est en attente de validation. Veuillez vérifier votre email.",
+        isPending: true,
+      });
     }
 
     // Vérifier si l'utilisateur existe
@@ -174,8 +301,84 @@ const getUserInfo = async (req, res) => {
   }
 };
 
+// Renvoyer l'email de validation
+const resendValidationEmail = async (req, res) => {
+  console.log("--- Début fonction resendValidationEmail ---");
+  try {
+    const { email } = req.body;
+
+    console.log("Tentative de renvoi d'email pour:", email);
+
+    if (!email) {
+      console.log("Email non fourni");
+      return res.status(400).json({ message: "Email requis" });
+    }
+
+    // Vérifier si l'utilisateur temporaire existe
+    const tempUser = await TempUser.findOne({ email });
+    if (!tempUser) {
+      console.log("Utilisateur temporaire non trouvé:", email);
+      return res
+        .status(404)
+        .json({ message: "Aucune inscription en attente pour cet email" });
+    }
+
+    // Générer un nouveau token
+    const token = crypto.randomBytes(32).toString("hex");
+    console.log("Nouveau token de validation généré");
+
+    // Mettre à jour la date d'expiration (60 minutes)
+    const tokenExpiration = new Date();
+    tokenExpiration.setMinutes(tokenExpiration.getMinutes() + 60);
+
+    // Mettre à jour l'utilisateur temporaire
+    tempUser.token = token;
+    tempUser.tokenExpiration = tokenExpiration;
+    await tempUser.save();
+    console.log("Token mis à jour pour l'utilisateur temporaire");
+
+    // Renvoyer l'email de validation
+    console.log("Préparation du renvoi de l'email de validation...");
+    const emailResult = await sendValidationEmail(
+      email,
+      tempUser.prenom,
+      token
+    );
+
+    if (!emailResult.success) {
+      console.log(
+        "Échec du renvoi de l'email de validation:",
+        emailResult.error
+      );
+      return res.status(500).json({
+        message: "Échec du renvoi de l'email de validation",
+        error: emailResult.error,
+      });
+    }
+
+    console.log("--- Fin fonction resendValidationEmail (succès) ---");
+    res.status(200).json({
+      message: "Email de validation renvoyé avec succès",
+      email: email,
+    });
+  } catch (error) {
+    console.log("--- Erreur dans fonction resendValidationEmail ---");
+    console.error("Erreur détaillée:", error);
+    console.log("Erreur de renvoi d'email:", error.message);
+    console.log("Stack trace:", error.stack);
+    res
+      .status(500)
+      .json({
+        message: "Erreur lors du renvoi de l'email",
+        error: error.message,
+      });
+  }
+};
+
 module.exports = {
   register,
   login,
   getUserInfo,
+  validateAccount,
+  resendValidationEmail,
 };

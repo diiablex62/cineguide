@@ -32,7 +32,11 @@ export async function register(userData) {
 
     if (!response.ok) {
       console.error("Erreur de réponse API:", data);
-      throw new Error(data.message || "Erreur lors de l'inscription");
+      throw {
+        message: data.message || "Erreur lors de l'inscription",
+        status: response.status,
+        data: data,
+      };
     }
 
     console.log("Inscription réussie");
@@ -73,13 +77,100 @@ export async function login(credentials) {
 
     if (!response.ok) {
       console.error("Erreur de réponse API:", data);
-      throw new Error(data.message || "Erreur lors de la connexion");
+      throw {
+        message: data.message || "Erreur lors de la connexion",
+        status: response.status,
+        data: data,
+      };
     }
 
     console.log("Connexion réussie");
     return data;
   } catch (error) {
     console.error("Erreur de connexion:", error);
+    console.error("Détails de l'erreur:", error.message);
+    throw error;
+  }
+}
+
+// Validation du compte avec le token reçu par email
+export async function validateAccount(token) {
+  try {
+    console.log("Début de l'appel API de validation de compte");
+    console.log("URL d'appel:", `${BASE_URL}/users/validate/${token}`);
+
+    const response = await fetch(`${BASE_URL}/users/validate/${token}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    console.log("Statut de la réponse:", response.status);
+    console.log(
+      "Headers de la réponse:",
+      Object.fromEntries([...response.headers])
+    );
+
+    const data = await response.json();
+    console.log("Réponse de validation:", data);
+
+    if (!response.ok) {
+      console.error("Erreur de réponse API:", data);
+      throw {
+        message: data.message || "Erreur lors de la validation du compte",
+        status: response.status,
+        data: data,
+      };
+    }
+
+    console.log("Validation de compte réussie");
+    return data;
+  } catch (error) {
+    console.error("Erreur de validation de compte:", error);
+    console.error("Détails de l'erreur:", error.message);
+    throw error;
+  }
+}
+
+// Renvoyer l'email de validation
+export async function resendValidationEmail(email) {
+  try {
+    console.log("Début de l'appel API pour renvoyer l'email de validation");
+    console.log("URL d'appel:", `${BASE_URL}/users/resend-validation`);
+    console.log("Email pour renvoi:", email);
+
+    const response = await fetch(`${BASE_URL}/users/resend-validation`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    console.log("Statut de la réponse:", response.status);
+    console.log(
+      "Headers de la réponse:",
+      Object.fromEntries([...response.headers])
+    );
+
+    const data = await response.json();
+    console.log("Réponse du renvoi d'email:", data);
+
+    if (!response.ok) {
+      console.error("Erreur de réponse API:", data);
+      throw {
+        message:
+          data.message || "Erreur lors du renvoi de l'email de validation",
+        status: response.status,
+        data: data,
+      };
+    }
+
+    console.log("Renvoi d'email réussi");
+    return data;
+  } catch (error) {
+    console.error("Erreur de renvoi d'email:", error);
     console.error("Détails de l'erreur:", error.message);
     throw error;
   }
@@ -110,9 +201,12 @@ export async function getUserInfo(userId, token) {
 
     if (!response.ok) {
       console.error("Erreur de réponse API:", data);
-      throw new Error(
-        data.message || "Erreur lors de la récupération des informations"
-      );
+      throw {
+        message:
+          data.message || "Erreur lors de la récupération des informations",
+        status: response.status,
+        data: data,
+      };
     }
 
     console.log("Récupération des informations réussie");

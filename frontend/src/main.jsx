@@ -1,17 +1,15 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import { RouterProvider } from "react-router-dom";
-import { router } from "./router.jsx";
-import AuthProvider from "./components/providers/AuthProvider";
+import App from "./App";
 import QuizzProvider from "./components/providers/QuizzProvider.jsx";
+
+console.log("Initialisation de l'application");
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <AuthProvider>
-      <QuizzProvider>
-        <RouterProvider router={router}></RouterProvider>
-      </QuizzProvider>
-    </AuthProvider>
+    <QuizzProvider>
+      <App />
+    </QuizzProvider>
   </StrictMode>
 );
