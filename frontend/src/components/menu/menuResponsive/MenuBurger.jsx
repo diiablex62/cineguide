@@ -12,12 +12,13 @@ import { MdSunny } from "react-icons/md";
 import { MenuContext } from "../../../context/MenuContext";
 import { AuthContext } from "../../../context/AuthContext";
 import LangButton from "../LangButton";
+import { IoIosLogOut } from "react-icons/io";
 
 export default function MenuBurger() {
   const { toggleTheme, theme } = useContext(ThemeContext);
   const { burger, setMenuPlus, menuPlus, toggleBurger, menuRef } =
     useContext(MenuContext);
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, logout } = useContext(AuthContext);
 
   return (
     <>
@@ -41,7 +42,6 @@ export default function MenuBurger() {
           />
         </div>
         <div className="flex flex-col gap-5 justify-center items-center">
-          {/* <div className="flex flex-col justify-center gap-1"> */}
           <NavLink
             onClick={toggleBurger}
             to="/"
@@ -98,9 +98,21 @@ export default function MenuBurger() {
             </div>
           )}
           {isLoggedIn ? (
-            <NavLink to="/profil" className="bg-fuchsia py-4 text-white w-full">
-              Mon Compte
-            </NavLink>
+            <>
+              <NavLink
+                onClick={toggleBurger}
+                to="/profil"
+                className="bg-fuchsia py-4 text-white w-full"
+              >
+                Mon Compte
+              </NavLink>
+              <a
+                onClick={logout}
+                className="text-2xl cursor-pointer hover:text-fuchsia pl-1"
+              >
+                <IoIosLogOut />
+              </a>
+            </>
           ) : (
             <>
               <NavLink
