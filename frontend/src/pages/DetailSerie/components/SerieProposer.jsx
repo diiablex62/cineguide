@@ -1,37 +1,43 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Card from "../Card";
 import { SerieContext } from "../../../context/SerieContext";
+import { useParams } from "react-router-dom";
 
 export default function SerieProposer() {
-  const { detailSerie, serie } = useContext(SerieContext);
+  const { id } = useParams();
+  const { detailSerie, serie, loadSerieDetails } = useContext(SerieContext);
+  
+  useEffect(() => {
+    if (id && (!detailSerie || String(detailSerie.id) !== String(id))) {
+      loadSerieDetails(id);
+    }
+  }, [id, detailSerie, loadSerieDetails]);
 
-  // Vérifier si serie et detailSerie existent avant de les utiliser
   if (!serie || !detailSerie) {
     return <div className="p-4">Chargement des recommandations...</div>;
   }
 
-  // Filtrer les series par le même genre que le serie actuel (mais exclure le serie actuel)
   const similarSeries = serie
     .filter(
       (item) =>
-        item.id !== detailSerie.id &&
+        String(item.id) !== String(detailSerie.id) &&
         item.genre &&
         detailSerie.genre &&
         item.genre.some((genre) => detailSerie.genre.includes(genre))
     )
     .slice(0, 6);
 
-  // Obtenir des series populaires (triés par note, excluant le serie actuel)
   const popularSeries = [...serie]
-    .filter((item) => item.id !== detailSerie.id)
+    .filter((item) => String(item.id) !== String(detailSerie.id))
     .sort((a, b) => (b.note || 0) - (a.note || 0))
     .slice(0, 6);
 
-  // Obtenez des series spé (triés par note, excluant le serie actuel)
   const dramaSeries = serie
     .filter(
       (item) =>
-        item.id !== detailSerie.id && item.genre && item.genre.includes("Drame")
+        String(item.id) !== String(detailSerie.id) && 
+        item.genre && 
+        item.genre.includes("Drame")
     )
     .slice(0, 6);
 

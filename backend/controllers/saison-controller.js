@@ -4,15 +4,21 @@ const Serie = require('../models/serie.schema');
 // Récupérer toutes les saisons d'une série
 const getSaisonsBySerie = async (req, res) => {
   try {
-    const serieId = req.params.id;
+    const serieId = req.params.id; // Changement de _id à id
     
-    const serie = await Serie.findById(serieId);
+    // Recherche par ID ou par l'attribut id
+    const serie = await Serie.findOne({ 
+      $or: [
+        { _id: serieId }, 
+        { id: serieId }
+      ]
+    });
     
     if (!serie) {
       return res.status(404).json({ message: 'Série non trouvée' });
     }
     
-    const saisons = await Saison.find({ serie: serieId }).select('-episodes');
+    const saisons = await Saison.find({ serie: serie._id }).select('-episodes');
     res.status(200).json(saisons);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -22,17 +28,24 @@ const getSaisonsBySerie = async (req, res) => {
 // Récupérer une saison spécifique
 const getSaisonByNumero = async (req, res) => {
   try {
-    const serieId = req.params.id;
+    const serieId = req.params.id; // Changement de _id à id
+    const saisonNumero = req.params.numero;
     
-    const serie = await Serie.findById(serieId);
+    // Recherche par ID ou par l'attribut id
+    const serie = await Serie.findOne({ 
+      $or: [
+        { _id: serieId }, 
+        { id: serieId }
+      ]
+    });
     
     if (!serie) {
       return res.status(404).json({ message: 'Série non trouvée' });
     }
     
     const saison = await Saison.findOne({
-      serie: serieId,
-      numero: req.params.numero
+      serie: serie._id,
+      numero: saisonNumero
     }).populate('episodes');
     
     if (!saison) {
@@ -48,7 +61,7 @@ const getSaisonByNumero = async (req, res) => {
 // Ajouter une saison
 const addSaison = async (req, res) => {
   try {
-    const serieId = req.params.id;
+    const serieId = req.params._id;
     
     const serie = await Serie.findById(serieId);
     
