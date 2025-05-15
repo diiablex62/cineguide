@@ -8,7 +8,7 @@ const {
 
 // Routes pour les saisons
 router.get("/:id/saisons", getSaisonsBySerie);
-router.get("/:id/saisons/numero", getSaisonByNumero);
+router.get("/:id/saisons/:numero", getSaisonByNumero);
 router.post("/:id", addSaison);
 
 module.exports = router;
