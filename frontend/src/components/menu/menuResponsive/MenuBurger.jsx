@@ -42,19 +42,39 @@ export default function MenuBurger() {
         </div>
         <div className="flex flex-col gap-5 justify-center items-center">
           {/* <div className="flex flex-col justify-center gap-1"> */}
-          <NavLink to="/" className="text-black  dark:text-white">
+          <NavLink
+            onClick={toggleBurger}
+            to="/"
+            className="text-black  dark:text-white"
+          >
             Accueil
           </NavLink>
-          <NavLink to="/film" className="text-black  dark:text-white">
+          <NavLink
+            onClick={toggleBurger}
+            to="/film"
+            className="text-black  dark:text-white"
+          >
             Films
           </NavLink>
-          <NavLink to="/series" className="text-black  dark:text-white">
+          <NavLink
+            onClick={toggleBurger}
+            to="/series"
+            className="text-black  dark:text-white"
+          >
             Séries
           </NavLink>
-          <NavLink to="/actualites" className="text-black  dark:text-white">
+          <NavLink
+            onClick={toggleBurger}
+            to="/actualites"
+            className="text-black  dark:text-white"
+          >
             Actualités
           </NavLink>
-          <NavLink to="/jeux" className="text-black  dark:text-white">
+          <NavLink
+            onClick={toggleBurger}
+            to="/jeux"
+            className="text-black  dark:text-white"
+          >
             Jeux
           </NavLink>
           {menuPlus ? (
