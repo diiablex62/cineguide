@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import * as authAPI from "../../apis/auth.api";
+import { setCookie, getCookie, removeCookie } from "../../utils/cookies";
 
 export default function AuthProvider({ children }) {
   const defaultUser = {
@@ -14,58 +16,195 @@ export default function AuthProvider({ children }) {
     complement: "",
   };
 
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    !!localStorage.getItem("session")
-  );
+  // État pour suivre si l'utilisateur est connecté
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    const checkSession = () => {
-      const session = localStorage.getItem("session");
-      setIsLoggedIn(!!session);
-    };
+  // État pour stocker les données de l'utilisateur
+  const [user, setUser] = useState(defaultUser);
 
-    window.addEventListener("storage", checkSession);
+  // État pour suivre si l'utilisateur est connecté (autre nom pour la compatibilité)
+  const [connectedUser, setConnectedUser] = useState(false);
 
-    return () => {
-      window.removeEventListener("storage", checkSession);
-    };
-  }, []);
+  // État pour stocker le token d'authentification
+  const [token, setToken] = useState(null);
 
-  const [user, setUser] = useState(() => {
-    const savedSession = localStorage.getItem("session");
-    return savedSession ? JSON.parse(savedSession) : defaultUser;
-  });
+  // État pour stocker l'ID de l'utilisateur
+  const [userId, setUserId] = useState(null);
 
-  const [connectedUser, setConnectedUser] = useState(() => {
-    return !!localStorage.getItem("session");
-  });
+  // État pour gérer le chargement initial
+  const [isLoading, setIsLoading] = useState(true);
 
   const [fakeUser] = useState({
     email: "default@example.com",
   });
 
-  const saveSession = (data) => {
-    localStorage.setItem("session", JSON.stringify(data));
-    setUser(data);
+  // Effet pour charger les données de session au chargement de l'application
+  useEffect(() => {
+    const verifyAuthentication = async () => {
+      console.log("Vérification des données d'authentification sauvegardées");
+      setIsLoading(true);
+
+      try {
+        // Récupération des données depuis les cookies
+        const savedToken = getCookie("token");
+        const savedUserId = getCookie("userId");
+        const savedUserData = getCookie("userData");
+
+        if (savedToken && savedUserId) {
+          console.log("Données d'authentification trouvées dans les cookies");
+
+          // Vérifier que le token est toujours valide
+          const { isValid, userData } = await authAPI.verifyToken(savedToken);
+
+          if (isValid) {
+            console.log("Token valide, restauration de la session");
+            setToken(savedToken);
+            setUserId(savedUserId);
+            setIsLoggedIn(true);
+            setConnectedUser(true);
+
+            // Utiliser les données actualisées ou celles des cookies
+            if (savedUserData) {
+              try {
+                const parsedUserData = JSON.parse(savedUserData);
+                setUser({
+                  ...defaultUser,
+                  ...parsedUserData,
+                });
+                console.log(
+                  "Données utilisateur restaurées depuis les cookies"
+                );
+              } catch (error) {
+                console.error(
+                  "Erreur lors du parsing des données utilisateur:",
+                  error
+                );
+              }
+            }
+          } else {
+            console.log("Token expiré ou invalide, déconnexion");
+            // Supprimer les informations périmées
+            logout();
+          }
+        } else {
+          console.log("Aucune donnée d'authentification trouvée");
+        }
+      } catch (error) {
+        console.error(
+          "Erreur lors de la vérification de l'authentification:",
+          error
+        );
+        logout();
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    verifyAuthentication();
+  }, []);
+
+  // Fonction de connexion avec appel API
+  const login = async (credentials) => {
+    try {
+      console.log("Tentative de connexion avec:", credentials);
+      const data = await authAPI.login(credentials);
+
+      // Sauvegarder dans le state
+      setToken(data.token);
+      setUserId(data.userId);
+      setIsLoggedIn(true);
+      setConnectedUser(true);
+
+      // Mettre à jour les données utilisateur
+      const userData = {
+        email: data.email || credentials.email,
+        firstname: data.prenom || "",
+        lastname: data.nom || "",
+      };
+
+      setUser({
+        ...defaultUser,
+        ...userData,
+      });
+
+      // Persister dans les cookies
+      setCookie("token", data.token);
+      setCookie("userId", data.userId);
+      setCookie("userData", JSON.stringify(userData));
+      console.log("Données d'authentification sauvegardées dans les cookies");
+
+      return data;
+    } catch (error) {
+      console.error("Échec de connexion:", error);
+      throw error;
+    }
   };
 
-  const login = (data) => {
-    console.log("Login values:", data);
-    saveSession(data);
-    setConnectedUser(true);
+  // Fonction d'inscription avec appel API
+  const registerUser = async (userData) => {
+    try {
+      console.log("Tentative d'inscription avec:", userData);
+
+      // Adapter le format des données si nécessaire
+      const formattedData = {
+        nom: userData.nom || userData.lastname,
+        prenom: userData.prenom || userData.firstname,
+        email: userData.email,
+        password: userData.password,
+      };
+
+      const data = await authAPI.register(formattedData);
+
+      if (data && data.token && data.user) {
+        // Sauvegarder dans le state
+        setToken(data.token);
+        setUserId(data.user._id);
+        setIsLoggedIn(true);
+        setConnectedUser(true);
+
+        // Préparer les données utilisateur
+        const userInfo = {
+          email: data.user.email,
+          firstname: data.user.prenom,
+          lastname: data.user.nom,
+        };
+
+        // Mettre à jour les données utilisateur
+        setUser({
+          ...defaultUser,
+          ...userInfo,
+        });
+
+        // Persister dans les cookies
+        setCookie("token", data.token);
+        setCookie("userId", data.user._id);
+        setCookie("userData", JSON.stringify(userInfo));
+        console.log(
+          "Données d'authentification sauvegardées dans les cookies après inscription"
+        );
+      }
+
+      return data;
+    } catch (error) {
+      console.error("Échec d'inscription:", error);
+      throw error;
+    }
   };
 
-  const registerUser = (data) => {
-    console.log("Register values:", data);
-    saveSession(data);
-    setConnectedUser(true);
-  };
-
+  // Fonction de déconnexion
   const logout = () => {
+    // Supprimer du state
+    setToken(null);
+    setUserId(null);
     setUser(defaultUser);
+    setIsLoggedIn(false);
     setConnectedUser(false);
-    localStorage.removeItem("session");
-    window.location.href = "/";
+
+    // Supprimer des cookies
+    removeCookie("token");
+    removeCookie("userId");
+    removeCookie("userData");
+    console.log("Données d'authentification supprimées des cookies");
   };
 
   return (
@@ -76,11 +215,12 @@ export default function AuthProvider({ children }) {
         login,
         logout,
         registerUser,
-        login,
         connectedUser,
         isLoggedIn,
-      }}
-    >
+        token,
+        userId,
+        isLoading,
+      }}>
       {children}
     </AuthContext.Provider>
   );

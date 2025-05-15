@@ -22,8 +22,53 @@ import { useTranslation } from "react-i18next"; // Ajout
 export default function Header() {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { menu, setMenu, burger, toggleBurger } = useContext(MenuContext);
-  const { logout, isLoggedIn } = useContext(AuthContext);
+  const { logout, isLoggedIn, isLoading } = useContext(AuthContext);
   const { t } = useTranslation(); // Ajout
+
+  // Fonction pour afficher les boutons d'authentification en fonction de l'état
+  const renderAuthButtons = () => {
+    // Si en cours de chargement, on n'affiche rien
+    if (isLoading) {
+      return <div className='w-[300px] h-[50px]'></div>;
+    }
+
+    // Si connecté, afficher Mon compte et Déconnexion
+    if (isLoggedIn) {
+      return (
+        <>
+          <NavLink
+            to='/profil'
+            className='bg-fuchsia flex justify-center items-center h-[50px] px-2 text-white '>
+            {t("header.monCompte", "Mon compte")}
+          </NavLink>
+          <a
+            onClick={logout}
+            className='text-2xl cursor-pointer hover:text-fuchsia'>
+            <IoIosLogOut />
+            <span className='sr-only'>
+              {t("header.deconnexion", "Déconnexion")}
+            </span>
+          </a>
+        </>
+      );
+    }
+
+    // Sinon afficher Se connecter et S'inscrire
+    return (
+      <>
+        <NavLink
+          to='/connexion'
+          className='bg-fuchsia flex justify-center items-center h-[50px] w-[150px] px-2 text-white '>
+          {t("header.connexion", "Connexion")}
+        </NavLink>
+        <NavLink
+          to='/inscription'
+          className='bg-white text-black flex justify-center items-center dark:bg-black dark:text-white h-[50px] w-[150px] border max-1500:px-8'>
+          {t("header.inscription", "S'inscrire")}
+        </NavLink>
+      </>
+    );
+  };
 
   return (
     <div className='flex items-center justify-between shadow-md p-4  gap-2.5 dark:bg-black dark:text-white dark:shadow-white'>
@@ -96,36 +141,7 @@ export default function Header() {
       </div>
       <div className='flex flex-col gap-4 items-center justify-end max-1100:hidden'>
         <div className='flex items-center gap-5'>
-          {isLoggedIn ? (
-            <>
-              <NavLink
-                to='/profil'
-                className='bg-fuchsia flex justify-center items-center h-[50px] px-2 text-white '>
-                {t("header.monCompte", "Mon compte")}
-              </NavLink>
-              <a
-                onClick={logout}
-                className='text-2xl cursor-pointer hover:text-fuchsia'>
-                <IoIosLogOut />
-                <span className='sr-only'>
-                  {t("header.deconnexion", "Déconnexion")}
-                </span>
-              </a>
-            </>
-          ) : (
-            <>
-              <NavLink
-                to='/connexion'
-                className='bg-fuchsia flex justify-center items-center h-[50px] w-[150px] px-2 text-white '>
-                {t("header.connexion", "Connexion")}
-              </NavLink>
-              <NavLink
-                to='/inscription'
-                className='bg-white text-black flex justify-center items-center dark:bg-black dark:text-white h-[50px] w-[150px] border max-1500:px-8'>
-                {t("header.inscription", "S'inscrire")}
-              </NavLink>
-            </>
-          )}
+          {renderAuthButtons()}
           <LangButton />
         </div>
         <div className='flex gap-[30px] items-center justify-end w-full'>
