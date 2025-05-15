@@ -13,7 +13,7 @@ const getAllSeries = async (req, res) => {
 // Récupérer une série par ID
 const getSerieById = async (req, res) => {
   try {
-    const serie = await Serie.findOne({ id: req.params.id }).populate({
+    const serie = await Serie.findOne({ id: req.params._id }).populate({
       path: "saisons",
       select: "numero annee nbEpisodes",
     });
