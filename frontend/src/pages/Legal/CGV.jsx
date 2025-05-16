@@ -145,7 +145,7 @@ const CGV_CONTENT = {
     },
     {
       titre: "Ley aplicable y jurisdicción competente",
-      contenido: `Estas CGV se rigen por la legislación francesa. En caso de litigio, y tras un intento de resolución amistosa, los tribunales franceses serán competentes.`,
+      contenu: `Estas CGV se rigen por la legislación francesa. En caso de litigio, y tras un intento de resolución amistosa, los tribunales franceses serán competentes.`,
     },
     {
       titre: "Contacto",
@@ -210,7 +210,7 @@ export default function CGV() {
   const sections = CGV_CONTENT[lang] || CGV_CONTENT.fr;
 
   return (
-    <div className='flex flex-col items-center justify-center mt-12 px-56 gap-14 text-black dark:text-white max-1100:px-32 max-md:px-16 max-sm:px-4 mb-10'>
+    <div className='flex flex-col items-center justify-center mt-12 px-56 gap-14 text-black dark:text-white bg-white dark:bg-black max-1100:px-32 max-md:px-16 max-sm:px-4 mb-10'>
       <h2 className='font-bold text-4xl text-center'>
         {sections[0]?.titre || "CGV"}
       </h2>
