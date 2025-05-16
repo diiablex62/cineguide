@@ -28,6 +28,9 @@ const Validation = lazy(() => import("./pages/Auth/Validation"));
 const ResetPassword = lazy(() => import("./pages/Auth/ResetPassword"));
 const ForgottenPassword = lazy(() => import("./pages/Auth/ForgottenPassword"));
 const Profil = lazy(() => import("./pages/Profil/Profil"));
+const ProfilActiviter = lazy(() => import("./pages/Profil/ProfilActiviter"));
+const ProfilListe = lazy(() => import("./pages/Profil/ProfilListe"));
+const ProfileReviews = lazy(() => import("./pages/Profil/ProfileReviews"));
 const Actualites = lazy(() => import("./pages/Actualites/ActualitesPage"));
 const Jeux = lazy(() => import("./pages/Jeux/Jeux"));
 const CGU = lazy(() => import("./pages/Legal/CGU"));
@@ -65,14 +68,20 @@ const AppContent = () => {
             <Route path='/series' element={<Series />} />
             <Route path='/actualites' element={<Actualites />} />
             <Route path='/jeux' element={<Jeux />} />
+
+            {/* Routes du profil protégées avec sous-routes */}
             <Route
               path='/profil'
               element={
                 <UserConnected>
                   <Profil />
                 </UserConnected>
-              }
-            />
+              }>
+              <Route path='mon-activiter' element={<ProfilActiviter />} />
+              <Route path='ma-liste' element={<ProfilListe />} />
+              <Route path='mes-reviews' element={<ProfileReviews />} />
+            </Route>
+
             <Route
               path='/connexion'
               element={

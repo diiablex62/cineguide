@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import UserData from "../../../data/User.json";
+
 export default function ProfilForm() {
   const { user } = useContext(AuthContext);
 
@@ -20,7 +21,7 @@ export default function ProfilForm() {
       .string()
       .required("Le code postal est obligatoire")
       .matches(/^\d{5}$/, "Le code postal doit comporter 5 chiffres"),
-    complement: yup.string().required("Le champ est obligatoire"),
+    complement: yup.string(),
   });
 
   const {
@@ -30,135 +31,160 @@ export default function ProfilForm() {
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onChange",
+    defaultValues: {
+      lastname: UserData.lastname || "",
+      firstname: UserData.firstname || "",
+      email: UserData.email || "",
+      adress: UserData.adress || "",
+      city: UserData.city || "",
+      postalCode: UserData.postalCode || "",
+      complement: UserData.complement || "",
+    },
   });
 
   const onSubmit = (data) => {
-    alert(data.firstname + " " + data.lastname + " " + data.email);
+    console.log("Mise à jour du profil :", data);
+    // Ici, appel API pour mettre à jour le profil
   };
+
   return (
-    <div className="dark:bg-black dark:text-white dark:border-white">
+    <div className='dark:bg-black dark:text-white dark:border-white'>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-col mb-2">
-          <label htmlFor="lastname" className="font-bold mb-2">
-            Nom :
-          </label>
-          <input
-            {...register("lastname")}
-            className="text-black border dark:border-white dark:text-white px-3 py-3"
-            type="text"
-            id="lastname"
-            defaultValue={UserData.lastname}
-          />
-          {errors.lastname && (
-            <p className="text-red-500 dark:text-red-400">
-              {errors.lastname.message}
-            </p>
-          )}
+        {/* Première rangée: Nom et Prénom */}
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mb-6'>
+          <div>
+            <label
+              htmlFor='lastname'
+              className='block text-sm font-medium mb-1'>
+              Nom
+            </label>
+            <input
+              {...register("lastname")}
+              className='w-full border dark:border-gray-700 px-3 py-2 dark:bg-gray-800 dark:text-white rounded'
+              type='text'
+              id='lastname'
+            />
+            {errors.lastname && (
+              <p className='text-red-500 text-xs mt-1'>
+                {errors.lastname.message}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <label
+              htmlFor='firstname'
+              className='block text-sm font-medium mb-1'>
+              Prénom
+            </label>
+            <input
+              {...register("firstname")}
+              className='w-full border dark:border-gray-700 px-3 py-2 dark:bg-gray-800 dark:text-white rounded'
+              type='text'
+              id='firstname'
+            />
+            {errors.firstname && (
+              <p className='text-red-500 text-xs mt-1'>
+                {errors.firstname.message}
+              </p>
+            )}
+          </div>
         </div>
-        <div className="flex flex-col mb-2 mt-3">
-          <label htmlFor="firstname" className="font-bold mb-2">
-            Prenom :
-          </label>
-          <input
-            {...register("firstname")}
-            className="text-black border dark:border-white dark:text-white px-3 py-3"
-            type="text"
-            id="firstname"
-            defaultValue={UserData.firstname}
-          />
-          {errors.firstname && (
-            <p className="text-red-500 dark:text-red-400">
-              {errors.firstname.message}
-            </p>
-          )}
-        </div>
-        <div className="flex flex-col mb-2 mt-3">
-          <label htmlFor="email" className="font-bold mb-2">
-            Email :
+
+        {/* Email (pleine largeur) */}
+        <div className='mb-6'>
+          <label htmlFor='email' className='block text-sm font-medium mb-1'>
+            Email
           </label>
           <input
             {...register("email")}
-            className="text-black border dark:border-white dark:text-white px-3 py-3"
-            type="email"
-            id="email"
-            defaultValue={UserData.email}
+            className='w-full border dark:border-gray-700 px-3 py-2 dark:bg-gray-800 dark:text-white rounded'
+            type='email'
+            id='email'
           />
           {errors.email && (
-            <p className="text-red-500 dark:text-red-400">
-              {errors.email.message}
-            </p>
+            <p className='text-red-500 text-xs mt-1'>{errors.email.message}</p>
           )}
         </div>
-        <div className="flex flex-col mb-2 mt-3">
-          <label htmlFor="adress" className="font-bold mb-2">
-            Adresse :
+
+        {/* Adresse (pleine largeur) */}
+        <div className='mb-6'>
+          <label htmlFor='adress' className='block text-sm font-medium mb-1'>
+            Adresse
           </label>
           <input
             {...register("adress")}
-            className="text-black border dark:border-white dark:text-white px-3 py-3"
-            type="text"
-            id="adress"
-            defaultValue={UserData.adress}
+            className='w-full border dark:border-gray-700 px-3 py-2 dark:bg-gray-800 dark:text-white rounded'
+            type='text'
+            id='adress'
           />
           {errors.adress && (
-            <p className="text-red-500 dark:text-red-400">
-              {errors.adress.message}
-            </p>
+            <p className='text-red-500 text-xs mt-1'>{errors.adress.message}</p>
           )}
         </div>
-        <div className="flex flex-col mb-2 mt-3">
-          <label htmlFor="city" className="font-bold mb-2">
-            Ville :
-          </label>
-          <input
-            {...register("city")}
-            className="text-black border dark:border-white dark:text-white px-3 py-3"
-            type="text"
-            id="city"
-            defaultValue={UserData.city}
-          />
-          {errors.city && (
-            <p className="text-red-500 dark:text-red-400">
-              {errors.city.message}
-            </p>
-          )}
+
+        {/* Ville et Code Postal */}
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mb-6'>
+          <div>
+            <label htmlFor='city' className='block text-sm font-medium mb-1'>
+              Ville
+            </label>
+            <input
+              {...register("city")}
+              className='w-full border dark:border-gray-700 px-3 py-2 dark:bg-gray-800 dark:text-white rounded'
+              type='text'
+              id='city'
+            />
+            {errors.city && (
+              <p className='text-red-500 text-xs mt-1'>{errors.city.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label
+              htmlFor='postalCode'
+              className='block text-sm font-medium mb-1'>
+              Code postal
+            </label>
+            <input
+              {...register("postalCode")}
+              className='w-full border dark:border-gray-700 px-3 py-2 dark:bg-gray-800 dark:text-white rounded'
+              type='text'
+              id='postalCode'
+            />
+            {errors.postalCode && (
+              <p className='text-red-500 text-xs mt-1'>
+                {errors.postalCode.message}
+              </p>
+            )}
+          </div>
         </div>
-        <div className="flex flex-col mb-2 mt-3">
-          <label htmlFor="postalCode" className="font-bold mb-2">
-            Code postal :
-          </label>
-          <input
-            {...register("postalCode")}
-            className="text-black border dark:border-white dark:text-white px-3 py-3"
-            type="text"
-            id="postalCode"
-            defaultValue={UserData.postalCode}
-          />
-          {errors.postalCode && (
-            <p className="text-red-500 dark:text-red-400">
-              {errors.postalCode.message}
-            </p>
-          )}
-        </div>
-        <div className="flex flex-col mb-2 mt-3">
-          <label htmlFor="complement" className="font-bold mb-2">
-            Complement :
+
+        {/* Complément (pleine largeur) */}
+        <div className='mb-8'>
+          <label
+            htmlFor='complement'
+            className='block text-sm font-medium mb-1'>
+            Complément
           </label>
           <input
             {...register("complement")}
-            className="text-black border dark:border-white dark:text-white px-3 py-3"
-            type="text"
-            id="complement"
-            defaultValue={UserData.complement}
+            className='w-full border dark:border-gray-700 px-3 py-2 dark:bg-gray-800 dark:text-white rounded'
+            type='text'
+            id='complement'
           />
           {errors.complement && (
-            <p className="text-red-500 dark:text-red-400">
+            <p className='text-red-500 text-xs mt-1'>
               {errors.complement.message}
             </p>
           )}
         </div>
-        <div className="flex justify-center">
-          <button className="italic bg-fuchsia text-white px-4 py-1 rounded cursor-pointer">
+
+        {/* Bouton de mise à jour */}
+        <div className='flex justify-center'>
+          <button
+            type='submit'
+            className='bg-fuchsia text-white px-6 py-2 hover:bg-opacity-90 transition-colors'>
             Mettre à jour
           </button>
         </div>
