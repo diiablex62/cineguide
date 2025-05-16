@@ -7,19 +7,27 @@ export default function SerieProposer() {
   const { id } = useParams();
   const { detailSerie, serie, loadSerieDetails } = useContext(SerieContext);
   
+  // Ne chargez les détails que si l'ID est différent de celui déjà chargé
   useEffect(() => {
-    if (id && (!detailSerie || String(detailSerie.id) !== String(id))) {
+    if (
+      id && 
+      (!detailSerie || !detailSerie.id || String(detailSerie.id) !== String(id))
+    ) {
       loadSerieDetails(id);
     }
-  }, [id, detailSerie, loadSerieDetails]);
+  }, [id]); // Dépendance uniquement à l'ID
 
-  if (!serie || !detailSerie) {
+  // Affichage de chargement si les données ne sont pas encore disponibles
+  if (!serie || !serie.length || !detailSerie || !detailSerie.id) {
     return <div className="p-4">Chargement des recommandations...</div>;
   }
 
+  // Définition des séries similaires - filtrer par genre
   const similarSeries = serie
     .filter(
       (item) =>
+        item && 
+        detailSerie && 
         String(item.id) !== String(detailSerie.id) &&
         item.genre &&
         detailSerie.genre &&
@@ -27,14 +35,18 @@ export default function SerieProposer() {
     )
     .slice(0, 6);
 
+  // Définition des séries populaires - tri par note
   const popularSeries = [...serie]
-    .filter((item) => String(item.id) !== String(detailSerie.id))
+    .filter((item) => item && detailSerie && String(item.id) !== String(detailSerie.id))
     .sort((a, b) => (b.note || 0) - (a.note || 0))
     .slice(0, 6);
 
+  // Définition des séries dramatiques
   const dramaSeries = serie
     .filter(
       (item) =>
+        item && 
+        detailSerie && 
         String(item.id) !== String(detailSerie.id) && 
         item.genre && 
         item.genre.includes("Drame")

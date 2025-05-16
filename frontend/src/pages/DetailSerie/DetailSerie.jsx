@@ -10,16 +10,19 @@ export default function DetailSerie() {
   const { loadSerieDetails, detailSerie } = useContext(SerieContext);
   const { setDetailActor, allActors } = useContext(ActorContext);
 
+  // Premier useEffect pour charger les détails de la série
   useEffect(() => {
     if (id) {
       loadSerieDetails(id);
     }
-
+    
+    // Nettoyer l'état lors du démontage du composant
     return () => {
-      // Réinitialiser les détails si nécessaire lors du démontage
+      // Si vous avez une fonction pour réinitialiser les détails, appelez-la ici
     };
-  }, [id, loadSerieDetails]);
+  }, [id]); // Dépendance uniquement à l'ID, pas à loadSerieDetails
 
+  // Deuxième useEffect pour gérer les acteurs après que les détails de la série sont chargés
   useEffect(() => {
     if (
       detailSerie &&
@@ -45,7 +48,7 @@ export default function DetailSerie() {
         setDetailActor(oneActor);
       }
     }
-  }, [detailSerie, allActors, setDetailActor]);
+  }, [detailSerie?.id, allActors]); // Dépendance à l'ID de la série, pas à l'objet entier
 
   return (
     <div className="bg-white dark:bg-black text-gray-900 dark:text-white font-poppins">
