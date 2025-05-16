@@ -102,66 +102,37 @@ export default function Inscription() {
       console.log("Tentative d'inscription avec:", data.email);
       const result = await registerUser(data);
 
-      // Si l'inscription nécessite une validation par email
-      if (result && result.message && result.email) {
-        // Le toast est géré par le composant PendingAccountNotification
-        // qui affiche la notification de compte en attente de validation
-        console.log(
-          "Compte en attente de validation, redirection vers la page temporaire de validation"
-        );
+      // Supprimer tous les toasts existants pour éviter les conflits
+      toast.remove();
 
-        // Afficher un toast personnalisé pour la validation par email
-        toast.custom(
-          () => (
-            <div className='bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden flex'>
-              <div className='w-1.5 bg-yellow-400'></div>
-              <div className='flex-1 p-4'>
-                <div className='flex'>
-                  <div className='flex-1'>
-                    <p className='font-bold text-gray-900 dark:text-white'>
-                      Inscription réussie!
-                    </p>
-                    <p className='text-sm text-gray-600 dark:text-gray-300 mt-1'>
-                      Veuillez consulter votre email pour valider votre compte.
-                    </p>
-                    <div className='mt-4 flex space-x-2'>
-                      <button
-                        onClick={() => {
-                          toast.dismiss();
-                          navigate("/validation");
-                        }}
-                        className='px-3 py-1.5 text-white text-xs font-medium rounded-md bg-[#E71CA5] hover:opacity-90'>
-                        Renvoyer l'email
-                      </button>
-                      <button
-                        onClick={() => toast.dismiss()}
-                        className='px-3 py-1.5 text-gray-700 dark:text-gray-200 text-xs font-medium rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>
-                        Fermer
-                      </button>
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => toast.dismiss()}
-                    className='ml-4 text-gray-400 hover:text-gray-600 transition-colors'>
-                    ×
-                  </button>
+      // Pour toute inscription, qu'elle nécessite ou non une validation par email
+      console.log("Résultat de l'inscription:", result);
+
+      // Afficher un toast de succès avant la redirection
+      toast.custom(
+        () => (
+          <div className='bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden flex'>
+            <div className='w-1.5 bg-yellow-400'></div>
+            <div className='flex-1 p-4'>
+              <div className='flex'>
+                <div className='flex-1'>
+                  <p className='font-bold text-gray-900 dark:text-white'>
+                    Inscription réussie!
+                  </p>
+                  <p className='text-sm text-gray-600 dark:text-gray-300 mt-1'>
+                    Veuillez consulter votre email pour valider votre compte.
+                  </p>
                 </div>
               </div>
             </div>
-          ),
-          { duration: 8000, id: "pending-validation-toast" }
-        );
+          </div>
+        ),
+        { duration: 5000, id: `inscription-success-${Date.now()}` }
+      );
 
-        // Rediriger vers la page temporaire de validation au lieu de connexion
-        navigate("/validation");
-      } else {
-        // Si l'inscription est directe (sans validation par email)
-        // Rediriger vers la page de connexion sans afficher de toast
-        console.log(
-          "Inscription réussie, redirection vers la page de connexion"
-        );
-        navigate("/connexion");
-      }
+      // Redirection systématique vers la page de validation après inscription
+      console.log("Redirection vers la page de validation");
+      navigate("/validation");
     } catch (error) {
       console.error("Erreur lors de l'inscription:", error);
 

@@ -1,0 +1,453 @@
+import React, { useContext, useEffect, useState, useRef } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import logo from "../../assets/logo.png";
+import logoWhite from "../../assets/logo_blanc.png";
+import toast, { Toaster } from "react-hot-toast";
+import {
+  FiMail,
+  FiCheckCircle,
+  FiAlertTriangle,
+  FiClock,
+} from "react-icons/fi";
+
+export default function Validation() {
+  const {
+    validateAccount,
+    clearError,
+    clearNotification,
+    resendValidationEmail,
+    pendingAccount,
+    isLoggedIn,
+  } = useContext(AuthContext);
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get("token");
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [validated, setValidated] = useState(false);
+  const [resending, setResending] = useState(false);
+  const [localError, setLocalError] = useState(null);
+  const [validationAttempted, setValidationAttempted] = useState(false);
+  const [validationData, setValidationData] = useState(null);
+  const validationSuccessful = useRef(false);
+  const isInitialLoad = useRef(true);
+  const successToastShown = useRef(false);
+  const [emailInput, setEmailInput] = useState(pendingAccount || "");
+
+  // Effet pour supprimer TOUS les toasts au chargement initial de la page
+  useEffect(() => {
+    console.log("Nettoyage initial de tous les toasts");
+    // Vider absolument tous les toasts
+    toast.remove();
+    toast.dismiss();
+
+    // Log pour vérifier si un compte est en attente de validation
+    console.log("Compte en attente de validation:", pendingAccount);
+    console.log("Chargement initial de la page de validation, token:", token);
+
+    // Si nous avons un pendingAccount, le mettre dans l'input
+    if (pendingAccount) {
+      setEmailInput(pendingAccount);
+    }
+
+    // Ne pas afficher de toast de succès si c'est le premier chargement sans token
+    // (c'est-à-dire, après inscription et avant validation)
+    if (isInitialLoad.current && !token) {
+      console.log(
+        "Chargement initial sans token - affichage simple de la page de validation"
+      );
+    }
+
+    // Marquer la première exécution comme terminée
+    isInitialLoad.current = false;
+
+    return () => {
+      setLocalError(null);
+    };
+  }, [pendingAccount, token]);
+
+  // Effet pour gérer la validation et les toasts
+  useEffect(() => {
+    if (!token) return;
+
+    // Éviter les appels multiples
+    if (validationAttempted) {
+      console.log("Validation déjà tentée, pas de nouvelle tentative");
+      return;
+    }
+
+    const validateUserAccount = async () => {
+      console.log("Tentative de validation avec token:", token);
+      setLoading(true);
+      setValidationAttempted(true);
+      clearError();
+      clearNotification();
+
+      // Supprimer TOUS les toasts existants avant la validation
+      toast.remove();
+      toast.dismiss();
+
+      try {
+        // Appel API de validation
+        const result = await validateAccount(token);
+        console.log("Validation réussie:", result);
+
+        // Marquer la validation comme réussie pour éviter l'affichage d'erreurs
+        validationSuccessful.current = true;
+
+        // Sauvegarder les données pour une connexion manuelle si nécessaire
+        if (result && result.user && result.user.email) {
+          setValidationData({
+            email: result.user.email,
+            userId: result.user._id,
+            token: result.token,
+          });
+        }
+
+        setValidated(true);
+
+        // Supprimer TOUS les toasts potentiellement affichés précédemment
+        toast.remove();
+        toast.dismiss();
+
+        // Attendre 100ms pour s'assurer que tous les toasts sont supprimés
+        setTimeout(() => {
+          // Afficher le toast de succès uniquement si ce n'est pas déjà fait
+          if (!successToastShown.current) {
+            console.log("Affichage du toast de succès de validation");
+            toast.success("Validation effectuée ! Veuillez vous connecter.", {
+              id: "validation-success-toast",
+              duration: 5000,
+              style: {
+                borderLeft: "4px solid #22c55e",
+                padding: "12px",
+              },
+            });
+            successToastShown.current = true;
+          }
+        }, 100);
+
+        // TOUJOURS rediriger vers la page de connexion après validation
+        console.log(
+          "Redirection vers la page de connexion après validation..."
+        );
+        setTimeout(() => {
+          navigate("/connexion");
+        }, 3000);
+      } catch (err) {
+        console.error("Erreur lors de la validation:", err);
+
+        // Ne pas afficher d'erreur si la validation a été marquée comme réussie
+        if (!validationSuccessful.current) {
+          setLocalError(
+            err.message || "Token de validation invalide ou expiré"
+          );
+
+          // Afficher le toast d'erreur uniquement si l'utilisateur n'est pas connecté
+          // et si la validation n'a pas été réussie
+          if (!isLoggedIn && !validationSuccessful.current) {
+            setTimeout(() => {
+              toast.error(
+                err.message || "Token de validation invalide ou expiré",
+                {
+                  id: "validation-error-toast",
+                  duration: 5000,
+                  style: {
+                    borderLeft: "4px solid #ef4444",
+                    padding: "12px",
+                  },
+                }
+              );
+            }, 100);
+          }
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    validateUserAccount();
+  }, [
+    token,
+    validateAccount,
+    navigate,
+    clearError,
+    clearNotification,
+    validationAttempted,
+    isLoggedIn,
+  ]);
+
+  // Effet simplifié pour rediriger toujours vers la connexion après validation
+  useEffect(() => {
+    if (validated && validationData) {
+      console.log("Compte validé, redirection vers la page de connexion");
+
+      // Supprimer tous les toasts d'erreur précédents
+      toast.remove();
+      toast.dismiss();
+
+      // Rediriger vers la page de connexion après un court délai
+      // Sans afficher un deuxième toast de succès
+      const timer = setTimeout(() => {
+        navigate("/connexion");
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [validated, validationData, navigate]);
+
+  const handleResendEmail = async () => {
+    if (!emailInput.trim()) {
+      toast.error("Veuillez entrer votre adresse email", {
+        id: "no-input-email-toast",
+        duration: 5000,
+        style: {
+          borderLeft: "4px solid #ef4444",
+          padding: "12px",
+        },
+      });
+      return;
+    }
+
+    setResending(true);
+    try {
+      const emailToUse =
+        emailInput || pendingAccount || searchParams.get("email");
+      if (!emailToUse) {
+        toast.error("Aucune adresse email fournie pour le renvoi", {
+          id: "no-email-toast",
+          duration: 5000,
+          style: {
+            borderLeft: "4px solid #ef4444",
+            padding: "12px",
+          },
+        });
+        return;
+      }
+
+      await resendValidationEmail(emailToUse);
+
+      toast.success(
+        `Un nouvel email de validation a été envoyé à ${emailToUse}`,
+        {
+          id: "email-sent-toast",
+          duration: 5000,
+          style: {
+            borderLeft: "4px solid #22c55e",
+            padding: "12px",
+          },
+        }
+      );
+    } catch (err) {
+      console.error("Erreur lors du renvoi de l'email:", err);
+      toast.error(err.message || "Erreur lors du renvoi de l'email", {
+        id: "email-error-toast",
+        duration: 5000,
+        style: {
+          borderLeft: "4px solid #ef4444",
+          padding: "12px",
+        },
+      });
+    } finally {
+      setResending(false);
+    }
+  };
+
+  return (
+    <div className='flex min-h-screen items-center justify-center bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-900 dark:to-black p-4'>
+      <Toaster position='top-center' toastOptions={{ duration: 5000 }} />
+      <div className='w-full max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8 text-center transform transition-all duration-300 hover:shadow-2xl'>
+        <div className='mb-6 flex flex-col items-center'>
+          <img
+            src={logo}
+            alt='CineGuide'
+            className='h-16 mx-auto dark:hidden'
+          />
+          <img
+            src={logoWhite}
+            alt='CineGuide'
+            className='h-16 mx-auto hidden dark:block'
+          />
+          <Link
+            to='/'
+            className='text-sm text-gray-500 dark:text-gray-400 hover:underline block text-center mt-4 transition-colors duration-200 hover:text-[var(--color-fuchsia)]'>
+            &lt; Retour vers la page d'accueil
+          </Link>
+        </div>
+        <h2 className='text-2xl font-bold text-gray-900 dark:text-white mb-6 relative'>
+          Validation de votre compte
+          <span className='absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-[var(--color-fuchsia)] rounded-full'></span>
+        </h2>
+
+        {loading ? (
+          <div className='text-center py-6 animate-pulse'>
+            <div className='inline-block animate-spin rounded-full h-10 w-10 border-b-2 border-[var(--color-fuchsia)]'></div>
+            <p className='mt-4 text-gray-600 dark:text-gray-300 font-medium'>
+              Vérification du token de validation...
+            </p>
+            <p className='text-sm text-gray-500 dark:text-gray-400 mt-2'>
+              Cela ne prendra qu'un instant
+            </p>
+          </div>
+        ) : validated || validationSuccessful.current ? (
+          <div className='bg-green-50 dark:bg-green-900/30 border-l-4 border-green-500 p-6 mb-6 text-left rounded-lg transform transition-all duration-300 ease-in-out'>
+            <div className='flex items-start'>
+              <div className='flex-shrink-0'>
+                <FiCheckCircle className='h-6 w-6 text-green-500 dark:text-green-400' />
+              </div>
+              <div className='ml-3'>
+                <h3 className='font-bold text-green-700 dark:text-green-300 text-lg'>
+                  Compte validé avec succès !
+                </h3>
+                <p className='text-sm text-green-600 dark:text-green-400 mt-2'>
+                  Redirection vers la page de connexion en cours...
+                </p>
+                <div className='mt-4 flex justify-center'>
+                  <Link
+                    to='/connexion'
+                    className='inline-flex items-center px-5 py-2.5 bg-[var(--color-fuchsia)] text-white text-sm font-medium rounded-md hover:bg-[var(--color-fuchsia-hover)] transition-colors duration-200 shadow-md hover:shadow-lg'>
+                    Aller à la page de connexion
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : localError && !validationSuccessful.current ? (
+          <div className='bg-red-50 dark:bg-red-900/30 border-l-4 border-red-500 p-6 mb-6 text-left rounded-lg'>
+            <div className='flex items-start'>
+              <div className='flex-shrink-0'>
+                <FiAlertTriangle className='h-6 w-6 text-red-500 dark:text-red-400' />
+              </div>
+              <div className='ml-3'>
+                <h3 className='font-bold text-red-700 dark:text-red-300 text-lg'>
+                  Token de validation invalide ou expiré
+                </h3>
+                <p className='text-sm text-red-600 dark:text-red-400 mt-2'>
+                  Le lien que vous avez utilisé n'est plus valide. Veuillez
+                  demander un nouvel email de validation.
+                </p>
+                <div className='mt-6 flex flex-col gap-3'>
+                  <div className='relative'>
+                    <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+                      <FiMail className='h-5 w-5 text-gray-400' />
+                    </div>
+                    <input
+                      type='email'
+                      value={emailInput}
+                      onChange={(e) => setEmailInput(e.target.value)}
+                      placeholder='Entrez votre adresse email'
+                      className='pl-10 w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-[var(--color-fuchsia)] focus:border-[var(--color-fuchsia)] bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
+                    />
+                  </div>
+                  <button
+                    onClick={handleResendEmail}
+                    disabled={resending}
+                    className='w-full p-3 bg-[var(--color-fuchsia)] text-white font-medium rounded-md hover:bg-[var(--color-fuchsia-hover)] disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 shadow-md flex items-center justify-center'>
+                    {resending ? (
+                      <>
+                        <div className='animate-spin mr-2 h-4 w-4 border-t-2 border-white rounded-full'></div>
+                        Envoi en cours...
+                      </>
+                    ) : (
+                      <>
+                        <FiMail className='mr-2' />
+                        Renvoyer l'email de validation
+                      </>
+                    )}
+                  </button>
+                  <Link
+                    to='/connexion'
+                    className='w-full p-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 text-center transition-colors duration-200'>
+                    Retour à la connexion
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : !token ? (
+          <div className='p-6 bg-gray-50 dark:bg-gray-700/30 rounded-lg border border-gray-200 dark:border-gray-700'>
+            <div className='flex flex-col items-center mb-6'>
+              <div className='bg-[var(--color-fuchsia)]/10 p-4 rounded-full mb-4'>
+                <FiMail className='h-10 w-10 text-[var(--color-fuchsia)]' />
+              </div>
+              <h3 className='text-lg font-semibold text-gray-900 dark:text-white'>
+                Validation en attente
+              </h3>
+              <p className='text-gray-600 dark:text-gray-300 mt-3 text-center max-w-sm'>
+                Pour valider votre compte, veuillez entrer l'adresse email
+                utilisée lors de votre inscription.
+              </p>
+            </div>
+
+            <div className='space-y-4'>
+              <div className='relative'>
+                <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+                  <FiMail className='h-5 w-5 text-gray-400' />
+                </div>
+                <input
+                  type='email'
+                  value={emailInput}
+                  onChange={(e) => setEmailInput(e.target.value)}
+                  placeholder='Entrez votre adresse email'
+                  className='pl-10 w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-[var(--color-fuchsia)] focus:border-[var(--color-fuchsia)] bg-white dark:bg-gray-700 text-gray-900 dark:text-white'
+                />
+              </div>
+
+              <button
+                onClick={handleResendEmail}
+                disabled={resending}
+                className='w-full p-3 bg-[var(--color-fuchsia)] text-white font-medium rounded-md hover:bg-[var(--color-fuchsia-hover)] disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 shadow-md flex items-center justify-center'>
+                {resending ? (
+                  <>
+                    <div className='animate-spin mr-2 h-4 w-4 border-t-2 border-white rounded-full'></div>
+                    Envoi en cours...
+                  </>
+                ) : (
+                  <>
+                    <FiMail className='mr-2' />
+                    {pendingAccount
+                      ? `Renvoyer l'email de validation pour ${pendingAccount}`
+                      : "Renvoyer l'email de validation"}
+                  </>
+                )}
+              </button>
+
+              <Link
+                to='/connexion'
+                className='w-full p-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 text-center flex items-center justify-center transition-colors duration-200'>
+                Retour à la connexion
+              </Link>
+            </div>
+
+            <div className='mt-6 border-t border-gray-200 dark:border-gray-700 pt-4'>
+              <div className='flex items-center text-gray-500 dark:text-gray-400 text-sm'>
+                <FiClock className='mr-2' />
+                <span>
+                  Le lien de validation est valable pendant 60 minutes
+                </span>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className='text-gray-600 dark:text-gray-300 mb-6 animate-pulse'>
+            <div className='flex flex-col items-center'>
+              <div className='inline-block animate-spin rounded-full h-10 w-10 border-b-2 border-[var(--color-fuchsia)]'></div>
+              <p className='mt-4 font-medium'>
+                Vérification du token de validation...
+              </p>
+            </div>
+          </div>
+        )}
+
+        <p className='text-sm text-gray-500 dark:text-gray-400 mt-8'>
+          Besoin d'aide ?{" "}
+          <Link
+            to='/faq'
+            className='text-[var(--color-fuchsia)] hover:underline'>
+            Consultez notre FAQ
+          </Link>
+        </p>
+      </div>
+    </div>
+  );
+}

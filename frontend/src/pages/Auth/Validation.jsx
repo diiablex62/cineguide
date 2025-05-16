@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import logo from "../../assets/logo.png";
@@ -8,11 +8,11 @@ import toast, { Toaster } from "react-hot-toast";
 export default function Validation() {
   const {
     validateAccount,
-    notification,
     clearError,
     clearNotification,
     resendValidationEmail,
     pendingAccount,
+    isLoggedIn,
   } = useContext(AuthContext);
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
@@ -20,112 +20,93 @@ export default function Validation() {
   const [loading, setLoading] = useState(false);
   const [validated, setValidated] = useState(false);
   const [resending, setResending] = useState(false);
-  const [errorShown, setErrorShown] = useState(false);
   const [localError, setLocalError] = useState(null);
+  const [validationAttempted, setValidationAttempted] = useState(false);
+  const [validationData, setValidationData] = useState(null);
+  const validationSuccessful = useRef(false);
+  const isInitialLoad = useRef(true);
+  const successToastShown = useRef(false);
 
+  // Effet pour nettoyer les toasts
   useEffect(() => {
-    // Nettoyer l'effet lors du démontage du composant
+    console.log("Nettoyage initial de tous les toasts");
+    toast.remove();
+    console.log("Compte en attente de validation:", pendingAccount);
+    console.log("Chargement initial avec token:", token);
+
+    isInitialLoad.current = false;
+
     return () => {
-      setErrorShown(false);
       setLocalError(null);
     };
-  }, []);
+  }, [pendingAccount, token]);
 
+  // Effet pour gérer la validation
   useEffect(() => {
     if (!token) return;
 
-    // Vérifier si une erreur a déjà été affichée pour ce token
-    // Cette condition empêche les appels récursifs
-    if (errorShown) {
-      console.log(
-        "Validation déjà tentée et échouée, pas de nouvelle tentative"
-      );
+    if (validationAttempted) {
+      console.log("Validation déjà tentée");
       return;
     }
 
     const validateUserAccount = async () => {
       console.log("Tentative de validation avec token:", token);
       setLoading(true);
+      setValidationAttempted(true);
       clearError();
       clearNotification();
-
-      // Effacer tous les toasts existants pour éviter la confusion
-      toast.dismiss();
+      toast.remove();
 
       try {
-        await validateAccount(token);
+        const result = await validateAccount(token);
+        console.log("Validation réussie:", result);
+        validationSuccessful.current = true;
+
+        if (result && result.user && result.user.email) {
+          setValidationData({
+            email: result.user.email,
+            userId: result.user._id,
+            token: result.token,
+          });
+        }
+
         setValidated(true);
+        toast.remove();
 
-        toast.custom(
-          () => (
-            <div className='bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden flex'>
-              <div className='w-1.5 bg-yellow-400'></div>
-              <div className='flex-1 p-4'>
-                <div className='flex'>
-                  <div className='flex-1'>
-                    <p className='font-bold text-gray-900 dark:text-white'>
-                      Validation réussie
-                    </p>
-                    <p className='text-sm text-gray-600 dark:text-gray-300 mt-1'>
-                      Votre compte a été validé avec succès ! Redirection en
-                      cours...
-                    </p>
-                  </div>
+        setTimeout(() => {
+          if (!successToastShown.current) {
+            toast.success("Validation effectuée ! Veuillez vous connecter.", {
+              id: "validation-success-toast",
+              duration: 5000,
+            });
+            successToastShown.current = true;
+          }
+        }, 100);
 
-                  <button
-                    onClick={() => toast.dismiss()}
-                    className='ml-4 text-gray-400 hover:text-gray-600 transition-colors'>
-                    ×
-                  </button>
-                </div>
-              </div>
-            </div>
-          ),
-          { duration: 3000, id: "validation-success-toast" }
-        );
-
-        // Rediriger vers la page de connexion après validation réussie
         setTimeout(() => {
           navigate("/connexion");
         }, 3000);
       } catch (err) {
-        console.error("Erreur de validation:", err);
-        // Marquer comme erreur traitée pour éviter les appels récursifs
-        setErrorShown(true);
-        setLocalError(err.message || "Token de validation invalide ou expiré");
+        console.error("Erreur lors de la validation:", err);
 
-        toast.custom(
-          () => (
-            <div className='bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden flex'>
-              <div className='w-1.5 bg-red-500'></div>
-              <div className='flex-1 p-4'>
-                <div className='flex'>
-                  <div className='flex-1'>
-                    <p className='font-bold text-gray-900 dark:text-white'>
-                      Erreur de validation
-                    </p>
-                    <p className='text-sm text-gray-600 dark:text-gray-300 mt-1'>
-                      {err.message || "Token de validation invalide ou expiré"}
-                    </p>
-                    {pendingAccount && (
-                      <button
-                        onClick={() => handleResendEmail()}
-                        className='mt-4 px-3 py-1.5 text-white text-xs font-medium rounded-md bg-[#E71CA5] hover:opacity-90'>
-                        Renvoyer l'email de validation
-                      </button>
-                    )}
-                  </div>
-                  <button
-                    onClick={() => toast.dismiss()}
-                    className='ml-4 text-gray-400 hover:text-gray-600 transition-colors'>
-                    ×
-                  </button>
-                </div>
-              </div>
-            </div>
-          ),
-          { duration: 8000, id: "validation-error-toast" }
-        );
+        if (!validationSuccessful.current) {
+          setLocalError(
+            err.message || "Token de validation invalide ou expiré"
+          );
+
+          if (!isLoggedIn && !validationSuccessful.current) {
+            setTimeout(() => {
+              toast.error(
+                err.message || "Token de validation invalide ou expiré",
+                {
+                  id: "validation-error-toast",
+                  duration: 5000,
+                }
+              );
+            }, 100);
+          }
+        }
       } finally {
         setLoading(false);
       }
@@ -138,104 +119,39 @@ export default function Validation() {
     navigate,
     clearError,
     clearNotification,
-    errorShown,
-    pendingAccount,
+    validationAttempted,
+    isLoggedIn,
   ]);
 
+  // Redirection après validation
+  useEffect(() => {
+    if (validated && validationData) {
+      console.log("Compte validé, redirection vers connexion");
+      toast.remove();
+
+      const timer = setTimeout(() => {
+        navigate("/connexion");
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [validated, validationData, navigate]);
+
   const handleResendEmail = async () => {
+    if (!pendingAccount) {
+      toast.error("Aucune adresse email associée à votre compte");
+      return;
+    }
+
     setResending(true);
     try {
-      const emailToUse = pendingAccount || searchParams.get("email");
-      if (!emailToUse) {
-        toast.custom(
-          () => (
-            <div className='bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden flex'>
-              <div className='w-1.5 bg-red-500'></div>
-              <div className='flex-1 p-4'>
-                <div className='flex'>
-                  <div className='flex-1'>
-                    <p className='font-bold text-gray-900 dark:text-white'>
-                      Erreur
-                    </p>
-                    <p className='text-sm text-gray-600 dark:text-gray-300 mt-1'>
-                      Aucune adresse email fournie pour le renvoi
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => toast.dismiss()}
-                    className='ml-4 text-gray-400 hover:text-gray-600 transition-colors'>
-                    ×
-                  </button>
-                </div>
-              </div>
-            </div>
-          ),
-          { duration: 5000, id: "no-email-toast" }
-        );
-        return;
-      }
-
-      await resendValidationEmail(emailToUse);
-
-      toast.custom(
-        () => (
-          <div className='bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden flex'>
-            <div className='w-1.5 bg-yellow-400'></div>
-            <div className='flex-1 p-4'>
-              <div className='flex'>
-                <div className='flex-1'>
-                  <p className='font-bold text-gray-900 dark:text-white'>
-                    Email envoyé
-                  </p>
-                  <p className='text-sm text-gray-600 dark:text-gray-300 mt-1'>
-                    Un nouvel email de validation a été envoyé à votre adresse{" "}
-                    {emailToUse}
-                  </p>
-                  <button
-                    onClick={() => toast.dismiss()}
-                    className='mt-4 px-3 py-1.5 text-gray-700 dark:text-gray-200 text-xs font-medium rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>
-                    Fermer
-                  </button>
-                </div>
-
-                <button
-                  onClick={() => toast.dismiss()}
-                  className='ml-4 text-gray-400 hover:text-gray-600 transition-colors'>
-                  ×
-                </button>
-              </div>
-            </div>
-          </div>
-        ),
-        { duration: 8000, id: "email-sent-toast" }
+      await resendValidationEmail(pendingAccount);
+      toast.success(
+        `Un nouvel email de validation a été envoyé à ${pendingAccount}`
       );
     } catch (err) {
       console.error("Erreur lors du renvoi de l'email:", err);
-      toast.custom(
-        () => (
-          <div className='bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden flex'>
-            <div className='w-1.5 bg-red-500'></div>
-            <div className='flex-1 p-4'>
-              <div className='flex'>
-                <div className='flex-1'>
-                  <p className='font-bold text-gray-900 dark:text-white'>
-                    Erreur
-                  </p>
-                  <p className='text-sm text-gray-600 dark:text-gray-300 mt-1'>
-                    {err.message || "Erreur lors du renvoi de l'email"}
-                  </p>
-                </div>
-                <button
-                  onClick={() => toast.dismiss()}
-                  className='ml-4 text-gray-400 hover:text-gray-600 transition-colors'>
-                  ×
-                </button>
-              </div>
-            </div>
-          </div>
-        ),
-        { duration: 5000, id: "email-error-toast" }
-      );
+      toast.error(err.message || "Erreur lors du renvoi de l'email");
     } finally {
       setResending(false);
     }
@@ -249,88 +165,109 @@ export default function Validation() {
           <img
             src={logo}
             alt='CineGuide'
-            className='h-12 max-w-full object-contain dark:hidden'
+            className='h-12 mx-auto dark:hidden'
           />
           <img
             src={logoWhite}
             alt='CineGuide'
-            className='h-12 max-w-full object-contain hidden dark:block'
+            className='h-12 mx-auto hidden dark:block'
           />
         </div>
-
-        <h2 className='text-2xl font-bold text-gray-800 dark:text-white mb-6'>
+        <h2 className='text-2xl font-bold text-gray-900 dark:text-white mb-6'>
           Validation de votre compte
         </h2>
 
-        {loading && (
-          <div className='flex flex-col items-center mb-6'>
-            <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-fuchsia-500'></div>
-            <p className='text-gray-600 dark:text-gray-300 mt-4'>
-              Validation de votre compte en cours...
+        {loading ? (
+          <div className='text-center py-4'>
+            <div className='inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--color-fuchsia)]'></div>
+            <p className='mt-2 text-gray-600 dark:text-gray-300'>
+              Vérification du token de validation...
             </p>
           </div>
-        )}
-
-        {localError && !loading && (
-          <div className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6'>
-            <p>{localError}</p>
-            <div className='mt-4 flex flex-col gap-2'>
+        ) : validated || validationSuccessful.current ? (
+          <div className='bg-green-50 dark:bg-green-900 border-l-4 border-green-500 p-4 mb-4 text-left'>
+            <p className='font-medium text-green-700 dark:text-green-300'>
+              Compte validé avec succès !
+            </p>
+            <p className='text-sm text-green-600 dark:text-green-400 mt-1'>
+              Redirection vers la page de connexion en cours...
+            </p>
+            <div className='mt-4 text-center'>
+              <Link
+                to='/connexion'
+                className='inline-block px-4 py-2 bg-[var(--color-fuchsia)] text-white rounded-md hover:bg-[var(--color-fuchsia-hover)] transition-colors'>
+                Aller à la page de connexion
+              </Link>
+            </div>
+          </div>
+        ) : localError && !validationSuccessful.current ? (
+          <div className='bg-red-50 dark:bg-red-900 border-l-4 border-red-500 p-4 mb-4 text-left'>
+            <p className='font-medium text-red-700 dark:text-red-300'>
+              Token de validation invalide ou expiré
+            </p>
+            <div className='mt-6 flex flex-col gap-3'>
               <button
                 onClick={handleResendEmail}
-                disabled={resending || !pendingAccount}
-                className='w-full p-2 bg-fuchsia-600 text-white rounded hover:bg-fuchsia-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors'>
+                disabled={resending}
+                className='w-full p-3 bg-[var(--color-fuchsia)] text-white font-medium rounded-md hover:bg-[var(--color-fuchsia-hover)] disabled:opacity-50 disabled:cursor-not-allowed'>
                 {resending
                   ? "Envoi en cours..."
                   : "Renvoyer l'email de validation"}
               </button>
               <Link
-                to='/inscription'
-                className='text-fuchsia-600 dark:text-fuchsia-400 hover:underline'>
-                Retour à l'inscription
+                to='/connexion'
+                className='w-full p-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 text-center'>
+                Retour à la connexion
               </Link>
             </div>
           </div>
-        )}
+        ) : !token ? (
+          <div>
+            <div className='bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-500 p-4 mb-6 text-left'>
+              <p className='font-medium text-blue-700 dark:text-blue-300'>
+                Merci de vous être inscrit !
+              </p>
+              <p className='text-sm text-blue-600 dark:text-blue-400 mt-2'>
+                Vous allez recevoir un email de confirmation pour valider votre
+                compte. Veuillez vérifier votre boîte de réception et vos spams.
+              </p>
+              <p className='text-sm text-blue-600 dark:text-blue-400 mt-2'>
+                {pendingAccount && (
+                  <span>
+                    Email associé à votre compte :{" "}
+                    <strong>{pendingAccount}</strong>
+                  </span>
+                )}
+              </p>
+            </div>
 
-        {notification && !loading && !localError && (
-          <div className='bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6'>
-            <p>{notification}</p>
-            <p className='mt-2 text-sm'>
-              {validated ? "Redirection automatique dans 3 secondes..." : ""}
-            </p>
-          </div>
-        )}
-
-        {!token && !loading && !localError && (
-          <div className='bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded mb-6'>
-            <p>Aucun token de validation n'a été fourni.</p>
-            <p className='mt-2'>
-              Si vous avez reçu un email de validation, veuillez cliquer sur le
-              lien contenu dans celui-ci.
-            </p>
-            <div className='mt-4 flex flex-col gap-2'>
+            <div className='mt-6 flex flex-col gap-3'>
               <button
                 onClick={handleResendEmail}
-                disabled={resending || !pendingAccount}
-                className='w-full p-2 bg-fuchsia-600 text-white rounded hover:bg-fuchsia-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors'>
+                disabled={resending}
+                className='w-full p-3 bg-[var(--color-fuchsia)] text-white font-medium rounded-md hover:bg-[var(--color-fuchsia-hover)] disabled:opacity-50 disabled:cursor-not-allowed'>
                 {resending
                   ? "Envoi en cours..."
+                  : pendingAccount
+                  ? `Renvoyer l'email de validation`
                   : "Renvoyer l'email de validation"}
               </button>
-              <div className='flex justify-center gap-4 mt-2'>
-                <Link
-                  to='/connexion'
-                  className='text-fuchsia-600 dark:text-fuchsia-400 hover:underline'>
-                  Se connecter
-                </Link>
-                <span className='text-gray-500'>|</span>
-                <Link
-                  to='/inscription'
-                  className='text-fuchsia-600 dark:text-fuchsia-400 hover:underline'>
-                  S'inscrire
-                </Link>
-              </div>
+              <Link
+                to='/connexion'
+                className='w-full p-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 text-center'>
+                Retour à la connexion
+              </Link>
             </div>
+
+            <div className='mt-5 pt-4 border-t border-gray-200 dark:border-gray-700'>
+              <p className='text-sm text-gray-500 dark:text-gray-400'>
+                Le lien de validation est valable pendant 60 minutes
+              </p>
+            </div>
+          </div>
+        ) : (
+          <div className='text-gray-600 dark:text-gray-300 mb-6'>
+            <p>Vérification du token de validation...</p>
           </div>
         )}
       </div>

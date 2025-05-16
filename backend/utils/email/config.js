@@ -44,26 +44,119 @@ const sendValidationEmail = async (email, nom, token) => {
   console.log("URL du client:", process.env.CLIENT_URL);
 
   const validationUrl = `${process.env.CLIENT_URL}/validation?token=${token}`;
+  const logoUrl = `${process.env.CLIENT_URL}/logo_mail.png`; // Assurez-vous que ce fichier existe dans votre dossier public
 
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: email,
     subject: "Cineguide - Validation de votre inscription",
     html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e4e4e4; border-radius: 5px;">
-        <h2 style="color: #9c27b0;">Bienvenue sur Cineguide !</h2>
-        <p>Bonjour ${nom},</p>
-        <p>Merci de vous être inscrit sur notre plateforme. Pour finaliser votre inscription, veuillez cliquer sur le bouton ci-dessous :</p>
-        <div style="text-align: center; margin: 30px 0;">
-          <a href="${validationUrl}" style="background-color: #9c27b0; color: white; padding: 12px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">Valider mon compte</a>
+      <!DOCTYPE html>
+      <html lang="fr">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Validation de votre compte CineGuide</title>
+        <style>
+          body {
+            font-family: 'Helvetica', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333333;
+          }
+          .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+          }
+          .email-header {
+            background-color: #111111;
+            padding: 20px;
+            text-align: center;
+          }
+          .email-header img {
+            max-width: 150px;
+            height: auto;
+          }
+          .email-body {
+            padding: 30px;
+            line-height: 1.6;
+          }
+          .email-footer {
+            background-color: #f9f9f9;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #777777;
+            border-top: 1px solid #eeeeee;
+          }
+          h1 {
+            color: #E71CA5;
+            font-size: 24px;
+            margin-top: 0;
+          }
+          .button {
+            display: inline-block;
+            background-color: #E71CA5;
+            color: #ffffff !important;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            margin: 20px 0;
+            font-weight: bold;
+            text-align: center;
+          }
+          .button:hover {
+            background-color: #d0199a;
+          }
+          .expiration-notice {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff8e1;
+            border-left: 4px solid #ffcc00;
+            font-size: 14px;
+          }
+          .social-links {
+            margin-top: 20px;
+          }
+          .social-link {
+            display: inline-block;
+            margin: 0 10px;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="email-container">
+          <div class="email-header">
+            <img src="${logoUrl}" alt="CineGuide Logo" 
+                 onerror="this.onerror=null; this.src=''; this.alt='CineGuide';" />
+          </div>
+          <div class="email-body">
+            <h1>Bienvenue sur CineGuide !</h1>
+            <p>Bonjour ${nom},</p>
+            <p>Merci de vous être inscrit sur notre plateforme. Votre compte a été créé avec succès, mais il doit être validé avant que vous puissiez vous connecter.</p>
+            <p>Pour finaliser votre inscription, il vous suffit de cliquer sur le bouton ci-dessous :</p>
+            <div style="text-align: center;">
+              <a href="${validationUrl}" class="button">Valider mon compte</a>
+            </div>
+            <div class="expiration-notice">
+              <strong>Important :</strong> Ce lien est valable pendant 60 minutes. Après ce délai, vous devrez demander un nouveau lien de validation.
+            </div>
+            <p>Si vous n'êtes pas à l'origine de cette inscription, veuillez ignorer cet email.</p>
+            <p>À bientôt sur CineGuide !</p>
+            <p><strong>L'équipe CineGuide</strong></p>
+          </div>
+          <div class="email-footer">
+            <p>Cet email a été envoyé automatiquement, merci de ne pas y répondre.</p>
+            <p>&copy; ${new Date().getFullYear()} CineGuide. Tous droits réservés.</p>
+          </div>
         </div>
-        <p>Ce lien est valable pendant 60 minutes. Après ce délai, vous devrez vous réinscrire.</p>
-        <p>Si vous n'êtes pas à l'origine de cette inscription, veuillez ignorer cet email.</p>
-        <p>À bientôt sur Cineguide !</p>
-        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e4e4e4; font-size: 12px; color: #888;">
-          <p>Cet email a été envoyé automatiquement, merci de ne pas y répondre.</p>
-        </div>
-      </div>
+      </body>
+      </html>
     `,
   };
 
@@ -93,23 +186,131 @@ const sendValidationEmail = async (email, nom, token) => {
 const sendConfirmationEmail = async (email, nom) => {
   console.log("Envoi d'un email de confirmation à:", email);
 
+  const loginUrl = `${process.env.CLIENT_URL}/connexion`;
+  const logoUrl = `${process.env.CLIENT_URL}/logo_mail.png`; // Assurez-vous que ce fichier existe dans votre dossier public
+
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: email,
-    subject: "Cineguide - Confirmation de votre inscription",
+    subject: "Cineguide - Votre compte est activé !",
     html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e4e4e4; border-radius: 5px;">
-        <h2 style="color: #9c27b0;">Bienvenue sur Cineguide !</h2>
-        <p>Bonjour ${nom},</p>
-        <p>Votre compte a été validé avec succès. Vous pouvez dès maintenant vous connecter à notre plateforme et profiter de tous les services Cineguide.</p>
-        <div style="text-align: center; margin: 30px 0;">
-          <a href="${process.env.CLIENT_URL}/connexion" style="background-color: #9c27b0; color: white; padding: 12px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">Se connecter</a>
+      <!DOCTYPE html>
+      <html lang="fr">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Votre compte CineGuide est activé !</title>
+        <style>
+          body {
+            font-family: 'Helvetica', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333333;
+          }
+          .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+          }
+          .email-header {
+            background-color: #111111;
+            padding: 20px;
+            text-align: center;
+          }
+          .email-header img {
+            max-width: 150px;
+            height: auto;
+          }
+          .email-body {
+            padding: 30px;
+            line-height: 1.6;
+          }
+          .email-footer {
+            background-color: #f9f9f9;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #777777;
+            border-top: 1px solid #eeeeee;
+          }
+          h1 {
+            color: #E71CA5;
+            font-size: 24px;
+            margin-top: 0;
+          }
+          .button {
+            display: inline-block;
+            background-color: #E71CA5;
+            color: #ffffff !important;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            margin: 20px 0;
+            font-weight: bold;
+            text-align: center;
+          }
+          .button:hover {
+            background-color: #d0199a;
+          }
+          .success-message {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f0fff0;
+            border-left: 4px solid #22c55e;
+            font-size: 14px;
+          }
+          .features-list {
+            margin: 20px 0;
+            padding-left: 20px;
+          }
+          .features-list li {
+            margin-bottom: 10px;
+          }
+          .social-links {
+            margin-top: 20px;
+          }
+          .social-link {
+            display: inline-block;
+            margin: 0 10px;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="email-container">
+          <div class="email-header">
+            <img src="${logoUrl}" alt="CineGuide Logo" 
+                 onerror="this.onerror=null; this.src=''; this.alt='CineGuide';" />
+          </div>
+          <div class="email-body">
+            <h1>Félicitations ${nom} !</h1>
+            <p>Votre compte CineGuide a été validé avec succès !</p>
+            <div class="success-message">
+              <strong>Bonne nouvelle !</strong> Vous pouvez dès maintenant vous connecter et profiter de tous les services CineGuide.
+            </div>
+            <p>Avec votre compte CineGuide, vous pouvez :</p>
+            <ul class="features-list">
+              <li>Découvrir des films et séries sur toutes vos plateformes de streaming</li>
+              <li>Personnaliser vos recommandations selon vos goûts</li>
+              <li>Suivre vos séries préférées et être notifié des nouveaux épisodes</li>
+              <li>Créer et partager vos listes de favoris</li>
+            </ul>
+            <div style="text-align: center;">
+              <a href="${loginUrl}" class="button">Se connecter maintenant</a>
+            </div>
+            <p>Nous sommes ravis de vous compter parmi nos utilisateurs !</p>
+            <p><strong>L'équipe CineGuide</strong></p>
+          </div>
+          <div class="email-footer">
+            <p>Cet email a été envoyé automatiquement, merci de ne pas y répondre.</p>
+            <p>&copy; ${new Date().getFullYear()} CineGuide. Tous droits réservés.</p>
+          </div>
         </div>
-        <p>À bientôt sur Cineguide !</p>
-        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e4e4e4; font-size: 12px; color: #888;">
-          <p>Cet email a été envoyé automatiquement, merci de ne pas y répondre.</p>
-        </div>
-      </div>
+      </body>
+      </html>
     `,
   };
 
