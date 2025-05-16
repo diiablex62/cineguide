@@ -127,19 +127,35 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Profil />,
+            element: (
+              <UserConnected>
+                <Profil />
+              </UserConnected>
+            ),
           },
           {
             path: "/profil/mon-activiter",
-            element: <ProfilActiviter />,
+            element: (
+              <UserConnected>
+                <ProfilActiviter />
+              </UserConnected>
+            ),
           },
           {
             path: "/profil/ma-liste",
-            element: <ProfilListe />,
+            element: (
+              <UserConnected>
+                <ProfilListe />
+              </UserConnected>
+            ),
           },
           {
             path: "/profil/mes-reviews",
-            element: <ProfileReviews />,
+            element: (
+              <UserConnected>
+                <ProfileReviews />
+              </UserConnected>
+            ),
           },
         ],
       },

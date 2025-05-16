@@ -14,6 +14,8 @@ import { ActorProvider } from "./components/providers/ActorProvider";
 import SerieProvider from "./components/providers/SerieProvider";
 import { ActuProvider } from "./components/providers/ActuProvider";
 import "./Langue/i18n";
+import UserConnected from "./components/ProtectedRoutes/UserConnected";
+import UserNotConnected from "./components/ProtectedRoutes/UserNotConnected";
 
 // Import des composants avec lazy loading
 const Home = lazy(() => import("./pages/Home"));
@@ -35,6 +37,7 @@ const MentionsLegales = lazy(() => import("./pages/Legal/MentionsLegales"));
 const NotFound = lazy(() => import("./pages/404"));
 const Header = lazy(() => import("./components/Header"));
 const Footer = lazy(() => import("./components/Footer"));
+const ModalAbo = lazy(() => import("./components/modal-abo/modalAbo"));
 
 const AppContent = () => {
   const location = useLocation();
@@ -62,9 +65,30 @@ const AppContent = () => {
             <Route path='/series' element={<Series />} />
             <Route path='/actualites' element={<Actualites />} />
             <Route path='/jeux' element={<Jeux />} />
-            <Route path='/profil' element={<Profil />} />
-            <Route path='/connexion' element={<Connexion />} />
-            <Route path='/inscription' element={<Inscription />} />
+            <Route
+              path='/profil'
+              element={
+                <UserConnected>
+                  <Profil />
+                </UserConnected>
+              }
+            />
+            <Route
+              path='/connexion'
+              element={
+                <UserNotConnected>
+                  <Connexion />
+                </UserNotConnected>
+              }
+            />
+            <Route
+              path='/inscription'
+              element={
+                <UserNotConnected>
+                  <Inscription />
+                </UserNotConnected>
+              }
+            />
             <Route path='/validation' element={<Validation />} />
             <Route path='/reset-password/:token' element={<ResetPassword />} />
             <Route path='/forgotten-password' element={<ForgottenPassword />} />
@@ -72,6 +96,14 @@ const AppContent = () => {
             <Route path='/cgv' element={<CGV />} />
             <Route path='/faq' element={<FAQ />} />
             <Route path='/mentionsLegales' element={<MentionsLegales />} />
+            <Route
+              path='/abonnement'
+              element={
+                <UserConnected>
+                  <ModalAbo />
+                </UserConnected>
+              }
+            />
             <Route path='*' element={<NotFound />} />
           </Routes>
         </main>
