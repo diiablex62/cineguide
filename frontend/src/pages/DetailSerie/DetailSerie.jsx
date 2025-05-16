@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Link, NavLink, Outlet, useParams } from "react-router-dom";
+import { NavLink, Outlet, useParams } from "react-router-dom";
 import Serie from "./components/Serie";
 import ResumeSerie from "./components/ResumeSerie";
 import { SerieContext } from "../../context/SerieContext";
@@ -7,20 +7,40 @@ import { ActorContext } from "../../context/ActorContext";
 
 export default function DetailSerie() {
   const { id } = useParams();
-  const { serie, loadSerieDetails, detailSerie } = useContext(SerieContext);
+  const { loadSerieDetails, detailSerie } = useContext(SerieContext);
   const { setDetailActor, allActors } = useContext(ActorContext);
 
   useEffect(() => {
-    // Charger les détails de la série dès que l'ID est disponible
     if (id) {
       loadSerieDetails(id);
     }
-  }, [id]);
+
+    return () => {
+      // Réinitialiser les détails si nécessaire lors du démontage
+    };
+  }, [id, loadSerieDetails]);
 
   useEffect(() => {
-    // Une fois que nous avons les détails de la série, essayer de trouver l'acteur correspondant
-    if (detailSerie && detailSerie.acteurs && detailSerie.acteurs.length > 0 && allActors && allActors.length > 0) {
-      const oneActor = allActors.find((a) => detailSerie.acteurs.includes(a.nom));
+    if (
+      detailSerie &&
+      detailSerie.acteurs &&
+      detailSerie.acteurs.length > 0 &&
+      allActors &&
+      allActors.length > 0
+    ) {
+      const acteursList = Array.isArray(detailSerie.acteurs)
+        ? detailSerie.acteurs
+        : [detailSerie.acteurs];
+
+      const oneActor = allActors.find((a) => {
+        return acteursList.some((acteur) => {
+          return (
+            a.nom === acteur ||
+            (typeof acteur === "object" && a.nom === acteur.nom)
+          );
+        });
+      });
+
       if (oneActor) {
         setDetailActor(oneActor);
       }

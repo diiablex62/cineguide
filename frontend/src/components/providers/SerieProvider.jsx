@@ -14,7 +14,6 @@ export default function SerieProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // État initial pour les détails de série
   const [detailSerie, setDetailSerie] = useState({
     id: 0,
     titre: "Chargement...",
@@ -34,7 +33,6 @@ export default function SerieProvider({ children }) {
     saisons: [],
   });
 
-  // Charger toutes les séries au montage du composant
   useEffect(() => {
     async function fetchSeries() {
       setLoading(true);
@@ -44,7 +42,6 @@ export default function SerieProvider({ children }) {
         setFilteredSeries(seriesData);
         setError(null);
       } catch (error) {
-        console.error("Erreur lors du chargement des séries:", error);
         setError(
           "Impossible de charger les séries. Veuillez réessayer plus tard."
         );
@@ -55,57 +52,46 @@ export default function SerieProvider({ children }) {
     fetchSeries();
   }, []);
 
-  // Charger les détails d'une série spécifique
   const loadSerieDetails = async (id) => {
     if (!id) return;
 
     setLoading(true);
     try {
-      // Récupérer les détails de base de la série
       const serieDetails = await getSerieById(id);
-      
-      // S'assurer que les saisons sont bien remplies avec leurs épisodes
+
       const saisonsCompletes = [];
-      
-      // Si les saisons sont des références (IDs) et non des objets complets
+
       if (serieDetails.saisons && Array.isArray(serieDetails.saisons)) {
         for (const saison of serieDetails.saisons) {
-          // Si c'est juste un ID ou un objet avec seulement numero/annee/nbEpisodes
-          const saisonId = saison._id || saison;
-          const saisonNumero = saison.numero;
-          
+          const saisonNumero =
+            typeof saison === "object" ? saison.numero : saison;
+
           try {
-            // Récupérer les épisodes de cette saison
             const episodes = await getEpisodesBySaison(id, saisonNumero);
-            
-            // Ajouter la saison complète avec ses épisodes
+
             saisonsCompletes.push({
               ...saison,
-              episodes: episodes || []
+              episodes: episodes || [],
             });
           } catch (episodeError) {
-            console.error(`Erreur lors du chargement des épisodes pour la saison ${saisonNumero}:`, episodeError);
-            // Ajouter la saison sans épisodes en cas d'erreur
             saisonsCompletes.push({
               ...saison,
-              episodes: []
+              episodes: [],
             });
           }
         }
       }
-      
-      // Mettre à jour les détails de la série avec les saisons complètes
+
       setDetailSerie({
         ...serieDetails,
-        saisons: saisonsCompletes.length > 0 ? saisonsCompletes : serieDetails.saisons || []
+        saisons:
+          saisonsCompletes.length > 0
+            ? saisonsCompletes
+            : serieDetails.saisons || [],
       });
-      
+
       setError(null);
     } catch (error) {
-      console.error(
-        `Erreur lors du chargement des détails de la série ${id}:`,
-        error
-      );
       setError(
         `Impossible de charger les détails de la série. Veuillez réessayer plus tard.`
       );
@@ -114,7 +100,6 @@ export default function SerieProvider({ children }) {
     }
   };
 
-  // Gérer les états des boutons pour chaque série
   function toggleState(setter, id) {
     if (!id && id !== 0) return;
 
@@ -123,7 +108,6 @@ export default function SerieProvider({ children }) {
       [id]: !prev[id],
     }));
 
-    // Gestion de la liste des séries vues
     if (setter === setAlreadySeenStates) {
       setSeriesSeen((prev) => {
         if (prev.some((serie) => serie.id === id)) {
@@ -136,7 +120,6 @@ export default function SerieProvider({ children }) {
     }
   }
 
-  // Filtres pour les séries
   function allSeries() {
     setFilteredSeries(series);
   }

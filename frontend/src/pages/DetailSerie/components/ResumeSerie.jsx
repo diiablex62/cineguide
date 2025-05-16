@@ -3,21 +3,14 @@ import { SerieContext } from "../../../context/SerieContext";
 import { ActorContext } from "../../../context/ActorContext";
 
 export default function ResumeSerie() {
-  const { detailSerie } = useContext(SerieContext);
-  const [selectedSeason, setSelectedSeason] = useState(0); // Index de la saison sélectionnée
+  const { detailSerie, loading } = useContext(SerieContext);
+  const [selectedSeason, setSelectedSeason] = useState(0);
   const { detailActor, actorRedirect } = useContext(ActorContext);
 
   useEffect(() => {
-    // Réinitialiser la saison sélectionnée quand on change de série
     setSelectedSeason(0);
   }, [detailSerie]);
 
-  // Vérifier si detailSerie existe et a des saisons
-  if (!detailSerie) {
-    return <div>Chargement des données...</div>;
-  }
-
-  // S'assurer que detailSerie.saisons est un tableau
   const saisons = Array.isArray(detailSerie.saisons) ? detailSerie.saisons : [];
 
   return (
@@ -42,11 +35,10 @@ export default function ResumeSerie() {
                       selectedSeason === index ? "ring-2 ring-fuchsia" : ""
                     }`}
                   >
-                    {" "}
                     <img
                       src={`${detailSerie.image}`}
                       alt={`${detailSerie.titre} - Saison ${saison.numero}`}
-                      className="w-full h-full object-fill "
+                      className="w-full h-full object-fill"
                     />
                   </div>
                   <span className="mt-1 text-xs font-semibold">
@@ -61,21 +53,22 @@ export default function ResumeSerie() {
           </div>
         ) : (
           <div className="mb-8">
-            <p className="text-center text-gray-500">Aucune saison disponible</p>
+            <p className="text-center text-gray-500">
+              Aucune saison disponible
+            </p>
           </div>
         )}
 
         {/* Affichage des épisodes de la saison sélectionnée */}
-        {saisons.length > 0 && 
-         selectedSeason >= 0 && 
-         selectedSeason < saisons.length && 
-         saisons[selectedSeason] && (
-          <div className="space-y-2 mb-8">
-            <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-200">
-              ÉPISODES - SAISON {saisons[selectedSeason].numero}
-            </h2>
-            {Array.isArray(saisons[selectedSeason].episodes) && saisons[selectedSeason].episodes.length > 0 ? (
-              saisons[selectedSeason].episodes.map((episode) => (
+        {saisons.length > 0 &&
+          selectedSeason >= 0 &&
+          selectedSeason < saisons.length &&
+          saisons[selectedSeason] && (
+            <div className="space-y-2 mb-8">
+              <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-200">
+                ÉPISODES - SAISON {saisons[selectedSeason].numero}
+              </h2>
+              {saisons[selectedSeason].episodes.map((episode) => (
                 <div
                   key={episode._id || `episode-${episode.numero}`}
                   className="border-b border-gray-300 dark:border-gray-700 py-3 flex justify-between items-center"
@@ -92,12 +85,9 @@ export default function ResumeSerie() {
                     {episode.duree}
                   </span>
                 </div>
-              ))
-            ) : (
-              <p className="text-center text-gray-500">Aucun épisode disponible pour cette saison</p>
-            )}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
 
         <div className="mb-8">
           <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-200">
@@ -108,7 +98,7 @@ export default function ResumeSerie() {
           </p>
         </div>
 
-        {Array.isArray(detailSerie.acteurs) && detailSerie.acteurs.length > 0 && (
+        {detailSerie.acteurs.length > 0 && (
           <div className="mb-8">
             <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-200">
               CASTING
