@@ -94,8 +94,8 @@ export default function ActualitesPage() {
   }
 
   return (
-    <div className='p-6'>
-      <h2 className='text-2xl font-bold text-[var(--color-fuchsia)] mb-6 w-full md:w-[50%] mx-auto text-left'>
+    <div className='p-6 dark:bg-black'>
+      <h2 className='text-2xl font-bold text-[var(--color-fuchsia)] mb-6 w-full md:w-[50%] mx-auto text-left dark:text-white'>
         ACTUALITÉS
       </h2>
       {renderArticles()}
@@ -106,12 +106,12 @@ export default function ActualitesPage() {
             <button
               key={index + 1}
               onClick={() => handlePageChange(index + 1)}
-              className={`px-3 py-1 mx-1 border rounded cursor-pointer ${
+              className={`px-3 py-1 mx-1 rounded-full w-8 h-8 flex items-center justify-center cursor-pointer ${
                 currentPage === index + 1
                   ? "bg-[var(--color-fuchsia)] text-white"
                   : "bg-white text-black border-gray-300 hover:bg-gray-100"
               }`}>
-              Page {index + 1}
+              {index + 1}
             </button>
           )
         )}
