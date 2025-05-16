@@ -16,7 +16,7 @@ export default function Footer() {
   const { t } = useTranslation(); // Ajout
 
   return (
-    <div className='border-t border-black dark:border-white p-3 flex flex-col justify-center items-center md:flex-row md:justify-between'>
+    <div className='border-t border-black dark:border-white p-3 flex flex-col justify-center items-center md:flex-row md:justify-between bg-white dark:bg-black'>
       <div className=''>
         {theme === "dark" ? (
           <Link to='/'>
@@ -31,22 +31,22 @@ export default function Footer() {
       <div className='flex flex-col  md:flex-row items-center gap-3'>
         <NavLink
           to={"/"}
-          className='mr-5 text-black  dark:text-white hover:text-fuchsia'>
+          className='mr-5 text-black dark:text-white hover:text-fuchsia'>
           {t("footer.accueil", "Accueil")}
         </NavLink>
         <NavLink
           to={"/film"}
-          className='mr-5 text-black  dark:text-white hover:text-fuchsia'>
+          className='mr-5 text-black dark:text-white hover:text-fuchsia'>
           {t("footer.films", "Films")}
         </NavLink>
         <NavLink
           to={"/series"}
-          className='mr-5 text-black  dark:text-white hover:text-fuchsia'>
+          className='mr-5 text-black dark:text-white hover:text-fuchsia'>
           {t("footer.series", "Séries")}
         </NavLink>
         <NavLink
           to={"/actualites"}
-          className='mr-5 text-black  dark:text-white hover:text-fuchsia'>
+          className='mr-5 text-black dark:text-white hover:text-fuchsia'>
           {t("footer.actualites", "Actualités")}
         </NavLink>
         {menuFooter ? (
@@ -68,9 +68,9 @@ export default function Footer() {
           </div>
         )}
       </div>
-      <div className='flex gap-5 items-center justify-center text-3xl'>
-        <FaFacebookSquare className='dark:text-white cursor-pointer' />
-        <FaSquareXTwitter className='dark:text-white cursor-pointer' />
+      <div className='flex gap-5 items-center justify-center text-3xl text-black dark:text-white'>
+        <FaFacebookSquare className='cursor-pointer' />
+        <FaSquareXTwitter className='cursor-pointer' />
       </div>
     </div>
   );
