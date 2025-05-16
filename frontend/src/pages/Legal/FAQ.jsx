@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 export default function FAQ() {
   const { t } = useTranslation();
   return (
-    <div className='flex flex-col items-center justify-center gap-12 mt-12 mb-10'>
+    <div className='flex flex-col items-center justify-center gap-12 mt-12 mb-10 bg-white dark:bg-black'>
       <div className='flex items-center justify-center gap-5'>
         <RiQuestionAnswerFill className='text-fuchsia text-4xl' />
         <h2 className='text-black text-4xl font-bold max-sm:text-2xl dark:text-white'>
