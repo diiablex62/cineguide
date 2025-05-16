@@ -24,6 +24,7 @@ const Connexion = lazy(() => import("./pages/Auth/Connexion"));
 const Inscription = lazy(() => import("./pages/Auth/Inscription"));
 const Validation = lazy(() => import("./pages/Auth/Validation"));
 const ResetPassword = lazy(() => import("./pages/Auth/ResetPassword"));
+const ForgottenPassword = lazy(() => import("./pages/Auth/ForgottenPassword"));
 const Profil = lazy(() => import("./pages/Profil/Profil"));
 const Actualites = lazy(() => import("./pages/Actualites/ActualitesPage"));
 const Jeux = lazy(() => import("./pages/Jeux/Jeux"));
@@ -38,7 +39,12 @@ const Footer = lazy(() => import("./components/Footer"));
 const AppContent = () => {
   const location = useLocation();
   const isAuthPage =
-    ["/connexion", "/inscription", "/validation"].includes(location.pathname) ||
+    [
+      "/connexion",
+      "/inscription",
+      "/validation",
+      "/forgotten-password",
+    ].includes(location.pathname) ||
     location.pathname.startsWith("/reset-password/");
 
   console.log("Current path:", location.pathname, "isAuthPage:", isAuthPage);
@@ -61,6 +67,7 @@ const AppContent = () => {
             <Route path='/inscription' element={<Inscription />} />
             <Route path='/validation' element={<Validation />} />
             <Route path='/reset-password/:token' element={<ResetPassword />} />
+            <Route path='/forgotten-password' element={<ForgottenPassword />} />
             <Route path='/cgu' element={<CGU />} />
             <Route path='/cgv' element={<CGV />} />
             <Route path='/faq' element={<FAQ />} />
