@@ -15,4 +15,5 @@ router.post("/reset-password", userController.resetPassword);
 router.get("/:id", auth, userController.getUserInfo);
 
 console.log("Routes utilisateurs chargées");
+
 module.exports = router;

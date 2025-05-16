@@ -3,22 +3,43 @@ import { SerieContext } from "../../../context/SerieContext";
 
 export default function BandeAnnonce() {
   const { detailSerie } = useContext(SerieContext);
+  
+  // Vérifier si les données sont chargées et si la bande-annonce existe
+  if (!detailSerie || !detailSerie.id || !detailSerie.bandeAnnonce) {
+    return (
+      <div className="w-full">
+        <div className="w-full text-center justify-center items-center">
+          <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-200">
+            Vidéos: Trailer, Teaser, Bandes-annonces
+          </h2>
+          <div className="flex justify-center items-center">
+            <div className="bg-gray-800 w-full md:w-1/2 h-80 flex items-center justify-center overflow-hidden shadow-lg">
+              <p className="text-white">Aucune bande-annonce disponible</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  
+  // Préparer l'URL de la bande-annonce (YouTube)
+  const videoUrl = detailSerie.bandeAnnonce.includes("watch?v=") 
+    ? detailSerie.bandeAnnonce.replace("watch?v=", "embed/")
+    : detailSerie.bandeAnnonce;
+  
   return (
-    <div className="w-full ">
+    <div className="w-full">
       <div className="w-full text-center justify-center items-center">
         <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-200">
           Vidéos: Trailer, Teaser, Bandes-annonces
         </h2>
-        <div className="flex  justify-center items-center">
-          <div className="relative w-full flex  justify-center items-center">
-            <div className="bg-gray-800 w-full md:w-1/2 h-80 flex items-center justify-center  overflow-hidden shadow-lg">
+        <div className="flex justify-center items-center">
+          <div className="relative w-full flex justify-center items-center">
+            <div className="bg-gray-800 w-full md:w-1/2 h-80 flex items-center justify-center overflow-hidden shadow-lg">
               <iframe
                 width="100%"
                 height="100%"
-                src={`${detailSerie.bandeAnnonce.replace(
-                  "watch?v=",
-                  "embed/"
-                )}`}
+                src={videoUrl}
                 title="Bande-annonce officielle"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen

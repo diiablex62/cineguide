@@ -3,87 +3,104 @@ import { SerieContext } from "../../../context/SerieContext";
 import { ActorContext } from "../../../context/ActorContext";
 
 export default function ResumeSerie() {
-  const { detailSerie } = useContext(SerieContext);
-  const [selectedSeason, setSelectedSeason] = useState(0); // Index de la saison sélectionnée
+  const { detailSerie, loading } = useContext(SerieContext);
+  const [selectedSeason, setSelectedSeason] = useState(0);
   const { detailActor, actorRedirect } = useContext(ActorContext);
 
+  // Réinitialiser la saison sélectionnée lorsqu'une nouvelle série est chargée
   useEffect(() => {
-    const movieActors = detailSerie.acteurs;
-    {
-      movieActors.find((m, index) => m);
+    if (detailSerie && detailSerie.id) {
+      setSelectedSeason(0);
     }
-  }, [detailSerie, detailActor]);
+  }, [detailSerie?.id]); // Dépendance uniquement à l'ID, pas à l'objet entier
 
-  // Vérifier si detailSerie existe et a des saisons
-  if (!detailSerie || !detailSerie.saisons) {
-    return <div>Chargement des données...</div>;
+  // Sécuriser l'accès aux saisons
+  const saisons = detailSerie && Array.isArray(detailSerie.saisons) 
+    ? detailSerie.saisons 
+    : [];
+
+  // Vérifier si les données sont chargées
+  if (!detailSerie || !detailSerie.id) {
+    return <div className="md:w-2/3 w-full p-4">Chargement des informations...</div>;
   }
 
   return (
     <div className="md:w-2/3 w-full">
       <div className="w-full text-center justify-center items-center">
-        <div className="mb-8">
-          <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-200">
-            {detailSerie.saisons.length} SAISONS
-          </h2>
-          <div className="flex overflow-x-auto space-x-6 pb-2 md:justify-center md:items-center">
-            {detailSerie.saisons.map((saison, index) => (
-              <div
-                key={saison.numero}
-                className={`flex flex-col items-center cursor-pointer ${
-                  selectedSeason === index ? "opacity-100" : "opacity-60"
-                }`}
-                onClick={() => setSelectedSeason(index)}
-              >
-                <div
-                  className={`w-20 h-28 bg-gray-800 ${
-                    selectedSeason === index ? "ring-2 ring-fuchsia" : ""
-                  }`}
-                >
-                  {" "}
-                  <img
-                    src={`${detailSerie.image}`}
-                    alt={`${detailSerie.titre}`}
-                    className="w-full h-full object-fill "
-                  />
-                </div>
-                <span className="mt-1 text-xs font-semibold">
-                  Saison {saison.numero}
-                </span>
-                <span className="text-xs text-gray-500">
-                  {saison.nbEpisodes} épisodes
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Affichage des épisodes de la saison sélectionnée */}
-        {detailSerie.saisons.length > 0 && (
-          <div className="space-y-2 mb-8">
+        {saisons.length > 0 ? (
+          <div className="mb-8">
             <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-200">
-              ÉPISODES - SAISON {detailSerie.saisons[selectedSeason].numero}
+              {saisons.length} SAISONS
             </h2>
-            {detailSerie.saisons[selectedSeason].episodes.map((episode) => (
-              <div
-                key={episode.numero}
-                className="border-b border-gray-300 dark:border-gray-700 py-3 flex justify-between items-center"
-              >
-                <div className="text-start">
-                  <span className="text-sm text-start font-medium">
-                    {episode.numero}. {episode.titre}
+            <div className="flex overflow-x-auto space-x-6 pb-2 md:justify-center md:items-center">
+              {saisons.map((saison, index) => (
+                <div
+                  key={saison._id || `saison-${saison.numero}`}
+                  className={`flex flex-col items-center cursor-pointer ${
+                    selectedSeason === index ? "opacity-100" : "opacity-60"
+                  }`}
+                  onClick={() => setSelectedSeason(index)}
+                >
+                  <div
+                    className={`w-20 h-28 bg-gray-800 ${
+                      selectedSeason === index ? "ring-2 ring-fuchsia" : ""
+                    }`}
+                  >
+                    <img
+                      src={detailSerie.image}
+                      alt={`${detailSerie.titre} - Saison ${saison.numero}`}
+                      className="w-full h-full object-fill"
+                    />
+                  </div>
+                  <span className="mt-1 text-xs font-semibold">
+                    Saison {saison.numero}
                   </span>
-                  <p className="text-xs text-start text-gray-500 dark:text-gray-200 mt-1">
-                    {episode.synopsis}
-                  </p>
+                  <span className="text-xs text-gray-500">
+                    {saison.nbEpisodes} épisodes
+                  </span>
                 </div>
-                <span className="text-xs text-start text-gray-500 dark:text-gray-200">
-                  {episode.duree}
-                </span>
-              </div>
-            ))}
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div className="mb-8">
+            <p className="text-center text-gray-500">
+              Aucune saison disponible
+            </p>
           </div>
         )}
+
+        {/* Affichage des épisodes de la saison sélectionnée */}
+        {saisons.length > 0 &&
+          selectedSeason >= 0 &&
+          selectedSeason < saisons.length &&
+          saisons[selectedSeason] && 
+          saisons[selectedSeason].episodes && 
+          Array.isArray(saisons[selectedSeason].episodes) && (
+            <div className="space-y-2 mb-8">
+              <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-200">
+                ÉPISODES - SAISON {saisons[selectedSeason].numero}
+              </h2>
+              {saisons[selectedSeason].episodes.map((episode) => (
+                <div
+                  key={episode._id || `episode-${episode.numero}`}
+                  className="border-b border-gray-300 dark:border-gray-700 py-3 flex justify-between items-center"
+                >
+                  <div className="text-start">
+                    <span className="text-sm text-start font-medium">
+                      {episode.numero}. {episode.titre}
+                    </span>
+                    <p className="text-xs text-start text-gray-500 dark:text-gray-200 mt-1">
+                      {episode.synopsis}
+                    </p>
+                  </div>
+                  <span className="text-xs text-start text-gray-500 dark:text-gray-200">
+                    {episode.duree}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
 
         <div className="mb-8">
           <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-200">
@@ -94,22 +111,24 @@ export default function ResumeSerie() {
           </p>
         </div>
 
-        <div className="mb-8">
-          <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-200">
-            CASTING
-          </h2>
-          <div className="flex flex-wrap gap-2 justify-center items-center">
-            {detailSerie.acteurs.map((actor, index) => (
-              <div
-                key={index}
-                onClick={actorRedirect}
-                className="bg-gray-200 dark:bg-gray-800 px-3 py-1 text-xs hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer transition-colors"
-              >
-                {actor}
-              </div>
-            ))}
+        {detailSerie.acteurs && detailSerie.acteurs.length > 0 && (
+          <div className="mb-8">
+            <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-200">
+              CASTING
+            </h2>
+            <div className="flex flex-wrap gap-2 justify-center items-center">
+              {detailSerie.acteurs.map((actor, index) => (
+                <div
+                  key={`actor-${index}`}
+                  onClick={actorRedirect}
+                  className="bg-gray-200 dark:bg-gray-800 px-3 py-1 text-xs hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer transition-colors"
+                >
+                  {actor}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

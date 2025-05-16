@@ -12,43 +12,13 @@ import { MdSunny } from "react-icons/md";
 import { MenuContext } from "../../../context/MenuContext";
 import { AuthContext } from "../../../context/AuthContext";
 import LangButton from "../LangButton";
+import { IoIosLogOut } from "react-icons/io";
 
 export default function MenuBurger() {
   const { toggleTheme, theme } = useContext(ThemeContext);
   const { burger, setMenuPlus, menuPlus, toggleBurger, menuRef } =
     useContext(MenuContext);
-  const { isLoggedIn, isLoading } = useContext(AuthContext);
-
-  // Fonction pour afficher les boutons d'authentification en fonction de l'état
-  const renderAuthButtons = () => {
-    // Si en cours de chargement, on n'affiche rien
-    if (isLoading) {
-      return <div className='w-full h-[40px]'></div>;
-    }
-
-    // Si connecté, afficher Mon compte
-    if (isLoggedIn) {
-      return (
-        <NavLink to='/profil' className='bg-fuchsia py-4 text-white w-full'>
-          Mon Compte
-        </NavLink>
-      );
-    }
-
-    // Sinon afficher Se connecter et S'inscrire
-    return (
-      <>
-        <NavLink to='/connexion' className='bg-fuchsia py-4 text-white w-full'>
-          Connexion
-        </NavLink>
-        <NavLink
-          to='/inscription'
-          className='bg-white text-black dark:bg-black dark:text-white py-4 border w-full'>
-          S'inscrire
-        </NavLink>
-      </>
-    );
-  };
+  const { isLoggedIn } = useContext(AuthContext);
 
   return (
     <>
@@ -70,21 +40,21 @@ export default function MenuBurger() {
             onClick={toggleBurger}
           />
         </div>
-        <div className='flex flex-col gap-5 justify-center items-center'>
+        <div className="flex flex-col gap-5 justify-center items-center">
           {/* <div className="flex flex-col justify-center gap-1"> */}
-          <NavLink to='/' className='text-black  dark:text-white'>
+          <NavLink to="/" className="text-black  dark:text-white">
             Accueil
           </NavLink>
-          <NavLink to='/film' className='text-black  dark:text-white'>
+          <NavLink to="/film" className="text-black  dark:text-white">
             Films
           </NavLink>
-          <NavLink to='/series' className='text-black  dark:text-white'>
+          <NavLink to="/series" className="text-black  dark:text-white">
             Séries
           </NavLink>
-          <NavLink to='/actualites' className='text-black  dark:text-white'>
+          <NavLink to="/actualites" className="text-black  dark:text-white">
             Actualités
           </NavLink>
-          <NavLink to='/jeux' className='text-black  dark:text-white'>
+          <NavLink to="/jeux" className="text-black  dark:text-white">
             Jeux
           </NavLink>
           {menuPlus ? (
@@ -105,7 +75,26 @@ export default function MenuBurger() {
               <FaChevronDown />
             </div>
           )}
-          {renderAuthButtons()}
+          {isLoggedIn ? (
+            <NavLink to="/profil" className="bg-fuchsia py-4 text-white w-full">
+              Mon Compte
+            </NavLink>
+          ) : (
+            <>
+              <NavLink
+                to="/connexion"
+                className="bg-fuchsia py-4 text-white w-full"
+              >
+                Connexion
+              </NavLink>
+              <NavLink
+                to="/inscription"
+                className="bg-white text-black dark:bg-black dark:text-white py-4 border w-full"
+              >
+                S'inscrire
+              </NavLink>
+            </>
+          )}
           <div
             onClick={toggleTheme}
             className='flex justify-center items-center gap-4 w-full py-3  cursor-pointer'>
