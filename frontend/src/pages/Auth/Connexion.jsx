@@ -54,6 +54,9 @@ export default function Connexion() {
     setIsSubmitting(true);
     setLoginError(null);
 
+    // Effacer toutes les notifications existantes
+    toast.dismiss();
+
     try {
       console.log("Tentative de connexion avec:", data.email);
       await login(data);
@@ -79,7 +82,11 @@ export default function Connexion() {
       }
 
       setLoginError(errorMessage);
-      toast.error(errorMessage);
+
+      // Ne pas afficher ce toast si on va afficher le toast personnalisé pour la validation en attente
+      if (!(error.status === 403 && error.data?.isPending)) {
+        toast.error(errorMessage);
+      }
 
       // Si le compte est en attente de validation, proposer de renvoyer l'email
       if (error.status === 403 && error.data?.isPending) {
@@ -98,11 +105,6 @@ export default function Connexion() {
                       <span className='font-medium'>{data.email}</span> est en
                       attente de validation. Veuillez vérifier votre boîte de
                       réception et cliquer sur le lien de validation.
-                    </p>
-
-                    <p className='text-sm text-green-500 mt-3 font-medium'>
-                      Inscription réussie! Veuillez consulter votre email pour
-                      valider votre compte.
                     </p>
 
                     <div className='mt-4 flex space-x-2'>

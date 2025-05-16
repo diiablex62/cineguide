@@ -212,11 +212,16 @@ export default function AuthProvider({ children }) {
   const validateAccount = async (token) => {
     try {
       console.log("Tentative de validation de compte avec token:", token);
+      // Réinitialiser les états d'erreur et de notification
       setError(null);
+
+      // Empêcher l'affichage simultané de notifications contradictoires
+      setNotification(null);
 
       const data = await authAPI.validateAccount(token);
 
       if (data && data.token && data.user) {
+        console.log("Validation réussie, connexion de l'utilisateur");
         // Sauvegarder dans le state
         setToken(data.token);
         setUserId(data.user._id);
@@ -245,15 +250,27 @@ export default function AuthProvider({ children }) {
           "Données d'authentification sauvegardées dans les cookies après validation"
         );
 
+        // Définir la notification de succès
         setNotification(
           data.message || "Votre compte a été validé avec succès!"
         );
-      }
 
-      return data;
+        return data;
+      } else {
+        // Si la réponse ne contient pas les données attendues mais n'a pas généré d'erreur
+        console.error("Données de validation incomplètes:", data);
+        throw new Error("Données de validation incomplètes");
+      }
     } catch (error) {
       console.error("Échec de validation de compte:", error);
+      // S'assurer qu'aucune donnée d'authentification n'est présente en cas d'erreur
+      setToken(null);
+      setUserId(null);
+      setIsLoggedIn(false);
+      setConnectedUser(false);
       setError(error.message || "Erreur lors de la validation du compte");
+      // S'assurer qu'aucune notification de succès n'est présente
+      setNotification(null);
       throw error;
     }
   };

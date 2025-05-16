@@ -24,14 +24,33 @@ export default function Validation() {
   const [localError, setLocalError] = useState(null);
 
   useEffect(() => {
+    // Nettoyer l'effet lors du démontage du composant
+    return () => {
+      setErrorShown(false);
+      setLocalError(null);
+    };
+  }, []);
+
+  useEffect(() => {
     if (!token) return;
 
-    if (errorShown) return;
+    // Vérifier si une erreur a déjà été affichée pour ce token
+    // Cette condition empêche les appels récursifs
+    if (errorShown) {
+      console.log(
+        "Validation déjà tentée et échouée, pas de nouvelle tentative"
+      );
+      return;
+    }
 
     const validateUserAccount = async () => {
+      console.log("Tentative de validation avec token:", token);
       setLoading(true);
       clearError();
       clearNotification();
+
+      // Effacer tous les toasts existants pour éviter la confusion
+      toast.dismiss();
 
       try {
         await validateAccount(token);
@@ -65,13 +84,15 @@ export default function Validation() {
           { duration: 3000, id: "validation-success-toast" }
         );
 
+        // Rediriger vers la page de connexion après validation réussie
         setTimeout(() => {
-          navigate("/");
+          navigate("/connexion");
         }, 3000);
       } catch (err) {
         console.error("Erreur de validation:", err);
-        setLocalError(err.message || "Token de validation invalide ou expiré");
+        // Marquer comme erreur traitée pour éviter les appels récursifs
         setErrorShown(true);
+        setLocalError(err.message || "Token de validation invalide ou expiré");
 
         toast.custom(
           () => (
@@ -312,8 +333,6 @@ export default function Validation() {
             </div>
           </div>
         )}
-
-   
       </div>
     </div>
   );

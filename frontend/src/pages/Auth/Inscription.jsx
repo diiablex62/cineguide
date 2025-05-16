@@ -104,13 +104,62 @@ export default function Inscription() {
 
       // Si l'inscription nécessite une validation par email
       if (result && result.message && result.email) {
-        toast.success(
-          "Inscription réussie ! Veuillez vérifier votre email pour activer votre compte."
+        // Le toast est géré par le composant PendingAccountNotification
+        // qui affiche la notification de compte en attente de validation
+        console.log(
+          "Compte en attente de validation, redirection vers la page temporaire de validation"
         );
+
+        // Afficher un toast personnalisé pour la validation par email
+        toast.custom(
+          () => (
+            <div className='bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden flex'>
+              <div className='w-1.5 bg-yellow-400'></div>
+              <div className='flex-1 p-4'>
+                <div className='flex'>
+                  <div className='flex-1'>
+                    <p className='font-bold text-gray-900 dark:text-white'>
+                      Inscription réussie!
+                    </p>
+                    <p className='text-sm text-gray-600 dark:text-gray-300 mt-1'>
+                      Veuillez consulter votre email pour valider votre compte.
+                    </p>
+                    <div className='mt-4 flex space-x-2'>
+                      <button
+                        onClick={() => {
+                          toast.dismiss();
+                          navigate("/validation");
+                        }}
+                        className='px-3 py-1.5 text-white text-xs font-medium rounded-md bg-[#E71CA5] hover:opacity-90'>
+                        Renvoyer l'email
+                      </button>
+                      <button
+                        onClick={() => toast.dismiss()}
+                        className='px-3 py-1.5 text-gray-700 dark:text-gray-200 text-xs font-medium rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>
+                        Fermer
+                      </button>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => toast.dismiss()}
+                    className='ml-4 text-gray-400 hover:text-gray-600 transition-colors'>
+                    ×
+                  </button>
+                </div>
+              </div>
+            </div>
+          ),
+          { duration: 8000, id: "pending-validation-toast" }
+        );
+
+        // Rediriger vers la page temporaire de validation au lieu de connexion
         navigate("/validation");
       } else {
         // Si l'inscription est directe (sans validation par email)
-        toast.success("Inscription réussie ! Veuillez vous connecter.");
+        // Rediriger vers la page de connexion sans afficher de toast
+        console.log(
+          "Inscription réussie, redirection vers la page de connexion"
+        );
         navigate("/connexion");
       }
     } catch (error) {
@@ -121,55 +170,37 @@ export default function Inscription() {
         error.message || "Une erreur est survenue lors de l'inscription";
       setRegisterError(errorMessage);
 
-      // Notification d'erreur
-      toast.error(errorMessage);
-
-      // Si l'email est déjà utilisé, proposer la connexion
-      if (
-        error.status === 409 ||
-        errorMessage.includes("existe déjà") ||
-        errorMessage.includes("already exists")
-      ) {
-        toast.custom(
-          () => (
-            <div className='bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden flex'>
-              <div className='w-1.5 bg-yellow-400'></div>
-              <div className='flex-1 p-4'>
-                <div className='flex'>
-                  <div className='flex-1'>
-                    <p className='font-bold text-gray-900 dark:text-white'>
-                      Compte existant
-                    </p>
-                    <p className='text-sm text-gray-600 dark:text-gray-300 mt-1'>
-                      Un compte avec cet email existe déjà.
-                    </p>
-
-                    <div className='mt-4 flex space-x-2'>
-                      <button
-                        onClick={() => navigate("/connexion")}
-                        className='px-3 py-1.5 text-white text-xs font-medium rounded-md bg-[#E71CA5] hover:opacity-90'>
-                        Se connecter
-                      </button>
-                      <button
-                        onClick={() => toast.dismiss()}
-                        className='px-3 py-1.5 text-gray-700 dark:text-gray-200 text-xs font-medium rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>
-                        Fermer
-                      </button>
-                    </div>
-                  </div>
-
+      // Notification d'erreur personnalisée
+      toast.custom(
+        () => (
+          <div className='bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden flex'>
+            <div className='w-1.5 bg-red-500'></div>
+            <div className='flex-1 p-4'>
+              <div className='flex'>
+                <div className='flex-1'>
+                  <p className='font-bold text-gray-900 dark:text-white'>
+                    Erreur d'inscription
+                  </p>
+                  <p className='text-sm text-gray-600 dark:text-gray-300 mt-1'>
+                    {errorMessage}
+                  </p>
                   <button
                     onClick={() => toast.dismiss()}
-                    className='ml-4 text-gray-400 hover:text-gray-600 transition-colors'>
-                    ×
+                    className='mt-4 px-3 py-1.5 text-gray-700 dark:text-gray-200 text-xs font-medium rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>
+                    Fermer
                   </button>
                 </div>
+                <button
+                  onClick={() => toast.dismiss()}
+                  className='ml-4 text-gray-400 hover:text-gray-600 transition-colors'>
+                  ×
+                </button>
               </div>
             </div>
-          ),
-          { duration: 15000 }
-        );
-      }
+          </div>
+        ),
+        { duration: 5000, id: "inscription-error-toast" }
+      );
     } finally {
       setIsSubmitting(false);
     }
