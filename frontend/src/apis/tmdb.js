@@ -25,7 +25,7 @@ async function fetchFromTMDB(endpoint, params = {}) {
   return response.json();
 }
 
-// 🔹 Obtenir tous les films
+// 🔹 Obtenir tout les films
 export async function getAllMovies(maxPages = 1) {
   const allMovies = [];
 
@@ -129,7 +129,7 @@ export async function showSerieInfo(serieId) {
     );
   });
 
-  // Exemple : récupère les épisodes de la saison 1
+  // Récupère tout les épisodes de la saison 1
   const saison1 = await getSeasonDetails(serieId, 1);
   console.log(
     "Épisodes saison 1:",
@@ -137,12 +137,19 @@ export async function showSerieInfo(serieId) {
   );
 }
 
-// Main
-(async () => {
-  try {
-    const details = await showSerieInfo(8590);
-    console.log(details);
-  } catch (e) {
-    console.error("Erreur getMovieDetails:", e.message);
-  }
-})();
+// Récupérer un épisode en particulier
+export async function getEpisodeDetails(serieId, seasonNumber, episodeNumber) {
+  return await fetchFromTMDB(
+    `tv/${serieId}/season/${seasonNumber}/episode/${episodeNumber}`
+  );
+}
+
+// Main pour tester lancer le terminal dans /apis et faire node tmdb.js, ça va éxécuter le code en dessous
+// (async () => {
+//   try {
+//     const details = await showSerieInfo(1399);
+//     console.log(details);
+//   } catch (e) {
+//     console.error("Erreur:", e.message);
+//   }
+// })();
