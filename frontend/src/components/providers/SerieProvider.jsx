@@ -13,6 +13,7 @@ export default function SerieProvider({ children }) {
   const [seriesSeen, setSeriesSeen] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [serie, setSerie] = useState([]); // Pour stocker toutes les séries disponibles
 
   const [detailSerie, setDetailSerie] = useState({
     id: 0,
@@ -40,6 +41,7 @@ export default function SerieProvider({ children }) {
         const seriesData = await getAllSeries();
         setSeries(seriesData);
         setFilteredSeries(seriesData);
+        setSerie(seriesData); // Stocker toutes les séries pour les recommandations
         setError(null);
       } catch (error) {
         setError(
@@ -52,8 +54,14 @@ export default function SerieProvider({ children }) {
     fetchSeries();
   }, []);
 
+  // Fonction optimisée pour charger les détails d'une série
   const loadSerieDetails = async (id) => {
     if (!id) return;
+    
+    // Vérifier si on est déjà en train de charger la même série
+    if (detailSerie.id && String(detailSerie.id) === String(id) && !loading) {
+      return; // Éviter les chargements multiples pour la même série
+    }
 
     setLoading(true);
     try {
@@ -62,36 +70,47 @@ export default function SerieProvider({ children }) {
       const saisonsCompletes = [];
 
       if (serieDetails.saisons && Array.isArray(serieDetails.saisons)) {
-        for (const saison of serieDetails.saisons) {
+        // Traitement des saisons et épisodes en parallèle pour plus d'efficacité
+        const saisonPromises = serieDetails.saisons.map(async (saison) => {
           const saisonNumero =
             typeof saison === "object" ? saison.numero : saison;
 
           try {
             const episodes = await getEpisodesBySaison(id, saisonNumero);
-
-            saisonsCompletes.push({
+            return {
               ...saison,
               episodes: episodes || [],
-            });
+            };
           } catch (episodeError) {
-            saisonsCompletes.push({
+            console.error(`Erreur lors du chargement des épisodes de la saison ${saisonNumero}:`, episodeError);
+            return {
               ...saison,
               episodes: [],
-            });
+            };
           }
-        }
+        });
+
+        saisonsCompletes.push(...await Promise.all(saisonPromises));
       }
 
-      setDetailSerie({
+      // Normaliser les données de la série
+      const normalizedSerie = {
         ...serieDetails,
-        saisons:
-          saisonsCompletes.length > 0
-            ? saisonsCompletes
-            : serieDetails.saisons || [],
-      });
+        id: serieDetails.id || serieDetails._id, // S'assurer que l'ID est toujours défini
+        acteurs: Array.isArray(serieDetails.acteurs) ? serieDetails.acteurs : [],
+        genre: Array.isArray(serieDetails.genre) ? serieDetails.genre : [],
+        paysProduction: Array.isArray(serieDetails.paysProduction) ? serieDetails.paysProduction : 
+                        (serieDetails.paysProduction || "Non spécifié"),
+        platforms: Array.isArray(serieDetails.platforms) ? serieDetails.platforms : [],
+        langues: Array.isArray(serieDetails.langues) ? serieDetails.langues : [],
+        bandeAnnonce: serieDetails.bandeAnnonce || "",
+        saisons: saisonsCompletes.length > 0 ? saisonsCompletes : serieDetails.saisons || [],
+      };
 
+      setDetailSerie(normalizedSerie);
       setError(null);
     } catch (error) {
+      console.error("Erreur lors du chargement des détails de la série:", error);
       setError(
         `Impossible de charger les détails de la série. Veuillez réessayer plus tard.`
       );
@@ -110,10 +129,10 @@ export default function SerieProvider({ children }) {
 
     if (setter === setAlreadySeenStates) {
       setSeriesSeen((prev) => {
-        if (prev.some((serie) => serie.id === id)) {
-          return prev.filter((serie) => serie.id !== id);
+        if (prev.some((serie) => String(serie.id) === String(id))) {
+          return prev.filter((serie) => String(serie.id) !== String(id));
         } else {
-          const serieToAdd = series.find((serie) => serie.id === id);
+          const serieToAdd = series.find((serie) => String(serie.id) === String(id));
           return serieToAdd ? [...prev, serieToAdd] : prev;
         }
       });
@@ -125,36 +144,45 @@ export default function SerieProvider({ children }) {
   }
 
   function filterPlatform(value) {
+    if (!value) return allSeries();
+    
     const platformArray = Array.isArray(value) ? value : [value];
 
     setFilteredSeries(
       series.filter(
         (serie) =>
           serie.platforms &&
+          Array.isArray(serie.platforms) &&
           serie.platforms.some((platform) => platformArray.includes(platform))
       )
     );
   }
 
   function filterLanguage(value) {
+    if (!value) return allSeries();
+    
     const languageArray = Array.isArray(value) ? value : [value];
 
     setFilteredSeries(
       series.filter(
         (serie) =>
           serie.langues &&
+          Array.isArray(serie.langues) &&
           serie.langues.some((langue) => languageArray.includes(langue))
       )
     );
   }
 
   function filterGender(value) {
+    if (!value) return allSeries();
+    
     const genderArray = Array.isArray(value) ? value : [value];
 
     setFilteredSeries(
       series.filter(
         (serie) =>
           serie.genre &&
+          Array.isArray(serie.genre) &&
           serie.genre.some((genre) => genderArray.includes(genre))
       )
     );
@@ -167,7 +195,7 @@ export default function SerieProvider({ children }) {
   function filterNotSeen() {
     setFilteredSeries(
       series.filter(
-        (serie) => !seriesSeen.some((seenSerie) => seenSerie.id === serie.id)
+        (serie) => !seriesSeen.some((seenSerie) => String(seenSerie.id) === String(serie.id))
       )
     );
   }
@@ -190,6 +218,7 @@ export default function SerieProvider({ children }) {
     <SerieContext.Provider
       value={{
         series,
+        serie, 
         filteredSeries,
         goSeeStates,
         alreadySeenStates,
