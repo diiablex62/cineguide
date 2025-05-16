@@ -94,9 +94,9 @@ export default function Home() {
   ]);
 
   return (
-    <div className='p-10'>
-      <div className='mt-10 dark:black px-6 rounded-lg text-center'>
-        <h1 className='text-2xl font-semibold mb- dark:text-white'>
+    <div className='p-10 bg-white dark:bg-black'>
+      <div className='mt-10 dark:bg-black px-6 rounded-lg text-center'>
+        <h1 className='text-2xl font-semibold mb- text-gray-900 dark:text-white'>
           {t(
             "home.titre",
             "CINÉGUIDE : Tous vos films et séries préférées au même endroit"
@@ -137,8 +137,8 @@ export default function Home() {
                 className='cursor-pointer'
                 to={`/detailserie/${serie.id}`}
                 key={serie.id}>
-                <div className='relative flex-shrink-0 w-40 h-60 bg-gray-200 dark:bg-gray-700 rounded-lg shadow scroll-snap-align-start group'>
-                  <div className='absolute bottom-[-50px] left-[-25px] transform -translate-x-1/2 text-[8rem] font-bold text-gray-800 dark:text-gray-400'>
+                <div className='relative flex-shrink-0 w-40 h-60 bg-gray-200 dark:bg-black rounded-lg shadow scroll-snap-align-start group'>
+                  <div className='absolute bottom-[-50px] left-[-25px] transform -translate-x-1/2 text-[8rem] font-bold text-gray-800 dark:text-white'>
                     {index + 1}
                   </div>
                   <img
@@ -161,9 +161,9 @@ export default function Home() {
                 className='cursor-pointer'
                 to={`/detailserie/${serie.id}`}
                 key={serie.id}>
-                <div className='flex h-24 bg-gray-200 dark:bg-gray-700'>
+                <div className='flex h-24 bg-gray-200 dark:bg-black'>
                   <div className='relative w-[20%]'>
-                    <div className='absolute bottom-[20px] left-[-40px] text-5xl font-bold text-gray-800 dark:text-gray-400'>
+                    <div className='absolute bottom-[20px] left-[-40px] text-5xl font-bold text-gray-800 dark:text-white'>
                       {index + 1}
                     </div>
                     <img
@@ -186,7 +186,7 @@ export default function Home() {
       </div>
 
       {/* Section 3 */}
-      <div className='mt-10'>
+      <div className='mt-10 bg-white dark:bg-black'>
         <h2 className='text-xl font-bold mb-4 text-left text-black dark:text-white -mx-10 md:mx-0 px-4 md:px-0'>
           {t("home.meilleuresSeriesAction", "Meilleures séries Action >")}
         </h2>
@@ -255,7 +255,7 @@ export default function Home() {
       </div>
 
       {/* Section On regarde quoi ce soir */}
-      <div className='mt-20'>
+      <div className='mt-20 bg-white dark:bg-black'>
         <h2 className='text-2xl font-bold text-black dark:text-white mb-8'>
           {t("home.onRegardeQuoi", "On regarde quoi ce soir ?")}
         </h2>
