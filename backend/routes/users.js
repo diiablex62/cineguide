@@ -8,6 +8,8 @@ router.post("/register", userController.register);
 router.post("/login", userController.login);
 router.get("/validate/:token", userController.validateAccount);
 router.post("/resend-validation", userController.resendValidationEmail);
+router.post("/forgot-password", userController.forgotPassword);
+router.post("/reset-password", userController.resetPassword);
 
 // Routes protégées (nécessitant authentification)
 router.get("/:id", auth, userController.getUserInfo);

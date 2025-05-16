@@ -369,10 +369,191 @@ const resendValidationEmail = async (req, res) => {
   }
 };
 
+// Fonction pour demander la réinitialisation du mot de passe
+const forgotPassword = async (req, res) => {
+  console.log("--- Début fonction forgotPassword ---");
+  try {
+    const { email } = req.body;
+    console.log("Demande de réinitialisation pour:", email);
+
+    if (!email) {
+      console.log("Email manquant");
+      return res.status(400).json({ message: "Email requis" });
+    }
+
+    // Vérifier si l'utilisateur existe
+    const user = await User.findOne({ email });
+    if (!user) {
+      console.log("Email non trouvé dans la base de données:", email);
+      // Par sécurité, on indique tout de même que l'email a été envoyé
+      return res.status(200).json({
+        message: "Si l'email existe, un lien de réinitialisation sera envoyé",
+      });
+    }
+
+    // Générer un token de réinitialisation
+    const resetToken = crypto.randomBytes(32).toString("hex");
+    console.log("Token de réinitialisation généré:", resetToken);
+
+    // Date d'expiration du token (30 minutes)
+    const resetTokenExpiration = new Date();
+    resetTokenExpiration.setMinutes(resetTokenExpiration.getMinutes() + 30);
+
+    // Mettre à jour l'utilisateur avec le token de réinitialisation
+    user.resetPasswordToken = resetToken;
+    user.resetPasswordExpires = resetTokenExpiration;
+    await user.save();
+    console.log("Token de réinitialisation enregistré pour l'utilisateur");
+
+    // Afficher l'URL pour le débogage
+    console.log("URL client utilisée:", process.env.CLIENT_URL);
+
+    // Créer l'URL de réinitialisation
+    const resetUrl = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
+    console.log("URL de réinitialisation complète:", resetUrl);
+
+    // Envoyer l'email avec le lien de réinitialisation
+    const emailContent = `
+      <h1>Réinitialisation de votre mot de passe</h1>
+      <p>Bonjour ${user.prenom},</p>
+      <p>Vous avez demandé une réinitialisation de votre mot de passe. Veuillez cliquer sur le lien ci-dessous pour définir un nouveau mot de passe :</p>
+      <a href="${resetUrl}" target="_blank">Réinitialiser mon mot de passe</a>
+      <p>Ce lien expirera dans 30 minutes.</p>
+      <p>Si vous n'avez pas demandé cette réinitialisation, veuillez ignorer cet email.</p>
+      <p>Cordialement,<br>L'équipe CineGuide</p>
+    `;
+
+    // Configuration pour l'envoi d'email
+    const nodemailer = require("nodemailer");
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
+
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: "Réinitialisation de votre mot de passe - CineGuide",
+      html: emailContent,
+    };
+
+    console.log("Envoi de l'email de réinitialisation...");
+    await transporter.sendMail(mailOptions);
+    console.log("Email de réinitialisation envoyé avec succès");
+
+    console.log("--- Fin fonction forgotPassword (succès) ---");
+    res.status(200).json({
+      message: "Email de réinitialisation envoyé avec succès",
+    });
+  } catch (error) {
+    console.log("--- Erreur dans fonction forgotPassword ---");
+    console.error("Erreur détaillée:", error);
+    console.log("Erreur de réinitialisation:", error.message);
+    console.log("Stack trace:", error.stack);
+    res.status(500).json({
+      message: "Erreur lors de la demande de réinitialisation",
+      error: error.message,
+    });
+  }
+};
+
+// Fonction pour réinitialiser le mot de passe avec le token
+const resetPassword = async (req, res) => {
+  console.log("--- Début fonction resetPassword ---");
+  try {
+    const { token, newPassword } = req.body;
+    console.log("Tentative de réinitialisation avec token");
+
+    if (!token || !newPassword) {
+      console.log("Token ou nouveau mot de passe manquant");
+      return res
+        .status(400)
+        .json({ message: "Token et nouveau mot de passe requis" });
+    }
+
+    // Rechercher l'utilisateur avec ce token
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      console.log("Token invalide ou expiré");
+      return res
+        .status(400)
+        .json({ message: "Token de réinitialisation invalide ou expiré" });
+    }
+
+    console.log("Utilisateur trouvé pour la réinitialisation:", user.email);
+
+    // Hachage du nouveau mot de passe
+    console.log("Hachage du nouveau mot de passe...");
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+    console.log("Nouveau mot de passe haché avec succès");
+
+    // Mettre à jour le mot de passe et supprimer le token de réinitialisation
+    user.password = hashedPassword;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+    await user.save();
+    console.log("Mot de passe réinitialisé avec succès");
+
+    // Informer l'utilisateur par email
+    const emailContent = `
+      <h1>Mot de passe réinitialisé avec succès</h1>
+      <p>Bonjour ${user.prenom},</p>
+      <p>Votre mot de passe a été réinitialisé avec succès. Vous pouvez maintenant vous connecter avec votre nouveau mot de passe.</p>
+      <p>Si vous n'êtes pas à l'origine de cette action, veuillez nous contacter immédiatement.</p>
+      <p>Cordialement,<br>L'équipe CineGuide</p>
+    `;
+
+    // Configuration pour l'envoi d'email
+    const nodemailer = require("nodemailer");
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
+
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: user.email,
+      subject: "Mot de passe réinitialisé - CineGuide",
+      html: emailContent,
+    };
+
+    console.log("Envoi de l'email de confirmation...");
+    await transporter.sendMail(mailOptions);
+    console.log("Email de confirmation envoyé avec succès");
+
+    console.log("--- Fin fonction resetPassword (succès) ---");
+    res.status(200).json({
+      message: "Mot de passe réinitialisé avec succès",
+    });
+  } catch (error) {
+    console.log("--- Erreur dans fonction resetPassword ---");
+    console.error("Erreur détaillée:", error);
+    console.log("Erreur de réinitialisation:", error.message);
+    console.log("Stack trace:", error.stack);
+    res.status(500).json({
+      message: "Erreur lors de la réinitialisation du mot de passe",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   register,
   login,
   getUserInfo,
   validateAccount,
   resendValidationEmail,
+  forgotPassword,
+  resetPassword,
 };

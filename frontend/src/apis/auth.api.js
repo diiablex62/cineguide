@@ -303,3 +303,88 @@ export async function testApiConnection() {
     return { success: false, error: error.message };
   }
 }
+
+// Demande de réinitialisation de mot de passe (mot de passe oublié)
+export async function forgotPassword(email) {
+  try {
+    console.log("Début de l'appel API pour mot de passe oublié");
+    console.log("URL d'appel:", `${BASE_URL}/users/forgot-password`);
+    console.log("Email pour réinitialisation:", email);
+
+    const response = await fetch(`${BASE_URL}/users/forgot-password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    console.log("Statut de la réponse:", response.status);
+    console.log(
+      "Headers de la réponse:",
+      Object.fromEntries([...response.headers])
+    );
+
+    const data = await response.json();
+    console.log("Réponse de demande de réinitialisation:", data);
+
+    if (!response.ok) {
+      console.error("Erreur de réponse API:", data);
+      throw {
+        message:
+          data.message || "Erreur lors de la demande de réinitialisation",
+        status: response.status,
+        data: data,
+      };
+    }
+
+    console.log("Demande de réinitialisation réussie");
+    return data;
+  } catch (error) {
+    console.error("Erreur de demande de réinitialisation:", error);
+    console.error("Détails de l'erreur:", error.message);
+    throw error;
+  }
+}
+
+// Réinitialiser le mot de passe avec le token reçu par email
+export async function resetPassword(token, newPassword) {
+  try {
+    console.log("Début de l'appel API pour réinitialiser le mot de passe");
+    console.log("URL d'appel:", `${BASE_URL}/users/reset-password`);
+
+    const response = await fetch(`${BASE_URL}/users/reset-password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ token, newPassword }),
+    });
+
+    console.log("Statut de la réponse:", response.status);
+    console.log(
+      "Headers de la réponse:",
+      Object.fromEntries([...response.headers])
+    );
+
+    const data = await response.json();
+    console.log("Réponse de réinitialisation:", data);
+
+    if (!response.ok) {
+      console.error("Erreur de réponse API:", data);
+      throw {
+        message:
+          data.message || "Erreur lors de la réinitialisation du mot de passe",
+        status: response.status,
+        data: data,
+      };
+    }
+
+    console.log("Réinitialisation du mot de passe réussie");
+    return data;
+  } catch (error) {
+    console.error("Erreur de réinitialisation de mot de passe:", error);
+    console.error("Détails de l'erreur:", error.message);
+    throw error;
+  }
+}
