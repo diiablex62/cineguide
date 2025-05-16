@@ -10,7 +10,6 @@ const episodeRoutes = require("./routes/episode");
 
 const acteurRoutes = require("./routes/acteurs");
 const filmRoutes = require("./routes/film");
-const userRoutes = require("./routes/users");
 const { verifyEmailConfig } = require("./utils/email/config");
 const app = express();
 app.use(express.json());
