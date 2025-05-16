@@ -18,6 +18,7 @@ import { IoIosLogOut } from "react-icons/io";
 import { AuthContext } from "../context/AuthContext";
 import LangButton from "./menu/LangButton";
 import { useTranslation } from "react-i18next"; // Ajout
+import SearchBar from "./SearchBar";
 
 export default function Header() {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -82,16 +83,8 @@ export default function Header() {
         </Link>
       )}
       <div className='flex items-center flex-col gap-4 max-1100:hidden'>
-        <div className='flex justify-between items-center max-1500:w-[400px] w-[640px] border border-black p-2 dark:border-white'>
-          <input
-            type='text'
-            placeholder={t(
-              "header.rechercherPlaceholder",
-              "Rechercher un film, une série, un acteur ..."
-            )}
-            className='w-full outline-none placeholder:text-gray-500 dark:placeholder:text-white'
-          />
-          <IoSearchOutline className='dark:text-white' />
+        <div className='max-1500:w-[400px] w-[640px]'>
+          <SearchBar />
         </div>
         <div className='w-full flex'>
           <NavLink

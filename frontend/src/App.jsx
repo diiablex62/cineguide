@@ -32,6 +32,7 @@ const ProfilActiviter = lazy(() => import("./pages/Profil/ProfilActiviter"));
 const ProfilListe = lazy(() => import("./pages/Profil/ProfilListe"));
 const ProfileReviews = lazy(() => import("./pages/Profil/ProfileReviews"));
 const Actualites = lazy(() => import("./pages/Actualites/ActualitesPage"));
+const ActeurProfil = lazy(() => import("./pages/Acteurs/ActeurProfil"));
 const Jeux = lazy(() => import("./pages/Jeux/Jeux"));
 const CGU = lazy(() => import("./pages/Legal/CGU"));
 const CGV = lazy(() => import("./pages/Legal/CGV"));
@@ -68,6 +69,9 @@ const AppContent = () => {
             <Route path='/series' element={<Series />} />
             <Route path='/actualites' element={<Actualites />} />
             <Route path='/jeux' element={<Jeux />} />
+
+            {/* Route pour les acteurs */}
+            <Route path='/acteurs/:id' element={<ActeurProfil />} />
 
             {/* Routes du profil protégées avec sous-routes */}
             <Route
