@@ -2,81 +2,76 @@
   {
     "id": 1,
     "question": "Qu'est-ce que Cineguide ?",
-    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+    "answer": "Cineguide est une plateforme qui vous permet de découvrir, rechercher et suivre vos films et séries préférés sur l'ensemble des services de streaming. Notre application vous aide à trouver facilement où regarder vos contenus favoris et vous propose des recommandations personnalisées."
   },
   {
     "id": 2,
     "question": "Comment fonctionne la recherche de contenu ?",
-    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+    "answer": "Notre moteur de recherche vous permet de trouver films et séries par titre, acteur, réalisateur ou genre. Les résultats indiquent sur quelles plateformes de streaming le contenu est disponible. Vous pouvez également filtrer par note, année de sortie ou disponibilité sur vos services de streaming préférés."
   },
   {
     "id": 3,
     "question": "Puis-je créer une liste de contenu préféré ?",
-    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+    "answer": "Absolument ! Sur chaque fiche de film ou série, vous trouverez des boutons d'action : 'Déjà ajouté', 'Regarder', et '+ Pas encore vu'. Ces boutons vous permettent d'organiser facilement votre contenu et de suivre ce que vous avez regardé ou souhaitez regarder plus tard."
   },
   {
     "id": 4,
-    "question": "L’application est-elle gratuite ?",
-    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+    "question": "L'application est-elle gratuite ?",
+    "answer": "L'application de base est gratuite, mais nous proposons trois formules d'abonnement premium : Silver (20€/mois), Gold (50€/mois) et Diamond (550€/mois). Chaque formule offre des avantages spécifiques comme la suppression des publicités, des limites de listes plus élevées (20, 50 ou illimitées), des quotas de commentaires journaliers (10, 100 ou illimités), des notifications de nouvelles saisons, ainsi que des badges exclusifs. Vous pouvez choisir l'abonnement qui correspond le mieux à vos besoins."
   },
   {
     "id": 5,
     "question": "Comment puis-je accéder à des films et séries en streaming via Cineguide ?",
-    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+    "answer": "Cineguide ne diffuse pas directement les contenus mais vous indique où ils sont disponibles. Lorsque vous sélectionnez un contenu, nous vous montrons les plateformes où vous pouvez le regarder et vous redirigeons vers le service de votre choix. Vous devez être abonné à ces services pour y accéder."
   },
   {
     "id": 6,
     "question": "Quels services de streaming sont disponibles sur Cineguide ?",
-    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+    "answer": "Nous couvrons plus de 300 services de streaming dont Netflix, Amazon Prime Video, Disney+, HBO Max, Apple TV+, Hulu, Canal+, OCS, Crunchyroll et bien d'autres. Notre base de données est régulièrement mise à jour pour inclure les nouveaux services et refléter les changements de catalogue de chaque plateforme."
   },
   {
     "id": 7,
     "question": "Comment puis-je modifier mes préférences de recherche ?",
-    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+    "answer": "Dans votre profil, accédez à la section 'Préférences'. Vous pourrez y sélectionner vos genres favoris, les plateformes que vous utilisez, vos acteurs préférés et d'autres critères. Ces préférences amélioreront la pertinence de vos recherches et de vos recommandations personnalisées."
   },
   {
     "id": 8,
     "question": "Puis-je voir les avis des utilisateurs sur un contenu ?",
-    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+    "answer": "Oui, chaque page de film ou série affiche les avis et notes des utilisateurs de Cineguide. Vous pouvez également consulter les notes provenant de sites spécialisés comme IMDb, Rotten Tomatoes et AlloCiné. Si vous êtes connecté, vous pouvez laisser vos propres avis et notes."
   },
   {
     "id": 9,
     "question": "Puis-je utiliser Cineguide sur mon téléphone ou ma tablette ?",
-    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+    "answer": "Cineguide est accessible sur tous les appareils disposant d'un navigateur web. Notre site est entièrement responsive et s'adapte à tous les écrans."
   },
   {
     "id": 10,
     "question": "Que faire si je rencontre un problème technique avec l'application ?",
-    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+    "answer": "Si vous rencontrez un problème technique, essayez de vider le cache de votre navigateur ou de redémarrer l'application. Si le problème persiste, contactez notre support technique via la section 'Mentions légales' de l'onglet 'Plus'. Nous nous efforcerons de résoudre le problème dans les plus brefs délais."
   },
   {
     "id": 11,
     "question": "Pourquoi mes résultats de recherche ne sont-ils pas à jour ?",
-    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+    "answer": "Notre base de données est mise à jour quotidiennement, mais les plateformes de streaming modifient régulièrement leurs catalogues. Si vous constatez une information obsolète, utilisez le bouton 'Signaler une erreur' sur la page du contenu concerné pour nous aider à maintenir notre base à jour."
   },
   {
     "id": 12,
     "question": "Comment puis-je m'abonner à une fonctionnalité premium ?",
-    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+    "answer": "Pour vous abonner à l'une de nos formules premium (Silver, Gold ou Diamond), rendez-vous dans la section 'Abonnement' de votre profil. Vous pourrez y sélectionner la formule qui vous convient : Silver à 20€/mois, Gold à 50€/mois ou Diamond à 550€/mois. Le paiement peut être effectué par carte bancaire ou PayPal. Chaque abonnement vous donne accès à différents niveaux d'avantages comme détaillé dans la question sur la gratuité de l'application."
   },
   {
     "id": 13,
     "question": "Comment supprimer mon compte ?",
-    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+    "answer": "Pour supprimer votre compte, veuillez nous contacter directement. Toutes vos données personnelles seront supprimées définitivement, conformément à notre politique de confidentialité et au RGPD."
   },
   {
     "id": 14,
     "question": "Mon contenu préféré n'est pas disponible dans ma région, que faire ?",
-    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+    "answer": "La disponibilité des contenus varie selon les régions en raison des droits de diffusion. Vous pouvez activer les notifications pour être alerté dès que ce contenu devient disponible dans votre région."
   },
   {
     "id": 15,
-    "question": "Comment puis-je signaler un problème avec un contenu ?",
-    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
-  },
-  {
-    "id": 16,
-    "question": "Comment fonctionne l’algorithme de recommandation de contenu ?",
-    "answer": "Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur."
+    "question": "Comment fonctionne l'algorithme de recommandation de contenu ?",
+    "answer": "Notre algorithme de recommandation analyse vos préférences, historique de visionnage, évaluations et listes pour vous suggérer des contenus susceptibles de vous plaire. Il prend également en compte les tendances actuelles et les similarités avec d'autres utilisateurs aux goûts proches des vôtres. Plus vous utilisez Cineguide, plus les recommandations deviennent précises."
   }
 ]

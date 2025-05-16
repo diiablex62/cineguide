@@ -14,7 +14,7 @@ export default function FAQ() {
           {t("faq.titre")}
         </h2>
       </div>
-      <div className='flex flex-col items-center justify-center gap-12'>
+      <div className='flex flex-col items-center justify-center gap-12 w-full px-4'>
         {questionsFAQ.map((question) => (
           <OneQuestion question={question} key={question.id} />
         ))}
