@@ -5,11 +5,13 @@ import { AuthContext } from "../../../context/AuthContext";
 import ModalPassword from "../../../components/modalPassword/ModalPassword";
 import { IoMdClose } from "react-icons/io";
 import * as authAPI from "../../../apis/auth.api";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfilUtils() {
   const contextValue = useContext(ProfilContext);
   const { user } = useContext(AuthContext);
   const { Facture = [] } = contextValue || {};
+  const navigate = useNavigate();
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -51,6 +53,11 @@ export default function ProfilUtils() {
     }
   };
 
+  const handleOpenAbonnementModal = () => {
+    console.log("Redirection vers la page d'abonnement");
+    navigate("/abonnement");
+  };
+
   console.log("ProfilUtils rendu");
 
   return (
@@ -62,7 +69,9 @@ export default function ProfilUtils() {
           Aucun
         </p>
         <div className='flex justify-center'>
-          <button className='bg-fuchsia text-white text-sm px-4 py-1.5 hover:bg-opacity-90 transition-colors'>
+          <button
+            onClick={handleOpenAbonnementModal}
+            className='bg-fuchsia text-white text-sm px-4 py-1.5 hover:bg-opacity-90 transition-colors'>
             S'abonner ?
           </button>
         </div>

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import silverLogo from "../../assets/abonnement/silver.svg";
 import goldLogo from "../../assets/abonnement/gold.svg";
 import diamondLogo from "../../assets/abonnement/diamond.svg";
@@ -16,7 +16,7 @@ const StepContent = ({
   switch (step) {
     case 1:
       return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4">
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4'>
           {[
             {
               id: "silver",
@@ -32,21 +32,21 @@ const StepContent = ({
               logo: diamondLogo,
             },
           ].map((plan) => (
-            <div key={plan.id} className="border p-4 rounded shadow mx-auto">
-              <div className="flex items-center justify-between">
-                <h3 className="text-[26px] font-light">{plan.name}</h3>
-                <div className="text-center">
+            <div key={plan.id} className='border p-4 rounded shadow mx-auto'>
+              <div className='flex items-center justify-between'>
+                <h3 className='text-[26px] font-light'>{plan.name}</h3>
+                <div className='text-center'>
                   <img
                     src={plan.logo}
                     alt={plan.name}
-                    className="h-16 w-16 mx-auto"
+                    className='h-16 w-16 mx-auto'
                   />
-                  <p className="text-gray-500 mt-2 whitespace-nowrap">
+                  <p className='text-gray-500 mt-2 whitespace-nowrap'>
                     {plan.price}
                   </p>
                 </div>
               </div>
-              <ul className="mt-4 text-sm">
+              <ul className='mt-4 text-sm'>
                 <li>➤ Pas de pub</li>
                 <li>
                   ➤ Liste (max{" "}
@@ -72,8 +72,7 @@ const StepContent = ({
               <button
                 id={plan.id}
                 onClick={() => handleSubscriptionClick(plan.id)}
-                className="mt-4 p-2 bg-[var(--color-fuchsia)] text-white rounded hover:bg-[var(--color-fuchsia-hover)] w-full cursor-pointer"
-              >
+                className='mt-4 p-2 bg-[var(--color-fuchsia)] text-white rounded hover:bg-[var(--color-fuchsia-hover)] w-full cursor-pointer'>
                 Choisir
               </button>
             </div>
@@ -82,25 +81,23 @@ const StepContent = ({
       );
     case 2:
       return (
-        <div className="flex flex-col items-center justify-center flex-grow">
-          <div className="flex flex-col sm:flex-row justify-center gap-8 mb-6">
+        <div className='flex flex-col items-center justify-center flex-grow'>
+          <div className='flex flex-col sm:flex-row justify-center gap-8 mb-6'>
             <div
-              className="text-center cursor-pointer"
-              onClick={() => handlePaymentClick("carte")}
-            >
+              className='text-center cursor-pointer'
+              onClick={() => handlePaymentClick("carte")}>
               <img
                 src={cbIcon}
-                alt="Carte Bancaire"
-                className="h-16 w-16 mx-auto"
+                alt='Carte Bancaire'
+                className='h-16 w-16 mx-auto'
               />
-              <p className="mt-2">Carte Bancaire</p>
+              <p className='mt-2'>Carte Bancaire</p>
             </div>
             <div
-              className="text-center cursor-pointer"
-              onClick={() => handlePaymentClick("paypal")}
-            >
-              <PayPal className="h-16 w-16 mx-auto" />
-              <p className="mt-2">PayPal</p>
+              className='text-center cursor-pointer'
+              onClick={() => handlePaymentClick("paypal")}>
+              <PayPal className='h-16 w-16 mx-auto' />
+              <p className='mt-2'>PayPal</p>
             </div>
           </div>
         </div>
@@ -108,33 +105,32 @@ const StepContent = ({
     case 3:
       if (selectedPaymentMethod === "carte") {
         return (
-          <div className="flex flex-col items-center">
+          <div className='flex flex-col items-center'>
             <form
-              className="w-full max-w-md"
-              onSubmit={(e) => handlePaymentSubmit(e, selectedPaymentMethod)}
-            >
-              <div className="mb-4">
-                <label className="block text-sm font-medium mb-2">
+              className='w-full max-w-md'
+              onSubmit={(e) => handlePaymentSubmit(e, selectedPaymentMethod)}>
+              <div className='mb-4'>
+                <label className='block text-sm font-medium mb-2'>
                   Nom prénom
                 </label>
                 <input
-                  type="text"
-                  id="name"
-                  className="w-full p-2 border rounded focus:outline-none focus:border-[var(--color-fuchsia)]"
+                  type='text'
+                  id='name'
+                  className='w-full p-2 border rounded focus:outline-none focus:border-[var(--color-fuchsia)]'
                 />
               </div>
-              <div className="mb-4">
-                <label className="block text-sm font-medium mb-2">
+              <div className='mb-4'>
+                <label className='block text-sm font-medium mb-2'>
                   Numéro de carte
                 </label>
                 <input
-                  type="text"
-                  id="cardNumber"
-                  maxLength="19"
-                  placeholder="xxxx xxxx xxxx xxxx"
-                  pattern="\d{4} \d{4} \d{4} \d{4}"
-                  title="Le numéro de carte doit être au format xxxx xxxx xxxx xxxx."
-                  className="w-full p-2 border rounded focus:outline-none focus:border-[var(--color-fuchsia)]"
+                  type='text'
+                  id='cardNumber'
+                  maxLength='19'
+                  placeholder='xxxx xxxx xxxx xxxx'
+                  pattern='\d{4} \d{4} \d{4} \d{4}'
+                  title='Le numéro de carte doit être au format xxxx xxxx xxxx xxxx.'
+                  className='w-full p-2 border rounded focus:outline-none focus:border-[var(--color-fuchsia)]'
                   onKeyDown={(e) => {
                     if (
                       !/[0-9]/.test(e.key) &&
@@ -158,17 +154,17 @@ const StepContent = ({
                   }}
                 />
               </div>
-              <div className="flex gap-4">
-                <div className="mb-4 flex-1">
-                  <label className="block text-sm font-medium mb-2">CCV</label>
+              <div className='flex gap-4'>
+                <div className='mb-4 flex-1'>
+                  <label className='block text-sm font-medium mb-2'>CCV</label>
                   <input
-                    type="text"
-                    id="ccv"
-                    maxLength="3"
-                    placeholder="xxx"
-                    pattern="\d{3}"
-                    title="Le CCV doit contenir exactement 3 chiffres."
-                    className="w-full p-2 border rounded focus:outline-none focus:border-[var(--color-fuchsia)]"
+                    type='text'
+                    id='ccv'
+                    maxLength='3'
+                    placeholder='xxx'
+                    pattern='\d{3}'
+                    title='Le CCV doit contenir exactement 3 chiffres.'
+                    className='w-full p-2 border rounded focus:outline-none focus:border-[var(--color-fuchsia)]'
                     onKeyDown={(e) => {
                       if (
                         !/[0-9]/.test(e.key) &&
@@ -188,18 +184,18 @@ const StepContent = ({
                     }}
                   />
                 </div>
-                <div className="mb-4 flex-1">
-                  <label className="block text-sm font-medium mb-2">
+                <div className='mb-4 flex-1'>
+                  <label className='block text-sm font-medium mb-2'>
                     Date d'expiration
                   </label>
                   <input
-                    type="text"
-                    id="expiryDate"
-                    maxLength="5"
-                    pattern="\d{2}/\d{2}"
-                    title="La date doit être au format MM/YY."
-                    placeholder="MM/YY"
-                    className="w-full p-2 border rounded focus:outline-none focus:border-[var(--color-fuchsia)]"
+                    type='text'
+                    id='expiryDate'
+                    maxLength='5'
+                    pattern='\d{2}/\d{2}'
+                    title='La date doit être au format MM/YY.'
+                    placeholder='MM/YY'
+                    className='w-full p-2 border rounded focus:outline-none focus:border-[var(--color-fuchsia)]'
                     onKeyDown={(e) => {
                       if (
                         !/[0-9]/.test(e.key) &&
@@ -228,9 +224,8 @@ const StepContent = ({
                 </div>
               </div>
               <button
-                type="submit"
-                className="w-full p-3 bg-[var(--color-fuchsia)] text-white rounded hover:bg-[var(--color-fuchsia-hover)]"
-              >
+                type='submit'
+                className='w-full p-3 bg-[var(--color-fuchsia)] text-white rounded hover:bg-[var(--color-fuchsia-hover)]'>
                 PAYER
               </button>
             </form>
@@ -238,19 +233,19 @@ const StepContent = ({
         );
       } else if (selectedPaymentMethod === "paypal") {
         return (
-          <div className="flex flex-col items-center justify-center flex-grow text-center">
-            <p className="text-lg">Redirection vers PayPal...</p>
+          <div className='flex flex-col items-center justify-center flex-grow text-center'>
+            <p className='text-lg'>Redirection vers PayPal...</p>
           </div>
         );
       }
       break;
     case 4:
       return (
-        <div className="flex flex-col items-center justify-center flex-grow text-center">
-          <h2 className="text-2xl sm:text-3xl font-light mb-4">
+        <div className='flex flex-col items-center justify-center flex-grow text-center'>
+          <h2 className='text-2xl sm:text-3xl font-light mb-4'>
             Achat terminé
           </h2>
-          <p className="text-lg mb-6">
+          <p className='text-lg mb-6'>
             Merci beaucoup pour votre argent !<br />
             Nous sommes ravis de vous compter parmi nos abonnés.
           </p>
@@ -263,26 +258,43 @@ const StepContent = ({
 
 export default function ModalAbo() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [step, setStep] = useState(1);
   const [selectedSubscription, setSelectedSubscription] = useState("");
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
 
+  useEffect(() => {
+    if (location.pathname === "/abonnement") {
+      setIsModalOpen(true);
+    }
+  }, [location.pathname]);
+
   const handleOpenModal = () => setIsModalOpen(true);
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setStep(1);
     setSelectedSubscription("");
     setSelectedPaymentMethod("");
+
+    if (location.pathname === "/abonnement") {
+      navigate(-1);
+    }
   };
+
   const handleSubscriptionClick = (id) => {
+    console.log("Abonnement sélectionné:", id);
     setSelectedSubscription(id);
     setStep(2);
   };
+
   const handlePaymentClick = (method) => {
+    console.log("Méthode de paiement sélectionnée:", method);
     setSelectedPaymentMethod(method);
     setStep(3);
   };
+
   const handlePaymentSubmit = (e) => {
     e.preventDefault();
     const name = document.getElementById("name").value.trim();
@@ -295,46 +307,46 @@ export default function ModalAbo() {
       return;
     }
 
+    console.log("Paiement soumis pour l'abonnement:", selectedSubscription);
     setStep(4);
   };
 
+  const showButton = location.pathname !== "/abonnement";
+
   return (
     <div className={isModalOpen ? "relative overflow-hidden" : ""}>
-      <button
-        onClick={handleOpenModal}
-        className="p-3 bg-[var(--color-fuchsia)] text-white rounded hover:bg-[var(--color-fuchsia-hover)]"
-      >
-        Voir les abonnements
-      </button>
+      {showButton && (
+        <button
+          onClick={handleOpenModal}
+          className='p-3 bg-[var(--color-fuchsia)] text-white rounded hover:bg-[var(--color-fuchsia-hover)]'>
+          Voir les abonnements
+        </button>
+      )}
 
       <div
         className={
           isModalOpen ? "fixed inset-0 backdrop-blur-sm bg-opacity-10" : ""
         }
-        onClick={handleCloseModal}
-      >
+        onClick={handleCloseModal}>
         {isModalOpen && (
           <div
-            className="fixed inset-0 flex items-start sm:items-center justify-center overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="bg-white dark:bg-black border border-gray-300 dark:border-white text-black dark:text-white p-6 rounded shadow-lg w-11/12 max-w-[900px] h-auto sm:h-[400px] flex flex-col justify-between">
-              <div className="relative mb-6">
+            className='fixed inset-0 flex items-start sm:items-center justify-center overflow-y-auto'
+            onClick={(e) => e.stopPropagation()}>
+            <div className='bg-white dark:bg-black border border-gray-300 dark:border-white text-black dark:text-white p-6 rounded shadow-lg w-11/12 max-w-[900px] h-auto sm:h-[400px] flex flex-col justify-between'>
+              <div className='relative mb-6'>
                 <button
                   onClick={handleCloseModal}
-                  className="absolute top-2 right-2 sm:top-0 sm:right-0 text-4xl font-light text-black dark:text-white hover:text-gray-700 dark:hover:text-gray-300 cursor-pointer"
-                >
+                  className='absolute top-2 right-2 sm:top-0 sm:right-0 text-4xl font-light text-black dark:text-white hover:text-gray-700 dark:hover:text-gray-300 cursor-pointer'>
                   &times;
                 </button>
                 {step > 1 && (
                   <button
                     onClick={() => setStep(step - 1)}
-                    className="absolute top-2 left-2 sm:top-0 sm:left-0 text-xl font-light text-black dark:text-white hover:text-gray-700 dark:hover:text-gray-300 cursor-pointer"
-                  >
+                    className='absolute top-2 left-2 sm:top-0 sm:left-0 text-xl font-light text-black dark:text-white hover:text-gray-700 dark:hover:text-gray-300 cursor-pointer'>
                     &larr; Retour
                   </button>
                 )}
-                <h2 className="text-2xl sm:text-3xl font-light mt-10 sm:mt-0 text-center text-black dark:text-white">
+                <h2 className='text-2xl sm:text-3xl font-light mt-10 sm:mt-0 text-center text-black dark:text-white'>
                   {step === 1
                     ? "Choisir un abonnement :"
                     : step === 2
