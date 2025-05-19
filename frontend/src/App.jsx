@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React from "react";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import ThemeProvider from "./components/providers/ThemeProvider";
 import MenuProvider from "./components/providers/MenuProvider";
@@ -16,29 +16,30 @@ import { LangageProvider } from "./components/providers/LangageProvider";
 import UserConnected from "./components/ProtectedRoutes/UserConnected";
 import UserNotConnected from "./components/ProtectedRoutes/UserNotConnected";
 
-const Home = lazy(() => import("./pages/Home"));
-const Films = lazy(() => import("./pages/Films/FilmList"));
-const DetailFilm = lazy(() => import("./pages/DetailFilm/DetailFilm"));
-const Series = lazy(() => import("./pages/Series/SeriesList"));
-const Connexion = lazy(() => import("./pages/Auth/Connexion"));
-const Inscription = lazy(() => import("./pages/Auth/Inscription"));
-const Validation = lazy(() => import("./pages/Auth/Validation"));
-const ResetPassword = lazy(() => import("./pages/Auth/ResetPassword"));
-const ForgottenPassword = lazy(() => import("./pages/Auth/ForgottenPassword"));
-const Profil = lazy(() => import("./pages/Profil/Profil"));
-const ProfilActiviter = lazy(() => import("./pages/Profil/ProfilActiviter"));
-const ProfilListe = lazy(() => import("./pages/Profil/ProfilListe"));
-const ProfileReviews = lazy(() => import("./pages/Profil/ProfileReviews"));
-const Actualites = lazy(() => import("./pages/Actualites/ActualitesPage"));
-const Jeux = lazy(() => import("./pages/Jeux/Jeux"));
-const CGU = lazy(() => import("./pages/Legal/CGU"));
-const CGV = lazy(() => import("./pages/Legal/CGV"));
-const FAQ = lazy(() => import("./pages/Legal/FAQ"));
-const MentionsLegales = lazy(() => import("./pages/Legal/MentionsLegales"));
-const NotFound = lazy(() => import("./pages/404"));
-const Header = lazy(() => import("./components/Header"));
-const Footer = lazy(() => import("./components/Footer"));
-const ModalAbo = lazy(() => import("./components/modal-abo/modalAbo"));
+import Home from "./pages/Home";
+import FilmList from "./pages/Films/FilmList";
+import DetailFilm from "./pages/DetailFilm/DetailFilm";
+import SeriesList from "./pages/Series/SeriesList";
+import Connexion from "./pages/Auth/Connexion";
+import Inscription from "./pages/Auth/Inscription";
+import Validation from "./pages/Auth/Validation";
+import ResetPassword from "./pages/Auth/ResetPassword";
+import ForgottenPassword from "./pages/Auth/ForgottenPassword";
+import Profil from "./pages/Profil/Profil";
+import ProfilActiviter from "./pages/Profil/ProfilActiviter";
+import ProfilListe from "./pages/Profil/ProfilListe";
+import ProfileReviews from "./pages/Profil/ProfileReviews";
+import ActualitesPage from "./pages/Actualites/ActualitesPage";
+import Jeux from "./pages/Jeux/Jeux";
+import CGU from "./pages/Legal/CGU";
+import CGV from "./pages/Legal/CGV";
+import FAQ from "./pages/Legal/FAQ";
+import MentionsLegales from "./pages/Legal/MentionsLegales";
+import NotFound from "./pages/404";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import ModalAbo from "./components/modal-abo/modalAbo";
+import ActeurProfil from "./pages/Acteurs/ActeurProfil";
 
 const AppContent = () => {
   const location = useLocation();
@@ -54,76 +55,72 @@ const AppContent = () => {
   return (
     <>
       <PendingAccountNotification />
-      <Suspense fallback={<LoadingSpinner />}>
-        {!isAuthPage && <Header />}
-        <main
-          className={`${
-            !isAuthPage
-              ? "min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white"
-              : ""
-          }`}
-        >
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/film" element={<Films />} />
-            <Route path="/detailfilm/:id" element={<DetailFilm />} />
-            <Route path="/series" element={<Series />} />
-            <Route path="/actualites" element={<Actualites />} />
-            <Route path="/jeux" element={<Jeux />} />
+      {!isAuthPage && <Header />}
+      <main
+        className={`${
+          !isAuthPage
+            ? "min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white"
+            : ""
+        }`}>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/film' element={<FilmList />} />
+          <Route path='/detailfilm/:id' element={<DetailFilm />} />
+          <Route path='/series' element={<SeriesList />} />
+          <Route path='/actualites' element={<ActualitesPage />} />
+          <Route path='/jeux' element={<Jeux />} />
 
-            {/* Route pour les acteurs */}
-            <Route path="/acteurs/:id" element={<ActeurProfil />} />
+          {/* Route pour les acteurs */}
+          <Route path='/acteurs/:id' element={<ActeurProfil />} />
 
-            {/* Routes du profil protégées avec sous-routes */}
-            <Route
-              path="/profil"
-              element={
-                <UserConnected>
-                  <Profil />
-                </UserConnected>
-              }
-            >
-              <Route path="mon-activiter" element={<ProfilActiviter />} />
-              <Route path="ma-liste" element={<ProfilListe />} />
-              <Route path="mes-reviews" element={<ProfileReviews />} />
-            </Route>
+          {/* Routes du profil protégées avec sous-routes */}
+          <Route
+            path='/profil'
+            element={
+              <UserConnected>
+                <Profil />
+              </UserConnected>
+            }>
+            <Route path='mon-activiter' element={<ProfilActiviter />} />
+            <Route path='ma-liste' element={<ProfilListe />} />
+            <Route path='mes-reviews' element={<ProfileReviews />} />
+          </Route>
 
-            <Route
-              path="/connexion"
-              element={
-                <UserNotConnected>
-                  <Connexion />
-                </UserNotConnected>
-              }
-            />
-            <Route
-              path="/inscription"
-              element={
-                <UserNotConnected>
-                  <Inscription />
-                </UserNotConnected>
-              }
-            />
-            <Route path="/validation" element={<Validation />} />
-            <Route path="/reset-password/:token" element={<ResetPassword />} />
-            <Route path="/forgotten-password" element={<ForgottenPassword />} />
-            <Route path="/cgu" element={<CGU />} />
-            <Route path="/cgv" element={<CGV />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/mentionsLegales" element={<MentionsLegales />} />
-            <Route
-              path="/abonnement"
-              element={
-                <UserConnected>
-                  <ModalAbo />
-                </UserConnected>
-              }
-            />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </main>
-        {!isAuthPage && <Footer />}
-      </Suspense>
+          <Route
+            path='/connexion'
+            element={
+              <UserNotConnected>
+                <Connexion />
+              </UserNotConnected>
+            }
+          />
+          <Route
+            path='/inscription'
+            element={
+              <UserNotConnected>
+                <Inscription />
+              </UserNotConnected>
+            }
+          />
+          <Route path='/validation' element={<Validation />} />
+          <Route path='/reset-password/:token' element={<ResetPassword />} />
+          <Route path='/forgotten-password' element={<ForgottenPassword />} />
+          <Route path='/cgu' element={<CGU />} />
+          <Route path='/cgv' element={<CGV />} />
+          <Route path='/faq' element={<FAQ />} />
+          <Route path='/mentionsLegales' element={<MentionsLegales />} />
+          <Route
+            path='/abonnement'
+            element={
+              <UserConnected>
+                <ModalAbo />
+              </UserConnected>
+            }
+          />
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      </main>
+      {!isAuthPage && <Footer />}
     </>
   );
 };
@@ -134,7 +131,6 @@ function App() {
       <MenuProvider>
         <AuthProvider>
           <LangageProvider>
-            {" "}
             <HomeProvider>
               <ProfilProvider>
                 <FilmProvider>
@@ -143,7 +139,7 @@ function App() {
                       <ActuProvider>
                         <BrowserRouter>
                           <ActorProvider>
-                            <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white">
+                            <div className='min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white'>
                               <AppContent />
                             </div>
                           </ActorProvider>
@@ -154,7 +150,7 @@ function App() {
                 </FilmProvider>
               </ProfilProvider>
             </HomeProvider>
-          </LangageProvider>{" "}
+          </LangageProvider>
         </AuthProvider>
       </MenuProvider>
     </ThemeProvider>
