@@ -126,13 +126,11 @@ export default function ModalAbo() {
   };
 
   const handleSubscriptionClick = (id) => {
-    console.log("Abonnement sélectionné:", id);
     setSelectedSubscription(id);
     setStep(2);
   };
 
   const handlePaymentClick = (method) => {
-    console.log("Méthode de paiement sélectionnée:", method);
     setSelectedPaymentMethod(method);
     setStep(3);
   };
@@ -149,7 +147,6 @@ export default function ModalAbo() {
       return;
     }
 
-    console.log("Paiement soumis pour l'abonnement:", selectedSubscription);
     setStep(4);
   };
 

@@ -40,14 +40,11 @@ export default function SearchBar() {
 
   const handleSearch = async () => {
     try {
-      console.log("Recherche de:", searchTerm);
       setIsLoading(true);
       setResults(null); // Réinitialiser les résultats avant la recherche
 
       const data = await searchAll(searchTerm);
-      console.log("Résultats complets reçus:", data);
       if (data.acteurs && data.acteurs.length > 0) {
-        console.log("Acteurs trouvés:", data.acteurs);
       }
       setResults(data);
       setShowResults(true);
@@ -84,7 +81,6 @@ export default function SearchBar() {
         navigate(`/series/${id.saison ? id.saison.serie : id.serie}`);
         break;
       case "acteur":
-        console.log("Navigation vers acteur:", id);
         navigate(`/acteurs/${id.id || id}`);
         break;
       default:

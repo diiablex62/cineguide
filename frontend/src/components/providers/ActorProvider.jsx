@@ -36,12 +36,10 @@ export function ActorProvider({ children }) {
   }, []);
 
   const toggleActor = (params) => {
-    console.log("Actor toggled:", params);
     setActor(params);
   };
 
   const actorRedirect = () => {
-    console.log("Redirection vers acteur:", detailActor.id);
     navigate(`/acteurs/${detailActor.id}`);
   };
 

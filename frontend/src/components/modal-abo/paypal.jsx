@@ -2,7 +2,6 @@ import React from "react";
 import PayPalCheckout from "../paiement/PayPalCheckout";
 
 export default function paypal({ selectedSubscription }) {
-  console.log(selectedSubscription);
 
   return (
     <div>
