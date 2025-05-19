@@ -46,30 +46,38 @@ import QuizzAccueil from "./pages/Jeux/pages/Quizz/components/QuizzAccueil";
 import { AfficheProvider } from "./components/providers/AfficheProvider";
 import ResetPassword from "./pages/Auth/ResetPassword";
 
+import AuthLayout from "./components/layout/AuthLayout";
+
 export const router = createBrowserRouter([
   {
     path: "*",
     element: <NotFound />,
   },
+  // Routes d'authentification avec leur propre layout (sans header/footer)
   {
-    path: "/reset-password/:token",
-    element: <ResetPassword />,
-  },
-  {
-    path: "/connexion",
-    element: (
-      <UserNotConnected>
-        <Connexion />
-      </UserNotConnected>
-    ),
-  },
-  {
-    path: "/inscription",
-    element: (
-      <UserNotConnected>
-        <Inscription />
-      </UserNotConnected>
-    ),
+    element: <AuthLayout />,
+    children: [
+      {
+        path: "reset-password/:token",
+        element: <ResetPassword />,
+      },
+      {
+        path: "connexion",
+        element: (
+          <UserNotConnected>
+            <Connexion />
+          </UserNotConnected>
+        ),
+      },
+      {
+        path: "inscription",
+        element: (
+          <UserNotConnected>
+            <Inscription />
+          </UserNotConnected>
+        ),
+      },
+    ],
   },
   {
     path: "/jeux",
