@@ -1,5 +1,4 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 
 const ML_CONTENT = {
   fr: [
@@ -267,8 +266,7 @@ const ML_CONTENT = {
 };
 
 export default function MentionsLegales() {
-  const { i18n } = useTranslation();
-  const lang = i18n.language.split("-")[0] || "fr";
+  const lang = "fr";
   const sections = ML_CONTENT[lang] || ML_CONTENT.fr;
 
   return (

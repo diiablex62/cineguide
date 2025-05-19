@@ -41,10 +41,12 @@ verifyEmailConfig();
 // Fonction pour envoyer un email de validation d'inscription
 const sendValidationEmail = async (email, nom, token) => {
   console.log("Envoi d'un email de validation à:", email);
-  console.log("URL du client:", process.env.CLIENT_URL);
+  console.log("URL du client pour l'email:", process.env.CLIENT_URL);
 
-  const validationUrl = `${process.env.CLIENT_URL}/validation?token=${token}`;
-  const logoUrl = `${process.env.CLIENT_URL}/logo_mail.png`; // Assurez-vous que ce fichier existe dans votre dossier public
+  // S'assurer que l'URL ne contient pas de virgules
+  const clientUrl = process.env.CLIENT_URL.split(",")[0];
+  const validationUrl = `${clientUrl}/validation?token=${token}`;
+  const logoUrl = `${clientUrl}/logo_mail.png`; // Assurez-vous que ce fichier existe dans votre dossier public
 
   const mailOptions = {
     from: process.env.EMAIL_USER,
@@ -186,8 +188,10 @@ const sendValidationEmail = async (email, nom, token) => {
 const sendConfirmationEmail = async (email, nom) => {
   console.log("Envoi d'un email de confirmation à:", email);
 
-  const loginUrl = `${process.env.CLIENT_URL}/connexion`;
-  const logoUrl = `${process.env.CLIENT_URL}/logo_mail.png`; // Assurez-vous que ce fichier existe dans votre dossier public
+  // S'assurer que l'URL ne contient pas de virgules
+  const clientUrl = process.env.CLIENT_URL.split(",")[0];
+  const loginUrl = `${clientUrl}/connexion`;
+  const logoUrl = `${clientUrl}/logo_mail.png`;
 
   const mailOptions = {
     from: process.env.EMAIL_USER,

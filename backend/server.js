@@ -15,10 +15,23 @@ const { verifyEmailConfig } = require("./utils/email/config");
 const app = express();
 app.use(express.json());
 
-console.log("Configuration du serveur avec CORS:", process.env.CLIENT_URL);
+console.log(
+  "Configuration du serveur avec CORS pour les origines:",
+  process.env.ALLOWED_ORIGINS
+);
 app.use(
   cors({
-    origin: "*",
+    origin: function (origin, callback) {
+      const allowedOrigins = process.env.ALLOWED_ORIGINS
+        ? process.env.ALLOWED_ORIGINS.split(",")
+        : [process.env.CLIENT_URL];
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        console.log(`Origine refusée: ${origin}`);
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
