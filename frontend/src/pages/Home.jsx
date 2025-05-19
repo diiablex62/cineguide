@@ -25,6 +25,9 @@ export default function Home() {
   // Log à chaque render de Home
   console.log("[Home] Render");
 
+  // Log à chaque render de Home
+  console.log("[Home] Render");
+
   const handleGenreChange = useCallback(
     (e) => {
       setSelectedGenre(e.target.value);
