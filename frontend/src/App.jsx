@@ -4,7 +4,6 @@ import ThemeProvider from "./components/providers/ThemeProvider";
 import MenuProvider from "./components/providers/MenuProvider";
 import AuthProvider from "./components/providers/AuthProvider";
 import LoadingSpinner from "./components/LoadingSpinner";
-import PendingAccountNotification from "./components/providers/PendingAccountNotification";
 import { HomeProvider } from "./components/providers/HomeProvider";
 import ProfilProvider from "./components/providers/ProfilProvider";
 import FiltreProvider from "./components/providers/FiltreProvider";
@@ -54,7 +53,6 @@ const AppContent = () => {
 
   return (
     <>
-      <PendingAccountNotification />
       {!isAuthPage && <Header />}
       <main
         className={`${
