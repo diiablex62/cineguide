@@ -125,6 +125,15 @@ const getMoviePlatforms = async (movieId) => {
   }
 };
 
+const getWeekTop = async (time) => {
+  try {
+    return await fetchFromTMDB(`trending/tv/${time}`);
+  } catch (err) {
+    console.error("Erreur récupération plateformes:", err.message);
+    return [];
+  }
+};
+
 module.exports = {
   getPopularSeries,
   getSerieDetails,
@@ -136,4 +145,5 @@ module.exports = {
   getMovieDetails,
   getFilmVideos,
   getMoviePlatforms,
+  getWeekTop,
 };
