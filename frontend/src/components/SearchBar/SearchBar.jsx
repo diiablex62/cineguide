@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import { searchAll } from "../apis/search.api";
+import { searchAll } from "../../apis/search.api";
 import { useNavigate } from "react-router-dom";
 import { IoSearchOutline } from "react-icons/io5";
-import { useTranslation } from "react-i18next";
 
 export default function SearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -11,7 +10,6 @@ export default function SearchBar() {
   const [showResults, setShowResults] = useState(false);
   const searchRef = useRef(null);
   const navigate = useNavigate();
-  const { t } = useTranslation();
 
   // Fermer les résultats si clic en dehors
   useEffect(() => {
@@ -99,10 +97,7 @@ export default function SearchBar() {
       <div className='flex justify-between items-center w-full border border-black p-2 dark:border-white'>
         <input
           type='text'
-          placeholder={t(
-            "header.rechercherPlaceholder",
-            "Rechercher un film, une série, un acteur ..."
-          )}
+          placeholder='Rechercher un film, une série, un acteur ...'
           className='w-full outline-none placeholder:text-gray-500 dark:placeholder:text-white dark:bg-black'
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}

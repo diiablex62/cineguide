@@ -3,11 +3,9 @@ import ProfilForm from "./components/ProfilForm";
 import ProfilUtils from "./components/ProfilUtils";
 import ProfilNav from "./components/ProfilNav";
 import { Outlet, useLocation } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 
 export default function Profil() {
   const location = useLocation();
-  const { t } = useTranslation();
   const isMainProfile = location.pathname === "/profil";
 
   console.log("Profil component rendered. Path:", location.pathname);

@@ -5,7 +5,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import { Link, NavLink } from "react-router-dom";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import MenuHeaderDesktop from "./menu/menuPlus/MenuHeaderDesktop";
-import MenuLangage from "./menu/menuLangage/MenuLangage";
+import MenuLangage from "../components/menu/menuLangage/MenuLangage";
 import { FaFacebookSquare } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { BsFillMoonStarsFill } from "react-icons/bs";
@@ -17,14 +17,12 @@ import { MenuContext } from "../context/MenuContext";
 import { IoIosLogOut } from "react-icons/io";
 import { AuthContext } from "../context/AuthContext";
 import LangButton from "./menu/LangButton";
-import { useTranslation } from "react-i18next"; // Ajout
-import SearchBar from "./SearchBar";
+import SearchBar from "./SearchBar/SearchBar";
 
 export default function Header() {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { menu, setMenu, burger, toggleBurger } = useContext(MenuContext);
   const { logout, isLoggedIn, isLoading } = useContext(AuthContext);
-  const { t } = useTranslation(); // Ajout
 
   // Fonction pour afficher les boutons d'authentification en fonction de l'état
   const renderAuthButtons = () => {
@@ -40,15 +38,13 @@ export default function Header() {
           <NavLink
             to='/profil'
             className='bg-fuchsia flex justify-center items-center h-[50px] px-2 text-white '>
-            {t("header.monCompte", "Mon compte")}
+            Mon compte
           </NavLink>
           <a
             onClick={logout}
             className='text-2xl cursor-pointer hover:text-fuchsia'>
             <IoIosLogOut />
-            <span className='sr-only'>
-              {t("header.deconnexion", "Déconnexion")}
-            </span>
+            <span className='sr-only'>Déconnexion</span>
           </a>
         </>
       );
@@ -60,12 +56,12 @@ export default function Header() {
         <NavLink
           to='/connexion'
           className='bg-fuchsia flex justify-center items-center h-[50px] w-[150px] px-2 text-white '>
-          {t("header.connexion", "Connexion")}
+          Connexion
         </NavLink>
         <NavLink
           to='/inscription'
           className='bg-white text-black flex justify-center items-center dark:bg-black dark:text-white h-[50px] w-[150px] border max-1500:px-8'>
-          {t("header.inscription", "S'inscrire")}
+          S'inscrire
         </NavLink>
       </>
     );
@@ -90,34 +86,34 @@ export default function Header() {
           <NavLink
             to='/'
             className='mr-5 text-black  dark:text-white hover:text-fuchsia'>
-            {t("header.accueil", "Accueil")}
+            Accueil
           </NavLink>
           <NavLink
             to='/film'
             className='mr-5 text-black  dark:text-white hover:text-fuchsia'>
-            {t("header.films", "Films")}
+            Films
           </NavLink>
           <NavLink
             to='/series'
             className='mr-5 text-black  dark:text-white hover:text-fuchsia'>
-            {t("header.series", "Séries")}
+            Séries
           </NavLink>
           <NavLink
             to='/actualites'
             className='mr-5 text-black  dark:text-white hover:text-fuchsia'>
-            {t("header.actualites", "Actualités")}
+            Actualités
           </NavLink>
           <NavLink
             to='/jeux'
             className='mr-5 text-black  dark:text-white hover:text-fuchsia'>
-            {t("header.jeux", "Jeux")}
+            Jeux
           </NavLink>
           {menu ? (
             <div>
               <div
                 onClick={() => setMenu(false)}
                 className='flex items-center gap-1 hover:text-fuchsia cursor-pointer text-black dark:text-white'>
-                <p>{t("header.plus", "Plus")}</p>
+                <p>Plus</p>
                 <FaChevronUp />
               </div>
               <MenuHeaderDesktop />
@@ -126,7 +122,7 @@ export default function Header() {
             <div
               onClick={() => setMenu(true)}
               className='flex items-center gap-1 hover:text-fuchsia cursor-pointer text-black dark:text-white'>
-              <p>{t("header.plus", "Plus")}</p>
+              <p>Plus</p>
               <FaChevronDown />
             </div>
           )}

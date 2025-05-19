@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import astroImage from "../assets/astro.webp";
-import { useTranslation } from "react-i18next";
 
 export default function NotFound() {
   const navigate = useNavigate();
-  const { t } = useTranslation();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -31,18 +29,16 @@ export default function NotFound() {
           paddingBottom: "20%",
         }}>
         <h1 className='text-4xl md:text-5xl font-bold mb-6'>
-          {t("notfound.title", "Vous vous êtes égaré ?")}
+          Vous vous êtes égaré ?
         </h1>
         <p className='text-base md:text-lg mb-8'>
-          {t(
-            "notfound.text",
-            "Désolé, nous n'avons pas trouvé cette page. Vous trouverez d'autres films et séries à explorer sur la page d'accueil."
-          )}
+          Désolé, nous n'avons pas trouvé cette page. Vous trouverez d'autres
+          films et séries à explorer sur la page d'accueil.
         </p>
         <Link
           to='/'
           className='px-6 py-3 bg-white text-black font-semibold rounded hover:bg-gray-200'>
-          {t("accueil", "Accueil Cineguide")}
+          Accueil Cineguide
         </Link>
       </div>
     </div>

@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { QuizzContext } from "../../../../../context/QuizzContext";
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 
 export default function PersonnalisationQuestionsQuizz() {
   const { questionsPerso, updateQuestionsPerso } = useContext(QuizzContext);

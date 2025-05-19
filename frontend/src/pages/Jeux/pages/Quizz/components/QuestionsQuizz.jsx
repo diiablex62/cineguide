@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
 
 export default function QuestionsQuizz() {
   const [selectedButtonId, setSelectedButtonId] = useState(null);

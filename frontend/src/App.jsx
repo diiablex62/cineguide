@@ -5,7 +5,6 @@ import MenuProvider from "./components/providers/MenuProvider";
 import AuthProvider from "./components/providers/AuthProvider";
 import LoadingSpinner from "./components/LoadingSpinner";
 import PendingAccountNotification from "./components/providers/PendingAccountNotification";
-import { LangageProvider } from "./components/providers/LangageProvider";
 import { HomeProvider } from "./components/providers/HomeProvider";
 import ProfilProvider from "./components/providers/ProfilProvider";
 import FiltreProvider from "./components/providers/FiltreProvider";
@@ -13,7 +12,6 @@ import FilmProvider from "./components/providers/FilmProvider";
 import { ActorProvider } from "./components/providers/ActorProvider";
 import SerieProvider from "./components/providers/SerieProvider";
 import { ActuProvider } from "./components/providers/ActuProvider";
-import "./Langue/i18n";
 import UserConnected from "./components/ProtectedRoutes/UserConnected";
 import UserNotConnected from "./components/ProtectedRoutes/UserNotConnected";
 
@@ -133,27 +131,25 @@ function App() {
     <ThemeProvider>
       <MenuProvider>
         <AuthProvider>
-          <LangageProvider>
-            <HomeProvider>
-              <ProfilProvider>
-                <FilmProvider>
-                  <SerieProvider>
-                    <FiltreProvider>
-                      <ActuProvider>
-                        <BrowserRouter>
-                          <ActorProvider>
-                            <div className='min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white'>
-                              <AppContent />
-                            </div>
-                          </ActorProvider>
-                        </BrowserRouter>
-                      </ActuProvider>
-                    </FiltreProvider>
-                  </SerieProvider>
-                </FilmProvider>
-              </ProfilProvider>
-            </HomeProvider>
-          </LangageProvider>
+          <HomeProvider>
+            <ProfilProvider>
+              <FilmProvider>
+                <SerieProvider>
+                  <FiltreProvider>
+                    <ActuProvider>
+                      <BrowserRouter>
+                        <ActorProvider>
+                          <div className='min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white'>
+                            <AppContent />
+                          </div>
+                        </ActorProvider>
+                      </BrowserRouter>
+                    </ActuProvider>
+                  </FiltreProvider>
+                </SerieProvider>
+              </FilmProvider>
+            </ProfilProvider>
+          </HomeProvider>
         </AuthProvider>
       </MenuProvider>
     </ThemeProvider>
