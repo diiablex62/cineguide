@@ -46,6 +46,7 @@ import ResultatQuizz from "./pages/Jeux/pages/Quizz/components/ResultatQuizz";
 import QuizzAccueil from "./pages/Jeux/pages/Quizz/components/QuizzAccueil";
 import { AfficheProvider } from "./components/providers/AfficheProvider";
 import ResetPassword from "./pages/Auth/ResetPassword";
+import ForgottenPassword from "./pages/Auth/ForgottenPassword";
 
 import AuthLayout from "./components/layout/AuthLayout";
 
@@ -60,6 +61,14 @@ export const router = createBrowserRouter([
       {
         path: "reset-password/:token",
         element: <ResetPassword />,
+      },
+      {
+        path: "forgotten-password",
+        element: (
+          <UserNotConnected>
+            <ForgottenPassword />
+          </UserNotConnected>
+        ),
       },
       {
         path: "validation",

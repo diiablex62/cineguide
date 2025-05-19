@@ -236,19 +236,35 @@ export default function Connexion() {
                 </p>
               )}
             </div>
-            <Link
-              to='/forgotten-password'
-              className='text-sm text-right text-[var(--color-fuchsia)] hover:underline'>
-              Mot de passe oublié?
-            </Link>
+
+            <div className='flex items-center justify-between'>
+              <div className='flex items-center'>
+                <input
+                  id='remember-me'
+                  name='remember-me'
+                  type='checkbox'
+                  className='h-4 w-4 text-fuchsia focus:ring-fuchsia border-gray-300 rounded'
+                />
+                <label
+                  htmlFor='remember-me'
+                  className='ml-2 block text-sm text-gray-900 dark:text-white'>
+                  Se souvenir de moi
+                </label>
+              </div>
+
+              <div className='text-sm'>
+                <Link
+                  to='/forgotten-password'
+                  className='font-medium text-fuchsia hover:text-fuchsia-700'>
+                  Mot de passe oublié ?
+                </Link>
+              </div>
+            </div>
+
             <button
               type='submit'
               disabled={isSubmitting}
-              className={`w-full p-3 ${
-                isSubmitting
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-[var(--color-fuchsia)] hover:bg-[var(--color-fuchsia-hover)]"
-              } text-white rounded transition-colors`}>
+              className='w-full text-white bg-fuchsia hover:bg-fuchsia-700 focus:ring-4 focus:outline-none focus:ring-fuchsia font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-50 disabled:cursor-not-allowed'>
               {isSubmitting ? "Connexion en cours..." : "Se connecter"}
             </button>
             <button
