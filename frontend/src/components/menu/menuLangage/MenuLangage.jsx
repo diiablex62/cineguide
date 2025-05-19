@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { LangageContext } from "../../../context/LangageContext";
 import { MenuContext } from "../../../context/MenuContext";
-import i18n from "../../../Langue/i18n";
 
 export default function MenuLangage() {
   const {
@@ -13,7 +12,6 @@ export default function MenuLangage() {
 
   const handleClick = (lang) => {
     handleLanguageChange(lang);
-    // Ne pas appeler i18n.changeLanguage ici !
   };
 
   return (

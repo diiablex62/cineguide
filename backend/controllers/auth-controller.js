@@ -158,3 +158,45 @@ function App() {
 }
 
 export default App;
+
+// Fonction pour construire une URL correctement
+const buildUrl = (baseUrl, path) => {
+  // Supprimer les slashes de fin du baseUrl
+  const cleanBaseUrl = baseUrl.endsWith("/") ? baseUrl.slice(0, -1) : baseUrl;
+  // Ajouter un slash au début du path s'il n'en a pas
+  const cleanPath = path.startsWith("/") ? path : `/${path}`;
+  return `${cleanBaseUrl}${cleanPath}`;
+};
+
+// Utiliser cette fonction lors de la création d'URLs
+const sendValidationEmail = async (user) => {
+  try {
+    // Utiliser la fonction buildUrl pour éviter les doubles slashes
+    const validationUrl = buildUrl(
+      process.env.CLIENT_URL,
+      `validation?token=${user.validationToken}`
+    );
+
+    // Le reste du code pour l'envoi d'email...
+    // ...existing code...
+  } catch (error) {
+    // ...existing code...
+  }
+};
+
+// De même pour les autres fonctions qui construisent des URLs
+const requestPasswordReset = async (req, res) => {
+  try {
+    // ...existing code...
+
+    // Construction correcte de l'URL de réinitialisation
+    const resetUrl = buildUrl(
+      process.env.CLIENT_URL,
+      `reset-password/${token}`
+    );
+
+    // ...existing code...
+  } catch (error) {
+    // ...existing code...
+  }
+};

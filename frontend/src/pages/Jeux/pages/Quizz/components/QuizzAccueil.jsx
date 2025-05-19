@@ -1,11 +1,9 @@
 import React, { useContext } from "react";
 import { QuizzContext } from "../../../../../context/QuizzContext";
 import { NavLink } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 
 export default function QuizzAccueil() {
   const { questionsPerso } = useContext(QuizzContext);
-  const { t } = useTranslation();
   const hasResponses = questionsPerso?.some((q) => q.response?.trim() !== "");
   const allQuestionsAnswered = questionsPerso?.every(
     (q) => q.response?.trim() !== ""
@@ -16,9 +14,7 @@ export default function QuizzAccueil() {
     <div className='flex flex-col gap-2.5 py-11 px-14 h-full'>
       <div className='flex flex-col'>
         {hasResponses ? (
-          <h2 className='text-3xl font-bold'>
-            {t("quiz.titre", "Quiz Personnalisé")}
-          </h2>
+          <h2 className='text-3xl font-bold'>Quiz Personnalisé</h2>
         ) : (
           <h2 className='text-3xl font-bold'>
             {t("quiz.bienvenue", "Bienvenue dans le Quiz Personnalisé")}

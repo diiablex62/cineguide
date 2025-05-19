@@ -5,7 +5,6 @@ import MenuProvider from "./components/providers/MenuProvider";
 import AuthProvider from "./components/providers/AuthProvider";
 import LoadingSpinner from "./components/LoadingSpinner";
 import PendingAccountNotification from "./components/providers/PendingAccountNotification";
-import { LangageProvider } from "./components/providers/LangageProvider";
 import { HomeProvider } from "./components/providers/HomeProvider";
 import ProfilProvider from "./components/providers/ProfilProvider";
 import FiltreProvider from "./components/providers/FiltreProvider";
@@ -13,11 +12,10 @@ import FilmProvider from "./components/providers/FilmProvider";
 import { ActorProvider } from "./components/providers/ActorProvider";
 import SerieProvider from "./components/providers/SerieProvider";
 import { ActuProvider } from "./components/providers/ActuProvider";
-import "./Langue/i18n";
+import { LangageProvider } from "./components/providers/LangageProvider";
 import UserConnected from "./components/ProtectedRoutes/UserConnected";
 import UserNotConnected from "./components/ProtectedRoutes/UserNotConnected";
 
-// Import des composants avec lazy loading
 const Home = lazy(() => import("./pages/Home"));
 const Films = lazy(() => import("./pages/Films/FilmList"));
 const DetailFilm = lazy(() => import("./pages/DetailFilm/DetailFilm"));
@@ -32,7 +30,6 @@ const ProfilActiviter = lazy(() => import("./pages/Profil/ProfilActiviter"));
 const ProfilListe = lazy(() => import("./pages/Profil/ProfilListe"));
 const ProfileReviews = lazy(() => import("./pages/Profil/ProfileReviews"));
 const Actualites = lazy(() => import("./pages/Actualites/ActualitesPage"));
-const ActeurProfil = lazy(() => import("./pages/Acteurs/ActeurProfil"));
 const Jeux = lazy(() => import("./pages/Jeux/Jeux"));
 const CGU = lazy(() => import("./pages/Legal/CGU"));
 const CGV = lazy(() => import("./pages/Legal/CGV"));
@@ -59,7 +56,13 @@ const AppContent = () => {
       <PendingAccountNotification />
       <Suspense fallback={<LoadingSpinner />}>
         {!isAuthPage && <Header />}
-        <main className={`${!isAuthPage ? "min-h-screen" : ""}`}>
+        <main
+          className={`${
+            !isAuthPage
+              ? "min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white"
+              : ""
+          }`}
+        >
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/film" element={<Films />} />
@@ -131,6 +134,7 @@ function App() {
       <MenuProvider>
         <AuthProvider>
           <LangageProvider>
+            {" "}
             <HomeProvider>
               <ProfilProvider>
                 <FilmProvider>
@@ -139,7 +143,9 @@ function App() {
                       <ActuProvider>
                         <BrowserRouter>
                           <ActorProvider>
-                            <AppContent />
+                            <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white">
+                              <AppContent />
+                            </div>
                           </ActorProvider>
                         </BrowserRouter>
                       </ActuProvider>
@@ -148,7 +154,7 @@ function App() {
                 </FilmProvider>
               </ProfilProvider>
             </HomeProvider>
-          </LangageProvider>
+          </LangageProvider>{" "}
         </AuthProvider>
       </MenuProvider>
     </ThemeProvider>

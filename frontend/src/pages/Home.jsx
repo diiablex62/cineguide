@@ -6,7 +6,6 @@ import Hulu from "../components/home/hulu";
 import peakyBg from "../assets/peaky2.jpg";
 import { HomeContext } from "../context/HomeContext";
 import { NavLink } from "react-router-dom";
-import { useTranslation } from "react-i18next"; // Ajout
 
 export default function Home() {
   const {
@@ -25,6 +24,9 @@ export default function Home() {
   } = useContext(HomeContext);
 
   const { t } = useTranslation(); // Ajout
+
+  // Log à chaque render de Home
+  console.log("[Home] Render");
 
   const handleGenreChange = useCallback(
     (e) => {
@@ -375,11 +377,11 @@ export default function Home() {
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
                   {t("home.aucunResultat", "Aucun ")}
                   {selectedType.film && !selectedType.serie
-                    ? t("home.film", "film")
+                    ? "film"
                     : !selectedType.film && selectedType.serie
-                    ? t("home.serie", "série")
-                    : t("home.filmOuSerie", "film ou série")}{" "}
-                  {t("home.neCorrespond", "ne correspond à vos critères 😕")}
+                    ? "série"
+                    : "film ou série"}{" "}
+                  ne correspond à vos critères 😕
                 </p>
                 <p className="text-gray-500 dark:text-gray-400">
                   {t(

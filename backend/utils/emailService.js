@@ -28,7 +28,9 @@ transporter.verify(function (error, success) {
 // Fonction pour envoyer un email de réinitialisation de mot de passe
 const sendPasswordResetEmail = async (to, token) => {
   try {
-    const resetUrl = `${process.env.CLIENT_URL}/reset-password/${token}`;
+    // S'assurer que l'URL ne contient pas de virgules
+    const clientUrl = process.env.CLIENT_URL.split(",")[0];
+    const resetUrl = `${clientUrl}/reset-password/${token}`;
 
     const mailOptions = {
       from: `"CineGuide" <${process.env.EMAIL_USER}>`,
