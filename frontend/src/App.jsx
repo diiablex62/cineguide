@@ -12,11 +12,10 @@ import FilmProvider from "./components/providers/FilmProvider";
 import { ActorProvider } from "./components/providers/ActorProvider";
 import SerieProvider from "./components/providers/SerieProvider";
 import { ActuProvider } from "./components/providers/ActuProvider";
-import { LangageProvider } from "./components/providers/LangageProvider"; // Ajout de l'import
+import { LangageProvider } from "./components/providers/LangageProvider"; 
 import UserConnected from "./components/ProtectedRoutes/UserConnected";
 import UserNotConnected from "./components/ProtectedRoutes/UserNotConnected";
 
-// Import des composants avec lazy loading
 const Home = lazy(() => import("./pages/Home"));
 const Films = lazy(() => import("./pages/Films/FilmList"));
 const DetailFilm = lazy(() => import("./pages/DetailFilm/DetailFilm"));
@@ -134,7 +133,6 @@ function App() {
         <AuthProvider>
           <LangageProvider>
             {" "}
-            {/** Ajout du LangageProvider ici */}
             <HomeProvider>
               <ProfilProvider>
                 <FilmProvider>
@@ -155,7 +153,6 @@ function App() {
               </ProfilProvider>
             </HomeProvider>
           </LangageProvider>{" "}
-          {/** Fin du LangageProvider */}
         </AuthProvider>
       </MenuProvider>
     </ThemeProvider>
