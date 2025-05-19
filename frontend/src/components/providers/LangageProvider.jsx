@@ -8,13 +8,12 @@ import de from "../../assets/allemagne.png";
 const LANGAGE_LIST = [
   { id: 1, code: "fr", img: fr, desc: "drapeau langue française" },
   { id: 2, code: "en", img: uk, desc: "drapeau langue anglaise" },
-  { id: 3, code: "es", img: es, desc: "drapeau langue espagnol" },
+  { id: 3, code: "es", img: es, desc: "drapeau langue espagnole" },
   { id: 4, code: "de", img: de, desc: "drapeau langue allemande" },
 ];
 
 export function LangageProvider({ children }) {
   const [langageMenu, setLangageMenu] = useState(false);
-
   const [selectedLang, setSelectedLang] = useState(() => {
     try {
       const saved = localStorage.getItem("selectedLangId");
@@ -29,16 +28,6 @@ export function LangageProvider({ children }) {
     }
   });
 
-  // Log à chaque render du Provider
-  console.log("[LangageProvider] Render, selectedLang:", selectedLang);
-
-  // Synchronise la langue i18n à chaque changement de selectedLang
-  useEffect(() => {
-    if (selectedLang && selectedLang.code) {
-      i18n.changeLanguage(selectedLang.code).then(() => {});
-    }
-  }, [selectedLang]);
-
   const handleLanguageChange = (lang) => {
     const found = LANGAGE_LIST.find((l) => l.id === lang.id);
 
@@ -46,24 +35,17 @@ export function LangageProvider({ children }) {
       setSelectedLang(found); // Met à jour l'état pour l'affichage du drapeau
       setLangageMenu(false);
       localStorage.setItem("selectedLangId", found.id);
-      if (found.code) {
-        i18n.changeLanguage(found.code).then(() => {});
-      }
-      localStorage.setItem("selectedLangId", found.id); // Sauvegarde le choix pour la persistance de l'affichage
     }
   };
-
-  const toggleLangageMenu = () => setLangageMenu((prev) => !prev);
 
   return (
     <LangageContext.Provider
       value={{
-        langage: LANGAGE_LIST,
-        selectedLang,
-        handleLanguageChange,
         langageMenu,
         setLangageMenu,
-        toggleLangageMenu,
+        selectedLang,
+        handleLanguageChange,
+        LANGAGE_LIST,
       }}
     >
       {children}
