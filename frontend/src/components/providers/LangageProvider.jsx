@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { LangageContext } from "../../context/LangageContext";
 import fr from "../../assets/france.png";
 import uk from "../../assets/royaume_uni.png";
 import es from "../../assets/espagne.png";
 import de from "../../assets/allemagne.png";
+import i18n from "../../Langue/i18n";
 
 const LANGAGE_LIST = [
   { id: 1, code: "fr", img: fr, desc: "drapeau langue française" },
@@ -21,16 +22,11 @@ export function LangageProvider({ children }) {
       const id = saved ? Number(saved) : null;
       const found = LANGAGE_LIST.find((l) => l.id === id);
       return found || LANGAGE_LIST[0];
-      const initialLang = LANGAGE_LIST.find((l) => l.id === 1); // Toujours français
-      return initialLang;
     } catch {
-      console.log("[LangageProvider] Fallback to default language (fr)");
-      return LANGAGE_LIST[0]; // Français par défaut
+      console.log("[LangageProvider] Fallback to default language");
+      return LANGAGE_LIST[0];
     }
   });
-
-  // Log à chaque render du Provider
-  console.log("[LangageProvider] Render, selectedLang:", selectedLang);
 
   // Synchronise la langue i18n à chaque changement de selectedLang
   useEffect(() => {
@@ -41,14 +37,14 @@ export function LangageProvider({ children }) {
 
   const handleLanguageChange = (lang) => {
     const found = LANGAGE_LIST.find((l) => l.id === lang.id);
+
     if (found) {
-      setSelectedLang(found); // Met à jour l'état pour l'affichage du drapeau
+      setSelectedLang(found);
       setLangageMenu(false);
       localStorage.setItem("selectedLangId", found.id);
       if (found.code) {
         i18n.changeLanguage(found.code).then(() => {});
       }
-      localStorage.setItem("selectedLangId", found.id); // Sauvegarde le choix pour la persistance de l'affichage
     }
   };
 
