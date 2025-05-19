@@ -60,7 +60,12 @@ const AppContent = () => {
       <PendingAccountNotification />
       <Suspense fallback={<LoadingSpinner />}>
         {!isAuthPage && <Header />}
-        <main className={`${!isAuthPage ? "min-h-screen" : ""}`}>
+        <main
+          className={`${
+            !isAuthPage
+              ? "min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white"
+              : ""
+          }`}>
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/film' element={<Films />} />
@@ -137,7 +142,9 @@ function App() {
                       <ActuProvider>
                         <BrowserRouter>
                           <ActorProvider>
-                            <AppContent />
+                            <div className='min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white'>
+                              <AppContent />
+                            </div>
                           </ActorProvider>
                         </BrowserRouter>
                       </ActuProvider>

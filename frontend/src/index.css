@@ -85,7 +85,7 @@ html {
   scrollbar-width: none;
 }
 .scrollbar-hide::-webkit-scrollbar {
-  display: none; 
+  display: none;
 }
 
 .container {
@@ -93,15 +93,26 @@ html {
   margin: 0 auto;
 }
 
-
-
-.swiper-button-next{
+.swiper-button-next {
   color: white !important;
   margin-top: -100px !important;
 }
 
-.swiper-button-prev{
+.swiper-button-prev {
   color: white !important;
   margin-top: -100px !important;
-  
+}
+
+/* Ajouter ces règles pour garantir le mode sombre partout */
+body {
+  @apply bg-gray-900 text-white;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  @apply bg-gray-900 text-white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }

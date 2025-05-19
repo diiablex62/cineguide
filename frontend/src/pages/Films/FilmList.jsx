@@ -2,14 +2,14 @@ import React, { useContext } from "react";
 import Filtre from "../../components/filtre/Filtre";
 import CardFilm from "./components/CardFilm";
 
-export default function FilmList() {
+const FilmList = () => {
   return (
-    <div className="dark:bg-black dark:text-white min-h-screen mt-5">
-      <div className="md:flex md:p-4">
-        <div className="md:w-[40%] md:mr-5 lg:w-[25%] ">
+    <div className='bg-white dark:bg-black text-gray-900 dark:text-white min-h-screen'>
+      <div className='md:flex md:p-4'>
+        <div className='md:w-[40%] md:mr-5 lg:w-[25%] '>
           <Filtre></Filtre>
         </div>
-        <div className="md:w-[60%] lg:w-[75%]">
+        <div className='md:w-[60%] lg:w-[75%]'>
           <CardFilm></CardFilm>
         </div>
       </div>
@@ -18,4 +18,6 @@ export default function FilmList() {
       </div> */}
     </div>
   );
-}
+};
+
+export default FilmList;
