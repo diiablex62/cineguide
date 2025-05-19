@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import FilmList from "./pages/Films/FilmList";
 import Connexion from "./pages/Auth/Connexion";
 import Inscription from "./pages/Auth/Inscription";
+import Validation from "./pages/Auth/Validation";
 import ActualitesPage from "./pages/Actualites/ActualitesPage";
 import SeriesList from "./pages/Series/SeriesList";
 import MentionsLegales from "./pages/Legal/MentionsLegales";
@@ -52,14 +53,17 @@ export const router = createBrowserRouter([
   {
     path: "*",
     element: <NotFound />,
-  },
-  // Routes d'authentification avec leur propre layout (sans header/footer)
+  }, // Routes d'authentification avec leur propre layout (sans header/footer)
   {
     element: <AuthLayout />,
     children: [
       {
         path: "reset-password/:token",
         element: <ResetPassword />,
+      },
+      {
+        path: "validation",
+        element: <Validation />,
       },
       {
         path: "connexion",
