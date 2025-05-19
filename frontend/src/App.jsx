@@ -15,6 +15,8 @@ import { ActuProvider } from "./components/providers/ActuProvider";
 import { LangageProvider } from "./components/providers/LangageProvider";
 import UserConnected from "./components/ProtectedRoutes/UserConnected";
 import UserNotConnected from "./components/ProtectedRoutes/UserNotConnected";
+import "./Langue/i18n";
+import ActeurProfil from "./pages/Acteurs/ActeurProfil";
 
 import Home from "./pages/Home";
 import FilmList from "./pages/Films/FilmList";

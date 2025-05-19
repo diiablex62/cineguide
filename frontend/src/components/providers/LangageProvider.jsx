@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { LangageContext } from "../../context/LangageContext";
 import fr from "../../assets/france.png";
 import uk from "../../assets/royaume_uni.png";
@@ -21,13 +21,14 @@ export function LangageProvider({ children }) {
       const found = LANGAGE_LIST.find((l) => l.id === id);
       return found || LANGAGE_LIST[0];
     } catch {
-      console.log("[LangageProvider] Fallback to default language (fr)");
-      return LANGAGE_LIST[0]; // Français par défaut
+      console.log("[LangageProvider] Fallback to default language");
+      return LANGAGE_LIST[0];
     }
   });
 
   const handleLanguageChange = (lang) => {
     const found = LANGAGE_LIST.find((l) => l.id === lang.id);
+
     if (found) {
       setSelectedLang(found);
       setLangageMenu(false);
