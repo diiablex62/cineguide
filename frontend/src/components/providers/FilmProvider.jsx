@@ -68,16 +68,28 @@ export default function FilmProvider({ children }) {
   function filterPlatform(value) {
     setFilteredFilm(
       film.filter((film) =>
-        film.platforms.some((platform) => value.includes(platform))
+        film.platforms.some((platform) =>
+          value.includes(platform.provider_name)
+        )
       )
     );
   }
 
-  // Affiche les films par langue
   function filterLanguage(value) {
+    if (!value || (Array.isArray(value) && value.length === 0)) {
+      setFilteredFilm(film);
+      return;
+    }
+
+    const selectedLanguages = (Array.isArray(value) ? value : [value]).map(
+      (l) => l.toLowerCase()
+    );
+
     setFilteredFilm(
       film.filter((film) =>
-        film.langues.some((langue) => value.includes(langue))
+        film.langues?.some((langue) =>
+          selectedLanguages.includes(langue?.toLowerCase())
+        )
       )
     );
   }
