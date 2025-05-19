@@ -7,7 +7,6 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 const fetchRSSArticles = async (rssUrl) => {
   const proxyUrl = "https://api.allorigins.win/get?url=";
   try {
-    console.log("Début du chargement des articles RSS...");
     const response = await fetch(proxyUrl + encodeURIComponent(rssUrl));
     const data = await response.json();
     const parser = new DOMParser();
@@ -21,7 +20,7 @@ const fetchRSSArticles = async (rssUrl) => {
         item.querySelector("enclosure")?.getAttribute("url") ||
         "https://via.placeholder.com/150",
     }));
-    console.log(`${articles.length} articles chargés avec succès`);
+
     return articles;
   } catch (error) {
     console.error("Erreur lors de la récupération du flux RSS :", error);
@@ -94,12 +93,12 @@ export default function ActualitesPage() {
   }
 
   return (
-    <div className='p-6 dark:bg-black'>
-      <h2 className='text-2xl font-bold text-[var(--color-fuchsia)] mb-6 w-full md:w-[50%] mx-auto text-left dark:text-white'>
+    <div className="p-6 dark:bg-black">
+      <h2 className="text-2xl font-bold text-[var(--color-fuchsia)] mb-6 w-full md:w-[50%] mx-auto text-left dark:text-white">
         ACTUALITÉS
       </h2>
       {renderArticles()}
-      <div className='flex justify-center mt-6'>
+      <div className="flex justify-center mt-6">
         {Array.from(
           { length: Math.ceil(articles.length / articlesPerPage) },
           (_, index) => (
@@ -110,7 +109,8 @@ export default function ActualitesPage() {
                 currentPage === index + 1
                   ? "bg-[var(--color-fuchsia)] text-white"
                   : "bg-white text-black border-gray-300 hover:bg-gray-100"
-              }`}>
+              }`}
+            >
               {index + 1}
             </button>
           )

@@ -26,7 +26,6 @@ export function ActorProvider({ children }) {
         const response = await fetch(`${BASE_URL}/acteurs`);
         if (response.ok) {
           const actorsFromApi = await response.json();
-          console.log("Acteurs chargés:", actorsFromApi);
           setAllActors(actorsFromApi);
         }
       } catch (error) {
@@ -68,7 +67,8 @@ export function ActorProvider({ children }) {
         actor,
         filmsByActor,
         recompenseByActor,
-      }}>
+      }}
+    >
       {children}
     </ActorContext.Provider>
   );

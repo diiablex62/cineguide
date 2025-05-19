@@ -4,8 +4,6 @@ import "./index.css";
 import App from "./App";
 import QuizzProvider from "./components/providers/QuizzProvider.jsx";
 
-console.log("Initialisation de l'application");
-
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <QuizzProvider>

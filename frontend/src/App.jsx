@@ -54,8 +54,6 @@ const AppContent = () => {
     ].includes(location.pathname) ||
     location.pathname.startsWith("/reset-password/");
 
-  console.log("Current path:", location.pathname, "isAuthPage:", isAuthPage);
-
   return (
     <>
       <PendingAccountNotification />
@@ -63,31 +61,32 @@ const AppContent = () => {
         {!isAuthPage && <Header />}
         <main className={`${!isAuthPage ? "min-h-screen" : ""}`}>
           <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/film' element={<Films />} />
-            <Route path='/detailfilm/:id' element={<DetailFilm />} />
-            <Route path='/series' element={<Series />} />
-            <Route path='/actualites' element={<Actualites />} />
-            <Route path='/jeux' element={<Jeux />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/film" element={<Films />} />
+            <Route path="/detailfilm/:id" element={<DetailFilm />} />
+            <Route path="/series" element={<Series />} />
+            <Route path="/actualites" element={<Actualites />} />
+            <Route path="/jeux" element={<Jeux />} />
 
             {/* Route pour les acteurs */}
-            <Route path='/acteurs/:id' element={<ActeurProfil />} />
+            <Route path="/acteurs/:id" element={<ActeurProfil />} />
 
             {/* Routes du profil protégées avec sous-routes */}
             <Route
-              path='/profil'
+              path="/profil"
               element={
                 <UserConnected>
                   <Profil />
                 </UserConnected>
-              }>
-              <Route path='mon-activiter' element={<ProfilActiviter />} />
-              <Route path='ma-liste' element={<ProfilListe />} />
-              <Route path='mes-reviews' element={<ProfileReviews />} />
+              }
+            >
+              <Route path="mon-activiter" element={<ProfilActiviter />} />
+              <Route path="ma-liste" element={<ProfilListe />} />
+              <Route path="mes-reviews" element={<ProfileReviews />} />
             </Route>
 
             <Route
-              path='/connexion'
+              path="/connexion"
               element={
                 <UserNotConnected>
                   <Connexion />
@@ -95,29 +94,29 @@ const AppContent = () => {
               }
             />
             <Route
-              path='/inscription'
+              path="/inscription"
               element={
                 <UserNotConnected>
                   <Inscription />
                 </UserNotConnected>
               }
             />
-            <Route path='/validation' element={<Validation />} />
-            <Route path='/reset-password/:token' element={<ResetPassword />} />
-            <Route path='/forgotten-password' element={<ForgottenPassword />} />
-            <Route path='/cgu' element={<CGU />} />
-            <Route path='/cgv' element={<CGV />} />
-            <Route path='/faq' element={<FAQ />} />
-            <Route path='/mentionsLegales' element={<MentionsLegales />} />
+            <Route path="/validation" element={<Validation />} />
+            <Route path="/reset-password/:token" element={<ResetPassword />} />
+            <Route path="/forgotten-password" element={<ForgottenPassword />} />
+            <Route path="/cgu" element={<CGU />} />
+            <Route path="/cgv" element={<CGV />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/mentionsLegales" element={<MentionsLegales />} />
             <Route
-              path='/abonnement'
+              path="/abonnement"
               element={
                 <UserConnected>
                   <ModalAbo />
                 </UserConnected>
               }
             />
-            <Route path='*' element={<NotFound />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         {!isAuthPage && <Footer />}
@@ -127,7 +126,6 @@ const AppContent = () => {
 };
 
 function App() {
-  console.log("App component rendered");
   return (
     <ThemeProvider>
       <MenuProvider>

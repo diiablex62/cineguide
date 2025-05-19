@@ -11,8 +11,6 @@ const idToCode = { 1: "fr", 2: "en", 3: "es", 4: "de" };
 const initialLang =
   idToCode[savedLangId] || localStorage.getItem("i18nextLng") || "fr";
 
-console.log("[i18n] Initial language:", initialLang);
-
 i18n.use(initReactI18next).init({
   resources: {
     fr,

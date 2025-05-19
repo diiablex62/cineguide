@@ -10,17 +10,15 @@ export default function Profil() {
   const { t } = useTranslation();
   const isMainProfile = location.pathname === "/profil";
 
-  console.log("Profil component rendered. Path:", location.pathname);
-
   return (
-    <div className='flex flex-col dark:bg-black dark:text-white dark:border-white'>
+    <div className="flex flex-col dark:bg-black dark:text-white dark:border-white">
       {isMainProfile ? (
         // Layout pour la page principale du profil avec formulaire et aside
-        <div className='flex flex-col md:flex-row px-6 pt-6 pb-6'>
+        <div className="flex flex-col md:flex-row px-6 pt-6 pb-6">
           {/* Colonne gauche avec entête et formulaire */}
-          <div className='w-full md:w-2/3 md:pr-8'>
+          <div className="w-full md:w-2/3 md:pr-8">
             {/* Entête avec photo et info utilisateur */}
-            <div className='mb-6'>
+            <div className="mb-6">
               <ProfilNav />
             </div>
 
@@ -29,15 +27,15 @@ export default function Profil() {
           </div>
 
           {/* Colonne droite avec informations de compte */}
-          <div className='w-full md:w-1/3'>
+          <div className="w-full md:w-1/3">
             <ProfilUtils />
           </div>
         </div>
       ) : (
         // Pour les onglets comme "Mon activité", "Ma liste", "Mes reviews"
-        <div className='px-6 pb-6'>
+        <div className="px-6 pb-6">
           {/* Entête pour les autres onglets */}
-          <div className='mb-6 pt-6'>
+          <div className="mb-6 pt-6">
             <ProfilNav />
           </div>
 

@@ -21,10 +21,6 @@ export function LangageProvider({ children }) {
       const saved = localStorage.getItem("selectedLangId");
       const id = saved ? Number(saved) : null;
       const found = LANGAGE_LIST.find((l) => l.id === id);
-      console.log(
-        "[LangageProvider] Initial selectedLang:",
-        found || LANGAGE_LIST[0]
-      );
       return found || LANGAGE_LIST[0];
     } catch {
       console.log("[LangageProvider] Fallback to default language");
@@ -32,41 +28,21 @@ export function LangageProvider({ children }) {
     }
   });
 
-  // Log à chaque render du Provider
-  console.log("[LangageProvider] Render, selectedLang:", selectedLang);
-
   // Synchronise la langue i18n à chaque changement de selectedLang
   useEffect(() => {
-    console.log("[LangageProvider] useEffect selectedLang:", selectedLang);
     if (selectedLang && selectedLang.code) {
-      i18n.changeLanguage(selectedLang.code).then(() => {
-        console.log(
-          "[LangageProvider] i18n.changeLanguage called with:",
-          selectedLang.code
-        );
-      });
+      i18n.changeLanguage(selectedLang.code).then(() => {});
     }
   }, [selectedLang]);
 
   const handleLanguageChange = (lang) => {
     const found = LANGAGE_LIST.find((l) => l.id === lang.id);
-    console.log(
-      "[LangageProvider] handleLanguageChange called with:",
-      lang,
-      "found:",
-      found
-    );
     if (found) {
       setSelectedLang(found);
       setLangageMenu(false);
       localStorage.setItem("selectedLangId", found.id);
       if (found.code) {
-        i18n.changeLanguage(found.code).then(() => {
-          console.log(
-            "[LangageProvider] i18n.changeLanguage (immediate) called with:",
-            found.code
-          );
-        });
+        i18n.changeLanguage(found.code).then(() => {});
       }
     }
   };
@@ -82,7 +58,8 @@ export function LangageProvider({ children }) {
         langageMenu,
         setLangageMenu,
         toggleLangageMenu,
-      }}>
+      }}
+    >
       {children}
     </LangageContext.Provider>
   );

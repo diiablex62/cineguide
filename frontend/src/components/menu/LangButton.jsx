@@ -12,7 +12,6 @@ export default function LangButton() {
   const btnRef = useRef();
 
   useEffect(() => {
-    console.log("Langage menu state:", langageMenu);
     if (!langageMenu) return;
     const handleClick = (e) => {
       if (btnRef.current && !btnRef.current.contains(e.target)) {
