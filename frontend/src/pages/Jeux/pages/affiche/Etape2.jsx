@@ -28,7 +28,7 @@ export default function Etape2() {
   }, [affiche]);
 
   return (
-    <div className="w-full lg:w-6/8 lg:flex lg:flex-col  px-10 bg-white mt-5 shadow rounded-r-xl ">
+    <div className="w-full lg:w-6/8 lg:flex lg:flex-col text-black  px-10 bg-white mt-5 shadow rounded-r-xl ">
       <div className="flex flex-col justify-center lg:flex-start mt-5 w-full">
         <h2 className="font-medium text-center lg:text-start text-xl">
           Bienvenue dans Affiche brouillées
