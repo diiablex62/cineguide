@@ -14,7 +14,7 @@
     "@paypal/react-paypal-js": "^8.8.3",
     "@tailwindcss/vite": "^4.1.4",
     "axios": "^1.9.0",
-    "i18next": "^25.1.1",
+    "i18next": "^25.2.0",
     "react": "^19.0.0",
     "react-confetti": "^6.4.0",
     "react-dom": "^19.0.0",
