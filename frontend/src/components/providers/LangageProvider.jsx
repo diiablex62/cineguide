@@ -41,6 +41,7 @@ export function LangageProvider({ children }) {
 
   const handleLanguageChange = (lang) => {
     const found = LANGAGE_LIST.find((l) => l.id === lang.id);
+
     if (found) {
       setSelectedLang(found); // Met à jour l'état pour l'affichage du drapeau
       setLangageMenu(false);
