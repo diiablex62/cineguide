@@ -7,17 +7,21 @@ const saisonSchema = new mongoose.Schema(
       required: true,
     },
     annee: {
-      type: Number,
+      type: String,
       required: true,
     },
     nbEpisodes: {
       type: Number,
       required: true,
     },
-    serie: {
+    IdSerieMongo: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Serie",
-      required: true
+      required: true,
+    },
+    IdSerieTmdb: {
+      type: Number,
+      required: true,
     },
     episodes: [
       {

@@ -7,7 +7,6 @@ const userRoutes = require("./routes/users");
 const serieRoutes = require("./routes/serie");
 const saisonRoutes = require("./routes/saison");
 const episodeRoutes = require("./routes/episode");
-
 const acteurRoutes = require("./routes/acteurs");
 const filmRoutes = require("./routes/film");
 const app = express();
