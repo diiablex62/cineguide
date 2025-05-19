@@ -158,3 +158,11 @@ function App() {
 }
 
 export default App;
+
+// Dans la fonction d'envoi d'email de validation
+const sendValidationEmail = async (user) => {
+  // Utilisation de la variable CLIENT_URL unique pour construire le lien de validation
+  const validationUrl = `${process.env.CLIENT_URL}/validation?token=${user.validationToken}`;
+
+  // ...existing code...
+};

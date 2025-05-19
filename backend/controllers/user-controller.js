@@ -408,8 +408,10 @@ const forgotPassword = async (req, res) => {
     // Afficher l'URL pour le débogage
     console.log("URL client utilisée:", process.env.CLIENT_URL);
 
+    // S'assurer que l'URL ne contient pas de virgules
+    const clientUrl = process.env.CLIENT_URL.split(",")[0];
     // Créer l'URL de réinitialisation
-    const resetUrl = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
+    const resetUrl = `${clientUrl}/reset-password/${resetToken}`;
     console.log("URL de réinitialisation complète:", resetUrl);
 
     // Envoyer l'email avec le lien de réinitialisation
