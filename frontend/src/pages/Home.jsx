@@ -6,7 +6,6 @@ import Hulu from "../components/home/hulu";
 import peakyBg from "../assets/peaky2.jpg";
 import { HomeContext } from "../context/HomeContext";
 import { NavLink } from "react-router-dom";
-import { useTranslation } from "react-i18next"; // Ajout
 export default function Home() {
   const {
     selectedGenre,
