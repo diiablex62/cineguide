@@ -12,6 +12,7 @@ import FilmProvider from "./components/providers/FilmProvider";
 import { ActorProvider } from "./components/providers/ActorProvider";
 import SerieProvider from "./components/providers/SerieProvider";
 import { ActuProvider } from "./components/providers/ActuProvider";
+import { LangageProvider } from "./components/providers/LangageProvider"; // Ajout de l'import
 import UserConnected from "./components/ProtectedRoutes/UserConnected";
 import UserNotConnected from "./components/ProtectedRoutes/UserNotConnected";
 
@@ -131,25 +132,30 @@ function App() {
     <ThemeProvider>
       <MenuProvider>
         <AuthProvider>
-          <HomeProvider>
-            <ProfilProvider>
-              <FilmProvider>
-                <SerieProvider>
-                  <FiltreProvider>
-                    <ActuProvider>
-                      <BrowserRouter>
-                        <ActorProvider>
-                          <div className='min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white'>
-                            <AppContent />
-                          </div>
-                        </ActorProvider>
-                      </BrowserRouter>
-                    </ActuProvider>
-                  </FiltreProvider>
-                </SerieProvider>
-              </FilmProvider>
-            </ProfilProvider>
-          </HomeProvider>
+          <LangageProvider>
+            {" "}
+            {/** Ajout du LangageProvider ici */}
+            <HomeProvider>
+              <ProfilProvider>
+                <FilmProvider>
+                  <SerieProvider>
+                    <FiltreProvider>
+                      <ActuProvider>
+                        <BrowserRouter>
+                          <ActorProvider>
+                            <div className='min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white'>
+                              <AppContent />
+                            </div>
+                          </ActorProvider>
+                        </BrowserRouter>
+                      </ActuProvider>
+                    </FiltreProvider>
+                  </SerieProvider>
+                </FilmProvider>
+              </ProfilProvider>
+            </HomeProvider>
+          </LangageProvider>{" "}
+          {/** Fin du LangageProvider */}
         </AuthProvider>
       </MenuProvider>
     </ThemeProvider>

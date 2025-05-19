@@ -7,7 +7,6 @@ export default function PersonnalisationQuestionsQuizz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [inputValue, setInputValue] = useState("");
   const navigate = useNavigate();
-  const { t } = useTranslation();
 
   useEffect(() => {
     console.log(questionsPerso);
@@ -50,32 +49,21 @@ export default function PersonnalisationQuestionsQuizz() {
   return (
     <div className='flex flex-col gap-2.5 py-11 px-14 h-full'>
       <div className='flex flex-col'>
-        <h2 className='text-3xl font-bold'>
-          {t("quiz.titre", "Quiz Personnalisé")}
-        </h2>
+        <h2 className='text-3xl font-bold'>Quiz Personnalisé</h2>
         <p className='italic text-gray-500'>
-          <span className='underline'>{t("quiz.objectif", "Objectif")} :</span>{" "}
-          {t(
-            "quiz.objectifTexte",
-            "répondre aux questions posées en rapport avec vos préférences."
-          )}{" "}
+          <span className='underline'>Objectif</span> : répondre aux questions
+          posées en rapport avec vos préférences.{" "}
           <span className='underline'>
-            {t("quiz.vitesse", "Attention : la vitesse des réponses compte !")}
+            Attention : la vitesse des réponses compte !
           </span>
         </p>
       </div>
-      <h3 className='font-bold text-xl'>{t("quiz.etape1", "Etape 1 :")}</h3>
+      <h3 className='font-bold text-xl'>Etape 1 :</h3>
       <div className='flex py-7'>
         <div className='flex flex-col gap-9 items-center justify-center w-full'>
           <div className='flex flex-col gap-2.5 items-center w-full'>
             <p className='text-fuchsia p-2.5 w-full font-medium'>
-              {t("quiz.questionXsurY", {
-                x: currentQuestion + 1,
-                y: questionsPerso.length,
-                defaultValue: `Question ${currentQuestion + 1} / ${
-                  questionsPerso.length
-                }`,
-              })}
+              {`Question ${currentQuestion + 1} / ${questionsPerso.length}`}
             </p>
             <div className='p-8 border border-black bg-white w-full'>
               <p className='font-medium text-center'>
@@ -87,7 +75,7 @@ export default function PersonnalisationQuestionsQuizz() {
             onSubmit={onSubmit}
             className='flex flex-col gap-2.5 items-center w-full'>
             <p className='text-fuchsia p-2.5 w-full font-medium'>
-              {t("quiz.repondre", "Veuillez répondre ci-dessous :")}
+              Veuillez répondre ci-dessous :
             </p>
             <input
               type='text'
@@ -98,7 +86,7 @@ export default function PersonnalisationQuestionsQuizz() {
             <button
               type='submit'
               className='bg-fuchsia flex justify-center items-center h-[50px] px-2 text-white cursor-pointer'>
-              {t("quiz.suivant", "Passer à la question suivante")}
+              Passer à la question suivante
             </button>
           </form>
         </div>
