@@ -87,12 +87,9 @@ export default function AuthProvider({ children }) {
               }
             }
           } else {
-            console.log("Token expiré ou invalide, déconnexion");
-            // Supprimer les informations périmées
             logout();
           }
         } else {
-          console.log("Aucune donnée d'authentification trouvée");
         }
       } catch (error) {
         console.error(

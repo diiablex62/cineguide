@@ -13,7 +13,6 @@ export function CommentProvider({ children }) {
   ]);
 
   const addComment = (newComment) => {
-    console.log("Ajout d'un nouveau commentaire:", newComment);
     setComments([
       ...comments,
       {

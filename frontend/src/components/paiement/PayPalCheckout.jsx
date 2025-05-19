@@ -8,7 +8,6 @@ import toast from "react-hot-toast";
 export default function PayPalCheckout({ selectedSubscription }) {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  console.log(user);
 
   const priceMap = [
     { id: "silver", name: "Silver", price: 20 },
