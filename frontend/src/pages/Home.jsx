@@ -6,8 +6,6 @@ import Hulu from "../components/home/hulu";
 import peakyBg from "../assets/peaky2.jpg";
 import { HomeContext } from "../context/HomeContext";
 import { NavLink } from "react-router-dom";
-import { useTranslation } from "react-i18next"; // Ajout
-
 export default function Home() {
   const {
     selectedGenre,
@@ -24,7 +22,8 @@ export default function Home() {
     genres,
   } = useContext(HomeContext);
 
-  const { t } = useTranslation(); // Ajout
+  // Log à chaque render de Home
+  console.log("[Home] Render");
 
   // Log à chaque render de Home
   console.log("[Home] Render");
@@ -94,19 +93,13 @@ export default function Home() {
   ]);
 
   return (
-    <div className='p-10'>
-      <div className='mt-10 dark:black px-6 rounded-lg text-center'>
-        <h1 className='text-2xl font-semibold mb- dark:text-white'>
-          {t(
-            "home.titre",
-            "CINÉGUIDE : Tous vos films et séries préférées au même endroit"
-          )}
+    <div className='p-10 bg-white dark:bg-black'>
+      <div className='mt-10 dark:bg-black px-6 rounded-lg text-center'>
+        <h1 className='text-2xl font-semibold mb- text-gray-900 dark:text-white'>
+          Tous vos films et séries préférées au même endroit
         </h1>
         <p className='text-gray-600 dark:text-gray-300 mb-6'>
-          {t(
-            "home.slogan",
-            "Parcourez, recherchez et regardez la télévision et les films de plus de 300 services."
-          )}
+          Parcourez, recherchez et regardez la télévision et les films de plus de 300 services.
         </p>
         <div className='flex justify-center items-center gap-4 flex-wrap'>
           <div className='h-12 bg-white p-2 rounded shadow'>
@@ -122,13 +115,13 @@ export default function Home() {
             <Hulu className='h-full w-auto' />
           </div>
           <span className='text-lg font-medium text-gray-600 dark:text-gray-300'>
-            {t("home.etBienDautres", "et bien d'autres")}
+           et bien d'autres
           </span>
         </div>
       </div>
       <div className='mt-10'>
         <h2 className='text-xl font-bold mb-4 text-left dark:text-white'>
-          {t("home.top10", "Top 10 cette semaine >")}
+       Top 10 cette semaine
         </h2>
         <div className='relative w-[70%] mx-auto md:h-[15rem]'>
           <div className='hidden md:flex gap-20 h-full overflow-x-auto overflow-y-hidden scroll-snap-x pl-10 pr-52 scrollbar-hide'>
@@ -137,8 +130,8 @@ export default function Home() {
                 className='cursor-pointer'
                 to={`/detailserie/${serie.id}`}
                 key={serie.id}>
-                <div className='relative flex-shrink-0 w-40 h-60 bg-gray-200 dark:bg-gray-700 rounded-lg shadow scroll-snap-align-start group'>
-                  <div className='absolute bottom-[-50px] left-[-25px] transform -translate-x-1/2 text-[8rem] font-bold text-gray-800 dark:text-gray-400'>
+                <div className='relative flex-shrink-0 w-40 h-60 bg-gray-200 dark:bg-black rounded-lg shadow scroll-snap-align-start group'>
+                  <div className='absolute bottom-[-50px] left-[-25px] transform -translate-x-1/2 text-[8rem] font-bold text-gray-800 dark:text-white'>
                     {index + 1}
                   </div>
                   <img
@@ -161,9 +154,9 @@ export default function Home() {
                 className='cursor-pointer'
                 to={`/detailserie/${serie.id}`}
                 key={serie.id}>
-                <div className='flex h-24 bg-gray-200 dark:bg-gray-700'>
+                <div className='flex h-24 bg-gray-200 dark:bg-black'>
                   <div className='relative w-[20%]'>
-                    <div className='absolute bottom-[20px] left-[-40px] text-5xl font-bold text-gray-800 dark:text-gray-400'>
+                    <div className='absolute bottom-[20px] left-[-40px] text-5xl font-bold text-gray-800 dark:text-white'>
                       {index + 1}
                     </div>
                     <img
@@ -186,9 +179,9 @@ export default function Home() {
       </div>
 
       {/* Section 3 */}
-      <div className='mt-10'>
+      <div className='mt-10 bg-white dark:bg-black'>
         <h2 className='text-xl font-bold mb-4 text-left text-black dark:text-white -mx-10 md:mx-0 px-4 md:px-0'>
-          {t("home.meilleuresSeriesAction", "Meilleures séries Action >")}
+    Meilleures séries Action
         </h2>
         <div className='flex overflow-x-auto scrollbar-hide -mx-10 md:mx-0 px-4 md:px-0'>
           <div className='flex gap-2'>
@@ -224,10 +217,7 @@ export default function Home() {
         }}>
         <div className='absolute inset-0 flex flex-col items-center justify-center px-4'>
           <h2 className='text-2xl text-white text-center mb-2 bg-black/30 px-1 py-1'>
-            {t(
-              "home.parceQueVousAimez",
-              'Parce que vous aimez "Peaky Blinders"'
-            )}
+            Parce que vous aimez "Peaky Blinders"
           </h2>
           <div className='flex overflow-x-auto scrollbar-hide max-w-full'>
             <div className='flex gap-4 px-4'>
@@ -255,9 +245,9 @@ export default function Home() {
       </div>
 
       {/* Section On regarde quoi ce soir */}
-      <div className='mt-20'>
+      <div className='mt-20 bg-white dark:bg-black'>
         <h2 className='text-2xl font-bold text-black dark:text-white mb-8'>
-          {t("home.onRegardeQuoi", "On regarde quoi ce soir ?")}
+          On regarde quoi ce soir ?
         </h2>
         <div className='flex flex-col md:flex-row gap-8'>
           {/* Colonne de gauche - Filtres */}
@@ -266,18 +256,18 @@ export default function Home() {
               <div className='w-[80%]'>
                 {errors.genre && (
                   <p className='text-red-500 dark:text-red-400 text-sm mb-2'>
-                    {t("home.erreurGenre", "Veuillez sélectionner un genre")}
+                    Veuillez sélectionner un genre
                   </p>
                 )}
                 <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>
-                  {t("home.genre", "GENRE :")}
+                  GENRE :
                 </label>
                 <select
                   className='w-full p-2 border border-black  dark:border-gray-700 rounded bg-white dark:bg-black text-black dark:text-white'
                   value={selectedGenre}
                   onChange={handleGenreChange}>
                   <option value='' className='bg-white dark:bg-black'>
-                    {t("home.selectionnezGenre", "Sélectionnez un genre")}
+                    Sélectionnez un genre
                   </option>
                   {genres.map((genre, index) => (
                     <option
@@ -293,14 +283,11 @@ export default function Home() {
               <div>
                 {errors.type && (
                   <p className='text-red-500 dark:text-red-400 text-sm mb-2'>
-                    {t(
-                      "home.erreurType",
-                      "Veuillez sélectionner au moins un type"
-                    )}
+                    Veuillez sélectionner au moins un type
                   </p>
                 )}
                 <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>
-                  {t("home.type", "TYPE :")}
+                  TYPE :
                 </label>
                 <div className='flex gap-4'>
                   <label className='flex items-center'>
@@ -311,7 +298,7 @@ export default function Home() {
                       onChange={() => handleTypeChange("film")}
                     />
                     <span className='ml-2 text-gray-700 dark:text-gray-300'>
-                      {t("home.film", "Film")}
+                      Film
                     </span>
                   </label>
                   <label className='flex items-center'>
@@ -322,33 +309,33 @@ export default function Home() {
                       onChange={() => handleTypeChange("serie")}
                     />
                     <span className='ml-2 text-gray-700 dark:text-gray-300'>
-                      {t("home.serie", "Série")}
+                      Série
                     </span>
                   </label>
                 </div>
               </div>
               <div className='w-[80%]'>
                 <label className='block text-sm font-medium  text-gray-700 dark:text-gray-300 mb-1'>
-                  {t("home.note", "NOTE :")}
+                  NOTE :
                 </label>
                 <select
                   className='w-full p-2 border border-black dark:border-gray-700 rounded bg-white dark:bg-black text-black dark:text-white'
                   value={selectedNote}
                   onChange={handleNoteChange}>
                   <option value='' className='bg-white dark:bg-black'>
-                    {t("home.selectionnezNote", "Sélectionnez une note")}
+                    Sélectionnez une note
                   </option>
                   <option value='9-10' className='bg-white dark:bg-black'>
-                    {t("home.noteChefOeuvre", "9 à 10 - Chef d'œuvre")}
+                    9 à 10 - Chef d'œuvre
                   </option>
                   <option value='7-9' className='bg-white dark:bg-black'>
-                    {t("home.noteTresBon", "7 à 9 - Très bon")}
+                    7 à 9 - Très bon
                   </option>
                   <option value='4-7' className='bg-white dark:bg-black'>
-                    {t("home.noteMoyen", "4 à 7 - Moyen")}
+                    4 à 7 - Moyen
                   </option>
                   <option value='0-4' className='bg-white dark:bg-black'>
-                    {t("home.noteMauvais", "0 à 4 - Mauvais")}
+                    0 à 4 - Mauvais
                   </option>
                 </select>
               </div>
@@ -356,7 +343,7 @@ export default function Home() {
                 <button
                   onClick={handleSearch}
                   className='bg-[var(--color-fuchsia)] text-white py-2 px-8 rounded hover:bg-[var(--color-fuchsia-hover)] whitespace-nowrap'>
-                  {t("home.trouverUnFilm", "TROUVER UN FILM")}
+                  TROUVER UN FILM
                 </button>
               </div>
             </div>
@@ -367,19 +354,16 @@ export default function Home() {
             {filteredResult === "no_results" ? (
               <div className='flex flex-col items-center justify-center h-full text-center p-8'>
                 <p className='text-gray-600 dark:text-gray-300 mb-4'>
-                  {t("home.aucunResultat", "Aucun ")}
+                  Aucun{" "}
                   {selectedType.film && !selectedType.serie
-                    ? t("home.film", "film")
+                    ? "film"
                     : !selectedType.film && selectedType.serie
-                    ? t("home.serie", "série")
-                    : t("home.filmOuSerie", "film ou série")}{" "}
-                  {t("home.neCorrespond", "ne correspond à vos critères 😕")}
+                    ? "série"
+                    : "film ou série"}{" "}
+                  ne correspond à vos critères 😕
                 </p>
                 <p className='text-gray-500 dark:text-gray-400'>
-                  {t(
-                    "home.essayezFiltres",
-                    "Essayez de modifier vos filtres pour obtenir plus de résultats"
-                  )}
+                  Essayez de modifier vos filtres pour obtenir plus de résultats
                 </p>
               </div>
             ) : filteredResult ? (
@@ -410,10 +394,10 @@ export default function Home() {
                   </div>
                   <div className='flex gap-2 mt-4'>
                     <button className='bg-[var(--color-fuchsia)] text-white px-4 py-2 rounded'>
-                      {t("home.aVoir", "À voir")}
+                      À voir
                     </button>
                     <button className='bg-green-600 text-white px-4 py-2 rounded'>
-                      {t("home.dejaVu", "Déjà vu")}
+                      Déjà vu
                     </button>
                   </div>
                 </div>
@@ -421,16 +405,11 @@ export default function Home() {
             ) : (
               <div className='flex flex-col items-center justify-center h-full text-center p-8'>
                 <p className='text-gray-600 dark:text-gray-300 mb-4'>
-                  {t(
-                    "home.pasInspiration",
-                    "Pas d'inspiration pour ce soir ? 🎬"
-                  )}
+                  Pas d'inspiration pour ce soir ? 🎬
                 </p>
                 <p className='text-gray-500 dark:text-gray-400'>
-                  {t(
-                    "home.utilisezFiltres",
-                    'Utilisez les filtres et cliquez sur "TROUVER UN FILM" pour obtenir une suggestion personnalisée !'
-                  )}
+                  Utilisez les filtres et cliquez sur "TROUVER UN FILM" pour
+                  obtenir une suggestion personnalisée !
                 </p>
               </div>
             )}

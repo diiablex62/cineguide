@@ -20,9 +20,9 @@ export async function getSerieById(id) {
     const response = await fetch(`${BASE_URL}/series/${id}`, {
       method: "GET",
     });
-    
+
     if (!response.ok) throw new Error(`Erreur serveur: ${response.status}`);
-    
+
     const serie = await response.json();
     return serie;
   } catch (error) {

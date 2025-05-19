@@ -7,11 +7,22 @@ export default function ResumeSerie() {
   const [selectedSeason, setSelectedSeason] = useState(0);
   const { detailActor, actorRedirect } = useContext(ActorContext);
 
+  // Réinitialiser la saison sélectionnée lorsqu'une nouvelle série est chargée
   useEffect(() => {
-    setSelectedSeason(0);
-  }, [detailSerie]);
+    if (detailSerie && detailSerie.id) {
+      setSelectedSeason(0);
+    }
+  }, [detailSerie?.id]); // Dépendance uniquement à l'ID, pas à l'objet entier
 
-  const saisons = Array.isArray(detailSerie.saisons) ? detailSerie.saisons : [];
+  // Sécuriser l'accès aux saisons
+  const saisons = detailSerie && Array.isArray(detailSerie.saisons) 
+    ? detailSerie.saisons 
+    : [];
+
+  // Vérifier si les données sont chargées
+  if (!detailSerie || !detailSerie.id) {
+    return <div className="md:w-2/3 w-full p-4">Chargement des informations...</div>;
+  }
 
   return (
     <div className="md:w-2/3 w-full">
@@ -36,7 +47,7 @@ export default function ResumeSerie() {
                     }`}
                   >
                     <img
-                      src={`${detailSerie.image}`}
+                      src={detailSerie.image}
                       alt={`${detailSerie.titre} - Saison ${saison.numero}`}
                       className="w-full h-full object-fill"
                     />
@@ -63,7 +74,9 @@ export default function ResumeSerie() {
         {saisons.length > 0 &&
           selectedSeason >= 0 &&
           selectedSeason < saisons.length &&
-          saisons[selectedSeason] && (
+          saisons[selectedSeason] && 
+          saisons[selectedSeason].episodes && 
+          Array.isArray(saisons[selectedSeason].episodes) && (
             <div className="space-y-2 mb-8">
               <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-200">
                 ÉPISODES - SAISON {saisons[selectedSeason].numero}
@@ -98,7 +111,7 @@ export default function ResumeSerie() {
           </p>
         </div>
 
-        {detailSerie.acteurs.length > 0 && (
+        {detailSerie.acteurs && detailSerie.acteurs.length > 0 && (
           <div className="mb-8">
             <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-200">
               CASTING

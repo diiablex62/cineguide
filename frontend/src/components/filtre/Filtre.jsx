@@ -5,7 +5,6 @@ import GenreData from "../../data/Genre";
 import { ImCross } from "react-icons/im";
 import { FiltreContext } from "../../context/FiltreContext";
 import { FilmContext } from "../../context/FilmContext";
-import { useTranslation } from "react-i18next";
 
 export default function Filtre() {
   const { openFilter, toggleFilter } = useContext(FiltreContext);
@@ -19,24 +18,22 @@ export default function Filtre() {
     filterNotSeen,
   } = useContext(FilmContext);
 
-  const { t, i18n } = useTranslation();
-
   // Pour obtenir la valeur d'origine à partir de la traduction (pour le filtre)
   const getPlatformOriginal = (translated) => {
     const found = PlatformeData.find(
-      (p) => t(`filter.platformes.${p.name}`, p.name) === translated
+      (p) => p.name === translated // Simplifié car plus de traduction
     );
     return found ? found.name : translated;
   };
   const getGenreOriginal = (translated) => {
     const found = GenreData.find(
-      (g) => t(`filter.genresList.${g.type}`, g.type) === translated
+      (g) => g.type === translated // Simplifié
     );
     return found ? found.type : translated;
   };
   const getLangueOriginal = (translated) => {
     const found = Langue.find(
-      (l) => t(`filter.languesList.${l.name}`, l.name) === translated
+      (l) => l.name === translated // Simplifié
     );
     return found ? found.name : translated;
   };
@@ -50,7 +47,7 @@ export default function Filtre() {
             openFilter ? "hidden" : "flex"
           }`}>
           <img src='../src/assets/filter.svg' className='w-[20px]' alt='' />
-          {t("filter.filtrer", "Filtrer")}
+          Filtrer
         </button>
       </div>
       <div
@@ -63,18 +60,10 @@ export default function Filtre() {
               <ImCross />
             </button>
           </div>
-          <h2 className='font-bold text-3xl dark:text-white'>
-            {t("filter.trier", "Trier")}
-          </h2>
-          <p className='dark:text-white'>
-            {t("filter.parPlateforme", "Par plateforme :")}
-          </p>
+          <h2 className='font-bold text-3xl dark:text-white'>Trier</h2>
+          <p className='dark:text-white'>Par plateforme :</p>
           <div className='flex flex-wrap gap-3 items-center mt-4'>
             {PlatformeData.map((platforme, index) => {
-              const translated = t(
-                `filter.platformes.${platforme.name}`,
-                platforme.name
-              );
               return (
                 <a
                   onClick={(e) => {
@@ -95,14 +84,13 @@ export default function Filtre() {
                   href='#'
                   key={index}
                   className='platform-link text-[12px] bg-white hover:bg-black hover:text-white text-black border flex rounded items-center justify-center text-center w-[50px] h-[50px]'>
-                  {translated}
+                  {platforme.name}{" "}
+                  {/* Remplacé translated par platforme.name */}
                 </a>
               );
             })}
           </div>
-          <p className='mt-5 mb-2 dark:text-white'>
-            {t("filter.afficher", "Afficher :")}
-          </p>
+          <p className='mt-5 mb-2 dark:text-white'>Afficher :</p>
           <div className='flex items-center gap-1 mb-2'>
             <input
               id='all'
@@ -121,7 +109,7 @@ export default function Filtre() {
               }}
             />
             <label htmlFor='all' className='dark:text-white'>
-              {t("filter.tous", "Tous")}
+              Tous
             </label>
           </div>
           <div className='flex items-center gap-1 mb-2'>
@@ -142,7 +130,7 @@ export default function Filtre() {
               className='peer appearance-none w-5 h-5 border-2 dark:border-white border-black rounded-full bg-white checked:bg-black transition-colors duration-300'
             />
             <label htmlFor='see' className='dark:text-white'>
-              {t("filter.filmDejaVu", "Film que j’ai déjà vu")}
+              Film que j’ai déjà vu
             </label>
           </div>
 
@@ -164,19 +152,13 @@ export default function Filtre() {
               className='peer appearance-none w-5 h-5 border-2 dark:border-white border-black rounded-full bg-white checked:bg-black transition-colors duration-300'
             />
             <label htmlFor='notsee' className='dark:text-white'>
-              {t("filter.filmPasVu", "Film que je n'ai pas vu")}
+              Film que je n'ai pas vu
             </label>
           </div>
 
-          <p className='mt-5 mb-2 dark:text-white'>
-            {t("filter.genres", "Genres :")}
-          </p>
+          <p className='mt-5 mb-2 dark:text-white'>Genres :</p>
           <div className='flex flex-wrap gap-3 items-center mt-4'>
             {GenreData.map((genre, index) => {
-              const translated = t(
-                `filter.genresList.${genre.type}`,
-                genre.type
-              );
               return (
                 <a
                   href='#'
@@ -195,14 +177,12 @@ export default function Filtre() {
                   }}
                   key={index}
                   className='genre-link text-[12px] bg-white hover:bg-black hover:text-white text-black border flex rounded items-center justify-center text-center p-2'>
-                  {translated}
+                  {genre.type} {/* Remplacé translated par genre.type */}
                 </a>
               );
             })}
           </div>
-          <p className='mt-5 mb-2 dark:text-white'>
-            {t("filter.langues", "Langues :")}
-          </p>
+          <p className='mt-5 mb-2 dark:text-white'>Langues :</p>
           <select
             className='bg-white w-full text-black border border-black rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-black'
             onChange={(e) => {
@@ -212,20 +192,18 @@ export default function Filtre() {
               filterLanguage(original);
             }}>
             {Langue.map((langue) => (
-              <option
-                key={langue.id}
-                value={t(`filter.languesList.${langue.name}`, langue.name)}>
-                {t(`filter.languesList.${langue.name}`, langue.name)}
+              <option key={langue.id} value={langue.name}>
+                {" "}
+                {/* Simplifié */}
+                {langue.name} {/* Simplifié */}
               </option>
             ))}
           </select>
-          <p className='mt-5 mb-2 dark:text-white'>
-            {t("filter.motsCles", "Mots-clés :")}
-          </p>
+          <p className='mt-5 mb-2 dark:text-white'>Mots-clés :</p>
           <input
             type='text'
             onChange={(e) => searchMovie(e.target.value)}
-            placeholder={t("filter.filtrerParMotCles", "Filtrer par mot clés")}
+            placeholder='Filtrer par mot clés'
             className='w-full px-4 py-1 border border-black rounded bg-white text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-black'
           />
         </div>

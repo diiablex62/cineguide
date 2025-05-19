@@ -1,58 +1,48 @@
-import { Outlet, ScrollRestoration } from "react-router-dom";
-import FilmProvider from "./components/providers/FilmProvider";
+import React from "react";
+import { Outlet } from "react-router-dom";
 import ThemeProvider from "./components/providers/ThemeProvider";
-import FiltreProvider from "./components/providers/FiltreProvider";
-import Header from "./components/Header";
-import LangageProvider from "./components/providers/LangageProvider";
 import MenuProvider from "./components/providers/MenuProvider";
-import SerieProvider from "./components/providers/SerieProvider";
-import ActorProvider from "./components/providers/ActorProvider";
-import ProfilProvider from "./components/providers/ProfilProvider";
-import CommentProvider from "./components/providers/CommentProvider";
-import Footer from "./components/Footer";
+import AuthProvider from "./components/providers/AuthProvider";
 import { HomeProvider } from "./components/providers/HomeProvider";
+import ProfilProvider from "./components/providers/ProfilProvider";
+import FiltreProvider from "./components/providers/FiltreProvider";
+import FilmProvider from "./components/providers/FilmProvider";
+import { ActorProvider } from "./components/providers/ActorProvider";
+import SerieProvider from "./components/providers/SerieProvider";
 import { ActuProvider } from "./components/providers/ActuProvider";
-import { ChatbotProvider } from "./components/providers/ChatbotProvider";
-import ChatbotUI from "./components/chatbot/ChatbotUI";
-import { useContext } from "react";
-import { AuthContext } from "./context/AuthContext";
-import "./Langue/i18n";
+import { LangageProvider } from "./components/providers/LangageProvider";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
-  const { isLoggedIn } = useContext(AuthContext);
-
   return (
-    <HomeProvider>
-      <div className="min-h-screen flex flex-col w-full dark:bg-black bg-white">
-        <ThemeProvider>
-          <LangageProvider>
-            <MenuProvider>
-              <FiltreProvider>
+    <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white">
+      <ThemeProvider>
+        <MenuProvider>
+          <AuthProvider>
+            <LangageProvider>
+              <HomeProvider>
                 <ProfilProvider>
-                  <ActorProvider>
-                    <FilmProvider>
-                      <SerieProvider>
-                        <CommentProvider>
-                          <ActuProvider>
-                            <Header />
-                            <Outlet />
+                  <FilmProvider>
+                    <SerieProvider>
+                      <FiltreProvider>
+                        <ActuProvider>
+                          <ActorProvider>
+                            <Header></Header>
+                            <Outlet></Outlet>
                             <Footer></Footer>
-                            <ScrollRestoration />
-                          </ActuProvider>
-                        </CommentProvider>
-                      </SerieProvider>
-                    </FilmProvider>
-                  </ActorProvider>
+                          </ActorProvider>
+                        </ActuProvider>
+                      </FiltreProvider>
+                    </SerieProvider>
+                  </FilmProvider>
                 </ProfilProvider>
-              </FiltreProvider>
-            </MenuProvider>
-          </LangageProvider>
-        </ThemeProvider>
-      </div>
-      <ChatbotProvider>
-        <ChatbotUI />
-      </ChatbotProvider>
-    </HomeProvider>
+              </HomeProvider>
+            </LangageProvider>
+          </AuthProvider>
+        </MenuProvider>
+      </ThemeProvider>
+    </div>
   );
 }
 

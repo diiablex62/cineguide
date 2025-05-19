@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ArticleCard from "../../components/actu/ArticleCard";
 import FirstArticleCard from "../../components/actu/FirstArticleCard";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 const fetchRSSArticles = async (rssUrl) => {
   const proxyUrl = "https://api.allorigins.win/get?url=";
@@ -10,7 +11,7 @@ const fetchRSSArticles = async (rssUrl) => {
     const data = await response.json();
     const parser = new DOMParser();
     const xml = parser.parseFromString(data.contents, "application/xml");
-    return Array.from(xml.querySelectorAll("item")).map((item) => ({
+    const articles = Array.from(xml.querySelectorAll("item")).map((item) => ({
       title: item.querySelector("title")?.textContent || "Titre indisponible",
       link: item.querySelector("link")?.textContent || "#",
       pubDate: item.querySelector("pubDate")?.textContent || "",
@@ -19,6 +20,8 @@ const fetchRSSArticles = async (rssUrl) => {
         item.querySelector("enclosure")?.getAttribute("url") ||
         "https://via.placeholder.com/150",
     }));
+
+    return articles;
   } catch (error) {
     console.error("Erreur lors de la récupération du flux RSS :", error);
     return [];
@@ -86,34 +89,29 @@ export default function ActualitesPage() {
   };
 
   if (isLoading) {
-    return (
-      <div className='flex justify-center items-center min-h-screen bg-white dark:bg-black'>
-        <p className='text-gray-800 dark:text-white'>
-          Chargement des articles...
-        </p>
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
   return (
-    <div className='p-6'>
-      <h2 className='text-2xl font-bold text-[var(--color-fuchsia)] mb-6 w-full md:w-[50%] mx-auto text-left'>
+    <div className="p-6 dark:bg-black">
+      <h2 className="text-2xl font-bold text-[var(--color-fuchsia)] mb-6 w-full md:w-[50%] mx-auto text-left dark:text-white">
         ACTUALITÉS
       </h2>
       {renderArticles()}
-      <div className='flex justify-center mt-6'>
+      <div className="flex justify-center mt-6">
         {Array.from(
           { length: Math.ceil(articles.length / articlesPerPage) },
           (_, index) => (
             <button
               key={index + 1}
               onClick={() => handlePageChange(index + 1)}
-              className={`px-3 py-1 mx-1 border rounded cursor-pointer ${
+              className={`px-3 py-1 mx-1 rounded-full w-8 h-8 flex items-center justify-center cursor-pointer ${
                 currentPage === index + 1
                   ? "bg-[var(--color-fuchsia)] text-white"
                   : "bg-white text-black border-gray-300 hover:bg-gray-100"
-              }`}>
-              Page {index + 1}
+              }`}
+            >
+              {index + 1}
             </button>
           )
         )}

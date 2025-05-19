@@ -1,24 +1,24 @@
-import React, { useContext, useState } from "react";
-import { FaRegStar, FaStar } from "react-icons/fa";
+import React, { useContext } from "react";
 import { SerieContext } from "../../../context/SerieContext";
 import { AuthContext } from "../../../context/AuthContext";
+import { FaStar } from "react-icons/fa";
 
 export default function Serie() {
-  const [rating, setRating] = useState(0);
-  const [hoverRating, setHoverRating] = useState(0);
   const { detailSerie } = useContext(SerieContext);
   const { connectedUser } = useContext(AuthContext);
 
-  if (!detailSerie) {
-    return <div className="p-4 text-center">Chargement du film...</div>;
+  // Vérifier si les données sont chargées
+  if (!detailSerie || !detailSerie.id) {
+    return <div className="md:w-1/3 flex-shrink-0 md:pl-4 p-4 text-center">Chargement du détail...</div>;
   }
+  
   return (
     <div className="md:w-1/3 flex-shrink-0 md:pl-4 ">
       <div className="flex gap-4 p-3 mb-6">
-        <div className="bg-gray-800 mb-3 h-64 w-48 relative  overflow-hidden shadow-xl">
+        <div className="bg-gray-800 mb-3 h-64 w-48 relative overflow-hidden shadow-xl">
           <img
-            src={`${detailSerie.image}`}
-            alt={`${detailSerie.titre}`}
+            src={detailSerie.image}
+            alt={detailSerie.titre}
             className="w-full h-full object-fill "
           />
         </div>
@@ -34,9 +34,6 @@ export default function Serie() {
                 <span
                   key={star}
                   className="cursor-pointer text-lg"
-                  onMouseEnter={() => setHoverRating(star)}
-                  onMouseLeave={() => setHoverRating(0)}
-                  onClick={() => setRating(star)}
                 >
                   {<FaStar className="text-fuchsia" />}
                 </span>
@@ -66,13 +63,13 @@ export default function Serie() {
       </div>
 
       <div className="mb-6 px-3 ">
-        <div className="flex  gap-y-4">
+        <div className="flex gap-y-4">
           <div className="w-1/2 md:w-full">
             <h3 className="font-bold text-sm mb-2 text-black dark:text-gray-200">
               GENRES
             </h3>
             <div className="flex flex-wrap gap-2">
-              {detailSerie.genre.map((genre) => (
+              {detailSerie.genre && Array.isArray(detailSerie.genre) && detailSerie.genre.map((genre) => (
                 <span
                   key={genre}
                   className="text-xs px-2 py-1 bg-gray-200 dark:bg-gray-800 rounded-md"
@@ -94,13 +91,15 @@ export default function Serie() {
       </div>
 
       <div className="mb-6 px-3">
-        <div className="flex  gap-y-4">
+        <div className="flex gap-y-4">
           <div className="w-1/2 md:w-full">
             <h3 className="font-bold text-sm mb-2 text-black dark:text-gray-200">
               PAYS DE PRODUCTION
             </h3>
             <p className="text-xs text-gray-600 dark:text-gray-300">
-              {detailSerie.paysProduction}
+              {detailSerie.paysProduction && Array.isArray(detailSerie.paysProduction) 
+                ? detailSerie.paysProduction.join(", ")
+                : detailSerie.paysProduction}
             </p>
           </div>
         </div>

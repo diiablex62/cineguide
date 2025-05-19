@@ -44,11 +44,16 @@ import QuestionsQuizz from "./pages/Jeux/pages/Quizz/components/QuestionsQuizz";
 import ResultatQuizz from "./pages/Jeux/pages/Quizz/components/ResultatQuizz";
 import QuizzAccueil from "./pages/Jeux/pages/Quizz/components/QuizzAccueil";
 import { AfficheProvider } from "./components/providers/AfficheProvider";
+import ResetPassword from "./pages/Auth/ResetPassword";
 
 export const router = createBrowserRouter([
   {
     path: "*",
     element: <NotFound />,
+  },
+  {
+    path: "/reset-password/:token",
+    element: <ResetPassword />,
   },
   {
     path: "/connexion",
@@ -68,7 +73,6 @@ export const router = createBrowserRouter([
   },
   {
     path: "/jeux",
-
     children: [
       {
         index: true,
@@ -123,28 +127,42 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Profil />,
+            element: (
+              <UserConnected>
+                <Profil />
+              </UserConnected>
+            ),
           },
           {
             path: "/profil/mon-activiter",
-            element: <ProfilActiviter />,
+            element: (
+              <UserConnected>
+                <ProfilActiviter />
+              </UserConnected>
+            ),
           },
           {
             path: "/profil/ma-liste",
-            element: <ProfilListe />,
+            element: (
+              <UserConnected>
+                <ProfilListe />
+              </UserConnected>
+            ),
           },
           {
             path: "/profil/mes-reviews",
-            element: <ProfileReviews />,
+            element: (
+              <UserConnected>
+                <ProfileReviews />
+              </UserConnected>
+            ),
           },
         ],
       },
-
       {
         path: "/film",
         element: <FilmList />,
       },
-
       {
         path: "/detailserie/:id",
         element: <DetailSerie />,
@@ -153,7 +171,6 @@ export const router = createBrowserRouter([
             index: true,
             element: <TousSerie />,
           },
-        
           {
             path: "bandeannonceserie",
             element: <BandeAnnonceSerie />,
@@ -172,7 +189,6 @@ export const router = createBrowserRouter([
         path: "/series",
         element: <SeriesList />,
       },
-
       {
         path: "/mentionsLegales",
         element: <MentionsLegales />,
@@ -205,7 +221,6 @@ export const router = createBrowserRouter([
             index: true,
             element: <Tous />,
           },
-         
           {
             path: "bandeannonce",
             element: <BandeAnnonce />,

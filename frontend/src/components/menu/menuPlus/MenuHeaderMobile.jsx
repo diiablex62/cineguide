@@ -1,11 +1,9 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { MenuContext } from "../../../context/MenuContext";
-import { useTranslation } from "react-i18next"; // Ajout
 
 export default function MenuHeaderMobile() {
   const { menuPlusRef, setMenuPlus } = useContext(MenuContext);
-  const { t } = useTranslation(); // Ajout
 
   return (
     <div
@@ -15,25 +13,25 @@ export default function MenuHeaderMobile() {
         to='/mentionsLegales'
         onClick={() => setMenuPlus(false)}
         className='w-full text-black dark:text-white hover:text-fuchsia'>
-        {t("footer.mentionsLegales", "Mentions Légales")}
+        Mentions Légales
       </NavLink>
       <NavLink
         to='/cgu'
         onClick={() => setMenuPlus(false)}
         className='w-full text-black dark:text-white hover:text-fuchsia'>
-        {t("footer.cgu", "CGU")}
+        CGU
       </NavLink>
       <NavLink
         to='/cgv'
         onClick={() => setMenuPlus(false)}
         className='w-full text-black dark:text-white hover:text-fuchsia'>
-        {t("footer.cgv", "CGV")}
+        CGV
       </NavLink>
       <NavLink
         to='/faq'
         onClick={() => setMenuPlus(false)}
         className='w-full text-black dark:text-white hover:text-fuchsia'>
-        {t("footer.faq", "FAQ")}
+        FAQ
       </NavLink>
     </div>
   );

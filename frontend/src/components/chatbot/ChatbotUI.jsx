@@ -103,10 +103,8 @@ const ChatbotUI = () => {
       });
       if (!response.ok) throw new Error(`API Mistral: ${response.status}`);
       setIsOnline(true);
-      console.log("Statut API Mistral d'Alex : En ligne");
     } catch (e) {
       setIsOnline(false);
-      console.log("Statut API Mistral d'Alex  : Hors ligne", e);
     }
   };
 
@@ -116,10 +114,8 @@ const ChatbotUI = () => {
     try {
       await handleSend();
       setIsOnline(true);
-      console.log("Statut API Mistral d'Alex : En ligne");
     } catch (e) {
       setIsOnline(false);
-      console.log("Statut API Mistral d'Alex : Hors ligne", e);
     }
   };
 
