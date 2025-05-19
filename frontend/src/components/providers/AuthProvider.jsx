@@ -34,6 +34,9 @@ export default function AuthProvider({ children }) {
   // État pour gérer le chargement initial
   const [isLoading, setIsLoading] = useState(true);
 
+  // État pour stocker les données de l'utilisateur
+  const [abonnement, setAbonnement] = useState();
+
   // État pour stocker les messages d'erreur
   const [error, setError] = useState(null);
 
@@ -50,7 +53,6 @@ export default function AuthProvider({ children }) {
   // Effet pour charger les données de session au chargement de l'application
   useEffect(() => {
     const verifyAuthentication = async () => {
-      console.log("Vérification des données d'authentification sauvegardées");
       setIsLoading(true);
 
       try {
@@ -60,13 +62,10 @@ export default function AuthProvider({ children }) {
         const savedUserData = getCookie("userData");
 
         if (savedToken && savedUserId) {
-          console.log("Données d'authentification trouvées dans les cookies");
-
           // Vérifier que le token est toujours valide
           const { isValid, userData } = await authAPI.verifyToken(savedToken);
 
           if (isValid) {
-            console.log("Token valide, restauration de la session");
             setToken(savedToken);
             setUserId(savedUserId);
             setIsLoggedIn(true);
@@ -80,9 +79,6 @@ export default function AuthProvider({ children }) {
                   ...defaultUser,
                   ...parsedUserData,
                 });
-                console.log(
-                  "Données utilisateur restaurées depuis les cookies"
-                );
               } catch (error) {
                 console.error(
                   "Erreur lors du parsing des données utilisateur:",
@@ -115,7 +111,6 @@ export default function AuthProvider({ children }) {
   // Fonction de connexion avec appel API
   const login = async (credentials) => {
     try {
-      console.log("Tentative de connexion avec:", credentials);
       setError(null);
       const data = await authAPI.login(credentials);
 
@@ -127,6 +122,7 @@ export default function AuthProvider({ children }) {
 
       // Mettre à jour les données utilisateur
       const userData = {
+        id: data.userId,
         email: data.email || credentials.email,
         firstname: data.prenom || "",
         lastname: data.nom || "",
@@ -141,7 +137,6 @@ export default function AuthProvider({ children }) {
       setCookie("token", data.token);
       setCookie("userId", data.userId);
       setCookie("userData", JSON.stringify(userData));
-      console.log("Données d'authentification sauvegardées dans les cookies");
 
       return data;
     } catch (error) {
@@ -174,10 +169,25 @@ export default function AuthProvider({ children }) {
     }
   };
 
+  // Function to get user subscription information
+  const getUserSubscription = async (userId) => {
+    try {
+      const data = await authAPI.getUserAbonnement(userId);
+
+      if (data) {
+        setAbonnement(data);
+        return data;
+      }
+    } catch (error) {
+      console.error("Failed to fetch subscription:", error);
+      setError(error.message || "Error retrieving subscription information");
+      throw error;
+    }
+  };
+
   // Fonction d'inscription avec appel API
   const registerUser = async (userData) => {
     try {
-      console.log("Tentative d'inscription avec:", userData);
       setError(null);
 
       // Adapter le format des données si nécessaire
@@ -190,11 +200,8 @@ export default function AuthProvider({ children }) {
 
       const data = await authAPI.register(formattedData);
 
-      console.log("Réponse d'inscription:", data);
-
       // L'utilisateur temporaire est créé et un email de validation est envoyé
       if (data && data.message && data.email) {
-        console.log("Compte en attente de validation par email");
         setPendingAccount(data.email);
         setNotification(data.message);
         return { success: true, isPending: true, email: data.email };
@@ -211,7 +218,6 @@ export default function AuthProvider({ children }) {
   // Fonction pour valider un compte utilisateur
   const validateAccount = async (token) => {
     try {
-      console.log("Tentative de validation de compte avec token:", token);
       // Réinitialiser les états d'erreur et de notification
       setError(null);
 
@@ -221,7 +227,6 @@ export default function AuthProvider({ children }) {
       const data = await authAPI.validateAccount(token);
 
       if (data && data.token && data.user) {
-        console.log("Validation réussie, connexion de l'utilisateur");
         // Sauvegarder dans le state
         setToken(data.token);
         setUserId(data.user._id);
@@ -246,9 +251,6 @@ export default function AuthProvider({ children }) {
         setCookie("token", data.token);
         setCookie("userId", data.user._id);
         setCookie("userData", JSON.stringify(userInfo));
-        console.log(
-          "Données d'authentification sauvegardées dans les cookies après validation"
-        );
 
         // Définir la notification de succès
         setNotification(
@@ -262,7 +264,6 @@ export default function AuthProvider({ children }) {
         throw new Error("Données de validation incomplètes");
       }
     } catch (error) {
-      console.error("Échec de validation de compte:", error);
       // S'assurer qu'aucune donnée d'authentification n'est présente en cas d'erreur
       setToken(null);
       setUserId(null);
@@ -278,7 +279,6 @@ export default function AuthProvider({ children }) {
   // Fonction pour renvoyer l'email de validation
   const resendValidationEmail = async (email) => {
     try {
-      console.log("Tentative de renvoi d'email de validation pour:", email);
       setError(null);
 
       const data = await authAPI.resendValidationEmail(email || pendingAccount);
@@ -313,7 +313,6 @@ export default function AuthProvider({ children }) {
     removeCookie("token");
     removeCookie("userId");
     removeCookie("userData");
-    console.log("Données d'authentification supprimées des cookies");
   };
 
   // Fonction pour effacer les messages d'erreur
@@ -346,7 +345,10 @@ export default function AuthProvider({ children }) {
         pendingAccount,
         clearError,
         clearNotification,
-      }}>
+        getUserSubscription,
+        abonnement,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

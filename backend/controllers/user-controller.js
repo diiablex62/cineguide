@@ -7,6 +7,7 @@ const {
   sendValidationEmail,
   sendConfirmationEmail,
 } = require("../utils/email/config");
+const Abonnement = require("../models/abonnement.schema");
 
 // Inscription d'un nouvel utilisateur avec vérification d'email
 const register = async (req, res) => {
@@ -430,7 +431,7 @@ const forgotPassword = async (req, res) => {
       service: "gmail",
       auth: {
         user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        pass: process.env.EMAIL_PASSWORD,
       },
     });
 
@@ -549,6 +550,18 @@ const resetPassword = async (req, res) => {
   }
 };
 
+const getAbonnements = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    const abonnements = await Abonnement.findOne({ user: user._id });
+
+    res.status(200).json(abonnements);
+  } catch (error) {
+    console.log("Erreur lors de la récupération de l'abonnements:", error);
+    res.status(500).json({ message: "Erreur serveur" });
+  }
+};
+
 module.exports = {
   register,
   login,
@@ -557,4 +570,5 @@ module.exports = {
   resendValidationEmail,
   forgotPassword,
   resetPassword,
+  getAbonnements,
 };

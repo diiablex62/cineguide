@@ -10,6 +10,7 @@ const episodeRoutes = require("./routes/episode");
 const searchRoutes = require("./routes/search");
 const acteurRoutes = require("./routes/acteurs");
 const filmRoutes = require("./routes/film");
+const purchaseRoutes = require("./routes/purchase");
 const { verifyEmailConfig } = require("./utils/email/config");
 const app = express();
 app.use(express.json());
@@ -31,8 +32,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/search", searchRoutes);
 app.use("/api/series", serieRoutes);
 app.use("/api/saisons", saisonRoutes);
-app.use("/api/episodes", episodeRoutes);
-
+app.use("/api/purchase", purchaseRoutes);
 // Route de test pour vérifier que le serveur répond
 app.get("/api/test", (req, res) => {
   console.log("Route de test appelée");

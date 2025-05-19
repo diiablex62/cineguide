@@ -4,10 +4,6 @@ import { getCookie } from "../utils/cookies";
 // Inscription d'un nouvel utilisateur
 export async function register(userData) {
   try {
-    console.log("Début de l'appel API d'inscription");
-    console.log("URL d'appel:", `${BASE_URL}/users/register`);
-    console.log("Données d'inscription envoyées:", userData);
-
     const response = await fetch(`${BASE_URL}/users/register`, {
       method: "POST",
       headers: {
@@ -21,14 +17,7 @@ export async function register(userData) {
       }),
     });
 
-    console.log("Statut de la réponse:", response.status);
-    console.log(
-      "Headers de la réponse:",
-      Object.fromEntries([...response.headers])
-    );
-
     const data = await response.json();
-    console.log("Réponse d'inscription:", data);
 
     if (!response.ok) {
       console.error("Erreur de réponse API:", data);
@@ -39,7 +28,6 @@ export async function register(userData) {
       };
     }
 
-    console.log("Inscription réussie");
     return data;
   } catch (error) {
     console.error("Erreur d'inscription:", error);
@@ -51,10 +39,6 @@ export async function register(userData) {
 // Connexion d'un utilisateur
 export async function login(credentials) {
   try {
-    console.log("Début de l'appel API de connexion");
-    console.log("URL d'appel:", `${BASE_URL}/users/login`);
-    console.log("Identifiants de connexion:", credentials);
-
     const response = await fetch(`${BASE_URL}/users/login`, {
       method: "POST",
       headers: {
@@ -66,14 +50,7 @@ export async function login(credentials) {
       }),
     });
 
-    console.log("Statut de la réponse:", response.status);
-    console.log(
-      "Headers de la réponse:",
-      Object.fromEntries([...response.headers])
-    );
-
     const data = await response.json();
-    console.log("Réponse de connexion:", data);
 
     if (!response.ok) {
       console.error("Erreur de réponse API:", data);
@@ -84,7 +61,6 @@ export async function login(credentials) {
       };
     }
 
-    console.log("Connexion réussie");
     return data;
   } catch (error) {
     console.error("Erreur de connexion:", error);
@@ -118,9 +94,6 @@ export async function login(credentials) {
 // Validation du compte avec le token reçu par email
 export async function validateAccount(token) {
   try {
-    console.log("Début de l'appel API de validation de compte");
-    console.log("URL d'appel:", `${BASE_URL}/users/validate/${token}`);
-
     const response = await fetch(`${BASE_URL}/users/validate/${token}`, {
       method: "GET",
       headers: {
@@ -128,14 +101,7 @@ export async function validateAccount(token) {
       },
     });
 
-    console.log("Statut de la réponse:", response.status);
-    console.log(
-      "Headers de la réponse:",
-      Object.fromEntries([...response.headers])
-    );
-
     const data = await response.json();
-    console.log("Réponse de validation:", data);
 
     if (!response.ok) {
       console.error("Erreur de réponse API:", data);
@@ -146,7 +112,6 @@ export async function validateAccount(token) {
       };
     }
 
-    console.log("Validation de compte réussie");
     return data;
   } catch (error) {
     console.error("Erreur de validation de compte:", error);
@@ -158,10 +123,6 @@ export async function validateAccount(token) {
 // Renvoyer l'email de validation
 export async function resendValidationEmail(email) {
   try {
-    console.log("Début de l'appel API pour renvoyer l'email de validation");
-    console.log("URL d'appel:", `${BASE_URL}/users/resend-validation`);
-    console.log("Email pour renvoi:", email);
-
     const response = await fetch(`${BASE_URL}/users/resend-validation`, {
       method: "POST",
       headers: {
@@ -170,14 +131,7 @@ export async function resendValidationEmail(email) {
       body: JSON.stringify({ email }),
     });
 
-    console.log("Statut de la réponse:", response.status);
-    console.log(
-      "Headers de la réponse:",
-      Object.fromEntries([...response.headers])
-    );
-
     const data = await response.json();
-    console.log("Réponse du renvoi d'email:", data);
 
     if (!response.ok) {
       console.error("Erreur de réponse API:", data);
@@ -189,7 +143,6 @@ export async function resendValidationEmail(email) {
       };
     }
 
-    console.log("Renvoi d'email réussi");
     return data;
   } catch (error) {
     console.error("Erreur de renvoi d'email:", error);
@@ -201,10 +154,6 @@ export async function resendValidationEmail(email) {
 // Récupérer les informations de l'utilisateur connecté
 export async function getUserInfo(userId, token) {
   try {
-    console.log("Début de l'appel API pour les informations utilisateur");
-    console.log("URL d'appel:", `${BASE_URL}/users/${userId}`);
-    console.log("Récupération des informations pour l'utilisateur:", userId);
-
     const response = await fetch(`${BASE_URL}/users/${userId}`, {
       method: "GET",
       headers: {
@@ -212,14 +161,7 @@ export async function getUserInfo(userId, token) {
       },
     });
 
-    console.log("Statut de la réponse:", response.status);
-    console.log(
-      "Headers de la réponse:",
-      Object.fromEntries([...response.headers])
-    );
-
     const data = await response.json();
-    console.log("Informations utilisateur récupérées:", data);
 
     if (!response.ok) {
       console.error("Erreur de réponse API:", data);
@@ -231,7 +173,6 @@ export async function getUserInfo(userId, token) {
       };
     }
 
-    console.log("Récupération des informations réussie");
     return data;
   } catch (error) {
     console.error("Erreur de récupération des informations:", error);
@@ -240,24 +181,45 @@ export async function getUserInfo(userId, token) {
   }
 }
 
+// Récupérer les informations de l'utilisateur abonnements
+export async function getUserAbonnement(id) {
+  try {
+    const response = await fetch(`${BASE_URL}/users/get-abonnement/${id}`, {
+      method: "GET",
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.error("Erreur de réponse API:", data);
+      throw {
+        message:
+          data.message || "Erreur lors de la récupération des informations",
+        status: response.status,
+        data: data,
+      };
+    }
+
+    return data;
+  } catch (error) {
+    console.error("Erreur de récupération des informations:", error);
+    console.error("Détails de l'erreur:", error.message);
+    throw error;
+  }
+}
 // Vérifier la validité du token JWT
 export async function verifyToken(token) {
   try {
-    console.log("Vérification de la validité du token");
-
     if (!token) {
-      console.log("Aucun token fourni pour la vérification");
       return { isValid: false };
     }
 
     // Point d'API pour vérifier le token (utilisation de getUserInfo avec l'ID stocké)
     const userId = getCookie("userId");
     if (!userId) {
-      console.log("Aucun ID utilisateur trouvé pour la vérification du token");
       return { isValid: false };
     }
 
-    console.log("Vérification du token pour l'utilisateur:", userId);
     const response = await fetch(`${BASE_URL}/users/${userId}`, {
       method: "GET",
       headers: {
@@ -265,15 +227,11 @@ export async function verifyToken(token) {
       },
     });
 
-    console.log("Statut de la réponse de vérification:", response.status);
-
     // Si le token est valide, on obtient une réponse 200
     if (response.status === 200) {
-      console.log("Token valide");
       const userData = await response.json();
       return { isValid: true, userData };
     } else {
-      console.log("Token invalide ou expiré");
       return { isValid: false };
     }
   } catch (error) {
@@ -285,17 +243,11 @@ export async function verifyToken(token) {
 // Fonction utilitaire pour tester la connexion à l'API
 export async function testApiConnection() {
   try {
-    console.log("Test de connexion à l'API");
-    console.log("URL du test:", `${BASE_URL}/test`);
-
     const response = await fetch(`${BASE_URL}/test`, {
       method: "GET",
     });
 
-    console.log("Statut de la réponse de test:", response.status);
-
     const data = await response.json();
-    console.log("Réponse du test API:", data);
 
     return { success: response.ok, data };
   } catch (error) {
@@ -307,10 +259,6 @@ export async function testApiConnection() {
 // Demande de réinitialisation de mot de passe (mot de passe oublié)
 export async function forgotPassword(email) {
   try {
-    console.log("Début de l'appel API pour mot de passe oublié");
-    console.log("URL d'appel:", `${BASE_URL}/users/forgot-password`);
-    console.log("Email pour réinitialisation:", email);
-
     const response = await fetch(`${BASE_URL}/users/forgot-password`, {
       method: "POST",
       headers: {
@@ -319,14 +267,7 @@ export async function forgotPassword(email) {
       body: JSON.stringify({ email }),
     });
 
-    console.log("Statut de la réponse:", response.status);
-    console.log(
-      "Headers de la réponse:",
-      Object.fromEntries([...response.headers])
-    );
-
     const data = await response.json();
-    console.log("Réponse de demande de réinitialisation:", data);
 
     if (!response.ok) {
       console.error("Erreur de réponse API:", data);
@@ -338,7 +279,6 @@ export async function forgotPassword(email) {
       };
     }
 
-    console.log("Demande de réinitialisation réussie");
     return data;
   } catch (error) {
     console.error("Erreur de demande de réinitialisation:", error);
@@ -350,9 +290,6 @@ export async function forgotPassword(email) {
 // Réinitialiser le mot de passe avec le token reçu par email
 export async function resetPassword(token, newPassword) {
   try {
-    console.log("Début de l'appel API pour réinitialiser le mot de passe");
-    console.log("URL d'appel:", `${BASE_URL}/users/reset-password`);
-
     const response = await fetch(`${BASE_URL}/users/reset-password`, {
       method: "POST",
       headers: {
@@ -361,14 +298,7 @@ export async function resetPassword(token, newPassword) {
       body: JSON.stringify({ token, newPassword }),
     });
 
-    console.log("Statut de la réponse:", response.status);
-    console.log(
-      "Headers de la réponse:",
-      Object.fromEntries([...response.headers])
-    );
-
     const data = await response.json();
-    console.log("Réponse de réinitialisation:", data);
 
     if (!response.ok) {
       console.error("Erreur de réponse API:", data);
@@ -380,7 +310,6 @@ export async function resetPassword(token, newPassword) {
       };
     }
 
-    console.log("Réinitialisation du mot de passe réussie");
     return data;
   } catch (error) {
     console.error("Erreur de réinitialisation de mot de passe:", error);
