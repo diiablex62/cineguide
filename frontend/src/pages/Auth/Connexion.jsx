@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -12,11 +12,20 @@ import logoWhite from "../../assets/logo_blanc.png";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function Connexion() {
-  const { login } = useContext(AuthContext);
+  const { login, isLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [loginError, setLoginError] = useState(null);
+
+  // Vérifier si l'utilisateur est déjà connecté
+  useEffect(() => {
+    console.log("État de connexion:", isLoggedIn);
+    if (isLoggedIn) {
+      console.log("Utilisateur déjà connecté, redirection vers l'accueil");
+      navigate("/");
+    }
+  }, [isLoggedIn, navigate]);
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 

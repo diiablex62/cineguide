@@ -7,6 +7,8 @@ export default function UserNotConnected({ children }) {
 
   if (!context) return children;
 
-  const { user, connectedUser } = context;
-  return !user || !connectedUser ? children : <Navigate to='/' />;
+  const { isLoggedIn } = context;
+  console.log("État de connexion dans UserNotConnected:", isLoggedIn);
+
+  return !isLoggedIn ? children : <Navigate to='/' />;
 }
