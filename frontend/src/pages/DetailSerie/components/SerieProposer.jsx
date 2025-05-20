@@ -6,11 +6,11 @@ import { useParams } from "react-router-dom";
 export default function SerieProposer() {
   const { id } = useParams();
   const { detailSerie, serie, loadSerieDetails } = useContext(SerieContext);
-  
+
   // Ne chargez les détails que si l'ID est différent de celui déjà chargé
   useEffect(() => {
     if (
-      id && 
+      id &&
       (!detailSerie || !detailSerie.id || String(detailSerie.id) !== String(id))
     ) {
       loadSerieDetails(id);
@@ -26,8 +26,8 @@ export default function SerieProposer() {
   const similarSeries = serie
     .filter(
       (item) =>
-        item && 
-        detailSerie && 
+        item &&
+        detailSerie &&
         String(item.id) !== String(detailSerie.id) &&
         item.genre &&
         detailSerie.genre &&
@@ -37,7 +37,10 @@ export default function SerieProposer() {
 
   // Définition des séries populaires - tri par note
   const popularSeries = [...serie]
-    .filter((item) => item && detailSerie && String(item.id) !== String(detailSerie.id))
+    .filter(
+      (item) =>
+        item && detailSerie && String(item.id) !== String(detailSerie.id)
+    )
     .sort((a, b) => (b.note || 0) - (a.note || 0))
     .slice(0, 6);
 
@@ -45,10 +48,10 @@ export default function SerieProposer() {
   const dramaSeries = serie
     .filter(
       (item) =>
-        item && 
-        detailSerie && 
-        String(item.id) !== String(detailSerie.id) && 
-        item.genre && 
+        item &&
+        detailSerie &&
+        String(item.id) !== String(detailSerie._id) &&
+        item.genre &&
         item.genre.includes("Drame")
     )
     .slice(0, 6);
@@ -64,9 +67,9 @@ export default function SerieProposer() {
             <div className="flex overflow-x-auto gap-4 pb-4">
               {similarSeries.slice(0, 4).map((item) => (
                 <Card
-                  key={item.id}
+                  key={item._id}
                   serie={item}
-                  currentSerieId={detailSerie.id}
+                  currentSerieId={detailSerie._id}
                 />
               ))}
             </div>
@@ -81,9 +84,9 @@ export default function SerieProposer() {
             <div className="flex overflow-x-auto gap-4 pb-4">
               {popularSeries.map((item) => (
                 <Card
-                  key={item.id}
+                  key={item._id}
                   serie={item}
-                  currentSerieId={detailSerie.id}
+                  currentSerieId={detailSerie._id}
                 />
               ))}
             </div>
@@ -98,9 +101,9 @@ export default function SerieProposer() {
             <div className="flex overflow-x-auto gap-4 pb-4">
               {dramaSeries.map((item) => (
                 <Card
-                  key={item.id}
+                  key={item._id}
                   serie={item}
-                  currentSerieId={detailSerie.id}
+                  currentSerieId={detailSerie._id}
                 />
               ))}
             </div>
