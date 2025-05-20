@@ -15,11 +15,15 @@ import avatar from "../../../assets/profil/avatar.svg";
 
 export default function ProfilNav() {
   const [citation, setCitation] = useState(userData.textPerso);
-
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isNameModalOpen, setNameModalOpen] = useState(false);
+  const [userName, setUserName] = useState(
+    userData.firstname + "." + userData.lastname.charAt(0)
+  );
 
   const schema = yup.object({
     citation: yup.string().required("Le champ est obligatoire"),
+    fullName: yup.string().required("Le champ est obligatoire"),
   });
 
   const {
@@ -32,9 +36,17 @@ export default function ProfilNav() {
   });
 
   const onSubmit = (data) => {
-    setCitation(data.citation);
-    setModalOpen(false);
+    if (data.citation) {
+      setCitation(data.citation);
+      setModalOpen(false);
+    }
+
+    if (data.fullName) {
+      setUserName(data.fullName);
+      setNameModalOpen(false);
+    }
   };
+
   const [previewImage, setPreviewImage] = useState(avatar);
 
   const handleImageChange = (e) => {
@@ -49,15 +61,15 @@ export default function ProfilNav() {
   };
 
   return (
-    <div className="p-5 dark:text-white">
-      <div className="flex items-end">
+    <div className="dark:text-white">
+      <div className="flex items-start">
         <label
           htmlFor="upload-avatar"
           className="cursor-pointer flex justify-center items-center relative group"
         >
           <FaPen className="absolute text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <img
-            className="w-[100px] h-[100px] object-cover"
+            className="w-[100px] h-[100px] object-cover rounded-md"
             src={previewImage}
             alt="Avatar"
           />
@@ -69,22 +81,33 @@ export default function ProfilNav() {
           className="hidden"
           onChange={handleImageChange}
         />
-        <p className="font-bold text-4xl mb-3">
-          {userData.firstname}.{userData.lastname.charAt(0)}
-        </p>
-      </div>
-      <div>
-        <p className="italic my-3">{citation}</p>
-        <div className="flex justify-end">
-          <button
-            className="border rounded px-2 flex items-center cursor-pointer"
-            onClick={() => setModalOpen(true)}
-          >
-            <FaPen className="mr-2" />
-            Modifier
-          </button>
+
+        <div className="ml-3">
+          <div className="flex items-center mb-2">
+            <p className="font-bold text-2xl mr-2">{userName}</p>
+            <button
+              onClick={() => setNameModalOpen(true)}
+              className="text-gray-500 hover:text-fuchsia transition-colors"
+            >
+              <FaPen className="text-sm" />
+            </button>
+          </div>
+
+          <div className="flex items-center">
+            <p className="italic text-gray-600 dark:text-gray-400 mr-2">
+              {citation}
+            </p>
+            <button
+              onClick={() => setModalOpen(true)}
+              className="text-gray-500 hover:text-fuchsia transition-colors"
+            >
+              <FaPen className="text-sm" />
+            </button>
+          </div>
         </div>
       </div>
+
+      {/* Modal pour modifier la citation */}
       <ModalPassword isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
         <div className="flex justify-between">
           <h2 className="underline dark:text-white">
@@ -92,7 +115,7 @@ export default function ProfilNav() {
           </h2>
           <button
             onClick={() => setModalOpen(false)}
-            className=" cursor-pointer text-2xl"
+            className="cursor-pointer text-2xl"
           >
             <IoMdClose />
           </button>
@@ -121,7 +144,47 @@ export default function ProfilNav() {
           </form>
         </div>
       </ModalPassword>
-      <div className="my-4 flex justify-center md:justify-start gap-10">
+
+      {/* Modal pour modifier le nom */}
+      <ModalPassword
+        isOpen={isNameModalOpen}
+        onClose={() => setNameModalOpen(false)}
+      >
+        <div className="flex justify-between">
+          <h2 className="underline dark:text-white">Modifier votre nom ?</h2>
+          <button
+            onClick={() => setNameModalOpen(false)}
+            className="cursor-pointer text-2xl"
+          >
+            <IoMdClose />
+          </button>
+        </div>
+        <div className="mt-10 py-5 px-2 flex flex-col items-center">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col w-full"
+          >
+            <label htmlFor="fullName">Votre nom :</label>
+            <input
+              {...register("fullName")}
+              className="text-black border dark:border-white dark:text-white px-3 py-3"
+              type="text"
+              id="fullName"
+              defaultValue={userName}
+            />
+            {errors.fullName && (
+              <p className="text-red-500 dark:text-red-400">
+                {errors.fullName.message}
+              </p>
+            )}
+            <button className="px-10 cursor-pointer mt-8 bg-fuchsia text-white h-[40px]">
+              Envoyer
+            </button>
+          </form>
+        </div>
+      </ModalPassword>
+
+      <div className="mt-6 flex justify-center md:justify-start gap-4 mb-2">
         <NavLink
           to="/profil"
           className={({ isActive }) =>

@@ -5,7 +5,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { FilmContext } from "../../../context/FilmContext";
 import { NavLink } from "react-router-dom";
-import { useTranslation } from "react-i18next"; // Ajout
 
 export default function CardFilm() {
   const {
@@ -20,24 +19,23 @@ export default function CardFilm() {
     filteredFilm,
   } = useContext(FilmContext);
 
-  const { t } = useTranslation(); // Ajout
+  const [visibleFilms, setVisibleFilms] = useState(6);
+
+  const showMoreFilms = () => {
+    setVisibleFilms((prev) => prev + 6);
+  };
 
   return (
     <>
       {filteredFilm.length === 0 ? (
         <div className="flex justify-center items-center h-screen mt-[-100px]">
-          <h2>
-            {t(
-              "home.noFilmAvailable",
-              "Aucun film n'est disponible d'après vos recherches"
-            )}
-          </h2>
+          <h2>Aucun film n'est disponible d'après vos recherches</h2>
         </div>
       ) : (
         <>
           {/* Affichage desktop */}
-          <div className="hidden md:flex md:flex-wrap ">
-            {filteredFilm.map((film, index) => (
+          <div className="hidden md:flex md:flex-wrap">
+            {filteredFilm.slice(0, visibleFilms).map((film, index) => (
               <div
                 key={index}
                 className="flex md:w-full lg:w-[48%] gap-4 border p-4 mr-2 mb-4"
@@ -55,33 +53,35 @@ export default function CardFilm() {
                     <p className="mr-3">
                       {new Date(film.dateSortie).getFullYear()}
                     </p>
+                    <p className="mr-3">Note : {film.note}</p>
                     <p className="mr-3">
-                      {t("home.note", "Note")} : {film.note}
+                      {film.duree >= 60
+                        ? `${Math.floor(film.duree / 60)}h${
+                            film.duree % 60 > 0 ? ` ${film.duree % 60}min` : ""
+                          }`
+                        : `${film.duree}min`}
                     </p>
-                    <p className="mr-3">{film.duree}</p>
                   </div>
                   <p>
                     {film.synopsis.length > 50
                       ? film.synopsis.slice(0, 50) + "..."
                       : film.synopsis}
                   </p>
-                  <div className="flex flex-col ">
+                  <div className="flex flex-col">
                     <button
                       onClick={() => toggleState(setGoSeeStates, index)}
                       className={`mt-2 cursor-pointer text-white w-[130px] h-[40px] lg:text-[15px] ${
                         goSeeStates[index] ? "bg-gray-fonce" : "bg-gray-400"
                       }`}
                     >
-                      {goSeeStates[index]
-                        ? "+ " + t("home.aVoir", "À voir")
-                        : t("home.dejaAjoute", "Déjà ajouté")}
+                      {goSeeStates[index] ? "+ À voir" : "Déjà ajouté"}
                     </button>
                     <div className="flex">
                       <NavLink
                         to={`/detailfilm/${film._id}`}
                         className="mt-2 cursor-pointer flex items-center justify-center mr-2 bg-fuchsia text-white w-[130px] h-[40px] lg:text-[15px]"
                       >
-                        {t("home.regarder", "Regarder")}
+                        Regarder
                       </NavLink>
                       <button
                         onClick={() =>
@@ -94,16 +94,25 @@ export default function CardFilm() {
                         }`}
                       >
                         {alreadySeenStates[film._id]
-                          ? t("home.dejaVu", "Déjà vu")
-                          : "+ " + t("home.pasEncoreVu", "Pas encore vu")}
+                          ? "Déjà vu"
+                          : "+ Pas encore vu"}
                       </button>
                     </div>
                   </div>
                 </div>
               </div>
             ))}
+            {visibleFilms < filteredFilm.length && (
+              <div className="w-full flex justify-center mt-4">
+                <button
+                  onClick={showMoreFilms}
+                  className="bg-fuchsia text-white px-6 py-2 rounded cursor-pointer"
+                >
+                  Voir plus
+                </button>
+              </div>
+            )}
           </div>
-
           {/* Affichage mobile (Swiper) */}
           <div className="flex items-center justify-center md:hidden p-5">
             <Swiper
@@ -138,9 +147,7 @@ export default function CardFilm() {
                   >
                     <p className="font-bold text-2xl">{film.titre}</p>
                     <p>{new Date(film.dateSortie).getFullYear()}</p>
-                    <p>
-                      {t("home.note", "Note")} : {film.note}
-                    </p>
+                    <p>Note : {film.note}</p>
                     <p>{film.duree}</p>
                     <p>{film.synopsis}</p>
                     <div className="flex flex-col items-center">
@@ -150,15 +157,13 @@ export default function CardFilm() {
                           goSeeStates[index] ? "bg-gray-fonce" : "bg-gray-400"
                         }`}
                       >
-                        {goSeeStates[index]
-                          ? "+ " + t("home.aVoir", "À voir")
-                          : t("home.dejaAjoute", "Déjà ajouté")}
+                        {goSeeStates[index] ? "+ À voir" : "Déjà ajouté"}
                       </button>
                       <NavLink
                         to={`/detailfilm/${film._id}`}
                         className="mt-2 cursor-pointer bg-fuchsia text-white w-[150px]  flex justify-center items-center h-[50px]"
                       >
-                        {t("home.regarder", "Regarder")}
+                        Regarder
                       </NavLink>
                       <button
                         onClick={() => toggleState(setAlreadySeenStates, index)}
@@ -169,8 +174,8 @@ export default function CardFilm() {
                         }`}
                       >
                         {alreadySeenStates[index]
-                          ? t("home.dejaVu", "Déjà vu")
-                          : "+ " + t("home.pasEncoreVu", "Pas encore vu")}
+                          ? "Déjà vu"
+                          : "+ Pas encore vu"}
                       </button>
                     </div>
                   </div>

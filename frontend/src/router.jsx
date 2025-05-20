@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import FilmList from "./pages/Films/FilmList";
 import Connexion from "./pages/Auth/Connexion";
 import Inscription from "./pages/Auth/Inscription";
+import Validation from "./pages/Auth/Validation";
 import ActualitesPage from "./pages/Actualites/ActualitesPage";
 import SeriesList from "./pages/Series/SeriesList";
 import MentionsLegales from "./pages/Legal/MentionsLegales";
@@ -44,31 +45,55 @@ import QuestionsQuizz from "./pages/Jeux/pages/Quizz/components/QuestionsQuizz";
 import ResultatQuizz from "./pages/Jeux/pages/Quizz/components/ResultatQuizz";
 import QuizzAccueil from "./pages/Jeux/pages/Quizz/components/QuizzAccueil";
 import { AfficheProvider } from "./components/providers/AfficheProvider";
+import ResetPassword from "./pages/Auth/ResetPassword";
+import ForgottenPassword from "./pages/Auth/ForgottenPassword";
+
+import AuthLayout from "./components/layout/AuthLayout";
 
 export const router = createBrowserRouter([
   {
     path: "*",
     element: <NotFound />,
-  },
+  }, // Routes d'authentification avec leur propre layout (sans header/footer)
   {
-    path: "/connexion",
-    element: (
-      <UserNotConnected>
-        <Connexion />
-      </UserNotConnected>
-    ),
-  },
-  {
-    path: "/inscription",
-    element: (
-      <UserNotConnected>
-        <Inscription />
-      </UserNotConnected>
-    ),
+    element: <AuthLayout />,
+    children: [
+      {
+        path: "reset-password/:token",
+        element: <ResetPassword />,
+      },
+      {
+        path: "forgotten-password",
+        element: (
+          <UserNotConnected>
+            <ForgottenPassword />
+          </UserNotConnected>
+        ),
+      },
+      {
+        path: "validation",
+        element: <Validation />,
+      },
+      {
+        path: "connexion",
+        element: (
+          <UserNotConnected>
+            <Connexion />
+          </UserNotConnected>
+        ),
+      },
+      {
+        path: "inscription",
+        element: (
+          <UserNotConnected>
+            <Inscription />
+          </UserNotConnected>
+        ),
+      },
+    ],
   },
   {
     path: "/jeux",
-
     children: [
       {
         index: true,
@@ -123,28 +148,42 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Profil />,
+            element: (
+              <UserConnected>
+                <Profil />
+              </UserConnected>
+            ),
           },
           {
             path: "/profil/mon-activiter",
-            element: <ProfilActiviter />,
+            element: (
+              <UserConnected>
+                <ProfilActiviter />
+              </UserConnected>
+            ),
           },
           {
             path: "/profil/ma-liste",
-            element: <ProfilListe />,
+            element: (
+              <UserConnected>
+                <ProfilListe />
+              </UserConnected>
+            ),
           },
           {
             path: "/profil/mes-reviews",
-            element: <ProfileReviews />,
+            element: (
+              <UserConnected>
+                <ProfileReviews />
+              </UserConnected>
+            ),
           },
         ],
       },
-
       {
         path: "/film",
         element: <FilmList />,
       },
-
       {
         path: "/detailserie/:id",
         element: <DetailSerie />,
@@ -153,7 +192,6 @@ export const router = createBrowserRouter([
             index: true,
             element: <TousSerie />,
           },
-        
           {
             path: "bandeannonceserie",
             element: <BandeAnnonceSerie />,
@@ -172,7 +210,6 @@ export const router = createBrowserRouter([
         path: "/series",
         element: <SeriesList />,
       },
-
       {
         path: "/mentionsLegales",
         element: <MentionsLegales />,
@@ -205,7 +242,6 @@ export const router = createBrowserRouter([
             index: true,
             element: <Tous />,
           },
-         
           {
             path: "bandeannonce",
             element: <BandeAnnonce />,

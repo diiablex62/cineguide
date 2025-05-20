@@ -9,12 +9,16 @@ const filmSchema = new mongoose.Schema(
     duree: { type: String, required: true },
     note: { type: String, required: true },
     dateSortie: { type: Date, required: true },
-    realisateur: { type: String, required: true },
+    realisateur: { type: Array, required: true },
     bandeAnnonce: { type: String, required: true },
     genre: { type: Array, required: true },
     platforms: { type: Array, required: true },
     paysProduction: { type: Array, required: true },
     langues: { type: Array, required: true },
+    tmdbId: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

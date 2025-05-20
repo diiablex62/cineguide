@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import FilmParActeur from "../../data/FilmParActeur.json";
 import Recompenses from "../../data/Recompense.json";
 import { BASE_URL } from "../../utils/url";
-export default function ActorProvider({ children }) {
+
+export function ActorProvider({ children }) {
   const [allActors, setAllActors] = useState();
   const [detailActor, setDetailActor] = useState({
     id: 0,

@@ -19,12 +19,16 @@ const episodeSchema = new mongoose.Schema(
       required: true,
     },
     dateDiffusion: {
-      type: Date,
+      type: String,
       required: true,
     },
-    saison: {
+    IdSaisonMongo: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Saison",
+      required: true,
+    },
+    NumeroSaison: {
+      type: Number,
       required: true,
     },
   },

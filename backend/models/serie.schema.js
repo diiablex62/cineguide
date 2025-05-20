@@ -65,6 +65,10 @@ const serieSchema = new mongoose.Schema(
         ref: "Saison",
       },
     ],
+    tmdbId: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
