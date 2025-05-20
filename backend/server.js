@@ -44,7 +44,8 @@ app.use("/api/films", filmRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/search", searchRoutes);
 app.use("/api/series", serieRoutes);
-app.use("/api/saisons", saisonRoutes);
+app.use("/api/series", episodeRoutes);
+app.use("/api/series", saisonRoutes);
 app.use("/api/purchase", purchaseRoutes);
 // Route de test pour vérifier que le serveur répond
 app.get("/api/test", (req, res) => {

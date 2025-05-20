@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {
-  // getEpisodesBySaison,
+  getEpisodesBySaison,
   // createEpisode,
   getEpisodeById,
   getAllEpisodes,
@@ -9,7 +9,7 @@ const {
 
 // Routes pour les épisodes
 // Ces routes seront préfixées par "/api/episodes" dans app.js
-// router.get("/:id/saisons/:saisonNumero/episodes", getEpisodesBySaison);
+router.get("/:id/saisons/:saisonNumero/episodes", getEpisodesBySaison);
 
 // router.post("/:id/saisons/:saisonNumero/episodes", createEpisode);
 
