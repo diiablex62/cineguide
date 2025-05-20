@@ -3,3 +3,9 @@ dist
 package-lock.json
 .env 
 cineguide data
+
+backend/node_modules
+frontend/node_modules
+
+backend/env
+frontend/env
