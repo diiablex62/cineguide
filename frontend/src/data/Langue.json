@@ -1,12 +1,5 @@
 [
   { "id": 1, "code": "fr", "name": "Français" },
-  { "id": 2, "code": "en", "name": "Anglais" },
-  { "id": 3, "code": "es", "name": "Espagnol" },
-  { "id": 4, "code": "de", "name": "Allemand" },
-  { "id": 5, "code": "it", "name": "Italien" },
-  { "id": 6, "code": "pt", "name": "Portugais" },
-  { "id": 7, "code": "ar", "name": "Arabe" },
-  { "id": 8, "code": "zh", "name": "Chinois" },
-  { "id": 9, "code": "ja", "name": "Japonais" },
-  { "id": 10, "code": "ru", "name": "Russe" }
+  { "id": 2, "code": "en", "name": "English" },
+  { "id": 3, "code": "es", "name": "Español" }
 ]
