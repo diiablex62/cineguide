@@ -1,8 +1,9 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import ThemeProvider from "./components/providers/ThemeProvider";
 import MenuProvider from "./components/providers/MenuProvider";
 import AuthProvider from "./components/providers/AuthProvider";
+import LoadingSpinner from "./components/LoadingSpinner";
 import { HomeProvider } from "./components/providers/HomeProvider";
 import ProfilProvider from "./components/providers/ProfilProvider";
 import FiltreProvider from "./components/providers/FiltreProvider";
@@ -15,8 +16,18 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 function App() {
+  const location = useLocation();
+  const isAuthPage =
+    [
+      "/connexion",
+      "/inscription",
+      "/validation",
+      "/forgotten-password",
+    ].includes(location.pathname) ||
+    location.pathname.startsWith("/reset-password/");
+
   return (
-    <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white">
+    <div className='min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white'>
       <ThemeProvider>
         <MenuProvider>
           <AuthProvider>
@@ -27,10 +38,18 @@ function App() {
                     <SerieProvider>
                       <FiltreProvider>
                         <ActuProvider>
+                          {" "}
                           <ActorProvider>
-                            <Header></Header>
-                            <Outlet></Outlet>
-                            <Footer></Footer>
+                            {!isAuthPage && <Header />}
+                            <main
+                              className={
+                                !isAuthPage
+                                  ? "min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white"
+                                  : ""
+                              }>
+                              <Outlet />
+                            </main>
+                            {!isAuthPage && <Footer />}
                           </ActorProvider>
                         </ActuProvider>
                       </FiltreProvider>

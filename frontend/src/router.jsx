@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import FilmList from "./pages/Films/FilmList";
 import Connexion from "./pages/Auth/Connexion";
 import Inscription from "./pages/Auth/Inscription";
+import Validation from "./pages/Auth/Validation";
 import ActualitesPage from "./pages/Actualites/ActualitesPage";
 import SeriesList from "./pages/Series/SeriesList";
 import MentionsLegales from "./pages/Legal/MentionsLegales";
@@ -45,31 +46,51 @@ import ResultatQuizz from "./pages/Jeux/pages/Quizz/components/ResultatQuizz";
 import QuizzAccueil from "./pages/Jeux/pages/Quizz/components/QuizzAccueil";
 import { AfficheProvider } from "./components/providers/AfficheProvider";
 import ResetPassword from "./pages/Auth/ResetPassword";
+import ForgottenPassword from "./pages/Auth/ForgottenPassword";
+
+import AuthLayout from "./components/layout/AuthLayout";
 
 export const router = createBrowserRouter([
   {
     path: "*",
     element: <NotFound />,
-  },
+  }, // Routes d'authentification avec leur propre layout (sans header/footer)
   {
-    path: "/reset-password/:token",
-    element: <ResetPassword />,
-  },
-  {
-    path: "/connexion",
-    element: (
-      <UserNotConnected>
-        <Connexion />
-      </UserNotConnected>
-    ),
-  },
-  {
-    path: "/inscription",
-    element: (
-      <UserNotConnected>
-        <Inscription />
-      </UserNotConnected>
-    ),
+    element: <AuthLayout />,
+    children: [
+      {
+        path: "reset-password/:token",
+        element: <ResetPassword />,
+      },
+      {
+        path: "forgotten-password",
+        element: (
+          <UserNotConnected>
+            <ForgottenPassword />
+          </UserNotConnected>
+        ),
+      },
+      {
+        path: "validation",
+        element: <Validation />,
+      },
+      {
+        path: "connexion",
+        element: (
+          <UserNotConnected>
+            <Connexion />
+          </UserNotConnected>
+        ),
+      },
+      {
+        path: "inscription",
+        element: (
+          <UserNotConnected>
+            <Inscription />
+          </UserNotConnected>
+        ),
+      },
+    ],
   },
   {
     path: "/jeux",

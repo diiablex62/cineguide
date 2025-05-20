@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 export default function QuestionsQuizz() {
   const [selectedButtonId, setSelectedButtonId] = useState(null);
+  console.log("Rendu de QuestionsQuizz", { selectedButtonId });
 
   function selectedResponse(event) {
     const buttonId = event.target.id;
@@ -11,7 +12,7 @@ export default function QuestionsQuizz() {
   return (
     <div className='flex flex-col gap-2.5 py-11 px-14 h-full'>
       <div className='flex flex-col'>
-        <h2 className='text-3xl font-bold'>Quiz Personnalisé</h2>
+        <h2 className='text-3xl font-bold text-black'>Quiz Personnalisé</h2>
         <p className='italic text-gray-500'>
           <span className='underline'>Objectif</span> : répondre aux questions
           posées en rapport avec vos préférences.{" "}
@@ -20,7 +21,7 @@ export default function QuestionsQuizz() {
           </span>
         </p>
       </div>
-      <h3 className='font-bold text-xl'>Etape 2 :</h3>
+      <h3 className='font-bold text-xl text-black'>Etape 2 :</h3>
       <div className='flex py-7'>
         <div className='flex flex-col gap-9 items-center justify-center w-full'>
           <div className='flex flex-col gap-2.5 items-center w-full'>
@@ -28,7 +29,7 @@ export default function QuestionsQuizz() {
               Question 1 / 10
             </p>
             <div className='p-8 border border-black bg-white w-full'>
-              <p className='font-medium text-center'>
+              <p className='font-medium text-center text-black'>
                 Dans quel film un parc rempli de dinosaures devient
                 incontrôlable ?
               </p>
