@@ -6,7 +6,7 @@ if (!TMDB_API_TOKEN) {
 }
 
 // Fonction générique pour faire une requête GET avec Bearer token
-async function fetchFromTMDB(endpoint) {
+const fetchFromTMDB = async (endpoint) => {
   try {
     const url = `${TMDB_BASE_URL}${endpoint}${
       endpoint.includes("?") ? "&" : "?"
@@ -24,7 +24,7 @@ async function fetchFromTMDB(endpoint) {
     console.error("Erreur API TMDB:", err.message);
     throw err;
   }
-}
+};
 
 // API Séries
 const getPopularSeries = async (page) => {
@@ -151,6 +151,7 @@ const getWeekTop = async (time) => {
 // };
 
 module.exports = {
+  fetchFromTMDB,
   getPopularSeries,
   getSerieDetails,
   getSeasonDetails,

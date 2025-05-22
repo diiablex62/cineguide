@@ -128,6 +128,9 @@ async function importActeursDepuisTMDB() {
     const details = await importerDetailsActeur(resultRecherche.id);
     if (!details) continue;
 
+    const credits = await fetchFromTMDB(
+      `person/${details.id}/combined_credits`
+    );
     const acteur = new Acteur({
       metiers: details.known_for_department
         ? [details.known_for_department]
@@ -135,15 +138,15 @@ async function importActeursDepuisTMDB() {
       nom: details.name,
       image: details.profile_path
         ? `https://image.tmdb.org/t/p/w500${details.profile_path}`
-        : null,
+        : "N/A",
       nom_de_naissance: details.also_known_as?.[0] || details.name,
       date_de_naissance: details.birthday || "Inconnue",
       age: calculerAge(details.birthday) || 0,
-      nationalite: details.place_of_birth || "Inconnue",
+      lieu_de_naissance: details.place_of_birth || "Inconnue",
       carriere: details.birthday
         ? new Date().getFullYear() - new Date(details.birthday).getFullYear()
         : null,
-      nb_films: details.movie_credits?.cast?.length || null,
+      nb_films: credits || null,
       prix: 0, // Placeholder
       nominations: 0, // Placeholder
       oeuvres_principales:
@@ -158,11 +161,109 @@ async function importActeursDepuisTMDB() {
   }
 }
 
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const enrichirActeursDepuisWikidata = async () => {
+  try {
+    const acteurs = await Acteur.find();
+
+    for (const acteur of acteurs) {
+      const nom = acteur.nom;
+
+      // Encode le nom pour URL
+      const nomEncode = encodeURIComponent(nom);
+
+      // Ajoute un délai pour éviter le blocage de Wikidata
+      await sleep(500);
+
+      const query = `
+    SELECT ?films ?prix ?nominations WHERE {
+      {
+        SELECT (COUNT(DISTINCT ?film) AS ?films) WHERE {
+          ?person wdt:P31 wd:Q5;
+                  rdfs:label ?label.
+          FILTER(LANG(?label) = "fr")
+          FILTER(LCASE(?label) = LCASE("${nom}"))
+          ?film wdt:P161 ?person.
+        }
+      }
+      {
+        SELECT (COUNT(DISTINCT ?nomination) AS ?nominations) WHERE {
+          ?person wdt:P31 wd:Q5;
+                  rdfs:label ?label.
+          FILTER(LANG(?label) = "fr")
+          FILTER(LCASE(?label) = LCASE("${nom}"))
+          ?nomination wdt:P1346 ?person.
+        }
+      }
+      {
+        SELECT (COUNT(DISTINCT ?prix) AS ?prix) WHERE {
+          ?person wdt:P31 wd:Q5;
+                  rdfs:label ?label.
+          FILTER(LANG(?label) = "fr")
+          FILTER(LCASE(?label) = LCASE("${nom}"))
+          ?prix wdt:P166 ?person.
+        }
+      }
+    }
+    LIMIT 1
+  `;
+
+      const url = `https://query.wikidata.org/sparql?query=${encodeURIComponent(
+        query
+      )}`;
+
+      const res = await fetch(url, {
+        headers: {
+          Accept: "application/sparql-results+json",
+          "User-Agent": "VideoGameManagerBot/1.0 (contact@tonsite.com)",
+        },
+      });
+
+      if (!res.ok) {
+        console.warn(`⚠️ ${nom} non trouvé sur Wikidata : ${res.statusText}`);
+        continue;
+      }
+
+      const data = await res.json();
+      const bindings = data?.results?.bindings?.[0];
+
+      if (!bindings) {
+        console.warn(`⚠️ ${nom} : aucune donnée Wikidata`);
+        continue;
+      }
+
+      const nb_films = bindings.films?.value
+        ? parseInt(bindings.films.value)
+        : 0;
+      const nominations = bindings.nominations?.value
+        ? parseInt(bindings.nominations.value)
+        : 0;
+      const prix = bindings.awards?.value ? parseInt(bindings.awards.value) : 0;
+
+      acteur.nb_films = nb_films;
+      acteur.nominations = nominations;
+      acteur.prix = prix;
+
+      await acteur.save();
+
+      console.log(
+        `✅ ${nom} mis à jour : ${nb_films} films, ${prix} prix, ${nominations} nominations.`
+      );
+    }
+
+    console.log("✅ Enrichissement Wikidata terminé !");
+  } catch (err) {
+    console.error("❌ Erreur lors de l'enrichissement Wikidata :", err.message);
+  }
+};
+
 module.exports = {
   getActeurs,
-  getOneActeur,
-  updateActeur,
-  deleteActeur,
-  createActeur,
+  // getOneActeur,
+  // updateActeur,
+  // deleteActeur,
+  // createActeur,
   importActeursDepuisTMDB,
+  enrichirActeursDepuisWikidata,
 };

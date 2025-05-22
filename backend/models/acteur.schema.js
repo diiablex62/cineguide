@@ -7,7 +7,7 @@ const acteurSchema = new mongoose.Schema({
   nom_de_naissance: { type: String, required: true },
   date_de_naissance: { type: String, required: true },
   age: { type: Number, required: true },
-  nationalite: { type: String, required: true },
+  lieu_de_naissance: { type: String, required: true },
   carriere: { type: Number },
   nb_films: { type: Number },
   prix: { type: Number },
