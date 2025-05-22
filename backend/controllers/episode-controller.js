@@ -1,11 +1,15 @@
 const Episode = require("../models/episode.schema");
+const Serie = require("../models/serie.schema");
+const Saison = require("../models/saison.schema");
 const { getSeasonDetails } = require("../services/tmdb");
 
 // Récupérer tous les épisodes d'une saison
 const getEpisodesBySaison = async (req, res) => {
   try {
-    const serieId = req.params.id; // Changement de _id à id
-    const saisonNumero = req.params.saisonNumero;
+    const serieId = req.params.id;
+    const saisonNumero = parseInt(req.params.saisonNumero);
+
+    console.log(`Recherche des épisodes pour série ${serieId}, saison ${saisonNumero}`);
 
     // Recherche par ID ou par l'attribut id
     const serie = await Serie.findOne({
@@ -16,68 +20,95 @@ const getEpisodesBySaison = async (req, res) => {
     });
 
     if (!serie) {
-
+      console.log(`Série non trouvée avec ID: ${serieId}`);
       return res.status(404).json({ message: 'Série non trouvée' });
     }
 
-    const saison = await Saison.findOne({
+    console.log(`Série trouvée: ${serie.titre || serie.name}, ID: ${serie._id}`);
+
+    // Essayer différentes façons de trouver la saison
+    let saison = await Saison.findOne({
       serie: serie._id,
       numero: saisonNumero
     });
 
+    // Si pas trouvé, essayer avec d'autres champs possibles
     if (!saison) {
-
-      return res.status(404).json({ message: 'Saison non trouvée' });
+      saison = await Saison.findOne({
+        IdSerieMongo: serie._id,
+        numero: saisonNumero
+      });
     }
 
-    const episodes = await Episode.find({ saison: saison._id });
+    // Si toujours pas trouvé, essayer avec le champ season_number
+    if (!saison) {
+      saison = await Saison.findOne({
+        $or: [
+          { serie: serie._id },
+          { IdSerieMongo: serie._id }
+        ],
+        $or: [
+          { numero: saisonNumero },
+          { season_number: saisonNumero }
+        ]
+      });
+    }
+
+    if (!saison) {
+      // Debug: lister toutes les saisons pour cette série
+      const allSaisons = await Saison.find({
+        $or: [
+          { serie: serie._id },
+          { IdSerieMongo: serie._id }
+        ]
+      });
+      
+      console.log(`Aucune saison ${saisonNumero} trouvée pour la série ${serie._id}`);
+      console.log(`Saisons disponibles pour cette série:`, allSaisons.map(s => ({
+        id: s._id,
+        numero: s.numero,
+        season_number: s.season_number,
+        serie: s.serie,
+        IdSerieMongo: s.IdSerieMongo
+      })));
+      
+      return res.status(404).json({ 
+        message: 'Saison non trouvée',
+        debug: {
+          serieId: serie._id,
+          saisonNumero,
+          availableSeasons: allSaisons.map(s => s.numero || s.season_number)
+        }
+      });
+    }
+
+    console.log(`Saison trouvée: ${saison._id}, numéro: ${saison.numero || saison.season_number}`);
+
+    // Chercher les épisodes avec différentes possibilités de référence
+    let episodes = await Episode.find({ saison: saison._id });
+    
+    if (episodes.length === 0) {
+      episodes = await Episode.find({ IdSaisonMongo: saison._id });
+    }
+
+    if (episodes.length === 0) {
+      episodes = await Episode.find({ 
+        NumeroSaison: saisonNumero,
+        $or: [
+          { saison: saison._id },
+          { IdSaisonMongo: saison._id }
+        ]
+      });
+    }
+
+    console.log(`${episodes.length} épisodes trouvés pour la saison ${saisonNumero}`);
 
     res.status(200).json(episodes);
   } catch (error) {
-
+    console.error('Error in getEpisodesBySaison:', error);
     res.status(500).json({ message: error.message });
   }
 };
-
-// // Ajouter un épisode
-// const createEpisode = async (req, res) => {
-//   try {
-//     const serieId = req.params._id;
-//     const saisonNumero = req.params.saisonNumero;
-
-//     const serie = await Serie.findById(serieId);
-
-//     if (!serie) {
-//       return res.status(404).json({ message: 'Série non trouvée' });
-//     }
-
-//     const saison = await Saison.findOne({
-//       serie: serieId,
-//       numero: saisonNumero
-//     });
-
-//     if (!saison) {
-//       return res.status(404).json({ message: 'Saison non trouvée' });
-//     }
-
-//     const episode = new Episode({
-//       ...req.body,
-//       saison: saison._id
-//     });
-
-//     const newEpisode = await episode.save();
-
-//     // Mettre à jour la référence dans la saison
-//     saison.episodes.push(newEpisode._id);
-//     await saison.save();
-
-//     res.status(201).json(newEpisode);
-//   } catch (error) {
-//     res.status(400).json({ message: error.message });
-//   }
-// };
-
-// module.exports = {getEpisodesBySaison, createEpisode};
 
 const createEpisodeForSaison = async (saisonDoc, numeroSaison) => {
   try {
@@ -85,7 +116,7 @@ const createEpisodeForSaison = async (saisonDoc, numeroSaison) => {
       saisonDoc.IdSerieTmdb,
       numeroSaison
     );
-    if (!seasonData) return; // ← saison introuvable, on ne continue pas
+    if (!seasonData) return;
     const episodes = seasonData.episodes || [];
 
     for (const ep of episodes) {
@@ -106,6 +137,7 @@ const createEpisodeForSaison = async (saisonDoc, numeroSaison) => {
         dateDiffusion,
         IdSaisonMongo: saisonDoc._id,
         NumeroSaison: numeroSaison,
+        saison: saisonDoc._id, // Ajouter aussi cette référence pour compatibilité
       });
 
       await episodeDoc.save();
