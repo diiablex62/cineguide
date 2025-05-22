@@ -11,6 +11,9 @@ const searchRoutes = require("./routes/search");
 const acteurRoutes = require("./routes/acteurs");
 const filmRoutes = require("./routes/film");
 const purchaseRoutes = require("./routes/purchase");
+const trendingRoutes = require("./routes/trending");
+const actionSeriesRoutes = require("./routes/action-series");
+const similarSeriesRoutes = require("./routes/similar-series");
 const { verifyEmailConfig } = require("./utils/email/config");
 const app = express();
 app.use(express.json());
@@ -44,15 +47,12 @@ app.use("/api/series", serieRoutes);
 app.use("/api/series", episodeRoutes);
 app.use("/api/series", saisonRoutes);
 app.use("/api/purchase", purchaseRoutes);
+app.use("/api/trending", trendingRoutes);
+app.use("/api/action-series", actionSeriesRoutes);
+app.use("/api/similar-series", similarSeriesRoutes);
 
 app.get("/api/test", (req, res) => {
   res.status(200).json({ message: "Serveur API fonctionnel!" });
-});
-
-app.use(express.static(path.join(__DIRNAME, "/frontend/dist")));
-
-app.get(/(.*)/, (req, res) => {
-  res.sendFile(path.join(__DIRNAME, "frontend", "dist", "index.html"));
 });
 
 mongoose
