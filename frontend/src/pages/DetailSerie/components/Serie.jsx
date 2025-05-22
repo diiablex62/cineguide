@@ -9,9 +9,13 @@ export default function Serie() {
 
   // Vérifier si les données sont chargées
   if (!detailSerie || !detailSerie.id) {
-    return <div className="md:w-1/3 flex-shrink-0 md:pl-4 p-4 text-center">Chargement du détail...</div>;
+    return (
+      <div className="md:w-1/3 flex-shrink-0 md:pl-4 p-4 text-center">
+        Chargement du détail...
+      </div>
+    );
   }
-  
+
   return (
     <div className="md:w-1/3 flex-shrink-0 md:pl-4 ">
       <div className="flex gap-4 p-3 mb-6">
@@ -31,10 +35,7 @@ export default function Serie() {
             </div>
             <div className="flex mt-1 gap-2">
               {[1, 2, 3, 4, 5].map((star) => (
-                <span
-                  key={star}
-                  className="cursor-pointer text-lg"
-                >
+                <span key={star} className="cursor-pointer text-lg">
                   {<FaStar className="text-fuchsia" />}
                 </span>
               ))}
@@ -69,14 +70,16 @@ export default function Serie() {
               GENRES
             </h3>
             <div className="flex flex-wrap gap-2">
-              {detailSerie.genre && Array.isArray(detailSerie.genre) && detailSerie.genre.map((genre) => (
-                <span
-                  key={genre}
-                  className="text-xs px-2 py-1 bg-gray-200 dark:bg-gray-800 rounded-md"
-                >
-                  {genre}
-                </span>
-              ))}
+              {detailSerie.genre &&
+                Array.isArray(detailSerie.genre) &&
+                detailSerie.genre.map((genre) => (
+                  <span
+                    key={genre}
+                    className="text-xs px-2 py-1 bg-gray-200 dark:bg-gray-800 rounded-md"
+                  >
+                    {genre}
+                  </span>
+                ))}
             </div>
           </div>
           <div className="w-1/2 md:w-full">
@@ -97,10 +100,27 @@ export default function Serie() {
               PAYS DE PRODUCTION
             </h3>
             <p className="text-xs text-gray-600 dark:text-gray-300">
-              {detailSerie.paysProduction && Array.isArray(detailSerie.paysProduction) 
+              {detailSerie.paysProduction &&
+              Array.isArray(detailSerie.paysProduction)
                 ? detailSerie.paysProduction.join(", ")
                 : detailSerie.paysProduction}
             </p>
+          </div>
+        </div>
+      </div>
+      <div className="mb-6 px-3">
+        <div className="flex gap-y-4">
+          <div className="w-1/2 md:w-full">
+            <h3 className="font-bold text-sm mb-2 text-black dark:text-gray-200">
+              PLATEFORMES
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              <p className="text-xs px-2 py-1 bg-gray-200 dark:bg-gray-800 rounded-md">
+                {detailSerie.platforms && Array.isArray(detailSerie.platforms)
+                  ? detailSerie.platforms.join(", ")
+                  : detailSerie.platforms}
+              </p>
+            </div>
           </div>
         </div>
       </div>

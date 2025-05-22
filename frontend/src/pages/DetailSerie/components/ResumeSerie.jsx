@@ -67,7 +67,7 @@ export default function ResumeSerie() {
             <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-200">
               {saisons.length} SAISONS
             </h2>
-            <div className="flex overflow-x-auto space-x-6 pb-2 md:justify-center md:items-center">
+            <div className="flex overflow-x-auto space-x-2 pb-2  md:items-center w-full">
               {saisons.map((saison, index) => (
                 <div
                   key={saison._id || `saison-${saison.numero || index}`}
