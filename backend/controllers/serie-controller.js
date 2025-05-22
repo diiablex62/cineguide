@@ -8,38 +8,35 @@ const {
 const { createSaisonForSerie } = require("./saison-controller");
 
 // Récupérer toutes les séries
-// const getAllSeries = async (req, res) => {
-//   try {
-//     const series = await Serie.find().select("-saisons");
-//     res.status(200).json(series);
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
+const getAllSeries = async (req, res) => {
+  try {
+    const series = await Serie.find().select("-saisons");
+    res.status(200).json(series);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 // // Récupérer une série par ID
-// const getSerieById = async (req, res) => {
-//   try {
-//     // Recherche par ID ou par l'attribut id
-//     const serie = await Serie.findOne({
-//       $or: [
-//         { _id: req.params.id },
-//         { id: req.params.id }
-//       ]
-//     }).populate({
-//       path: "saisons",
-//       select: "numero annee nbEpisodes",
-//     });
+const getSerieById = async (req, res) => {
+  try {
+    // Recherche par ID ou par l'attribut id
+    const serie = await Serie.findOne({
+      $or: [{ _id: req.params.id }, { id: req.params.id }],
+    }).populate({
+      path: "saisons",
+      select: "numero annee nbEpisodes",
+    });
 
-//     if (!serie) {
-//       return res.status(404).json({ message: "Série non trouvée" });
-//     }
+    if (!serie) {
+      return res.status(404).json({ message: "Série non trouvée" });
+    }
 
-//     res.status(200).json(serie);
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
+    res.status(200).json(serie);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 // // Créer une nouvelle série
 // const createSerie = async (req, res) => {
@@ -168,33 +165,33 @@ async function importMultipleSeries() {
 /**
  * Récupérer une série via son ID Mongo
  */
-const getSerieById = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const serie = await Serie.findById(id).populate({
-      path: "saisons",
-      populate: {
-        path: "episodes",
-      },
-    });
-    if (!serie) return res.status(404).json({ error: "Série non trouvée" });
-    res.json(serie);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+// const getSerieById = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const serie = await Serie.findById(id).populate({
+//       path: "saisons",
+//       populate: {
+//         path: "episodes",
+//       },
+//     });
+//     if (!serie) return res.status(404).json({ error: "Série non trouvée" });
+//     res.json(serie);
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// };
 
 /**
  * Récupérer toutes les séries (exemple simple)
  */
-const getAllSeries = async (req, res) => {
-  try {
-    const series = await Serie.find();
-    res.json(series);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
+// const getAllSeries = async (req, res) => {
+//   try {
+//     const series = await Serie.find();
+//     res.json(series);
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// };
 
 module.exports = {
   getAllSeries,
