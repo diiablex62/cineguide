@@ -6,7 +6,7 @@ if (!TMDB_API_TOKEN) {
 }
 
 // Fonction générique pour faire une requête GET avec Bearer token
-async function fetchFromTMDB(endpoint) {
+const fetchFromTMDB = async (endpoint) => {
   try {
     const url = `${TMDB_BASE_URL}${endpoint}${
       endpoint.includes("?") ? "&" : "?"
@@ -24,7 +24,7 @@ async function fetchFromTMDB(endpoint) {
     console.error("Erreur API TMDB:", err.message);
     throw err;
   }
-}
+};
 
 // API Séries
 const getPopularSeries = async (page) => {
@@ -125,7 +125,33 @@ const getMoviePlatforms = async (movieId) => {
   }
 };
 
+const getWeekTop = async (time) => {
+  try {
+    return await fetchFromTMDB(`trending/tv/${time}`);
+  } catch (err) {
+    console.error("Erreur récupération plateformes:", err.message);
+    return [];
+  }
+};
+
+// Acteurs
+
+// const getActeursFromMovies = async (id) => {
+//   try {
+//     return await fetchFromTMDB(`movie/${id}/credits`);
+//   } catch (err) {
+//     const message = err.message || "";
+//     if (message.includes('status_code":34')) {
+//       console.warn(`⚠️ Credits du film ${id} introuvable (TMDB 404).`);
+//       return null; // ← on retourne null si la série n'existe pas
+//     }
+//     console.error("Erreur API TMDB:", message);
+//     return null; // ← on retourne null pour toute autre erreur réseau/API aussi
+//   }
+// };
+
 module.exports = {
+  fetchFromTMDB,
   getPopularSeries,
   getSerieDetails,
   getSeasonDetails,
@@ -136,4 +162,5 @@ module.exports = {
   getMovieDetails,
   getFilmVideos,
   getMoviePlatforms,
+  getWeekTop,
 };

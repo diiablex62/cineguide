@@ -7,6 +7,7 @@ const {
   getMovieById,
   getAllMovies,
 } = require("../controllers/film-controller");
+const { getWeekTop } = require("../services/tmdb");
 
 // router.post("/add", add);
 router.get("/getAll", getAll);
@@ -19,5 +20,6 @@ router.get("/:id", getMovieById);
 
 // Récupérer tout les films
 router.get("/", getAllMovies);
+router.get("/top", getWeekTop);
 
 module.exports = router;
