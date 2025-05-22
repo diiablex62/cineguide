@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { SerieContext } from "../../context/SerieContext";
 import { getAllSeries, getSerieById } from "../../apis/serie.api";
 import { getSaisonsBySerie } from "../../apis/saison.api";
@@ -39,11 +39,19 @@ export default function SerieProvider({ children }) {
       setLoading(true);
       try {
         const seriesData = await getAllSeries();
-        setSeries(seriesData);
-        setFilteredSeries(seriesData);
-        setSerie(seriesData); // Stocker toutes les séries pour les recommandations
-        setError(null);
+        
+        // Vérifier que les données reçues sont bien un tableau
+        if (Array.isArray(seriesData)) {
+          setSeries(seriesData);
+          setFilteredSeries(seriesData);
+          setSerie(seriesData); // Stocker toutes les séries pour les recommandations
+          setError(null);
+        } else {
+          console.error("Les données reçues ne sont pas un tableau:", seriesData);
+          setError("Format de données incorrect reçu du serveur.");
+        }
       } catch (error) {
+        console.error("Erreur lors du chargement des séries:", error);
         setError(
           "Impossible de charger les séries. Veuillez réessayer plus tard."
         );
@@ -54,8 +62,8 @@ export default function SerieProvider({ children }) {
     fetchSeries();
   }, []);
 
-  // Fonction optimisée pour charger les détails d'une série
-  const loadSerieDetails = async (id) => {
+  // Optimisation avec useCallback pour éviter des re-rendus inutiles
+  const loadSerieDetails = useCallback(async (id) => {
     if (!id) return;
     
     // Vérifier si on est déjà en train de charger la même série
@@ -66,45 +74,82 @@ export default function SerieProvider({ children }) {
     setLoading(true);
     try {
       const serieDetails = await getSerieById(id);
+      if (!serieDetails) {
+        throw new Error(`Série avec ID ${id} non trouvée`);
+      }
 
       const saisonsCompletes = [];
 
-      if (serieDetails.saisons && Array.isArray(serieDetails.saisons)) {
+      // Récupération des saisons si elles ne sont pas incluses dans les détails de la série
+      let saisonsData = serieDetails.saisons;
+      if (!saisonsData || !Array.isArray(saisonsData) || saisonsData.length === 0) {
+        try {
+          saisonsData = await getSaisonsBySerie(id);
+        } catch (saisonError) {
+          console.warn(`Impossible de récupérer les saisons pour la série ${id}:`, saisonError);
+          saisonsData = [];
+        }
+      }
+
+      if (Array.isArray(saisonsData) && saisonsData.length > 0) {
         // Traitement des saisons et épisodes en parallèle pour plus d'efficacité
-        const saisonPromises = serieDetails.saisons.map(async (saison) => {
-          const saisonNumero =
-            typeof saison === "object" ? saison.numero : saison;
+        const saisonPromises = saisonsData.map(async (saison) => {
+          // Si saison est un nombre ou une chaîne, convertir en objet avec numéro
+          const saisonObj = typeof saison === "object" ? saison : { numero: saison };
+          const saisonNumero = saisonObj.numero;
+
+          if (!saisonNumero && saisonNumero !== 0) {
+            console.warn("Saison sans numéro détectée:", saison);
+            return saisonObj;
+          }
 
           try {
             const episodes = await getEpisodesBySaison(id, saisonNumero);
             return {
-              ...saison,
-              episodes: episodes || [],
+              ...saisonObj,
+              episodes: Array.isArray(episodes) ? episodes : []
             };
           } catch (episodeError) {
             console.error(`Erreur lors du chargement des épisodes de la saison ${saisonNumero}:`, episodeError);
             return {
-              ...saison,
-              episodes: [],
+              ...saisonObj,
+              episodes: []
             };
           }
         });
 
-        saisonsCompletes.push(...await Promise.all(saisonPromises));
+        try {
+          const resolvedSaisons = await Promise.all(saisonPromises);
+          saisonsCompletes.push(...resolvedSaisons);
+        } catch (parallelError) {
+          console.error("Erreur lors du traitement parallèle des saisons:", parallelError);
+        }
       }
 
       // Normaliser les données de la série
       const normalizedSerie = {
         ...serieDetails,
-        id: serieDetails.id || serieDetails._id, // S'assurer que l'ID est toujours défini
-        acteurs: Array.isArray(serieDetails.acteurs) ? serieDetails.acteurs : [],
-        genre: Array.isArray(serieDetails.genre) ? serieDetails.genre : [],
-        paysProduction: Array.isArray(serieDetails.paysProduction) ? serieDetails.paysProduction : 
-                        (serieDetails.paysProduction || "Non spécifié"),
-        platforms: Array.isArray(serieDetails.platforms) ? serieDetails.platforms : [],
-        langues: Array.isArray(serieDetails.langues) ? serieDetails.langues : [],
+        _id: serieDetails._id || serieDetails.id, // S'assurer que _id est toujours défini
+        id: serieDetails.id || serieDetails._id, // S'assurer que id est toujours défini
+        acteurs: Array.isArray(serieDetails.acteurs) 
+          ? serieDetails.acteurs.filter(acteur => acteur) // Filtrer les valeurs null/undefined
+          : [],
+        genre: Array.isArray(serieDetails.genre) 
+          ? serieDetails.genre.filter(genre => genre) 
+          : [],
+        paysProduction: Array.isArray(serieDetails.paysProduction) 
+          ? serieDetails.paysProduction 
+          : [serieDetails.paysProduction].filter(Boolean),
+        platforms: Array.isArray(serieDetails.platforms) 
+          ? serieDetails.platforms.filter(platform => platform) 
+          : [],
+        langues: Array.isArray(serieDetails.langues) 
+          ? serieDetails.langues.filter(langue => langue) 
+          : [],
         bandeAnnonce: serieDetails.bandeAnnonce || "",
-        saisons: saisonsCompletes.length > 0 ? saisonsCompletes : serieDetails.saisons || [],
+        saisons: saisonsCompletes.length > 0 
+          ? saisonsCompletes 
+          : (Array.isArray(serieDetails.saisons) ? serieDetails.saisons : [])
       };
 
       setDetailSerie(normalizedSerie);
@@ -114,12 +159,27 @@ export default function SerieProvider({ children }) {
       setError(
         `Impossible de charger les détails de la série. Veuillez réessayer plus tard.`
       );
+      
+      // Réinitialiser les détails avec un état d'erreur pour éviter d'afficher des données incomplètes
+      setDetailSerie({
+        id: id,
+        titre: "Erreur de chargement",
+        synopsis: "Impossible de charger les informations de la série.",
+        image: "https://via.placeholder.com/300x450?text=Erreur",
+        acteurs: [],
+        genre: [],
+        paysProduction: [],
+        platforms: [],
+        langues: [],
+        saisons: [],
+      });
     } finally {
       setLoading(false);
     }
-  };
+  }, [detailSerie.id, loading]);
 
-  function toggleState(setter, id) {
+  // Optimisation avec useCallback pour éviter des re-rendus inutiles
+  const toggleState = useCallback((setter, id) => {
     if (!id && id !== 0) return;
 
     setter((prev) => ({
@@ -137,13 +197,14 @@ export default function SerieProvider({ children }) {
         }
       });
     }
-  }
+  }, [series]);
 
-  function allSeries() {
+  // Fonctions de filtrage optimisées
+  const allSeries = useCallback(() => {
     setFilteredSeries(series);
-  }
+  }, [series]);
 
-  function filterPlatform(value) {
+  const filterPlatform = useCallback((value) => {
     if (!value) return allSeries();
     
     const platformArray = Array.isArray(value) ? value : [value];
@@ -156,9 +217,9 @@ export default function SerieProvider({ children }) {
           serie.platforms.some((platform) => platformArray.includes(platform))
       )
     );
-  }
+  }, [series, allSeries]);
 
-  function filterLanguage(value) {
+  const filterLanguage = useCallback((value) => {
     if (!value) return allSeries();
     
     const languageArray = Array.isArray(value) ? value : [value];
@@ -171,9 +232,9 @@ export default function SerieProvider({ children }) {
           serie.langues.some((langue) => languageArray.includes(langue))
       )
     );
-  }
+  }, [series, allSeries]);
 
-  function filterGender(value) {
+  const filterGender = useCallback((value) => {
     if (!value) return allSeries();
     
     const genderArray = Array.isArray(value) ? value : [value];
@@ -186,21 +247,21 @@ export default function SerieProvider({ children }) {
           serie.genre.some((genre) => genderArray.includes(genre))
       )
     );
-  }
+  }, [series, allSeries]);
 
-  function filterAlreadySeen() {
+  const filterAlreadySeen = useCallback(() => {
     setFilteredSeries(seriesSeen);
-  }
+  }, [seriesSeen]);
 
-  function filterNotSeen() {
+  const filterNotSeen = useCallback(() => {
     setFilteredSeries(
       series.filter(
         (serie) => !seriesSeen.some((seenSerie) => String(seenSerie.id) === String(serie.id))
       )
     );
-  }
+  }, [series, seriesSeen]);
 
-  function searchSerie(value) {
+  const searchSerie = useCallback((value) => {
     if (!value) {
       setFilteredSeries(series);
       return;
@@ -212,7 +273,7 @@ export default function SerieProvider({ children }) {
         (serie) => serie.titre && serie.titre.toLowerCase().includes(searchTerm)
       )
     );
-  }
+  }, [series]);
 
   return (
     <SerieContext.Provider
