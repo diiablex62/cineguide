@@ -9,7 +9,7 @@ const Jeux = () => {
         <div className='w-full lg:w-2/8 bg-white dark:bg-black mt-5 shadow rounded lg:rounded-l-xl lg:mr-2 text-black dark:text-white'>
           <Navbar></Navbar>
         </div>
-        <div className='w-full lg:w-6/8 lg:flex lg:flex-col lg:items-center px-10 bg-white dark:bg-black mt-5 shadow rounded lg:rounded-r-xl h-auto text-black dark:text-white'>
+        <div className='w-full lg:w-6/8 lg:flex lg:flex-col lg:items-center px-10 bg-white dark:bg-black mt-5 shadow rounded lg:rounded-r-xl min-h-screen text-black dark:text-white'>
           <Outlet />
         </div>
       </div>
