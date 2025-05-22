@@ -7,7 +7,6 @@ try {
   Saison = require("../models/saison.schema");
   Acteur = require("../models/acteur.schema");
   Episode = require("../models/episode.schema");
-  console.log("Modèles chargés avec succès pour la recherche");
 } catch (error) {
   console.error("Erreur lors du chargement des modèles:", error);
 }

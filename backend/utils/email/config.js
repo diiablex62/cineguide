@@ -12,25 +12,13 @@ const transporter = nodemailer.createTransport({
 // Vérification de la connexion au service d'emails
 const verifyEmailConfig = async () => {
   try {
-    console.log(
-      "Vérification de la configuration email avec:",
-      process.env.EMAIL_USER
-    );
     const verification = await transporter.verify();
-    console.log("📧 Service d'emails configuré correctement:", verification);
     return verification;
   } catch (error) {
     console.error(
-      "❌ Erreur de configuration du service d'emails:",
+      "Erreur de configuration du service d'emails:",
       error.message
     );
-    console.error("Détails:", {
-      service: "gmail",
-      user: process.env.EMAIL_USER,
-      passLength: process.env.EMAIL_PASSWORD
-        ? process.env.EMAIL_PASSWORD.length
-        : 0,
-    });
     return false;
   }
 };
@@ -40,13 +28,9 @@ verifyEmailConfig();
 
 // Fonction pour envoyer un email de validation d'inscription
 const sendValidationEmail = async (email, nom, token) => {
-  console.log("Envoi d'un email de validation à:", email);
-  console.log("URL du client pour l'email:", process.env.CLIENT_URL);
-
-  // S'assurer que l'URL ne contient pas de virgules
   const clientUrl = process.env.CLIENT_URL.split(",")[0];
   const validationUrl = `${clientUrl}/validation?token=${token}`;
-  const logoUrl = `${clientUrl}/logo_mail.png`; // Assurez-vous que ce fichier existe dans votre dossier public
+  const logoUrl = `${clientUrl}/logo_mail.png`;
 
   const mailOptions = {
     from: process.env.EMAIL_USER,
@@ -163,32 +147,19 @@ const sendValidationEmail = async (email, nom, token) => {
   };
 
   try {
-    console.log("Tentative d'envoi d'email avec les options:", {
-      from: mailOptions.from,
-      to: mailOptions.to,
-      subject: mailOptions.subject,
-    });
-
     const info = await transporter.sendMail(mailOptions);
-    console.log("📧 Email de validation envoyé avec succès:", info.messageId);
-    console.log("URL de validation générée:", validationUrl);
-
     return { success: true, messageId: info.messageId };
   } catch (error) {
-    console.error("❌ Erreur lors de l'envoi de l'email de validation:", error);
-    console.error("Détails de l'erreur:", error.message);
-    if (error.code) {
-      console.error("Code d'erreur:", error.code);
-    }
+    console.error(
+      "Erreur lors de l'envoi de l'email de validation:",
+      error.message
+    );
     return { success: false, error: error.message };
   }
 };
 
 // Fonction pour envoyer un email de confirmation après validation
 const sendConfirmationEmail = async (email, nom) => {
-  console.log("Envoi d'un email de confirmation à:", email);
-
-  // S'assurer que l'URL ne contient pas de virgules
   const clientUrl = process.env.CLIENT_URL.split(",")[0];
   const loginUrl = `${clientUrl}/connexion`;
   const logoUrl = `${clientUrl}/logo_mail.png`;
@@ -320,14 +291,12 @@ const sendConfirmationEmail = async (email, nom) => {
 
   try {
     const info = await transporter.sendMail(mailOptions);
-    console.log("📧 Email de confirmation envoyé avec succès:", info.messageId);
     return { success: true, messageId: info.messageId };
   } catch (error) {
     console.error(
-      "❌ Erreur lors de l'envoi de l'email de confirmation:",
-      error
+      "Erreur lors de l'envoi de l'email de confirmation:",
+      error.message
     );
-    console.error("Détails de l'erreur:", error.message);
     return { success: false, error: error.message };
   }
 };

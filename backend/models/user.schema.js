@@ -35,5 +35,4 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
-console.log("Schéma utilisateur chargé");
 module.exports = mongoose.model("User", userSchema);
