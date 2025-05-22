@@ -5,61 +5,68 @@ import { useParams } from "react-router-dom";
 
 export default function SerieProposer() {
   const { id } = useParams();
-  const { detailSerie, serie, loadSerieDetails } = useContext(SerieContext);
+  const { detailSerie, serie, loadSerieDetails, loading, filteredSeries } =
+    useContext(SerieContext);
 
   // Ne chargez les détails que si l'ID est différent de celui déjà chargé
   useEffect(() => {
     if (
       id &&
-      (!detailSerie || !detailSerie.id || String(detailSerie.id) !== String(id))
+      (!detailSerie ||
+        !detailSerie._id ||
+        String(detailSerie._id) !== String(id))
     ) {
       loadSerieDetails(id);
     }
-  }, [id]); // Dépendance uniquement à l'ID
+  }, [id, detailSerie, loadSerieDetails]); // Ajout des dépendances manquantes
 
   // Affichage de chargement si les données ne sont pas encore disponibles
-  if (!serie || !serie.length || !detailSerie || !detailSerie.id) {
+  if (loading || !serie || !serie.length || !detailSerie || !detailSerie._id) {
     return <div className="p-4">Chargement des recommandations...</div>;
   }
 
-  // Définition des séries similaires - filtrer par genre
-  const similarSeries = serie
-    .filter(
-      (item) =>
-        item &&
-        detailSerie &&
-        String(item.id) !== String(detailSerie.id) &&
-        item.genre &&
-        detailSerie.genre &&
-        item.genre.some((genre) => detailSerie.genre.includes(genre))
-    )
-    .slice(0, 6);
+  // Vérification de sécurité supplémentaire
+  if (!Array.isArray(serie)) {
+    console.error("La liste des séries n'est pas un tableau:", serie);
+    return <div className="p-4">Impossible de charger les recommandations</div>;
+  }
 
-  // Définition des séries populaires - tri par note
-  const popularSeries = [...serie]
-    .filter(
-      (item) =>
-        item && detailSerie && String(item.id) !== String(detailSerie.id)
-    )
-    .sort((a, b) => (b.note || 0) - (a.note || 0))
-    .slice(0, 6);
+  // Définition des séries similaires - filtrer par genre avec vérification de sécurité
+  const similarSeries = filteredSeries.filter(
+    (item) =>
+      item &&
+      detailSerie &&
+      String(item._id) !== String(detailSerie._id) &&
+      item.genre &&
+      Array.isArray(item.genre) &&
+      detailSerie.genre &&
+      Array.isArray(detailSerie.genre) &&
+      item.genre.some((genre) => detailSerie.genre.includes(genre))
+  );
 
-  // Définition des séries dramatiques
-  const dramaSeries = serie
+  // Définition des séries populaires - tri par note avec vérification des données
+  const popularSeries = filteredSeries
     .filter(
       (item) =>
-        item &&
-        detailSerie &&
-        String(item.id) !== String(detailSerie._id) &&
-        item.genre &&
-        item.genre.includes("Drame")
+        item && detailSerie && String(item._id) !== String(detailSerie._id)
     )
-    .slice(0, 6);
+    .sort((a, b) => (b.note || 0) - (a.note || 0));
+
+  // Définition des séries dramatiques avec vérification de sécurité
+  const dramaSeries = filteredSeries.filter(
+    (item) =>
+      item &&
+      detailSerie &&
+      String(item._id) !== String(detailSerie._id) &&
+      item.genre &&
+      Array.isArray(item.genre) &&
+      item.genre.includes("Drame")
+  );
 
   return (
     <div className="w-full text-center justify-center items-center">
       <div className="mt-8">
-        {similarSeries.length > 0 && (
+        {similarSeries.length > 0 ? (
           <>
             <h2 className="font-bold mb-4 text-sm uppercase text-black dark:text-gray-200">
               Ça pourrait vous intéresser
@@ -67,16 +74,16 @@ export default function SerieProposer() {
             <div className="flex overflow-x-auto gap-4 pb-4">
               {similarSeries.slice(0, 4).map((item) => (
                 <Card
-                  key={item._id}
+                  key={item._id || `similar-${Math.random()}`}
                   serie={item}
                   currentSerieId={detailSerie._id}
                 />
               ))}
             </div>
           </>
-        )}
+        ) : null}
 
-        {popularSeries.length > 0 && (
+        {popularSeries.length > 0 ? (
           <div className="mt-12">
             <h2 className="font-bold mb-4 text-sm uppercase text-black dark:text-gray-200">
               Séries populaires
@@ -84,16 +91,16 @@ export default function SerieProposer() {
             <div className="flex overflow-x-auto gap-4 pb-4">
               {popularSeries.map((item) => (
                 <Card
-                  key={item._id}
+                  key={item._id || `popular-${Math.random()}`}
                   serie={item}
                   currentSerieId={detailSerie._id}
                 />
               ))}
             </div>
           </div>
-        )}
+        ) : null}
 
-        {dramaSeries.length > 0 && (
+        {dramaSeries.length > 0 ? (
           <div className="mt-8">
             <h2 className="font-bold mb-4 text-sm uppercase text-black dark:text-gray-200">
               Séries Drame
@@ -101,14 +108,14 @@ export default function SerieProposer() {
             <div className="flex overflow-x-auto gap-4 pb-4">
               {dramaSeries.map((item) => (
                 <Card
-                  key={item._id}
+                  key={item._id || `drama-${Math.random()}`}
                   serie={item}
                   currentSerieId={detailSerie._id}
                 />
               ))}
             </div>
           </div>
-        )}
+        ) : null}
       </div>
     </div>
   );

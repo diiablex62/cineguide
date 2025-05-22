@@ -11,13 +11,13 @@ export default function Card({ serie, currentSerieId }) {
     return null;
   }
   
-  if (!serie || !serie.id || !serie.image || !serie.titre) {
+  if (!serie || !serie._id || !serie.image || !serie.titre) {
     return null; // Ne pas afficher de carte incomplète
   }
   
   return (
     <Link
-      to={`/detailserie/${serie.id}`}
+      to={`/detailserie/${serie._id}`}
       className="w-48 flex-shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
     >
       <div className="relative h-64 overflow-hidden rounded-md shadow-lg">
