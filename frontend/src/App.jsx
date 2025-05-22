@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, ScrollRestoration, useLocation } from "react-router-dom";
 import ThemeProvider from "./components/providers/ThemeProvider";
 import MenuProvider from "./components/providers/MenuProvider";
 import AuthProvider from "./components/providers/AuthProvider";
@@ -27,7 +27,7 @@ function App() {
     location.pathname.startsWith("/reset-password/");
 
   return (
-    <div className='min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white'>
+    <div className="min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white">
       <ThemeProvider>
         <MenuProvider>
           <AuthProvider>
@@ -46,10 +46,12 @@ function App() {
                                 !isAuthPage
                                   ? "min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white"
                                   : ""
-                              }>
+                              }
+                            >
                               <Outlet />
                             </main>
                             {!isAuthPage && <Footer />}
+                            <ScrollRestoration />
                           </ActorProvider>
                         </ActuProvider>
                       </FiltreProvider>

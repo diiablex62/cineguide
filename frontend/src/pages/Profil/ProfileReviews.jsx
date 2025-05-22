@@ -12,7 +12,6 @@ export default function ProfileReviews() {
 
   return (
     <div className='w-full dark:bg-black dark:text-white'>
-      <h2 className='text-2xl font-bold mb-6 text-center'>Mes Reviews</h2>{" "}
       {review.length > 0 ? (
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-4'>
           {review.map((item) => {
