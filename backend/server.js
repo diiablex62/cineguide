@@ -15,6 +15,9 @@ const { verifyEmailConfig } = require("./utils/email/config");
 const app = express();
 app.use(express.json());
 
+const path = require("path");
+const __DIRNAME = path.resolve();
+
 console.log(
   "Configuration du serveur avec CORS pour les origines:",
   process.env.ALLOWED_ORIGINS
@@ -50,6 +53,12 @@ app.use("/api/purchase", purchaseRoutes);
 app.get("/api/test", (req, res) => {
   console.log("Route de test appelée");
   res.status(200).json({ message: "Serveur API fonctionnel!" });
+});
+
+app.use(express.static(path.join(__DIRNAME, "/frontend/dist")));
+
+app.get(/(.*)/, (req, res) => {
+  res.sendFile(path.join(__DIRNAME, "frontend", "dist", "index.html"));
 });
 
 mongoose
