@@ -106,6 +106,25 @@ const getSimilarToPeakyBlinders = async () => {
   }
 };
 
+// Recherche globale (films, séries, acteurs)
+const searchAll = async (query) => {
+  try {
+    const response = await fetch(
+      `${TMDB_BASE_URL}/search/multi?api_key=${TMDB_API_KEY}&language=fr-FR&query=${encodeURIComponent(
+        query
+      )}`
+    );
+    if (!response.ok) {
+      throw new Error(`Erreur HTTP: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.results;
+  } catch (error) {
+    console.error("Erreur lors de la recherche:", error.message);
+    throw error;
+  }
+};
+
 module.exports = {
   getTrending,
   getMovieDetails,
@@ -113,4 +132,5 @@ module.exports = {
   getImageUrl,
   getTopActionSeries,
   getSimilarToPeakyBlinders,
+  searchAll,
 };
