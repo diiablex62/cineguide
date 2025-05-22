@@ -134,6 +134,22 @@ const getWeekTop = async (time) => {
   }
 };
 
+// Acteurs
+
+// const getActeursFromMovies = async (id) => {
+//   try {
+//     return await fetchFromTMDB(`movie/${id}/credits`);
+//   } catch (err) {
+//     const message = err.message || "";
+//     if (message.includes('status_code":34')) {
+//       console.warn(`⚠️ Credits du film ${id} introuvable (TMDB 404).`);
+//       return null; // ← on retourne null si la série n'existe pas
+//     }
+//     console.error("Erreur API TMDB:", message);
+//     return null; // ← on retourne null pour toute autre erreur réseau/API aussi
+//   }
+// };
+
 module.exports = {
   getPopularSeries,
   getSerieDetails,
