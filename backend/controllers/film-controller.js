@@ -1,3 +1,4 @@
+const Film = require("../models/films.schema");
 const Movie = require("../models/films.schema");
 const {
   getMoviesCredits,
@@ -19,17 +20,17 @@ const {
 //   }
 // };
 
-// const getAll = async (req, res) => {
-//   try {
-//     // on récupére tout les films
-//     const film = await Film.find();
+const getAll = async (req, res) => {
+  try {
+    // on récupére tout les films
+    const film = await Film.find();
 
-//     // on la retourne à l'application WEB
-//     res.status(200).json(film);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+    // on la retourne à l'application WEB
+    res.status(200).json(film);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // module.exports = { add, getAll };
 
@@ -168,4 +169,4 @@ const getAllMovies = async (req, res) => {
   }
 };
 
-module.exports = { getAllMovies, getMovieById, importMultipleSeries };
+module.exports = { getAllMovies, getMovieById, importMultipleSeries, getAll };

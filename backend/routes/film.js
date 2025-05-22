@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const {
   //   add,
-  //   getAll,
+  getAll,
   //   getAllMovies,
   importMultipleSeries,
   getMovieById,
@@ -9,7 +9,7 @@ const {
 } = require("../controllers/film-controller");
 
 // router.post("/add", add);
-// router.get("/getAll", getAll);
+router.get("/getAll", getAll);
 // router.get("/", getAllMovies);
 
 router.get("/import", importMultipleSeries);
