@@ -11,7 +11,7 @@ export default function ProfilListe() {
 
   return (
     <div className='w-full dark:bg-black dark:text-white'>
-      <h2 className='text-2xl font-bold mb-6 text-center'>Ma Liste</h2>
+      {/* SUPPRIMER LE TITRE PRINCIPAL */}
 
       {films.length > 0 ? (
         <div className='flex flex-wrap items-center justify-center gap-4 py-4'>

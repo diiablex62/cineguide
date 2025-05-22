@@ -1,15 +1,16 @@
 const router = require("express").Router();
 const {
   //   add,
-  //   getAll,
+  getAll,
   //   getAllMovies,
   importMultipleSeries,
   getMovieById,
   getAllMovies,
 } = require("../controllers/film-controller");
+const { getWeekTop } = require("../services/tmdb");
 
 // router.post("/add", add);
-// router.get("/getAll", getAll);
+router.get("/getAll", getAll);
 // router.get("/", getAllMovies);
 
 router.get("/import", importMultipleSeries);
@@ -19,5 +20,6 @@ router.get("/:id", getMovieById);
 
 // Récupérer tout les films
 router.get("/", getAllMovies);
+router.get("/top", getWeekTop);
 
 module.exports = router;
