@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {
   // getSaisonsBySerie,
-  // getSaisonByNumero,
+  getSaisonByNumero,
   // addSaison,
   getAllSaisons,
   getSaisonById,
@@ -10,7 +10,7 @@ const {
 
 // Routes pour les saisons
 // router.get("/:id/saisons", getSaisonsBySerie);
-// router.get("/:id/saisons/:numero", getSaisonByNumero);
+router.get("/:id/saisons/:numero", getSaisonByNumero);
 // router.post("/:id", addSaison);
 
 // Récupérer toutes les saisons (optionnel)
