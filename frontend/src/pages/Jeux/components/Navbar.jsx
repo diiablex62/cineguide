@@ -14,7 +14,7 @@ export default function Navbar() {
       </div>
       <div className='flex justify-around items-center w-full lg:flex-col lg:items-start lg:mt-0 lg:pl-4'>
         <NavLink
-          to='/'
+          to='/jeux'
           className='flex flex-col items-center lg:flex-row lg:mb-6'
           end>
           <img src={house} alt='' /> <span className='lg:hidden'>Accueil</span>
