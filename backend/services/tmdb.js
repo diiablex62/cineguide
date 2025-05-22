@@ -66,51 +66,9 @@ const getImageUrl = (path, size = "w500") => {
   return `${TMDB_IMAGE_BASE_URL}/${size}${path}`;
 };
 
-// Récupérer les meilleures séries d'action
-const getTopActionSeries = async () => {
-  try {
-    const response = await fetch(
-      `${TMDB_BASE_URL}/discover/tv?api_key=${TMDB_API_KEY}&language=fr-FR&with_genres=10759&sort_by=vote_average.desc&vote_count.gte=100`
-    );
-    if (!response.ok) {
-      throw new Error(`Erreur HTTP: ${response.status}`);
-    }
-    const data = await response.json();
-    return data.results;
-  } catch (error) {
-    console.error(
-      "Erreur lors de la récupération des séries d'action:",
-      error.message
-    );
-    throw error;
-  }
-};
-
-// Récupérer les séries similaires à Peaky Blinders
-const getSimilarToPeakyBlinders = async () => {
-  try {
-    const response = await fetch(
-      `${TMDB_BASE_URL}/tv/60574/similar?api_key=${TMDB_API_KEY}&language=fr-FR`
-    );
-    if (!response.ok) {
-      throw new Error(`Erreur HTTP: ${response.status}`);
-    }
-    const data = await response.json();
-    return data.results;
-  } catch (error) {
-    console.error(
-      "Erreur lors de la récupération des séries similaires:",
-      error.message
-    );
-    throw error;
-  }
-};
-
 module.exports = {
   getTrending,
   getMovieDetails,
   getTvDetails,
   getImageUrl,
-  getTopActionSeries,
-  getSimilarToPeakyBlinders,
 };
