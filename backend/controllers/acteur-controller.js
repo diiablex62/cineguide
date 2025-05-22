@@ -174,7 +174,7 @@ const enrichirActeursDepuisWikidata = async () => {
       const nomEncode = encodeURIComponent(nom);
 
       // Ajoute un délai pour éviter le blocage de Wikidata
-      await sleep(500);
+      await sleep(100);
 
       const query = `
     SELECT ?films ?prix ?nominations WHERE {
