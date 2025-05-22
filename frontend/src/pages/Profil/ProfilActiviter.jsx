@@ -15,8 +15,6 @@ export default function ProfilActiviter() {
 
   return (
     <div className='w-full dark:bg-black dark:text-white'>
-      <h2 className='text-2xl font-bold mb-6 text-center'>Mon Activité</h2>
-
       <div className='flex flex-wrap'>
         {selectedActiviter && selectedActiviter.length > 0 ? (
           selectedActiviter.map((activity) => (
