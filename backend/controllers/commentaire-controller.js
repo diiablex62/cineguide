@@ -10,264 +10,265 @@ const getAllComm = async (req, res) => {
       order = "desc",
     } = req.query;
 
-    // Validation des paramètres
+    // Validation
     if (!["film", "serie"].includes(contentType)) {
-      return res.status(400).json({
-        error: 'Type de contenu invalide. Utilisez "film" ou "serie"',
-      });
+      return res.status(400).json({ error: "Type de contenu invalide" });
     }
 
-    const skip = (page - 1) * limit;
+    const skip = (parseInt(page) - 1) * parseInt(limit);
     const sortOrder = order === "desc" ? -1 : 1;
 
-    const comments = await Commentaire.find({
-      contentId,
+    // Récupérer les commentaires avec populate
+    const commentaires = await Commentaire.find({
       contentType,
+      contentId,
       isVisible: true,
     })
-      .populate("userId", "username avatar")
+      .populate("userId", "nom prenom email") // Populate les infos utilisateur
+      .populate("likedBy", "nom prenom") // Optionnel: populate les likes
       .sort({ [sortBy]: sortOrder })
       .skip(skip)
-      .limit(parseInt(limit));
+      .limit(parseInt(limit))
+      .exec();
 
+    // Compter le total pour la pagination
     const total = await Commentaire.countDocuments({
-      contentId,
       contentType,
+      contentId,
       isVisible: true,
     });
 
-    // Calculer la moyenne des notes
-    const ratingStats = await Commentaire.aggregate([
-      {
-        $match: {
-          contentId,
-          contentType,
-          isVisible: true,
-        },
-      },
-      {
-        $group: {
-          _id: null,
-          averageRating: { $avg: "$rating" },
-          totalRatings: { $sum: 1 },
-          ratingsDistribution: {
-            $push: "$rating",
-          },
-        },
-      },
-    ]);
-
-    const averageRating =
-      ratingStats.length > 0 ? ratingStats[0].averageRating : 0;
-    const totalRatings =
-      ratingStats.length > 0 ? ratingStats[0].totalRatings : 0;
+    // Transformer les données pour le frontend
+    const transformedComments = commentaires.map((comment) => ({
+      _id: comment._id,
+      author: comment.userId
+        ? `${comment.userId.prenom} ${comment.userId.nom}`
+        : "Utilisateur supprimé",
+      avatar: null, // Pas d'avatar dans votre modèle
+      email: comment.userId?.email || null,
+      rating: comment.rating,
+      text: comment.text,
+      likes: comment.likes,
+      likedBy: comment.likedBy,
+      createdAt: comment.createdAt,
+      updatedAt: comment.updatedAt,
+      userId: comment.userId?._id, // Ajouter l'userId pour les vérifications frontend
+      isOwner: false, // Sera défini côté frontend
+    }));
 
     res.json({
-      comments,
+      success: true,
+      data: transformedComments,
       pagination: {
         currentPage: parseInt(page),
-        totalPages: Math.ceil(total / limit),
-        totalComments: total,
-        hasNextPage: page * limit < total,
-        hasPrevPage: page > 1,
-      },
-      ratings: {
-        average: Math.round(averageRating * 10) / 10,
-        total: totalRatings,
+        totalPages: Math.ceil(total / parseInt(limit)),
+        totalItems: total,
+        itemsPerPage: parseInt(limit),
       },
     });
   } catch (error) {
-    console.error("Erreur lors de la récupération des commentaires:", error);
-    res.status(500).json({ error: "Erreur serveur" });
+    console.error("Erreur récupération commentaires:", error);
+    res.status(500).json({
+      error: "Erreur serveur lors de la récupération des commentaires",
+    });
   }
 };
 
 const postComm = async (req, res) => {
   try {
-    console.log("Données reçues:", req.body);
-    console.log("userData:", req.userData);
-    
     const { contentId, contentType, rating, text } = req.body;
 
-    // Récupération des données utilisateur depuis req.userData
-    const userId = req.userData.userId;
-
-    // Validation des données
+    // Validation
     if (!contentId || !contentType || !rating || !text) {
-      console.log("Champs manquants:", { contentId, contentType, rating, text });
-      return res.status(400).json({
-        error: "Tous les champs sont requis",
-      });
-    }
-
-    if (!["film", "serie"].includes(contentType)) {
-      return res.status(400).json({
-        error: "Type de contenu invalide",
-      });
+      return res.status(400).json({ error: "Tous les champs sont requis" });
     }
 
     if (rating < 1 || rating > 5) {
-      return res.status(400).json({
-        error: "La note doit être entre 1 et 5",
-      });
+      return res.status(400).json({ error: "La note doit être entre 1 et 5" });
     }
 
     if (text.trim().length < 10) {
-      return res.status(400).json({
-        error: "Le commentaire doit contenir au moins 10 caractères",
-      });
+      return res
+        .status(400)
+        .json({ error: "Le commentaire doit contenir au moins 10 caractères" });
     }
 
-    // Vérifier si l'utilisateur a déjà commenté ce contenu
-    const existingComment = await Commentaire.findOne({
-      userId,
+    // Créer le commentaire avec l'userId du token
+    const commentaire = new Commentaire({
+      userId: req.user.id, // Récupéré du token via le middleware auth
       contentId,
       contentType,
-    });
-
-    if (existingComment) {
-      return res.status(400).json({
-        error: "Vous avez déjà commenté ce contenu",
-      });
-    }
-
-    // Créer le commentaire avec les données disponibles
-    const newComment = new Commentaire({
-      userId,
-      contentId,
-      contentType,
-      rating: parseInt(rating),
+      rating,
       text: text.trim(),
-      // Les champs author et avatar seront remplis via populate
     });
 
-    await newComment.save();
-    
-    // Populate pour récupérer les infos utilisateur
-    await newComment.populate("userId", "username avatar");
+    await commentaire.save();
 
-    console.log("Commentaire créé avec succès:", newComment);
+    // Populate pour renvoyer les infos utilisateur
+    const populatedComment = await Commentaire.findById(commentaire._id)
+      .populate("userId", "nom prenom email") // Utiliser les champs de votre modèle User
+      .exec();
 
     res.status(201).json({
-      message: "Commentaire ajouté avec succès",
-      comment: newComment,
+      success: true,
+      data: populatedComment,
     });
   } catch (error) {
-    console.error("Erreur lors de l'ajout du commentaire:", error);
-    console.error("Stack trace:", error.stack);
-    res.status(500).json({ error: "Erreur serveur", details: error.message });
-  }
-};
-
-const putComm = async (req, res) => {
-  try {
-    const { commentId } = req.params;
-    const { rating, text } = req.body;
-    const userId = req.userData.userId; // Correction ici
-
-    const comment = await Commentaire.findById(commentId);
-
-    if (!comment) {
-      return res.status(404).json({ error: "Commentaire non trouvé" });
-    }
-
-    // Vérifier que l'utilisateur est le propriétaire du commentaire
-    if (comment.userId.toString() !== userId) {
-      return res.status(403).json({ error: "Non autorisé" });
-    }
-
-    // Validation des nouvelles données
-    if (rating && (rating < 1 || rating > 5)) {
-      return res.status(400).json({
-        error: "La note doit être entre 1 et 5",
-      });
-    }
-
-    if (text && text.trim().length < 10) {
-      return res.status(400).json({
-        error: "Le commentaire doit contenir au moins 10 caractères",
-      });
-    }
-
-    // Mettre à jour les champs
-    if (rating) comment.rating = rating;
-    if (text) comment.text = text.trim();
-
-    await comment.save();
-    await comment.populate("userId", "username avatar");
-
-    res.json({
-      message: "Commentaire modifié avec succès",
-      comment,
-    });
-  } catch (error) {
-    console.error("Erreur lors de la modification du commentaire:", error);
-    res.status(500).json({ error: "Erreur serveur" });
-  }
-};
-
-const deleteComm = async (req, res) => {
-  try {
-    const { commentId } = req.params;
-    const userId = req.userData.userId; // Correction ici
-
-    const comment = await Commentaire.findById(commentId);
-
-    if (!comment) {
-      return res.status(404).json({ error: "Commentaire non trouvé" });
-    }
-
-    // Vérifier que l'utilisateur est le propriétaire du commentaire
-    if (comment.userId.toString() !== userId) {
-      return res.status(403).json({ error: "Non autorisé" });
-    }
-
-    // Soft delete : marquer comme invisible au lieu de supprimer
-    comment.isVisible = false;
-    await comment.save();
-
-    res.json({ message: "Commentaire supprimé avec succès" });
-  } catch (error) {
-    console.error("Erreur lors de la suppression du commentaire:", error);
-    res.status(500).json({ error: "Erreur serveur" });
+    console.error("Erreur création commentaire:", error);
+    res
+      .status(500)
+      .json({ error: "Erreur serveur lors de la création du commentaire" });
   }
 };
 
 const likeComm = async (req, res) => {
   try {
-    const { commentId } = req.params;
-    const userId = req.userData.userId; // Correction ici
+    const { commentId } = req.params; // ← CORRECTION ICI (était: const { id } = req.params;)
+    const userId = req.user.id;
 
-    const comment = await Commentaire.findById(commentId);
+    console.log("=== DEBUG LIKE BACKEND ===");
+    console.log("Comment ID reçu:", commentId);
+    console.log("User ID:", userId);
 
-    if (!comment) {
+    const commentaire = await Commentaire.findById(commentId);
+
+    if (!commentaire) {
+      console.log("Commentaire non trouvé pour ID:", commentId);
       return res.status(404).json({ error: "Commentaire non trouvé" });
     }
 
-    const hasLiked = comment.likedBy.includes(userId);
+    console.log("Commentaire trouvé:", {
+      id: commentaire._id,
+      likes: commentaire.likes,
+      likedBy: commentaire.likedBy,
+    });
+
+    const hasLiked = commentaire.likedBy.includes(userId);
+    console.log("Utilisateur a déjà liké:", hasLiked);
 
     if (hasLiked) {
-      // Retirer le like
-      comment.likedBy = comment.likedBy.filter(
-        (id) => id.toString() !== userId
-      );
-      comment.likes = Math.max(0, comment.likes - 1);
+      // Unliker
+      commentaire.likedBy.pull(userId);
+      commentaire.likes = Math.max(0, commentaire.likes - 1);
+      console.log("Action: UNLIKE");
     } else {
-      // Ajouter le like
-      comment.likedBy.push(userId);
-      comment.likes += 1;
+      // Liker
+      commentaire.likedBy.push(userId);
+      commentaire.likes += 1;
+      console.log("Action: LIKE");
     }
 
-    await comment.save();
+    await commentaire.save();
+    console.log("Commentaire sauvegardé avec succès");
+
+    // Populate pour la réponse
+    const populatedComment = await Commentaire.findById(commentId)
+      .populate("userId", "nom prenom email")
+      .populate("likedBy", "nom prenom");
 
     res.json({
-      message: hasLiked ? "Like retiré" : "Like ajouté",
-      likes: comment.likes,
-      hasLiked: !hasLiked,
+      success: true,
+      data: populatedComment,
+      action: hasLiked ? "unliked" : "liked",
     });
   } catch (error) {
-    console.error("Erreur lors du like du commentaire:", error);
-    res.status(500).json({ error: "Erreur serveur" });
+    console.error("Erreur like commentaire:", error);
+    res
+      .status(500)
+      .json({ error: "Erreur serveur lors du like du commentaire" });
+  }
+};
+
+// Correction similaire pour putComm et deleteComm
+const putComm = async (req, res) => {
+  try {
+    const { commentId } = req.params; // ← CORRECTION ICI aussi
+    const { rating, text } = req.body;
+
+    // Trouver le commentaire
+    const commentaire = await Commentaire.findById(commentId);
+
+    if (!commentaire) {
+      return res.status(404).json({ error: "Commentaire non trouvé" });
+    }
+
+    // Vérifier que l'utilisateur est le propriétaire
+    if (commentaire.userId.toString() !== req.user.id) {
+      return res
+        .status(403)
+        .json({ error: "Non autorisé à modifier ce commentaire" });
+    }
+
+    // Validation
+    if (rating && (rating < 1 || rating > 5)) {
+      return res.status(400).json({ error: "La note doit être entre 1 et 5" });
+    }
+
+    if (text && text.trim().length < 10) {
+      return res
+        .status(400)
+        .json({ error: "Le commentaire doit contenir au moins 10 caractères" });
+    }
+
+    // Mettre à jour
+    const updateData = {};
+    if (rating) updateData.rating = rating;
+    if (text) updateData.text = text.trim();
+
+    const updatedComment = await Commentaire.findByIdAndUpdate(
+      commentId,
+      updateData,
+      {
+        new: true,
+        runValidators: true,
+      }
+    ).populate("userId", "nom prenom email");
+
+    res.json({
+      success: true,
+      data: updatedComment,
+    });
+  } catch (error) {
+    console.error("Erreur modification commentaire:", error);
+    res
+      .status(500)
+      .json({ error: "Erreur serveur lors de la modification du commentaire" });
+  }
+};
+
+const deleteComm = async (req, res) => {
+  try {
+    const { commentId } = req.params; // ← CORRECTION ICI aussi
+
+    // Trouver le commentaire
+    const commentaire = await Commentaire.findById(commentId);
+
+    if (!commentaire) {
+      return res.status(404).json({ error: "Commentaire non trouvé" });
+    }
+
+    // Vérifier que l'utilisateur est le propriétaire ou admin
+    if (
+      commentaire.userId.toString() !== req.user.id &&
+      req.user.role !== "admin"
+    ) {
+      return res
+        .status(403)
+        .json({ error: "Non autorisé à supprimer ce commentaire" });
+    }
+
+    // Soft delete
+    await Commentaire.findByIdAndUpdate(commentId, { isVisible: false });
+
+    res.json({
+      success: true,
+      message: "Commentaire supprimé avec succès",
+    });
+  } catch (error) {
+    console.error("Erreur suppression commentaire:", error);
+    res
+      .status(500)
+      .json({ error: "Erreur serveur lors de la suppression du commentaire" });
   }
 };
 
@@ -278,64 +279,51 @@ const statComm = async (req, res) => {
     const stats = await Commentaire.aggregate([
       {
         $match: {
-          contentId,
           contentType,
-          isVisible: true,
-        },
-      },
-      {
-        $group: {
-          _id: "$rating",
-          count: { $sum: 1 },
-        },
-      },
-      {
-        $sort: { _id: 1 },
-      },
-    ]);
-
-    const totalComments = await Commentaire.countDocuments({
-      contentId,
-      contentType,
-      isVisible: true,
-    });
-
-    const averageRating = await Commentaire.aggregate([
-      {
-        $match: {
           contentId,
-          contentType,
           isVisible: true,
         },
       },
       {
         $group: {
           _id: null,
-          average: { $avg: "$rating" },
+          totalComments: { $sum: 1 },
+          averageRating: { $avg: "$rating" },
+          totalLikes: { $sum: "$likes" },
+          ratingDistribution: {
+            $push: "$rating",
+          },
         },
       },
     ]);
 
-    const ratingDistribution = {};
+    const result = stats[0] || {
+      totalComments: 0,
+      averageRating: 0,
+      totalLikes: 0,
+      ratingDistribution: [],
+    };
+
+    // Calculer la distribution des notes
+    const distribution = {};
     for (let i = 1; i <= 5; i++) {
-      ratingDistribution[i] = 0;
+      distribution[i] = result.ratingDistribution.filter((r) => r === i).length;
     }
 
-    stats.forEach((stat) => {
-      ratingDistribution[stat._id] = stat.count;
-    });
-
     res.json({
-      totalComments,
-      averageRating:
-        averageRating.length > 0
-          ? Math.round(averageRating[0].average * 10) / 10
-          : 0,
-      ratingDistribution,
+      success: true,
+      data: {
+        totalComments: result.totalComments,
+        averageRating: Math.round(result.averageRating * 10) / 10,
+        totalLikes: result.totalLikes,
+        ratingDistribution: distribution,
+      },
     });
   } catch (error) {
-    console.error("Erreur lors de la récupération des statistiques:", error);
-    res.status(500).json({ error: "Erreur serveur" });
+    console.error("Erreur stats commentaires:", error);
+    res.status(500).json({
+      error: "Erreur serveur lors de la récupération des statistiques",
+    });
   }
 };
 
