@@ -15,6 +15,5 @@ router.get("/get-abonnement/:id", userController.getAbonnements);
 // Routes protégées (nécessitant authentification)
 router.get("/:id", auth, userController.getUserInfo);
 
-console.log("Routes utilisateurs chargées");
 
 module.exports = router;
