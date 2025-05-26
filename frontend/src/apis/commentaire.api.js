@@ -18,7 +18,7 @@ export async function postComm(commentData, token) {
     console.log("=== DEBUG POST COMMENT ===");
     console.log("1. Données reçues:", commentData);
 
-    const { contentId, contentType, rating, text } = commentData;
+    const { contentId, contentType, rating, text, author } = commentData;
 
     // Validation côté client
     if (!contentId || !contentType || !rating || !text) {
@@ -44,21 +44,18 @@ export async function postComm(commentData, token) {
     // Récupérer le token
     const authToken = token || getTokenFromCookies();
     console.log("2. Token trouvé:", authToken ? "OUI" : "NON");
-    console.log(
-      "3. Token preview:",
-      authToken ? authToken.substring(0, 20) + "..." : "AUCUN"
-    );
 
     if (!authToken) {
       throw new Error("Token d'authentification manquant");
     }
 
-    // Préparer les données
+    // Préparer les données - inclure l'auteur si fourni
     const bodyData = {
       contentId: contentId.toString(),
       contentType,
       rating: parseInt(rating),
       text: text.trim(),
+      ...(author && { author }) // Inclure l'auteur s'il est fourni
     };
 
     console.log("4. Body à envoyer:", bodyData);
@@ -112,7 +109,6 @@ export async function getAllComm(contentType, contentId, options = {}) {
       sortBy,
       order,
     });
-    
 
     const response = await fetch(
       `${BASE_URL}/commentaires/${contentType}/${contentId}?${queryParams}`,
@@ -129,7 +125,9 @@ export async function getAllComm(contentType, contentId, options = {}) {
       throw new Error(errorData.error || `Erreur HTTP: ${response.status}`);
     }
 
-    return await response.json();
+    const result = await response.json();
+    console.log("Commentaires récupérés:", result); // Debug pour voir la structure
+    return result;
   } catch (error) {
     console.error("Erreur lors de la récupération des commentaires:", error);
     throw error;
