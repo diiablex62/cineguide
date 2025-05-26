@@ -14,10 +14,12 @@ const serieSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    acteurs: {
-      type: [String],
-      required: true,
-    },
+    acteurs: [
+      {
+        name: String,
+        id: Number,
+      },
+    ],
     note: {
       type: Number,
       min: 0,
