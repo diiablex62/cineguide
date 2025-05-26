@@ -13,6 +13,9 @@ const acteurRoutes = require("./routes/acteurs");
 const filmRoutes = require("./routes/film");
 const purchaseRoutes = require("./routes/purchase");
 const commentaireRoutes = require("./routes/commentaire");
+const trendingRoutes = require("./routes/trending");
+const actionSeriesRoutes = require("./routes/action-series");
+const similarSeriesRoutes = require("./routes/similar-series");
 const { verifyEmailConfig } = require("./utils/email/config");
 const app = express();
 app.use(express.json());
@@ -20,10 +23,6 @@ app.use(express.json());
 const path = require("path");
 const __DIRNAME = path.resolve();
 
-console.log(
-  "Configuration du serveur avec CORS pour les origines:",
-  process.env.ALLOWED_ORIGINS
-);
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -33,7 +32,6 @@ app.use(
       if (!origin || allowedOrigins.indexOf(origin) !== -1) {
         callback(null, true);
       } else {
-        console.log(`Origine refusée: ${origin}`);
         callback(new Error("Not allowed by CORS"));
       }
     },
@@ -57,26 +55,20 @@ app.use("/api/purchase", purchaseRoutes);
 app.use("/api/commentaires", commentaireRoutes);
 
 // Route de test pour vérifier que le serveur répond
+app.use("/api/trending", trendingRoutes);
+app.use("/api/action-series", actionSeriesRoutes);
+app.use("/api/similar-series", similarSeriesRoutes);
+
 app.get("/api/test", (req, res) => {
-  console.log("Route de test appelée");
   res.status(200).json({ message: "Serveur API fonctionnel!" });
-});
-
-app.use(express.static(path.join(__DIRNAME, "/frontend/dist")));
-
-app.get(/(.*)/, (req, res) => {
-  res.sendFile(path.join(__DIRNAME, "frontend", "dist", "index.html"));
 });
 
 mongoose
   .connect(process.env.MONGO_URI)
   .then(async () => {
     console.log("Connexion Mongo DB OK");
-
-    // Vérifier la configuration des emails
     await verifyEmailConfig();
-
-    console.log(`Serveur en écoute sur le port ${process.env.PORT}`);
   })
   .catch((err) => console.log("Erreur de connexion MongoDB:", err));
+
 app.listen(process.env.PORT);
