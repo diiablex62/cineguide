@@ -1,116 +1,166 @@
-const TMDB_API_KEY = process.env.TMDB_API_TOKEN;
-const TMDB_BASE_URL = "https://api.themoviedb.org/3";
-const TMDB_IMAGE_BASE_URL = "https://image.tmdb.org/t/p";
+const TMDB_BASE_URL = "https://api.themoviedb.org/3/";
+const TMDB_API_TOKEN = process.env.TMDB_API_TOKEN; // Met ton token dans les variables d’environnement
 
-// Récupérer les tendances de la semaine
-const getTrending = async (mediaType = "all", timeWindow = "week") => {
+if (!TMDB_API_TOKEN) {
+  throw new Error("Le token TMDB_API_TOKEN est requis");
+}
+
+// Fonction générique pour faire une requête GET avec Bearer token
+const fetchFromTMDB = async (endpoint) => {
   try {
-    const response = await fetch(
-      `${TMDB_BASE_URL}/trending/${mediaType}/${timeWindow}?api_key=${TMDB_API_KEY}&language=fr-FR`
-    );
+    const url = `${TMDB_BASE_URL}${endpoint}${
+      endpoint.includes("?") ? "&" : "?"
+    }api_key=${TMDB_API_TOKEN}&language=fr-FR`;
+
+    const response = await fetch(url);
+
     if (!response.ok) {
-      throw new Error(`Erreur HTTP: ${response.status}`);
+      const errData = await response.json();
+      throw new Error(`Erreur API TMDB: ${JSON.stringify(errData)}`);
     }
     const data = await response.json();
-    return data.results;
-  } catch (error) {
-    console.error(
-      "Erreur lors de la récupération des tendances:",
-      error.message
-    );
-    throw error;
+    return data; // Retourne bien les données JSON
+  } catch (err) {
+    console.error("Erreur API TMDB:", err.message);
+    throw err;
   }
 };
 
-// Récupérer les détails d'un film
+// API Séries
+const getPopularSeries = async (page) => {
+  return fetchFromTMDB(
+    `discover/tv?sort_by=popularity.desc&page=${page}&with_origin_country=US`
+  );
+};
+
+const getSeriesCredits = async (id) => {
+  try {
+    return await fetchFromTMDB(`tv/${id}/credits`);
+  } catch (err) {
+    const message = err.message || "";
+    if (message.includes('status_code":34')) {
+      console.warn(`⚠️ Credits de la série ${id} introuvable (TMDB 404).`);
+      return null; // ← on retourne null si la série n'existe pas
+    }
+    console.error("Erreur API TMDB:", message);
+    return null; // ← on retourne null pour toute autre erreur réseau/API aussi
+  }
+};
+
+const getSerieDetails = async (id) => {
+  try {
+    return await fetchFromTMDB(`tv/${id}`);
+  } catch (err) {
+    const message = err.message || "";
+    if (message.includes('status_code":34')) {
+      console.warn(`⚠️ Série ${id} introuvable (TMDB 404).`);
+      return null; // ← on retourne null si la série n'existe pas
+    }
+    console.error("Erreur API TMDB:", message);
+    return null; // ← on retourne null pour toute autre erreur réseau/API aussi
+  }
+};
+
+const getSeasonDetails = async (serieId, seasonNumber) => {
+  try {
+    return await fetchFromTMDB(`tv/${serieId}/season/${seasonNumber}`);
+  } catch (err) {
+    const message = err.message || "";
+    if (message.includes('status_code":34')) {
+      console.warn(
+        `⚠️ Saison ${seasonNumber} non trouvée pour série ${serieId}, ignorée.`
+      );
+      return null; // ← on retourne null si la saison n'existe pas
+    }
+    throw err;
+  }
+};
+
+const getSerieVideos = async (id) => fetchFromTMDB(`tv/${id}/videos`);
+
+// API Films
+
+const getPopularMovies = async (page) => {
+  return fetchFromTMDB(
+    `discover/movie?sort_by=popularity.desc&page=${page}&with_origin_country=FR`
+  );
+};
+
+const getMoviesCredits = async (id) => {
+  try {
+    return await fetchFromTMDB(`movie/${id}/credits`);
+  } catch (err) {
+    const message = err.message || "";
+    if (message.includes('status_code":34')) {
+      console.warn(`⚠️ Credits du film ${id} introuvable (TMDB 404).`);
+      return null; // ← on retourne null si la série n'existe pas
+    }
+    console.error("Erreur API TMDB:", message);
+    return null; // ← on retourne null pour toute autre erreur réseau/API aussi
+  }
+};
+
 const getMovieDetails = async (id) => {
   try {
-    const response = await fetch(
-      `${TMDB_BASE_URL}/movie/${id}?api_key=${TMDB_API_KEY}&language=fr-FR`
-    );
-    if (!response.ok) {
-      throw new Error(`Erreur HTTP: ${response.status}`);
+    return await fetchFromTMDB(`movie/${id}`);
+  } catch (err) {
+    const message = err.message || "";
+    if (message.includes('status_code":34')) {
+      console.warn(`⚠️ Film ${id} introuvable (TMDB 404).`);
+      return null; // ← on retourne null si la série n'existe pas
     }
-    return await response.json();
-  } catch (error) {
-    console.error(
-      "Erreur lors de la récupération des détails du film:",
-      error.message
-    );
-    throw error;
+    console.error("Erreur API TMDB:", message);
+    return null; // ← on retourne null pour toute autre erreur réseau/API aussi
   }
 };
 
-// Récupérer les détails d'une série
-const getTvDetails = async (id) => {
+const getFilmVideos = async (id) => fetchFromTMDB(`movie/${id}/videos`);
+
+const getMoviePlatforms = async (movieId) => {
   try {
-    const response = await fetch(
-      `${TMDB_BASE_URL}/tv/${id}?api_key=${TMDB_API_KEY}&language=fr-FR`
-    );
-    if (!response.ok) {
-      throw new Error(`Erreur HTTP: ${response.status}`);
-    }
-    return await response.json();
-  } catch (error) {
-    console.error(
-      "Erreur lors de la récupération des détails de la série:",
-      error.message
-    );
-    throw error;
+    return await fetchFromTMDB(`movie/${movieId}/watch/providers`);
+  } catch (err) {
+    console.error("Erreur récupération plateformes:", err.message);
+    return [];
   }
 };
 
-// Formater l'URL de l'image
-const getImageUrl = (path, size = "w500") => {
-  if (!path) return null;
-  return `${TMDB_IMAGE_BASE_URL}/${size}${path}`;
-};
-
-// Récupérer les meilleures séries d'action
-const getTopActionSeries = async () => {
+const getWeekTop = async (time) => {
   try {
-    const response = await fetch(
-      `${TMDB_BASE_URL}/discover/tv?api_key=${TMDB_API_KEY}&language=fr-FR&with_genres=10759&sort_by=vote_average.desc&vote_count.gte=100`
-    );
-    if (!response.ok) {
-      throw new Error(`Erreur HTTP: ${response.status}`);
-    }
-    const data = await response.json();
-    return data.results;
-  } catch (error) {
-    console.error(
-      "Erreur lors de la récupération des séries d'action:",
-      error.message
-    );
-    throw error;
+    return await fetchFromTMDB(`trending/tv/${time}`);
+  } catch (err) {
+    console.error("Erreur récupération plateformes:", err.message);
+    return [];
   }
 };
 
-// Récupérer les séries similaires à Peaky Blinders
-const getSimilarToPeakyBlinders = async () => {
-  try {
-    const response = await fetch(
-      `${TMDB_BASE_URL}/tv/60574/similar?api_key=${TMDB_API_KEY}&language=fr-FR`
-    );
-    if (!response.ok) {
-      throw new Error(`Erreur HTTP: ${response.status}`);
-    }
-    const data = await response.json();
-    return data.results;
-  } catch (error) {
-    console.error(
-      "Erreur lors de la récupération des séries similaires:",
-      error.message
-    );
-    throw error;
-  }
-};
+// Acteurs
+
+// const getActeursFromMovies = async (id) => {
+//   try {
+//     return await fetchFromTMDB(`movie/${id}/credits`);
+//   } catch (err) {
+//     const message = err.message || "";
+//     if (message.includes('status_code":34')) {
+//       console.warn(`⚠️ Credits du film ${id} introuvable (TMDB 404).`);
+//       return null; // ← on retourne null si la série n'existe pas
+//     }
+//     console.error("Erreur API TMDB:", message);
+//     return null; // ← on retourne null pour toute autre erreur réseau/API aussi
+//   }
+// };
 
 module.exports = {
-  getTrending,
+  fetchFromTMDB,
+  getPopularSeries,
+  getSerieDetails,
+  getSeasonDetails,
+  getSerieVideos,
+  getSeriesCredits,
+  getPopularMovies,
+  getMoviesCredits,
   getMovieDetails,
-  getTvDetails,
-  getImageUrl,
-  getTopActionSeries,
-  getSimilarToPeakyBlinders,
+  getFilmVideos,
+  getMoviePlatforms,
+  getWeekTop,
 };
