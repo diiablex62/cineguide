@@ -221,13 +221,13 @@ export default function ResumeSerie() {
               CASTING
             </h2>
             <div className="flex flex-wrap gap-2 justify-center items-center">
-              {detailSerie.acteurs.map((actor, index) => (
+              {detailSerie.acteurs.map((actor) => (
                 <div
-                  key={`actor-${index}`}
+                  key={actor._id}
                   onClick={() => actor && actorRedirect(actor)}
                   className="bg-gray-200 dark:bg-gray-800 px-3 py-1 text-xs hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer transition-colors"
                 >
-                  {actor || "Acteur inconnu"}
+                  {actor.name || "Acteur inconnu"}
                 </div>
               ))}
             </div>
