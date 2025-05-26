@@ -45,8 +45,10 @@ async function createMovieWithDetails(details) {
       console.log(`⏩ Film déjà existant : ${details.original_title}`);
       return;
     }
-    const credits = details.credits ||
-      (await getMoviesCredits(details.id)) || { cast: [] };
+    const credits = (await getMoviesCredits(details.id)) || { cast: [] };
+    const acteurs = credits.cast.filter(
+      (cast) => cast.known_for_department === "Acting"
+    );
     const videos = (await getFilmVideos(details.id)) || "N/A";
     const trailer = videos.results.find(
       (v) => v.type === "Trailer" && v.site === "YouTube" && v.key
@@ -59,7 +61,12 @@ async function createMovieWithDetails(details) {
       image: details.poster_path
         ? `https://image.tmdb.org/t/p/w500${details.poster_path}`
         : null,
-      acteurs: credits.cast ? credits.cast.map((actor) => actor.name) : [],
+      acteurs: acteurs
+        ? acteurs.map((actor) => ({
+            name: actor.name,
+            id: actor.id,
+          }))
+        : [],
       duree: details.runtime,
       note: details.vote_average,
       dateSortie: details.release_date,
@@ -101,7 +108,7 @@ async function importMultipleSeries() {
     let discoverData;
     try {
       discoverData = await getPopularMovies(page);
-      console.log("Réponse TMDB page", page, ":", discoverData);
+      // console.log("Réponse TMDB page", page, ":", discoverData);
     } catch (err) {
       console.error(
         `Erreur lors de la récupération des séries page ${page}:`,
@@ -117,9 +124,9 @@ async function importMultipleSeries() {
 
     for (const movieSummary of discoverData.results) {
       try {
-        console.log(
-          `🟡 Import film ID: ${movieSummary.id} — Nom: ${movieSummary.original_title}`
-        );
+        // console.log(
+        //   `🟡 Import film ID: ${movieSummary.id} — Nom: ${movieSummary.original_title}`
+        // );
         const details = await getMovieDetails(movieSummary.id);
         if (!details) {
           console.warn(
@@ -128,7 +135,7 @@ async function importMultipleSeries() {
           continue;
         }
 
-        await createMovieWithDetails(details); // ← tu peux faire un return du film ici
+        await createMovieWithDetails(details);
         moviesCount++;
         console.log(`Film importée : ${details.original_title}`);
       } catch (err) {

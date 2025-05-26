@@ -35,23 +35,20 @@ const getSaisonByNumero = async (req, res) => {
 
     // Recherche par ID ou par l'attribut id
     const serie = await Serie.findOne({
-      $or: [
-        { _id: serieId },
-        { id: serieId }
-      ]
+      $or: [{ _id: serieId }, { id: serieId }],
     });
 
     if (!serie) {
-      return res.status(404).json({ message: 'Série non trouvée' });
+      return res.status(404).json({ message: "Série non trouvée" });
     }
 
     const saison = await Saison.findOne({
       serie: serie._id,
-      numero: saisonNumero
-    }).populate('episodes');
+      numero: saisonNumero,
+    }).populate("episodes");
 
     if (!saison) {
-      return res.status(404).json({ message: 'Saison non trouvée' });
+      return res.status(404).json({ message: "Saison non trouvée" });
     }
 
     res.status(200).json(saison);
@@ -105,7 +102,7 @@ const createSaisonForSerie = async (serieDoc) => {
 
       if (numero == null || isNaN(numero) || numero === 0) {
         console.warn(
-          `⚠️ Saison ${numero} ignorée (numéro invalide ou spéciale).`
+          `⚠️ Saison ${numero} ignorée (saison invalide ou spéciale).`
         );
         continue;
       }
@@ -114,7 +111,10 @@ const createSaisonForSerie = async (serieDoc) => {
       let saisonDetails;
       try {
         saisonDetails = await getSeasonDetails(serieDoc.tmdbId, numero);
-        if (!saisonDetails) continue; // déjà géré s’il y a erreur 34
+        if (saisonDetails.episodes <= 0) {
+          console.warn(`⚠️ Saison ${numero} ignorée (saison invalide).`);
+          continue;
+        }
       } catch (error) {
         console.warn(
           `⚠️ Saison ${numero} introuvable pour série ${serieDoc.titre} (id: ${tmdbSerieId})`
@@ -126,7 +126,7 @@ const createSaisonForSerie = async (serieDoc) => {
         ? new Date(saisonDetails.air_date).getFullYear().toString()
         : "N/A";
 
-      const nbEpisodes = saisonDetails.episodes?.length || 0;
+      const nbEpisodes = saisonDetails.episodes?.length;
 
       const saisonDoc = new Saison({
         numero,

@@ -69,30 +69,17 @@ async function getActeursExistant() {
   const films = await Film.find({}, "acteurs");
   const series = await Serie.find({}, "acteurs");
 
-  const noms = new Set();
+  const allActeurs = new Set();
 
   for (const f of films) {
-    (f.acteurs || []).forEach((nom) => noms.add(nom));
+    (f.acteurs || []).map((actor) => allActeurs.add(actor));
   }
 
   for (const s of series) {
-    (s.acteurs || []).forEach((nom) => noms.add(nom));
+    (s.acteurs || []).map((actor) => allActeurs.add(actor));
   }
 
-  return Array.from(noms);
-}
-
-async function chercherActeurParNom(nom) {
-  try {
-    const res = await fetchFromTMDB(
-      `search/person?query=${encodeURIComponent(nom)}`
-    );
-    const acteur = res.results?.[0];
-    return acteur || null;
-  } catch (err) {
-    console.error(`❌ Erreur recherche TMDB pour "${nom}":`, err.message);
-    return null;
-  }
+  return Array.from(allActeurs);
 }
 
 async function importerDetailsActeur(idTMDB) {
@@ -104,6 +91,40 @@ async function importerDetailsActeur(idTMDB) {
   }
 }
 
+async function importerKnownForActeur(name) {
+  try {
+    const response = await fetchFromTMDB(
+      `search/person?query=${encodeURIComponent(name)}`
+    );
+
+    if (!response || !response.results || response.results.length === 0) {
+      console.warn(`⚠️ Aucun résultat known_for trouvé pour: ${name}`);
+      return { known_for: [] };
+    }
+
+    // Prendre le premier résultat qui correspond le mieux
+    const actor = response.results[0];
+
+    if (!actor.known_for || !Array.isArray(actor.known_for)) {
+      console.warn(`⚠️ Pas de known_for disponible pour: ${name}`);
+      return { known_for: [] };
+    }
+
+    return {
+      known_for: actor.known_for.map((work) => ({
+        title: work.title || work.name || "Titre inconnu",
+        media_type: work.media_type,
+        year: work.release_date
+          ? new Date(work.release_date).getFullYear()
+          : null,
+      })),
+    };
+  } catch (err) {
+    console.error(`❌ Erreur détails TMDB acteur ${name}:`, err.message);
+    return { known_for: [] };
+  }
+}
+
 function calculerAge(dateNaissance) {
   try {
     return differenceInYears(new Date(), parseISO(dateNaissance));
@@ -112,151 +133,267 @@ function calculerAge(dateNaissance) {
   }
 }
 
-async function importActeursDepuisTMDB() {
-  const noms = await getActeursExistant();
-
-  for (const nom of noms) {
-    const deja = await Acteur.findOne({ nom });
-    if (deja) {
-      console.log(`⏩ Acteur déjà en base : ${nom}`);
-      continue;
-    }
-
-    const resultRecherche = await chercherActeurParNom(nom);
-    if (!resultRecherche) continue;
-
-    const details = await importerDetailsActeur(resultRecherche.id);
-    if (!details) continue;
-
-    const credits = await fetchFromTMDB(
-      `person/${details.id}/combined_credits`
-    );
-    const acteur = new Acteur({
-      metiers: details.known_for_department
-        ? [details.known_for_department]
-        : [],
-      nom: details.name,
-      image: details.profile_path
-        ? `https://image.tmdb.org/t/p/w500${details.profile_path}`
-        : "N/A",
-      nom_de_naissance: details.also_known_as?.[0] || details.name,
-      date_de_naissance: details.birthday || "Inconnue",
-      age: calculerAge(details.birthday) || 0,
-      lieu_de_naissance: details.place_of_birth || "Inconnue",
-      carriere: details.birthday
-        ? new Date().getFullYear() - new Date(details.birthday).getFullYear()
-        : null,
-      nb_films: credits || null,
-      prix: 0, // Placeholder
-      nominations: 0, // Placeholder
-      oeuvres_principales:
-        resultRecherche.known_for?.map((o) => o.title || o.name) || [],
-      description: `${details.name} est principalement connu pour ${details.known_for_department}`,
-      biographie: details.biography || "Biographie indisponible",
-      tmdbId: details.id,
-    });
-
-    await acteur.save();
-    console.log(`✅ Acteur importé : ${acteur.nom}`);
-  }
-}
-
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const enrichirActeursDepuisWikidata = async () => {
+async function getWikidataIdFromName(name) {
+  const url = `https://www.wikidata.org/w/api.php?action=wbsearchentities&search=${encodeURIComponent(
+    name
+  )}&language=fr&format=json&type=item&origin=*`;
+
+  const res = await fetch(url);
+  const data = await res.json();
+
+  if (data.search && data.search.length > 0) {
+    return data.search[0].id;
+  }
+
+  return null;
+}
+
+const enrichirActeursDepuisWikidata = async (acteur) => {
   try {
-    const acteurs = await Acteur.find();
+    const nom = acteur.name;
+    const wikidataId = await getWikidataIdFromName(nom);
 
-    for (const acteur of acteurs) {
-      const nom = acteur.nom;
-
-      // Encode le nom pour URL
-      const nomEncode = encodeURIComponent(nom);
-
-      // Ajoute un délai pour éviter le blocage de Wikidata
-      await sleep(100);
-
-      const query = `
-    SELECT ?films ?prix ?nominations WHERE {
-      {
-        SELECT (COUNT(DISTINCT ?film) AS ?films) WHERE {
-          ?person wdt:P31 wd:Q5;
-                  rdfs:label ?label.
-          FILTER(LANG(?label) = "fr")
-          FILTER(LCASE(?label) = LCASE("${nom}"))
-          ?film wdt:P161 ?person.
-        }
-      }
-      {
-        SELECT (COUNT(DISTINCT ?nomination) AS ?nominations) WHERE {
-          ?person wdt:P31 wd:Q5;
-                  rdfs:label ?label.
-          FILTER(LANG(?label) = "fr")
-          FILTER(LCASE(?label) = LCASE("${nom}"))
-          ?nomination wdt:P1346 ?person.
-        }
-      }
-      {
-        SELECT (COUNT(DISTINCT ?prix) AS ?prix) WHERE {
-          ?person wdt:P31 wd:Q5;
-                  rdfs:label ?label.
-          FILTER(LANG(?label) = "fr")
-          FILTER(LCASE(?label) = LCASE("${nom}"))
-          ?prix wdt:P166 ?person.
-        }
-      }
-    }
-    LIMIT 1
-  `;
-
-      const url = `https://query.wikidata.org/sparql?query=${encodeURIComponent(
-        query
-      )}`;
-
-      const res = await fetch(url, {
-        headers: {
-          Accept: "application/sparql-results+json",
-          "User-Agent": "VideoGameManagerBot/1.0 (contact@tonsite.com)",
-        },
-      });
-
-      if (!res.ok) {
-        console.warn(`⚠️ ${nom} non trouvé sur Wikidata : ${res.statusText}`);
-        continue;
-      }
-
-      const data = await res.json();
-      const bindings = data?.results?.bindings?.[0];
-
-      if (!bindings) {
-        console.warn(`⚠️ ${nom} : aucune donnée Wikidata`);
-        continue;
-      }
-
-      const nb_films = bindings.films?.value
-        ? parseInt(bindings.films.value)
-        : 0;
-      const nominations = bindings.nominations?.value
-        ? parseInt(bindings.nominations.value)
-        : 0;
-      const prix = bindings.awards?.value ? parseInt(bindings.awards.value) : 0;
-
-      acteur.nb_films = nb_films;
-      acteur.nominations = nominations;
-      acteur.prix = prix;
-
-      await acteur.save();
-
-      console.log(
-        `✅ ${nom} mis à jour : ${nb_films} films, ${prix} prix, ${nominations} nominations.`
-      );
+    if (!wikidataId) {
+      console.warn(`⚠️ Aucun ID Wikidata trouvé pour : ${nom}`);
+      return;
     }
 
-    console.log("✅ Enrichissement Wikidata terminé !");
+    const query = `
+SELECT 
+  (GROUP_CONCAT(DISTINCT ?occupationLabel; separator=", ") as ?occupations)
+  ?debutActivite 
+  (COUNT(DISTINCT ?film) AS ?nb_films) 
+  (COUNT(DISTINCT ?prix) AS ?nb_prix) 
+  (COUNT(DISTINCT ?nomination) AS ?nb_nominations) 
+WHERE {
+  wd:${wikidataId} wdt:P31 wd:Q5.
+  OPTIONAL { wd:${wikidataId} wdt:P106 ?occupation. }
+  OPTIONAL { ?film wdt:P161 wd:${wikidataId}. }
+  OPTIONAL { ?prix wdt:P166 wd:${wikidataId}. }
+  OPTIONAL { ?nomination wdt:P1346 wd:${wikidataId}. }
+  OPTIONAL { wd:${wikidataId} wdt:P2031 ?debutActivite. }
+
+  SERVICE wikibase:label { 
+    bd:serviceParam wikibase:language "fr,en".
+    ?occupation rdfs:label ?occupationLabel.
+  }
+}
+GROUP BY ?debutActivite
+`;
+
+    const url = `https://query.wikidata.org/sparql?query=${encodeURIComponent(
+      query
+    )}`;
+
+    const res = await fetch(url, {
+      headers: {
+        Accept: "application/sparql-results+json",
+        "User-Agent": "ActeursDataImporter/1.0 (newsonic62@gmail.com)",
+      },
+    });
+
+    if (!res.ok) {
+      console.warn(`⚠️ ${nom} non trouvé sur Wikidata : ${res.statusText}`);
+      return;
+    }
+
+    const data = await res.json();
+    const bindings = data?.results?.bindings?.[0];
+
+    if (!bindings) {
+      console.warn(`⚠️ ${nom} : aucune donnée Wikidata`);
+      return;
+    }
+
+    const nb_films = bindings.nb_films?.value
+      ? parseInt(bindings.nb_films.value)
+      : 0;
+    const prix = bindings.nb_prix?.value ? parseInt(bindings.nb_prix.value) : 0;
+    const nominations = bindings.nb_nominations?.value
+      ? parseInt(bindings.nb_nominations.value)
+      : 0;
+    const debutCarriere = bindings.debutActivite?.value || null;
+    const anneeDebutCarriere = debutCarriere
+      ? new Date(debutCarriere).getFullYear()
+      : null;
+    const occupations = bindings.occupations?.value || [];
+
+    // console.log(
+    //   `✅ ${nom} récupéré : ${nb_films} films, ${prix} prix, ${nominations} nominations.`
+    // );
+    // console.log("✅ Enrichissement Wikidata terminé !");
+    return { nb_films, prix, nominations, anneeDebutCarriere, occupations };
   } catch (err) {
     console.error("❌ Erreur lors de l'enrichissement Wikidata :", err.message);
   }
 };
+
+async function ajouterIdMongoDansActeurs(acteur) {
+  try {
+    if (!acteur || !acteur.tmdbId || !acteur._id) {
+      console.error("❌ Données d'acteur invalides pour la mise à jour", {
+        acteur: acteur?.name,
+        tmdbId: acteur?.tmdbId,
+        mongoId: acteur?._id,
+      });
+      return;
+    }
+
+    const tmdbId = parseInt(acteur.tmdbId);
+    const mongoId = acteur._id.toString();
+
+    // Mise à jour des films
+    const filmsResult = await Film.updateMany(
+      { "acteurs.id": tmdbId },
+      {
+        $set: {
+          "acteurs.$[elem]._id": mongoId,
+          "acteurs.$[elem].name": acteur.name,
+        },
+      },
+      {
+        arrayFilters: [{ "elem.id": tmdbId }],
+        multi: true,
+      }
+    );
+
+    // Mise à jour des séries
+    const seriesResult = await Serie.updateMany(
+      { "acteurs.id": tmdbId },
+      {
+        $set: {
+          "acteurs.$[elem]._id": mongoId,
+          "acteurs.$[elem].name": acteur.name,
+        },
+      },
+      {
+        arrayFilters: [{ "elem.id": tmdbId }],
+        multi: true,
+      }
+    );
+
+    // Vérification après mise à jour
+    const filmsApres = await Film.find({
+      acteurs: {
+        $elemMatch: {
+          id: tmdbId,
+          _id: mongoId,
+        },
+      },
+    });
+
+    const seriesApres = await Serie.find({
+      acteurs: {
+        $elemMatch: {
+          id: tmdbId,
+          _id: mongoId,
+        },
+      },
+    });
+
+    // console.log(`
+    // ✅ Résultat de la mise à jour pour ${acteur.name}:
+    // Films:
+    //   - Modifiés: ${filmsResult.modifiedCount}
+    //   - Vérifiés après: ${filmsApres.length}
+    // Séries:
+    //   - Modifiées: ${seriesResult.modifiedCount}
+    //   - Vérifiées après: ${seriesApres.length}
+    // `);
+  } catch (error) {
+    console.error(
+      `❌ Erreur lors de l'ajout de l'ID MongoDB pour ${acteur.name}:`,
+      error.message
+    );
+  }
+}
+
+async function importActeursDepuisTMDB() {
+  try {
+    const allActeurs = await getActeursExistant();
+    console.log(`🔍 Début import de ${allActeurs.length} acteurs...`);
+
+    let importCount = 0;
+    let errorCount = 0;
+
+    for (const oneActor of allActeurs) {
+      try {
+        const deja = await Acteur.findOne({
+          $or: [{ name: oneActor.name }, { tmdbId: oneActor.id.toString() }],
+        });
+        if (deja) {
+          console.log(`⏩ Acteur déjà en base : ${oneActor.name}`);
+          continue;
+        }
+
+        await sleep(1000);
+        const details = await importerDetailsActeur(oneActor.id);
+        const connu = await importerKnownForActeur(oneActor.name);
+        if (!details) {
+          console.warn(
+            `⚠️ Impossible d'obtenir les détails pour : ${oneActor.name}`
+          );
+          errorCount++;
+          continue;
+        }
+        const data = await enrichirActeursDepuisWikidata(details);
+
+        const acteur = new Acteur({
+          metiers:
+            data === undefined
+              ? details.known_for_department || []
+              : typeof data.occupations === "string"
+              ? data.occupations.split(", ").filter(Boolean)
+              : Array.isArray(data.occupations)
+              ? data.occupations
+              : [data.occupations].filter(Boolean),
+          name: details.name,
+          image: details.profile_path
+            ? `https://image.tmdb.org/t/p/w500${details.profile_path}`
+            : "N/A",
+          nom_de_naissance: details.also_known_as?.[0] || details.name,
+          date_de_naissance: details.birthday || "Inconnue",
+          age: calculerAge(details.birthday) || 0,
+          lieu_de_naissance: details.place_of_birth || "Inconnue",
+          carriere: data === undefined ? 0 : data.anneeDebutCarriere,
+          nb_films: data === undefined ? 0 : data.nb_films,
+          prix: data === undefined ? 0 : data.prix,
+          nominations: data === undefined ? 0 : data.nominations,
+          oeuvres_principales:
+            connu.known_for?.map((o) => o.title || o.name) || [],
+          description: `${details.name} est principalement connu pour ${details.known_for_department}`,
+          biographie: details.biography || "Biographie indisponible",
+          tmdbId: details.id.toString(),
+        });
+
+        await acteur.save();
+        await ajouterIdMongoDansActeurs(acteur);
+
+        importCount++;
+        console.log(`✅ Acteur importé : ${acteur.name}`);
+      } catch (error) {
+        errorCount++;
+        console.error(
+          `❌ Erreur lors de l'import de ${oneActor.name}:`,
+          error.message
+        );
+      }
+    }
+
+    console.log(`
+      📊 Rapport d'import :
+      - Total traité : ${allActeurs.length}
+      - Importés avec succès : ${importCount}
+      - Erreurs : ${errorCount}
+    `);
+    return { success: true, imported: importCount, errors: errorCount };
+  } catch (error) {
+    console.error("❌ Erreur générale d'import:", error.message);
+    return { success: false, error: error.message };
+  }
+}
 
 module.exports = {
   getActeurs,
@@ -265,5 +402,4 @@ module.exports = {
   // deleteActeur,
   // createActeur,
   importActeursDepuisTMDB,
-  enrichirActeursDepuisWikidata,
 };

@@ -62,25 +62,30 @@ async function createSerieWithDetails(details) {
       console.log(`⏩ Série déjà existante : ${details.name}`);
       return;
     }
-    const credits = details.credits ||
-      (await getSeriesCredits(details.id)) || { cast: [] };
-    const videos =
-      details.videos?.results || (await getSerieVideos(details.id)) || [];
-    const trailer = videos.find(
-      (v) => v.type === "Trailer" && v.site === "YouTube"
+    const credits = (await getSeriesCredits(details.id)) || { cast: [] };
+    const acteurs = credits.cast.filter(
+      (cast) => cast.known_for_department === "Acting"
     );
+    const videos =
+      details.videos?.results || (await getSerieVideos(details.id));
+    const trailer = videos ? videos : [];
     const serie = new Serie({
       titre: details.name,
       synopsis: details.overview ? details.overview : "N/A",
       image: details.poster_path
         ? `https://image.tmdb.org/t/p/w500${details.poster_path}`
         : null,
-      acteurs: credits.cast ? credits.cast.map((actor) => actor.name) : [],
+      acteurs: acteurs
+        ? acteurs.map((actor) => ({
+            name: actor.name,
+            id: actor.id,
+          }))
+        : [],
       note: details.vote_average,
       dateDebut: details.first_air_date,
       dateFin: details.last_air_date || null,
       createur: details.created_by?.[0]?.name || "Inconnu",
-      bandeAnnonce: trailer
+      bandeAnnonce: trailer.key
         ? `https://www.youtube.com/watch?v=${trailer.key}`
         : "N/A",
       genre: details.genres.map((g) => g.name),
@@ -116,7 +121,7 @@ async function importMultipleSeries() {
     let discoverData;
     try {
       discoverData = await getPopularSeries(page);
-      console.log("Réponse TMDB page", page, ":", discoverData);
+      // console.log("Réponse TMDB page", page, ":", discoverData);
     } catch (err) {
       console.error(
         `Erreur lors de la récupération des séries page ${page}:`,
@@ -132,9 +137,9 @@ async function importMultipleSeries() {
 
     for (const serieSummary of discoverData.results) {
       try {
-        console.log(
-          `🟡 Import série ID: ${serieSummary.id} — Nom: ${serieSummary.name}`
-        );
+        // console.log(
+        //   `🟡 Import série ID: ${serieSummary.id} — Nom: ${serieSummary.name}`
+        // );
         const details = await getSerieDetails(serieSummary.id);
         if (!details) {
           console.warn(

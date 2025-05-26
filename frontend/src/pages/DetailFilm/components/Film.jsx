@@ -130,6 +130,21 @@ export default function Film() {
               {detailFilm.realisateur}
             </p>
           </div>
+          <div className="w-1/2 md:w-full">
+            <h3 className="font-bold text-sm mb-2 text-black dark:text-gray-200">
+              PLAFORM
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {detailFilm.platforms.map((platform) => (
+                <span
+                  key={platform.provider_id}
+                  className="text-xs px-2 py-1 bg-gray-200 dark:bg-gray-800 rounded-md "
+                >
+                  {platform.provider_name}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -32,11 +32,11 @@ export default function Resume() {
           <div className=" mb-8 flex flex-wrap gap-2 justify-center items-center">
             {detailFilm.acteurs.map((actor) => (
               <div
-                key={actor}
+                key={actor._id}
                 onClick={actorRedirect}
                 className="bg-gray-200 dark:bg-gray-800 px-3 py-1 text-xs hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer transition-colors"
               >
-                {actor}
+                {actor.name}
               </div>
             ))}
           </div>

@@ -181,6 +181,7 @@ export async function getUserInfo(userId, token) {
   }
 }
 
+
 // Récupérer les informations de l'utilisateur abonnements
 export async function getUserAbonnement(id) {
   try {

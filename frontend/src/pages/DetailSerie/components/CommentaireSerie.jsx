@@ -5,46 +5,49 @@ import { useParams } from "react-router-dom";
 
 export default function CommentaireSerie() {
   const { id } = useParams();
-  const { comments, addComment, loadCommentsBySerie } = useContext(CommentContext);
+  const { comments, fetchComments, createComment, deleteComment, likeComment } =
+    useContext(CommentContext);
+
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [commentText, setCommentText] = useState("");
-  const [username, setUsername] = useState("Utilisateur");
-  
-  // Charger les commentaires lors du montage ou lorsque l'ID change
-  useEffect(() => {
-    if (id && loadCommentsBySerie) {
-      loadCommentsBySerie(id);
-    }
-    
-    // Réinitialiser le formulaire lors du changement de série
-    setCommentText("");
-    setRating(0);
-    setHoverRating(0);
-  }, [id, loadCommentsBySerie]);
+  const username = localStorage.getItem("username") || "Utilisateur";
 
-  const handleSubmit = (e) => {
+
+  useEffect(() => {
+    if (id) fetchComments("serie", id);
+  }, [id]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Ne pas ajouter de commentaires vides
     if (commentText.trim() === "" || rating === 0 || !id) return;
 
-    // Ajouter le nouveau commentaire avec l'ID de la série
-    addComment({
-      author: username,
-      rating: rating,
-      text: commentText,
-      avatar: null,
-      serieId: id
-    });
+    await createComment(
+      {
+         author: username,
+          avatar: null,
+        contentType: "serie",
+        contentId: id,
+        rating,
+        text: commentText,
+      },
+      token
+    );
 
-    // Réinitialiser le formulaire
     setCommentText("");
     setRating(0);
   };
 
-  // Filtrer les commentaires pour afficher uniquement ceux de la série actuelle
-  const serieComments = comments.filter(comment => comment.serieId === id);
+  const handleDelete = async (commentId) => {
+    if (window.confirm("Supprimer ce commentaire ?")) {
+      await deleteComment(commentId, token);
+    }
+  };
+
+  const handleLike = async (commentId) => {
+    await likeComment(commentId, token);
+  };
 
   return (
     <div className="w-full md:w-3/4">
@@ -88,34 +91,56 @@ export default function CommentaireSerie() {
             Publier
           </button>
         </form>
+
         <div className="space-y-4">
-          {serieComments.length > 0 ? (
-            serieComments.map((comment, index) => (
+          {comments.length > 0 ? (
+            comments.map((comment) => (
               <div
-                key={comment.id || `comment-${index}`}
+                key={comment._id}
                 className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg"
               >
-                <div className="flex items-center mb-2">
-                  <div className="w-8 h-8 bg-gray-300 dark:bg-gray-600 rounded-full mr-2"></div>
-                  <span className="font-medium text-start">{comment.author}</span>
-                  <div className="ml-2 flex">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <span key={star}>
-                        {comment.rating >= star ? (
-                          <FaStar className="text-fuchsia text-xs" />
-                        ) : (
-                          <FaRegStar className="dark:text-white text-gray-fonce text-xs" />
-                        )}
-                      </span>
-                    ))}
+                <div className="flex items-center mb-2 justify-between">
+                  <div className="flex items-center">
+                    <div className="w-8 h-8 bg-gray-300 dark:bg-gray-600 rounded-full mr-2"></div>
+                    <span className="font-medium text-start">
+                      {comment.author}
+                    </span>
+                    <div className="ml-2 flex">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <span key={star}>
+                          {comment.rating >= star ? (
+                            <FaStar className="text-fuchsia text-xs" />
+                          ) : (
+                            <FaRegStar className="dark:text-white text-gray-fonce text-xs" />
+                          )}
+                        </span>
+                      ))}
+                    </div>
                   </div>
+                  {comment.author === username && (
+                    <button
+                      className="text-red-500 text-xs hover:underline"
+                      onClick={() => handleDelete(comment.id)}
+                    >
+                      Supprimer
+                    </button>
+                  )}
                 </div>
-                <p className="text-sm text-start">{comment.text}</p>
+                <p className="text-sm text-start mb-2">{comment.text}</p>
+                <div className="text-left">
+                  <button
+                    className="text-sm text-fuchsia hover:underline"
+                    onClick={() => handleLike(comment.id)}
+                  >
+                    ❤️ J’aime ({comment.likes || 0})
+                  </button>
+                </div>
               </div>
             ))
           ) : (
             <p className="text-gray-500 dark:text-gray-400">
-              Aucun commentaire pour cette série. Soyez le premier à donner votre avis !
+              Aucun commentaire pour cette série. Soyez le premier à donner
+              votre avis !
             </p>
           )}
         </div>
