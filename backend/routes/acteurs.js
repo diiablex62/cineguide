@@ -1,19 +1,14 @@
 const router = require("express").Router();
 const {
+  importActeursDepuisTMDB,
   getActeurs,
-  getOneActeur,
-  updateActeur,
-  deleteActeur,
-  createActeur,
+  enrichirActeursDepuisWikidata,
 } = require("../controllers/acteur-controller");
 
 // localhost:3000/api/acteurs
 
 router.get("/", getActeurs);
-
-router.get("/:id", getOneActeur);
-router.put("/:id", updateActeur);
-router.delete("/:id", deleteActeur);
-router.post("/", createActeur);
+router.get("/import", importActeursDepuisTMDB);
+router.get("/wikidata", enrichirActeursDepuisWikidata);
 
 module.exports = router;

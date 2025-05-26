@@ -3,7 +3,7 @@ import { SerieContext } from "../../../context/SerieContext";
 
 export default function BandeAnnonce() {
   const { detailSerie } = useContext(SerieContext);
-  
+
   // Vérifier si les données sont chargées et si la bande-annonce existe
   if (!detailSerie || !detailSerie.id || !detailSerie.bandeAnnonce) {
     return (
@@ -21,12 +21,7 @@ export default function BandeAnnonce() {
       </div>
     );
   }
-  
-  // Préparer l'URL de la bande-annonce (YouTube)
-  const videoUrl = detailSerie.bandeAnnonce.includes("watch?v=") 
-    ? detailSerie.bandeAnnonce.replace("watch?v=", "embed/")
-    : detailSerie.bandeAnnonce;
-  
+
   return (
     <div className="w-full">
       <div className="w-full text-center justify-center items-center">
@@ -39,7 +34,7 @@ export default function BandeAnnonce() {
               <iframe
                 width="100%"
                 height="100%"
-                src={videoUrl}
+                src={detailSerie.BandeAnnonce}
                 title="Bande-annonce officielle"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen

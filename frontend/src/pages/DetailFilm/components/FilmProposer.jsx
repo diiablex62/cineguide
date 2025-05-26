@@ -2,28 +2,29 @@ import React, { useContext, useState } from "react";
 import Films from "../../../data/Film.json";
 import Card from "../Card";
 import { FilmContext } from "../../../context/FilmContext";
+import { useParams } from "react-router-dom";
 
 export default function FilmProposer() {
+  const { id } = useParams();
   const { detailFilm, film } = useContext(FilmContext);
 
   // Filtrer les films par le même genre que le film actuel (mais exclure le film actuel)
-  const similarFilms = film
-    .filter(
-      (film) =>
-        film.id !== detailFilm.id &&
-        film.genre.some((genre) => detailFilm.genre.includes(genre))
-    )
-    .slice(0, 6);
+  const similarFilms = film.filter(
+    (film) =>
+      film._id !== detailFilm._id &&
+      film.genre.some((genre) => detailFilm.genre.includes(genre))
+  );
+
   // Obtenir des films populaires (triés par note, excluant le film actuel)
   const popularFilms = [...film]
-    .filter((film) => film.id !== detailFilm.id)
-    .sort((a, b) => b.note - a.note)
-    .slice(0, 6);
+    .filter((film) => film._id !== detailFilm._id)
+    .sort((a, b) => b.note - a.note);
 
   // Obtenez des films spé (triés par note, excluant le film actuel)
-  const dramaFilms = film
-    .filter((film) => film.id !== detailFilm.id && film.genre.includes("Drame"))
-    .slice(0, 6);
+  const dramaFilms = film.filter(
+    (film) => film._id !== detailFilm._id && film.genre.includes("Drame")
+  );
+
   return (
     <div className="w-full  text-center justify-center items-center">
       <div className="mt-8">

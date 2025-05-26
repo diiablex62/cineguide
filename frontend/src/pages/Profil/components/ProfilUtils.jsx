@@ -11,7 +11,8 @@ export default function ProfilUtils() {
   const contextValue = useContext(ProfilContext);
   const { Facture = [] } = contextValue || {};
   const navigate = useNavigate();
-  const { abonnement, getUserSubscription, userId } = useContext(AuthContext);
+  const { abonnement, getUserSubscription, userId, user } =
+    useContext(AuthContext);
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -20,7 +21,11 @@ export default function ProfilUtils() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleSendResetEmail = async () => {
+    console.log("Début de handleSendResetEmail");
+    console.log("User:", user);
+
     if (!user || !user.email) {
+      console.log("Erreur: utilisateur ou email non trouvé");
       setIsError(true);
       setErrorMessage(
         "Impossible de récupérer votre email. Veuillez vous reconnecter."
@@ -62,19 +67,18 @@ export default function ProfilUtils() {
   }, []);
 
   return (
-    <div className="space-y-4">
+    <div className='space-y-4'>
       {/* Section Abonnement */}
-      <div className="border border-gray-300 dark:border-gray-700 p-4">
-        <h2 className="text-center font-medium mb-2">Mon abonnement</h2>
-        <p className="text-center text-gray-600 dark:text-gray-400 mb-4">
+      <div className='border border-gray-300 dark:border-gray-700 p-4'>
+        <h2 className='text-center font-medium mb-2'>Mon abonnement</h2>
+        <p className='text-center text-gray-600 dark:text-gray-400 mb-4'>
           {abonnement ? abonnement.type : "Aucun"}
         </p>
-        <div className="flex justify-center">
+        <div className='flex justify-center'>
           {!abonnement && (
             <button
               onClick={handleOpenAbonnementModal}
-              className="bg-fuchsia text-white text-sm px-4 py-1.5 hover:bg-opacity-90 transition-colors"
-            >
+              className='bg-fuchsia text-white text-sm px-4 py-1.5 hover:bg-opacity-90 transition-colors'>
               S'abonner ?
             </button>
           )}
@@ -82,23 +86,22 @@ export default function ProfilUtils() {
       </div>
 
       {/* Section Factures */}
-      <div className="border border-gray-300 dark:border-gray-700 p-4">
-        <h2 className="text-center font-medium mb-2">Mes factures</h2>
-        <p className="text-center text-gray-600 dark:text-gray-400">
+      <div className='border border-gray-300 dark:border-gray-700 p-4'>
+        <h2 className='text-center font-medium mb-2'>Mes factures</h2>
+        <p className='text-center text-gray-600 dark:text-gray-400'>
           Aucune facture
         </p>
       </div>
 
       {/* Section Mot de passe */}
-      <div className="border border-gray-300 dark:border-gray-700 p-4">
-        <h2 className="text-center font-medium mb-2">
+      <div className='border border-gray-300 dark:border-gray-700 p-4'>
+        <h2 className='text-center font-medium mb-2'>
           Changer de mot de passe
         </h2>
-        <div className="flex justify-center">
+        <div className='flex justify-center'>
           <button
             onClick={() => setModalOpen(true)}
-            className="bg-fuchsia text-white text-sm px-4 py-1.5 hover:bg-opacity-90 transition-colors"
-          >
+            className='bg-fuchsia text-white text-sm px-4 py-1.5 hover:bg-opacity-90 transition-colors'>
             Modifier
           </button>
         </div>
@@ -106,37 +109,35 @@ export default function ProfilUtils() {
 
       {/* Modal de changement de mot de passe */}
       <ModalPassword isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
-        <div className="flex justify-between items-center border-b pb-3">
-          <h2 className="font-medium">Changer de mot de passe</h2>
+        <div className='flex justify-between items-center border-b pb-3'>
+          <h2 className='font-medium'>Changer de mot de passe</h2>
           <button
             onClick={() => setModalOpen(false)}
-            className="text-gray-500 hover:text-gray-700 cursor-pointer text-xl"
-          >
+            className='text-gray-500 hover:text-gray-700 cursor-pointer text-xl'>
             <IoMdClose />
           </button>
         </div>
-        <div className="py-4 px-2">
+        <div className='py-4 px-2'>
           {isSuccess ? (
-            <div className="bg-green-100 text-green-800 p-3 text-center text-sm">
+            <div className='bg-green-100 text-green-800 p-3 text-center text-sm'>
               <p>
                 Un email de réinitialisation a été envoyé à votre adresse email.
               </p>
             </div>
           ) : isError ? (
-            <div className="bg-red-100 text-red-800 p-3 text-center text-sm">
+            <div className='bg-red-100 text-red-800 p-3 text-center text-sm'>
               <p>{errorMessage}</p>
             </div>
           ) : (
-            <div className="text-center">
-              <p className="mb-4 text-sm">
+            <div className='text-center'>
+              <p className='mb-4 text-sm'>
                 Un email sera envoyé à votre adresse pour réinitialiser votre
                 mot de passe.
               </p>
               <button
                 onClick={handleSendResetEmail}
                 disabled={isLoading}
-                className="bg-fuchsia text-white px-4 py-1.5 disabled:opacity-50 text-sm"
-              >
+                className='bg-fuchsia text-white px-4 py-1.5 disabled:opacity-50 text-sm'>
                 {isLoading ? "Envoi en cours..." : "Envoyer"}
               </button>
             </div>

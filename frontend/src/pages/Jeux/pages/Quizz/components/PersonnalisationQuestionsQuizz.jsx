@@ -9,7 +9,10 @@ export default function PersonnalisationQuestionsQuizz() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(questionsPerso);
+    console.log("Rendu de PersonnalisationQuestionsQuizz", {
+      questionsPerso,
+      currentQuestion,
+    });
     const saved = localStorage.getItem("quizz_perso_reponses");
     if (saved) {
       const obj = JSON.parse(saved);
@@ -49,7 +52,7 @@ export default function PersonnalisationQuestionsQuizz() {
   return (
     <div className='flex flex-col gap-2.5 py-11 px-14 h-full'>
       <div className='flex flex-col'>
-        <h2 className='text-3xl font-bold'>Quiz Personnalisé</h2>
+        <h2 className='text-3xl font-bold text-black'>Quiz Personnalisé</h2>
         <p className='italic text-gray-500'>
           <span className='underline'>Objectif</span> : répondre aux questions
           posées en rapport avec vos préférences.{" "}
@@ -58,7 +61,7 @@ export default function PersonnalisationQuestionsQuizz() {
           </span>
         </p>
       </div>
-      <h3 className='font-bold text-xl'>Etape 1 :</h3>
+      <h3 className='font-bold text-xl text-black'>Etape 1 :</h3>
       <div className='flex py-7'>
         <div className='flex flex-col gap-9 items-center justify-center w-full'>
           <div className='flex flex-col gap-2.5 items-center w-full'>
@@ -66,7 +69,7 @@ export default function PersonnalisationQuestionsQuizz() {
               {`Question ${currentQuestion + 1} / ${questionsPerso.length}`}
             </p>
             <div className='p-8 border border-black bg-white w-full'>
-              <p className='font-medium text-center'>
+              <p className='font-medium text-center text-black'>
                 {questionsPerso[currentQuestion].question}
               </p>
             </div>
@@ -79,7 +82,7 @@ export default function PersonnalisationQuestionsQuizz() {
             </p>
             <input
               type='text'
-              className='p-8 border border-black bg-white w-full'
+              className='p-8 border border-black bg-white w-full text-black'
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
             />

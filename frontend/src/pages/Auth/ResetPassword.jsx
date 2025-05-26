@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as authAPI from "../../apis/auth.api";
+import { FaRegEye } from "react-icons/fa6";
+import { FaRegEyeSlash } from "react-icons/fa6";
 
 export default function ResetPassword() {
   const { token } = useParams();
@@ -13,6 +15,12 @@ export default function ResetPassword() {
   const [errorMessage, setErrorMessage] = useState("");
   const [isValidToken, setIsValidToken] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
+  const toggleConfirmPasswordVisibility = () =>
+    setShowConfirmPassword(!showConfirmPassword);
 
   // Afficher le token dans la console pour le débogage
   console.log("Token reçu dans l'URL:", token);
@@ -221,12 +229,25 @@ export default function ResetPassword() {
                   className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>
                   Nouveau mot de passe
                 </label>
-                <input
-                  id='password'
-                  type='password'
-                  {...register("password")}
-                  className='block w-full dark:bg-gray-700 dark:text-white border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-fuchsia focus:border-fuchsia'
-                />
+                <div className='relative'>
+                  <input
+                    id='password'
+                    type={showPassword ? "text" : "password"}
+                    {...register("password")}
+                    className='block w-full dark:bg-gray-700 dark:text-white border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-fuchsia focus:border-fuchsia pr-10'
+                  />
+                  <button
+                    type='button'
+                    onClick={togglePasswordVisibility}
+                    className='absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 dark:text-gray-400'>
+                    {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+                    <span className='sr-only'>
+                      {showPassword
+                        ? "Masquer le mot de passe"
+                        : "Afficher le mot de passe"}
+                    </span>
+                  </button>
+                </div>
                 {errors.password && (
                   <p className='mt-2 text-sm text-red-600 dark:text-red-400'>
                     {errors.password.message}
@@ -240,12 +261,25 @@ export default function ResetPassword() {
                   className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>
                   Confirmer le mot de passe
                 </label>
-                <input
-                  id='confirmPassword'
-                  type='password'
-                  {...register("confirmPassword")}
-                  className='block w-full dark:bg-gray-700 dark:text-white border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-fuchsia focus:border-fuchsia'
-                />
+                <div className='relative'>
+                  <input
+                    id='confirmPassword'
+                    type={showConfirmPassword ? "text" : "password"}
+                    {...register("confirmPassword")}
+                    className='block w-full dark:bg-gray-700 dark:text-white border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-fuchsia focus:border-fuchsia pr-10'
+                  />
+                  <button
+                    type='button'
+                    onClick={toggleConfirmPasswordVisibility}
+                    className='absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 dark:text-gray-400'>
+                    {showConfirmPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+                    <span className='sr-only'>
+                      {showConfirmPassword
+                        ? "Masquer le mot de passe"
+                        : "Afficher le mot de passe"}
+                    </span>
+                  </button>
+                </div>
                 {errors.confirmPassword && (
                   <p className='mt-2 text-sm text-red-600 dark:text-red-400'>
                     {errors.confirmPassword.message}

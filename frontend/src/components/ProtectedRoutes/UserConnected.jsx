@@ -3,10 +3,8 @@ import { AuthContext } from "../../context/AuthContext";
 import { Navigate } from "react-router-dom";
 
 export default function UserConnected({ children }) {
-  const { user, connectedUser } = useContext(AuthContext);
+  const { isLoggedIn } = useContext(AuthContext);
+  console.log("État de connexion dans UserConnected:", isLoggedIn);
 
-  // Vérification simplifiée : utilisateur existe et est connecté
-  const isConnected = user && connectedUser;
-
-  return isConnected ? children : <Navigate to='/connexion' />;
+  return isLoggedIn ? children : <Navigate to='/connexion' />;
 }

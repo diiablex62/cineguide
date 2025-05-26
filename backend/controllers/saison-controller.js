@@ -28,37 +28,37 @@ const { createEpisodeForSaison } = require("./episode-controller");
 // };
 
 // // Récupérer une saison spécifique
-// const getSaisonByNumero = async (req, res) => {
-//   try {
-//     const serieId = req.params.id; // Changement de _id à id
-//     const saisonNumero = req.params.numero;
+const getSaisonByNumero = async (req, res) => {
+  try {
+    const serieId = req.params.id; // Changement de _id à id
+    const saisonNumero = req.params.numero;
 
-//     // Recherche par ID ou par l'attribut id
-//     const serie = await Serie.findOne({
-//       $or: [
-//         { _id: serieId },
-//         { id: serieId }
-//       ]
-//     });
+    // Recherche par ID ou par l'attribut id
+    const serie = await Serie.findOne({
+      $or: [
+        { _id: serieId },
+        { id: serieId }
+      ]
+    });
 
-//     if (!serie) {
-//       return res.status(404).json({ message: 'Série non trouvée' });
-//     }
+    if (!serie) {
+      return res.status(404).json({ message: 'Série non trouvée' });
+    }
 
-//     const saison = await Saison.findOne({
-//       serie: serie._id,
-//       numero: saisonNumero
-//     }).populate('episodes');
+    const saison = await Saison.findOne({
+      serie: serie._id,
+      numero: saisonNumero
+    }).populate('episodes');
 
-//     if (!saison) {
-//       return res.status(404).json({ message: 'Saison non trouvée' });
-//     }
+    if (!saison) {
+      return res.status(404).json({ message: 'Saison non trouvée' });
+    }
 
-//     res.status(200).json(saison);
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
+    res.status(200).json(saison);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 // // Ajouter une saison
 // const addSaison = async (req, res) => {
@@ -184,4 +184,5 @@ module.exports = {
   createSaisonForSerie,
   getSaisonById,
   getAllSaisons,
+  getSaisonByNumero,
 };

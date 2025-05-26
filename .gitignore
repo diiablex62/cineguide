@@ -1,11 +1,7 @@
 node_modules
 dist
-package-lock.json
-.env 
-cineguide data
-
 backend/node_modules
+backend/.env
 frontend/node_modules
-
-backend/env
-frontend/env
+frontend/.env
+backend/.env_model
