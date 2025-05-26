@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const Serie = require("../models/serie.schema");
-const Film = require("../models/film.schema");
+const Film = require("../models/films.schema");
 const Acteur = require("../models/acteur.schema");
 
 // Route de recherche globale
 router.get("/", async (req, res) => {
-  try {
+  try {scar
     const { query } = req.query;
 
     if (!query) {
