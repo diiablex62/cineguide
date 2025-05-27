@@ -1,7 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { FilmContext } from "../../../context/FilmContext";
 import { AuthContext } from "../../../context/AuthContext";
+import { CommentContext } from "../../../context/CommentContext";
 
 export default function Film() {
   const [rating, setRating] = useState(0);
@@ -9,10 +10,33 @@ export default function Film() {
   const { detailFilm } = useContext(FilmContext);
   const { connectedUser } = useContext(AuthContext);
 
+  const { comments, fetchComments } = useContext(CommentContext);
+  useEffect(() => {
+    if (detailFilm?._id) {
+      fetchComments("film", detailFilm._id);
+    }
+  }, [detailFilm?._id]);
+
+  const averageRating = useMemo(() => {
+    if (!comments || comments.length === 0) return 0;
+
+    const totalRatings = comments.reduce(
+      (sum, comment) => sum + (comment.rating || 0),
+      0
+    );
+    const numberOfRatings = comments.filter(
+      (comment) => comment.rating > 0
+    ).length;
+
+    return numberOfRatings === 0 ? 0 : totalRatings / numberOfRatings;
+  }, [comments]);
+
   if (!detailFilm) {
     return <div className="p-4 text-center">Chargement du film...</div>;
   }
-
+  const dateFormatee = new Date(detailFilm.dateSortie).toLocaleDateString(
+    "fr-FR"
+  );
   return (
     <div className="md:w-1/3 flex-shrink-0 md:pl-4">
       <div className="flex gap-4 p-3 mb-6">
@@ -30,14 +54,12 @@ export default function Film() {
             </div>
             <div className="flex mt-1 gap-2">
               {[1, 2, 3, 4, 5].map((star) => (
-                <span
-                  key={star}
-                  className="cursor-pointer text-lg"
-                  onMouseEnter={() => setHoverRating(star)}
-                  onMouseLeave={() => setHoverRating(0)}
-                  onClick={() => setRating(star)}
-                >
-                  {<FaStar className="text-fuchsia" />}
+                <span key={star} className="text-lg">
+                  {averageRating >= star ? (
+                    <FaStar className="text-fuchsia" />
+                  ) : (
+                    <FaRegStar className="text-gray-400 dark:text-white" />
+                  )}
                 </span>
               ))}
             </div>
@@ -71,14 +93,16 @@ export default function Film() {
               GENRES
             </h3>
             <div className="flex flex-wrap gap-2">
-              {detailFilm.genre.map((genre) => (
-                <span
-                  key={genre}
-                  className="text-xs px-2 py-1 bg-gray-200 dark:bg-gray-800 rounded-md"
-                >
-                  {genre}
-                </span>
-              ))}
+              {detailFilm.genre &&
+                Array.isArray(detailFilm.genre) &&
+                detailFilm.genre.map((genre) => (
+                  <span
+                    key={genre}
+                    className="text-xs px-2 py-1 bg-gray-200 dark:bg-gray-800 rounded-md"
+                  >
+                    {genre}
+                  </span>
+                ))}
             </div>
           </div>
           <div className="w-1/2 md:w-full">
@@ -119,7 +143,7 @@ export default function Film() {
               DATE DE SORTIE
             </h3>
             <p className="text-xs text-gray-600 dark:text-gray-300">
-              {detailFilm.dateSortie}
+              {dateFormatee}
             </p>
           </div>
           <div className="w-1/2 md:w-full">
@@ -135,14 +159,9 @@ export default function Film() {
               PLAFORM
             </h3>
             <div className="flex flex-wrap gap-2">
-              {detailFilm.platforms.map((platform) => (
-                <span
-                  key={platform.provider_id}
-                  className="text-xs px-2 py-1 bg-gray-200 dark:bg-gray-800 rounded-md "
-                >
-                  {platform.provider_name}
-                </span>
-              ))}
+              {detailFilm.platforms && Array.isArray(detailFilm.platforms)
+                ? detailFilm.platforms.join(", ")
+                : detailFilm.platforms}
             </div>
           </div>
         </div>

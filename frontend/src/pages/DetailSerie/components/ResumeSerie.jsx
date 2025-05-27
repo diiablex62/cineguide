@@ -1,12 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { SerieContext } from "../../../context/SerieContext";
 import { ActorContext } from "../../../context/ActorContext";
+import { CommentContext } from "../../../context/CommentContext";
 
 export default function ResumeSerie() {
   const { detailSerie, loading } = useContext(SerieContext);
   const [selectedSeason, setSelectedSeason] = useState(0);
   const [showAllEpisodes, setShowAllEpisodes] = useState(false);
   const { actorRedirect } = useContext(ActorContext);
+  
+
+
 
   // Réinitialiser la saison sélectionnée lorsqu'une nouvelle série est chargée
   useEffect(() => {

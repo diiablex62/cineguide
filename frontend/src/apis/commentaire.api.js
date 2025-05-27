@@ -15,8 +15,7 @@ function getTokenFromCookies() {
 // Créer un nouveau commentaire avec debugging avancé
 export async function postComm(commentData, token) {
   try {
-    console.log("=== DEBUG POST COMMENT ===");
-    console.log("1. Données reçues:", commentData);
+   
 
     const { contentId, contentType, rating, text, author } = commentData;
 
@@ -43,7 +42,7 @@ export async function postComm(commentData, token) {
 
     // Récupérer le token
     const authToken = token || getTokenFromCookies();
-    console.log("2. Token trouvé:", authToken ? "OUI" : "NON");
+   
 
     if (!authToken) {
       throw new Error("Token d'authentification manquant");
@@ -58,8 +57,7 @@ export async function postComm(commentData, token) {
       ...(author && { author }) // Inclure l'auteur s'il est fourni
     };
 
-    console.log("4. Body à envoyer:", bodyData);
-    console.log("5. URL:", `${BASE_URL}/commentaires/`);
+    
 
     const response = await fetch(`${BASE_URL}/commentaires/`, {
       method: "POST",
@@ -70,8 +68,7 @@ export async function postComm(commentData, token) {
       body: JSON.stringify(bodyData),
     });
 
-    console.log("6. Status response:", response.status);
-    console.log("7. Response OK:", response.ok);
+    
 
     if (!response.ok) {
       const errorData = await response
@@ -82,7 +79,7 @@ export async function postComm(commentData, token) {
     }
 
     const result = await response.json();
-    console.log("9. Succès:", result);
+  
     return result;
   } catch (error) {
     console.error("=== ERREUR POST COMMENT ===");
@@ -126,7 +123,7 @@ export async function getAllComm(contentType, contentId, options = {}) {
     }
 
     const result = await response.json();
-    console.log("Commentaires récupérés:", result); // Debug pour voir la structure
+    
     return result;
   } catch (error) {
     console.error("Erreur lors de la récupération des commentaires:", error);
@@ -209,6 +206,8 @@ export async function deleteComm(commentId, token) {
 // Liker/Unliker un commentaire
 export async function likeComm(commentId, token) {
   try {
+   
+    
     const authToken = token || getTokenFromCookies();
 
     if (!authToken) {
@@ -228,7 +227,9 @@ export async function likeComm(commentId, token) {
       throw new Error(errorData.error || `Erreur HTTP: ${response.status}`);
     }
 
-    return await response.json();
+    const result = await response.json();
+  
+    return result;
   } catch (error) {
     console.error("Erreur lors du like du commentaire:", error);
     throw error;

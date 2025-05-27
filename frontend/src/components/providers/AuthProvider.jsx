@@ -54,7 +54,6 @@ export default function AuthProvider({ children }) {
   useEffect(() => {
     const verifyAuthentication = async () => {
       setIsLoading(true);
-      console.log("Vérification de l'authentification en cours...");
 
       try {
         // Récupération des données depuis les cookies
@@ -62,15 +61,9 @@ export default function AuthProvider({ children }) {
         const savedUserId = getCookie("userId");
         const savedUserData = getCookie("userData");
 
-        console.log("Données de session trouvées:", {
-          savedToken: !!savedToken,
-          savedUserId: !!savedUserId,
-        });
-
         if (savedToken && savedUserId) {
           // Vérifier que le token est toujours valide
           const { isValid, userData } = await authAPI.verifyToken(savedToken);
-          console.log("Vérification du token:", { isValid });
 
           if (isValid) {
             setToken(savedToken);
@@ -86,7 +79,6 @@ export default function AuthProvider({ children }) {
                   ...defaultUser,
                   ...parsedUserData,
                 });
-                console.log("Données utilisateur chargées avec succès");
               } catch (error) {
                 console.error(
                   "Erreur lors du parsing des données utilisateur:",
@@ -95,11 +87,9 @@ export default function AuthProvider({ children }) {
               }
             }
           } else {
-            console.log("Token invalide, déconnexion...");
             logout();
           }
         } else {
-          console.log("Aucun token trouvé, utilisateur non connecté");
           setIsLoggedIn(false);
           setConnectedUser(false);
           setUser(defaultUser);
@@ -357,7 +347,8 @@ export default function AuthProvider({ children }) {
         clearNotification,
         getUserSubscription,
         abonnement,
-      }}>
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

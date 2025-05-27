@@ -19,9 +19,9 @@ export function CommentProvider({ children }) {
     setError(null);
     
     try {
-      console.log("Fetching comments for:", { contentType, contentId, options });
+     
       const data = await getAllComm(contentType, contentId, options);
-      console.log("Comments fetched:", data);
+      
       
       // Vérifier la structure des données retournées par l'API
       let commentsArray = [];
@@ -51,9 +51,9 @@ export function CommentProvider({ children }) {
 
   const createComment = async (commentData, token) => {
     try {
-      console.log("Creating comment:", commentData);
+     
       const newComment = await postComm(commentData, token);
-      console.log("Comment created:", newComment);
+   
       
       if (newComment) {
         setComments((prev) => {
@@ -109,35 +109,36 @@ export function CommentProvider({ children }) {
     }
   };
 
-  const toggleLikeComment = async (commentId, token) => {
-    try {
-      const result = await likeComm(commentId, token);
-      
-      // Mettre à jour le commentaire localement si possible
-      if (result) {
-        setComments((prev) => {
-          const prevArray = Array.isArray(prev) ? prev : [];
-          return prevArray.map((comment) => {
-            if (comment.id === commentId || comment._id === commentId) {
-              return {
-                ...comment,
-                likes: result.likes || comment.likes,
-                isLiked: result.isLiked !== undefined ? result.isLiked : !comment.isLiked
-              };
-            }
-            return comment;
-          });
+ const toggleLikeComment = async (commentId, token) => {
+  try {
+    const result = await likeComm(commentId, token);
+    
+    if (result && result.success) {
+      setComments((prev) => {
+        const prevArray = Array.isArray(prev) ? prev : [];
+        return prevArray.map((comment) => {
+          if (comment.id === commentId || comment._id === commentId) {
+            return {
+              ...comment,
+              likes: result.likes,
+              
+              likedBy: result.isLiked 
+                ? [...(comment.likedBy || []), token.userId || 'current-user']
+                : (comment.likedBy || []).filter(id => id !== (token.userId || 'current-user'))
+            };
+          }
+          return comment;
         });
-      }
-      
-      return result;
-    } catch (error) {
-      console.error("Erreur lors du like du commentaire:", error);
-      setError(error.message);
-      throw error;
+      });
     }
-  };
-
+    
+    return result;
+  } catch (error) {
+    console.error("Erreur lors du like du commentaire:", error);
+    setError(error.message);
+    throw error;
+  }
+};
   const getStats = async (contentType, contentId) => {
     try {
       return await statComm(contentType, contentId);
@@ -168,9 +169,9 @@ export function CommentProvider({ children }) {
         createComment,
         updateComment,
         removeComment,
-        deleteComment: removeComment, // Alias pour compatibilité
+        deleteComment: removeComment, 
         toggleLikeComment,
-        likeComment: toggleLikeComment, // Alias pour compatibilité
+        likeComment: toggleLikeComment, 
         getStats,
         resetComments,
         clearError,
