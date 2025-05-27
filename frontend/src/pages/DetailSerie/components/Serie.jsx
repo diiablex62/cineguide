@@ -1,11 +1,33 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useMemo } from "react";
 import { SerieContext } from "../../../context/SerieContext";
 import { AuthContext } from "../../../context/AuthContext";
-import { FaStar } from "react-icons/fa";
+import { FaRegStar, FaStar } from "react-icons/fa";
+import { CommentContext } from "../../../context/CommentContext";
 
 export default function Serie() {
   const { detailSerie } = useContext(SerieContext);
   const { connectedUser } = useContext(AuthContext);
+
+  const { comments,fetchComments } = useContext(CommentContext);
+  useEffect(() => {
+    if (detailSerie?._id) {
+      fetchComments("serie", detailSerie._id); 
+    }
+  }, [detailSerie?._id]);
+
+  const averageRating = useMemo(() => {
+    if (!comments || comments.length === 0) return 0;
+
+    const totalRatings = comments.reduce(
+      (sum, comment) => sum + (comment.rating || 0),
+      0
+    );
+    const numberOfRatings = comments.filter(
+      (comment) => comment.rating > 0
+    ).length;
+
+    return numberOfRatings === 0 ? 0 : totalRatings / numberOfRatings;
+  }, [comments]);
 
   // Vérifier si les données sont chargées
   if (!detailSerie || !detailSerie.id) {
@@ -35,8 +57,12 @@ export default function Serie() {
             </div>
             <div className="flex mt-1 gap-2">
               {[1, 2, 3, 4, 5].map((star) => (
-                <span key={star} className="cursor-pointer text-lg">
-                  {<FaStar className="text-fuchsia" />}
+                <span key={star} className="text-lg">
+                  {averageRating >= star ? (
+                    <FaStar className="text-fuchsia" />
+                  ) : (
+                    <FaRegStar className="text-gray-400 dark:text-white" />
+                  )}
                 </span>
               ))}
             </div>
