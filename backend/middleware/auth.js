@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
     }
 
     if (!token) {
-      console.log("Erreur d'authentification: Token manquant");
+      
       return res
         .status(401)
         .json({ message: "Non autorisé: token manquant" });
@@ -29,7 +29,7 @@ module.exports = (req, res, next) => {
     // Pour la compatibilité avec d'autres parties du code
     req.user = { id: decodedToken.userId, role: decodedToken.role };
     
-    console.log("Authentification réussie pour l'utilisateur:", decodedToken.userId);
+   
     next();
   } catch (error) {
     console.log("Erreur d'authentification:", error.message);

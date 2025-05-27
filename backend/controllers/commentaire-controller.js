@@ -123,61 +123,47 @@ const postComm = async (req, res) => {
 
 const likeComm = async (req, res) => {
   try {
-    const { commentId } = req.params; // ← CORRECTION ICI (était: const { id } = req.params;)
-    const userId = req.user.id;
+    const { commentId } = req.params;
+    const userId = req.user._id;
 
-    console.log("=== DEBUG LIKE BACKEND ===");
-    console.log("Comment ID reçu:", commentId);
-    console.log("User ID:", userId);
-
+   
     const commentaire = await Commentaire.findById(commentId);
 
     if (!commentaire) {
-      console.log("Commentaire non trouvé pour ID:", commentId);
+    
       return res.status(404).json({ error: "Commentaire non trouvé" });
     }
 
-    console.log("Commentaire trouvé:", {
-      id: commentaire._id,
-      likes: commentaire.likes,
-      likedBy: commentaire.likedBy,
-    });
-
     const hasLiked = commentaire.likedBy.includes(userId);
-    console.log("Utilisateur a déjà liké:", hasLiked);
+    
 
     if (hasLiked) {
       // Unliker
       commentaire.likedBy.pull(userId);
       commentaire.likes = Math.max(0, commentaire.likes - 1);
-      console.log("Action: UNLIKE");
     } else {
       // Liker
       commentaire.likedBy.push(userId);
       commentaire.likes += 1;
-      console.log("Action: LIKE");
     }
 
     await commentaire.save();
-    console.log("Commentaire sauvegardé avec succès");
 
-    // Populate pour la réponse
-    const populatedComment = await Commentaire.findById(commentId)
-      .populate("userId", "nom prenom email")
-      .populate("likedBy", "nom prenom");
-
+    // CORRECTION: Retourner les données dans le bon format pour le frontend
     res.json({
       success: true,
-      data: populatedComment,
+      likes: commentaire.likes,
+      isLiked: !hasLiked, // État après l'action
       action: hasLiked ? "unliked" : "liked",
     });
   } catch (error) {
     console.error("Erreur like commentaire:", error);
-    res
-      .status(500)
-      .json({ error: "Erreur serveur lors du like du commentaire" });
+    res.status(500).json({ 
+      error: "Erreur serveur lors du like du commentaire" 
+    });
   }
 };
+
 
 // Correction similaire pour putComm et deleteComm
 const putComm = async (req, res) => {
