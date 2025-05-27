@@ -8,9 +8,6 @@ export default function ResumeSerie() {
   const [selectedSeason, setSelectedSeason] = useState(0);
   const [showAllEpisodes, setShowAllEpisodes] = useState(false);
   const { actorRedirect } = useContext(ActorContext);
-  
-
-
 
   // Réinitialiser la saison sélectionnée lorsqu'une nouvelle série est chargée
   useEffect(() => {
@@ -228,7 +225,7 @@ export default function ResumeSerie() {
               {detailSerie.acteurs.map((actor) => (
                 <div
                   key={actor._id}
-                  onClick={() => actor && actorRedirect(actor)}
+                  onClick={() => actorRedirect(actor)}
                   className="bg-gray-200 dark:bg-gray-800 px-3 py-1 text-xs hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer transition-colors"
                 >
                   {actor.name || "Acteur inconnu"}

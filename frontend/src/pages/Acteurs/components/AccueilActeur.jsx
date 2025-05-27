@@ -3,7 +3,9 @@ import { ActorContext } from "../../../context/ActorContext";
 import { Link } from "react-router-dom";
 
 export default function AccueilActeur() {
-  const { actor } = useContext(ActorContext);
+  const { actor, getGenredJob } = useContext(ActorContext);
+
+  console.log(actor);
 
   return (
     <>
@@ -18,23 +20,37 @@ export default function AccueilActeur() {
             Métiers :{" "}
             <span className="font-bold">
               {Array.isArray(actor.metiers)
-                ? actor.metiers.join(", ")
-                : actor.metiers}
+                ? actor.metiers.map(getGenredJob).join(", ")
+                : getGenredJob(actor.metiers)}
+            </span>
+          </p>
+          {actor.nom_de_naissance === actor.name ? null : (
+            <p className="max-1100:text-center">
+              Autre nom :{" "}
+              <span className="font-bold">{actor.nom_de_naissance}</span>
+            </p>
+          )}
+          <p className="max-1100:text-center">
+            Lieu de naissance :{" "}
+            <span className="font-bold">
+              {actor.lieu_de_naissance === "Inconnue"
+                ? "N/A"
+                : actor.lieu_de_naissance}
             </span>
           </p>
           <p className="max-1100:text-center">
-            Nom de naissance :{" "}
-            <span className="font-bold">{actor.nom_de_naissance}</span>
-          </p>
-          <p className="max-1100:text-center">
-            Nationalité : <span className="font-bold">{actor.nationalite}</span>
-          </p>
-          <p className="max-1100:text-center">
             Naissance :{" "}
-            <span className="font-bold">{actor.date_de_naissance}</span>
+            <span className="font-bold">
+              {actor.date_de_naissance === "Inconnue"
+                ? "N/A"
+                : new Date(actor.date_de_naissance).toLocaleDateString("fr-FR")}
+            </span>
           </p>
           <p className="max-1100:text-center">
-            Âge : <span className="font-bold">{actor.age}</span>
+            Âge :{" "}
+            <span className="font-bold">
+              {actor.age === 0 ? "N/A" : actor.age}
+            </span>
           </p>
           <p className="max-1100:text-center">
             Oeuvres principales :{" "}
@@ -48,7 +64,9 @@ export default function AccueilActeur() {
             <div className="flex flex-col justify-center items-center p-5 border min-w-[150px] text-center max-1100:w-full">
               {actor.carriere ? (
                 <>
-                  <span className="font-bold">{actor.carriere}</span>
+                  <span className="font-bold">
+                    {new Date().getFullYear() - actor.carriere}
+                  </span>
                   <p>ans de carrière</p>
                 </>
               ) : null}

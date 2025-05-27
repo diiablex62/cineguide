@@ -11,7 +11,7 @@ const {
 
 // Routes pour les séries
 router.get("/", getAllSeries);
-router.get("/import", importMultipleSeries);
+// router.get("/import", importMultipleSeries);
 router.get("/:id", getSerieById);
 // router.post('/postserie', createSerie);
 

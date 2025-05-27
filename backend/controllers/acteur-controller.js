@@ -133,6 +133,27 @@ function calculerAge(dateNaissance) {
   }
 }
 
+async function ajouterHF() {
+  try {
+    const allActeurs = await getActeursExistant();
+    for (const oneActor of allActeurs) {
+      const acteursFind = await Acteur.findOne({
+        $or: [{ name: oneActor.name }, { tmdbId: oneActor.id.toString() }],
+      });
+      const acteur = await fetchFromTMDB(`person/${acteursFind.tmdbId}`);
+      await Acteur.findByIdAndUpdate(
+        acteursFind._id,
+        { gender: acteur.gender || 0 },
+        { new: true }
+      );
+      console.log(`✅ Genre ajouté pour : ${acteursFind.name}`);
+    }
+  } catch (err) {
+    console.error(`❌ Erreur`, err.message);
+    return null;
+  }
+}
+
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function getWikidataIdFromName(name) {
@@ -402,4 +423,5 @@ module.exports = {
   // deleteActeur,
   // createActeur,
   importActeursDepuisTMDB,
+  ajouterHF,
 };

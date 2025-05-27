@@ -15,6 +15,10 @@ const acteurSchema = new mongoose.Schema({
   oeuvres_principales: { type: Array, required: true },
   description: { type: String, required: true },
   biographie: { type: String, required: true },
+  gender: {
+    type: Number,
+    default: 0,
+  },
   tmdbId: { type: String, required: true },
 });
 
