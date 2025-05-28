@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ActorContext } from "../../context/ActorContext";
 import { useNavigate } from "react-router-dom";
 import FilmParActeur from "../../data/FilmParActeur.json";
 import Recompenses from "../../data/Recompense.json";
 import { BASE_URL } from "../../utils/url";
+import { FilmContext } from "../../context/FilmContext";
+import { getAll } from "../../apis/film.api";
 
 export function ActorProvider({ children }) {
+  const { film } = useContext(FilmContext);
   const [allActors, setAllActors] = useState();
   const [detailActor, setDetailActor] = useState({
     name: "Chargement...",
@@ -19,6 +22,7 @@ export function ActorProvider({ children }) {
   });
   const navigate = useNavigate();
   const [actor, setActor] = useState({});
+  const [actorMovies, setActorMovies] = useState([]);
 
   useEffect(() => {
     async function getAllActors() {
@@ -35,6 +39,12 @@ export function ActorProvider({ children }) {
     getAllActors();
   }, []);
 
+  useEffect(() => {
+    if (actor.tmdbId) {
+      filmsByActor();
+    }
+  }, [actor.tmdbId]);
+
   const toggleActor = (params) => {
     setActor(params);
   };
@@ -43,16 +53,29 @@ export function ActorProvider({ children }) {
     navigate(`/acteurs/${actor._id}`);
   };
 
-  const filmsByActor = FilmParActeur.filter(
-    (film) => film.idActeur === actor.tmdbId
-  );
+  // const getAllMovies = async () => {
+  //   const movies = await getAll();
+  //   setAllMovies(movies);
+  //   console.log(movies);
+  // };
 
-  const recompenseByActor = Recompenses.filter(
-    (recompense) => recompense.idActeur === actor.tmdbId
-  ).map((recompense) => ({
-    ...recompense,
-    film: FilmParActeur.find((film) => film.id === recompense.idFilm),
-  }));
+  const filmsByActor = () => {
+    // Filtre les films où l'acteur est présent dans le tableau des acteurs
+    setActorMovies(
+      film.filter((f) =>
+        f.acteurs.some((a) => a.id.toString() === actor.tmdbId)
+      )
+    );
+  };
+
+  // const recompenseByActor = () => {
+  //   // Filtre les films où l'acteur est présent dans le tableau des acteurs
+  //   setActorMovies(
+  //     film.filter((f) =>
+  //       f.acteurs.some((a) => a.id.toString() === actor.tmdbId)
+  //     )
+  //   );
+  // };
 
   const getGenredJob = (job) => {
     if (!job) return ""; // Protection contre les valeurs undefined ou null
@@ -78,6 +101,15 @@ export function ActorProvider({ children }) {
         .replace("chercheur ou chercheuse", "chercheuse")
         .replace("ingénieur ou ingénieure", "ingénieure")
         .replace("concepteur ou conceptrice", "conceptrice")
+        .replace("entraîneur ou entraîneuse", "entraîneuse")
+        .replace("footballeur ou footballeuse", "footballeuse")
+        .replace("pratiquant ou pratiquante", "pratiquante")
+        .replace("joueur ou joueuse", "joueuse")
+        .replace("participante ou participant", "participante")
+        .replace("ambassadeur ou ambassadrice", "ambassadrice")
+        .replace("militant ou militante", "militante")
+        .replace("théologien ou théologienne", "théologienne")
+        .replace("danseur ou danseuse", "danseuse")
         .replace(
           "auteur-compositeur ou autrice-compositrice",
           "autrice-compositrice"
@@ -102,10 +134,21 @@ export function ActorProvider({ children }) {
         .replace("chercheur ou chercheuse", "chercheur")
         .replace("ingénieur ou ingénieure", "ingénieur")
         .replace("concepteur ou conceptrice", "concepteur")
+        .replace("entraîneur ou entraîneuse", "entraîneur")
+        .replace("footballeur ou footballeuse", "footballeur")
+        .replace("pratiquant ou pratiquante", "pratiquant")
+        .replace("joueur ou joueuse", "joueur")
+        .replace("participante ou participant", "participant")
+        .replace("ambassadeur ou ambassadrice", "ambassadeur")
+        .replace("militant ou militante", "militant")
+        .replace("théologien ou théologienne", "théologien")
+        .replace("danseur ou danseuse", "danseur")
         .replace(
           "auteur-compositeur ou autrice-compositrice",
           "auteur-compositeur"
         );
+    } else if (actor.gender === 0) {
+      genredJob = job.replace("Acting", "acteur ou actrice");
     } else {
       genredJob = job;
     }
@@ -122,9 +165,10 @@ export function ActorProvider({ children }) {
         actorRedirect,
         toggleActor,
         actor,
-        filmsByActor,
+        actorMovies,
         recompenseByActor,
         getGenredJob,
+        setActorMovies,
       }}
     >
       {children}

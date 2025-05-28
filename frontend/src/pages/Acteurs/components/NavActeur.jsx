@@ -9,19 +9,6 @@ export default function NavActeur() {
     if (path.pathname.endsWith(id)) {
       document.getElementById("AccueilActeur").classList.add("activeActeur");
       document
-        .getElementById("BiographieActeur")
-        .classList.remove("activeActeur");
-      document
-        .getElementById("FilmographieActeur")
-        .classList.remove("activeActeur");
-      document
-        .getElementById("RecompensesActeur")
-        .classList.remove("activeActeur");
-    }
-    if (path.pathname.includes("biographie")) {
-      document.getElementById("AccueilActeur").classList.remove("activeActeur");
-      document.getElementById("BiographieActeur").classList.add("activeActeur");
-      document
         .getElementById("FilmographieActeur")
         .classList.remove("activeActeur");
       document
@@ -31,9 +18,6 @@ export default function NavActeur() {
     if (path.pathname.includes("filmographie")) {
       document.getElementById("AccueilActeur").classList.remove("activeActeur");
       document
-        .getElementById("BiographieActeur")
-        .classList.remove("activeActeur");
-      document
         .getElementById("FilmographieActeur")
         .classList.add("activeActeur");
       document
@@ -42,9 +26,6 @@ export default function NavActeur() {
     }
     if (path.pathname.includes("recompenses")) {
       document.getElementById("AccueilActeur").classList.remove("activeActeur");
-      document
-        .getElementById("BiographieActeur")
-        .classList.remove("activeActeur");
       document
         .getElementById("FilmographieActeur")
         .classList.remove("activeActeur");
@@ -63,15 +44,6 @@ export default function NavActeur() {
           className=" flex justify-center items-center px-5 py-[5px]  border border-black w-32 dark:bg-white dark:text-black"
         >
           Accueil
-        </Link>
-      </div>
-      <div className="flex justify-center items-center px-4">
-        <Link
-          id="BiographieActeur"
-          to={`/acteurs/${id}/biographie`}
-          className="flex justify-center items-center px-5 py-[5px] border border-black w-32 dark:bg-white dark:text-black"
-        >
-          Biographie
         </Link>
       </div>
       <div className="flex justify-center items-center px-4">

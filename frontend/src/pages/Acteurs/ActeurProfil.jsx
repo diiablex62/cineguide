@@ -29,7 +29,7 @@ export default function ActeurProfil() {
 
   return (
     <div className="flex flex-col gap-8 p-5 items-center text-black dark:text-white mt-12">
-      <h2 className="font-bold text-4xl">{actor.name}</h2>
+      <h2 className="font-bold text-4xl text-center">{actor.name}</h2>
       <NavActeur />
       <Outlet />
     </div>
