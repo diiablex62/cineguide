@@ -99,7 +99,7 @@ async function createMovieWithDetails(details) {
   }
 }
 
-async function importMultipleSeries() {
+async function importMultipleMovies() {
   const pageMax = 3; // Limite pour tests
   let moviesCount = 0;
 
@@ -176,4 +176,4 @@ const getAllMovies = async (req, res) => {
   }
 };
 
-module.exports = { getAllMovies, getMovieById, importMultipleSeries, getAll };
+module.exports = { getAllMovies, getMovieById, importMultipleMovies, getAll };

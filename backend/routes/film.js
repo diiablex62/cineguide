@@ -3,7 +3,7 @@ const {
   //   add,
   getAll,
   //   getAllMovies,
-  importMultipleSeries,
+  importMultipleMovies,
   getMovieById,
   getAllMovies,
 } = require("../controllers/film-controller");
@@ -12,7 +12,7 @@ const {
 router.get("/getAll", getAll);
 // router.get("/", getAllMovies);
 
-// router.get("/import", importMultipleSeries);
+// router.get("/import", importMultipleMovies);
 
 // Récupérer un film par son ID MongoDB
 router.get("/:id", getMovieById);
