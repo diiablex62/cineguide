@@ -6,7 +6,8 @@ const Acteur = require("../models/acteur.schema");
 
 // Route de recherche globale
 router.get("/", async (req, res) => {
-  try {scar
+  try {
+    scar;
     const { query } = req.query;
 
     if (!query) {
