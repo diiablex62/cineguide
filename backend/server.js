@@ -72,6 +72,16 @@ app.get("/api/test", (req, res) => {
   res.status(200).json({ message: "Serveur API fonctionnel!" });
 });
 
+// Route racine
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "Bienvenue sur l'API Cineguide!" });
+});
+
+// Gestion des erreurs 404
+app.use((req, res) => {
+  res.status(404).json({ message: "Route non trouvée" });
+});
+
 mongoose
   .connect(process.env.MONGO_URI)
   .then(async () => {
@@ -80,4 +90,6 @@ mongoose
   })
   .catch((err) => console.log("Erreur de connexion MongoDB:", err));
 
-app.listen(process.env.PORT);
+app.listen(port, () => {
+  console.log(`Serveur démarré sur le port ${port}`);
+});
