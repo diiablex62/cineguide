@@ -6,26 +6,23 @@ import Hulu from "../components/home/hulu";
 import peakyBg from "../assets/peaky2.jpg";
 import { HomeContext } from "../context/HomeContext";
 import { NavLink } from "react-router-dom";
+import useGenres from "../hooks/useGenres";
 
 export default function Home() {
-  const {
-    selectedGenre,
-    setSelectedGenre,
-    selectedType,
-    setSelectedType,
-    selectedNote,
-    setSelectedNote,
-    filteredResult,
-    setFilteredResult,
-    errors,
-    setErrors,
-    series,
-    genres,
-  } = useContext(HomeContext);
+  const { genres } = useContext(HomeContext);
 
+  const { genres: genresFromAPI, loading: genresLoading } = useGenres();
+  const [selectedGenre, setSelectedGenre] = useState("");
+  const [selectedTypes, setSelectedTypes] = useState({
+    movie: false,
+    tv: false,
+  });
+  const [selectedNote, setSelectedNote] = useState("");
+  const [errors, setErrors] = useState({});
   const [trending, setTrending] = useState([]);
+  const [series, setSeries] = useState([]);
+  const [filteredResult, setFilteredResult] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [actionSeries, setActionSeries] = useState([]);
   const [loadingAction, setLoadingAction] = useState(true);
   const [similarSeries, setSimilarSeries] = useState([]);
   const [loadingSimilar, setLoadingSimilar] = useState(true);
@@ -35,88 +32,49 @@ export default function Home() {
       try {
         const response = await fetch("http://localhost:3000/api/trending");
         if (!response.ok) {
-          throw new Error(`Erreur HTTP: ${response.status}`);
+          throw new Error("Erreur lors de la récupération des tendances");
         }
         const data = await response.json();
         setTrending(data);
+        setSeries(data);
+        setLoading(false);
       } catch (error) {
         console.error("Erreur lors de la récupération des tendances:", error);
-      } finally {
         setLoading(false);
       }
     };
 
-    const fetchActionSeries = async () => {
-      try {
-        const response = await fetch("http://localhost:3000/api/action-series");
-        if (!response.ok) {
-          throw new Error(`Erreur HTTP: ${response.status}`);
-        }
-        const data = await response.json();
-        setActionSeries(data);
-      } catch (error) {
-        console.error(
-          "Erreur lors de la récupération des séries d'action:",
-          error
-        );
-      } finally {
-        setLoadingAction(false);
-      }
-    };
-
-    const fetchSimilarSeries = async () => {
-      try {
-        const response = await fetch(
-          "http://localhost:3000/api/similar-series"
-        );
-        if (!response.ok) {
-          throw new Error(`Erreur HTTP: ${response.status}`);
-        }
-        const data = await response.json();
-        setSimilarSeries(data);
-      } catch (error) {
-        console.error(
-          "Erreur lors de la récupération des séries similaires:",
-          error
-        );
-      } finally {
-        setLoadingSimilar(false);
-      }
-    };
-
     fetchTrending();
-    fetchActionSeries();
-    fetchSimilarSeries();
   }, []);
 
-  const handleGenreChange = useCallback(
-    (e) => {
-      setSelectedGenre(e.target.value);
-    },
-    [setSelectedGenre]
-  );
+  const handleGenreChange = (e) => {
+    setSelectedGenre(e.target.value);
+    if (e.target.value) {
+      setErrors((prev) => ({ ...prev, genre: false }));
+    }
+  };
 
-  const handleTypeChange = useCallback(
-    (type) => {
-      setSelectedType((prev) => ({
-        ...prev,
-        [type]: !prev[type],
-      }));
-    },
-    [setSelectedType]
-  );
+  const handleTypeChange = (type) => {
+    setSelectedTypes((prev) => ({
+      ...prev,
+      [type]: !prev[type],
+    }));
+    if (Object.values(selectedTypes).some((value) => value)) {
+      setErrors((prev) => ({ ...prev, type: false }));
+    }
+  };
 
-  const handleNoteChange = useCallback(
-    (e) => {
-      setSelectedNote(e.target.value);
-    },
-    [setSelectedNote]
-  );
+  const handleNoteChange = (e) => {
+    setSelectedNote(e.target.value);
+    if (e.target.value) {
+      setErrors((prev) => ({ ...prev, note: false }));
+    }
+  };
 
-  const handleSearch = useCallback(() => {
+  const handleSearch = () => {
     const newErrors = {
       genre: !selectedGenre,
-      type: !selectedType.film && !selectedType.serie,
+      type: !Object.values(selectedTypes).some((value) => value),
       note: false,
     };
 
@@ -128,11 +86,10 @@ export default function Home() {
 
     // Filtrage des résultats correspondants aux critères
     const matchingResults = series.filter((item) => {
-      const matchesGenre = item.genre.includes(selectedGenre);
-      const matchesType = selectedType.serie;
-      const [minNote, maxNote] = selectedNote.split("-").map(Number);
+      const matchesGenre = item.genre_ids.includes(parseInt(selectedGenre));
+      const matchesType = selectedTypes[item.media_type];
       const matchesNote =
-        !selectedNote || (item.note >= minNote && item.note <= maxNote);
+        !selectedNote || item.vote_average >= parseInt(selectedNote);
 
       return matchesGenre && matchesType && matchesNote;
     });
@@ -144,14 +101,7 @@ export default function Home() {
     } else {
       setFilteredResult("no_results");
     }
-  }, [
-    selectedGenre,
-    selectedType,
-    selectedNote,
-    series,
-    setErrors,
-    setFilteredResult,
-  ]);
+  };
 
   return (
     <div className='p-10 bg-white dark:bg-black'>
@@ -268,7 +218,7 @@ export default function Home() {
                 <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--color-fuchsia)]'></div>
               </div>
             ) : (
-              actionSeries.map((serie) => (
+              series.map((serie) => (
                 <NavLink
                   className='cursor-pointer'
                   to={`/detailserie/${serie.id}`}
@@ -310,7 +260,7 @@ export default function Home() {
                   <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--color-fuchsia)]'></div>
                 </div>
               ) : (
-                similarSeries.map((serie) => (
+                series.map((serie) => (
                   <NavLink
                     className='cursor-pointer'
                     to={`/detailserie/${serie.id}`}
@@ -353,24 +303,24 @@ export default function Home() {
                   GENRE :
                 </label>
                 <select
-                  className='w-full p-2 border border-black  dark:border-gray-700 rounded bg-white dark:bg-black text-black dark:text-white'
+                  className='w-full p-2 border border-black dark:border-gray-700 rounded bg-white dark:bg-black text-black dark:text-white'
                   value={selectedGenre}
                   onChange={handleGenreChange}>
                   <option value='' className='bg-white dark:bg-black'>
                     Sélectionnez un genre
                   </option>
-                  {genres.map((genre, index) => (
+                  {genresFromAPI.map((genre) => (
                     <option
-                      key={index}
-                      value={genre.type}
+                      key={genre.id}
+                      value={genre.id}
                       className='bg-white dark:bg-black'>
-                      {genre.type}
+                      {genre.name}
                     </option>
                   ))}
                 </select>
               </div>
 
-              <div>
+              <div className='w-[80%]'>
                 {errors.type && (
                   <p className='text-red-500 dark:text-red-400 text-sm mb-2'>
                     Veuillez sélectionner au moins un type
@@ -383,9 +333,9 @@ export default function Home() {
                   <label className='flex items-center'>
                     <input
                       type='checkbox'
-                      className='form-checkbox text-[var(--color-fuchsia)]'
-                      checked={selectedType.film}
-                      onChange={() => handleTypeChange("film")}
+                      className='form-checkbox h-4 w-4 text-[var(--color-fuchsia)] rounded border-gray-300 dark:border-gray-700'
+                      checked={selectedTypes.movie}
+                      onChange={() => handleTypeChange("movie")}
                     />
                     <span className='ml-2 text-gray-700 dark:text-gray-300'>
                       Film
@@ -394,9 +344,9 @@ export default function Home() {
                   <label className='flex items-center'>
                     <input
                       type='checkbox'
-                      className='form-checkbox text-[var(--color-fuchsia)]'
-                      checked={selectedType.serie}
-                      onChange={() => handleTypeChange("serie")}
+                      className='form-checkbox h-4 w-4 text-[var(--color-fuchsia)] rounded border-gray-300 dark:border-gray-700'
+                      checked={selectedTypes.tv}
+                      onChange={() => handleTypeChange("tv")}
                     />
                     <span className='ml-2 text-gray-700 dark:text-gray-300'>
                       Série
@@ -404,9 +354,15 @@ export default function Home() {
                   </label>
                 </div>
               </div>
+
               <div className='w-[80%]'>
-                <label className='block text-sm font-medium  text-gray-700 dark:text-gray-300 mb-1'>
-                  NOTE :
+                {errors.note && (
+                  <p className='text-red-500 dark:text-red-400 text-sm mb-2'>
+                    Veuillez sélectionner une note
+                  </p>
+                )}
+                <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>
+                  NOTE MINIMALE :
                 </label>
                 <select
                   className='w-full p-2 border border-black dark:border-gray-700 rounded bg-white dark:bg-black text-black dark:text-white'
@@ -415,21 +371,19 @@ export default function Home() {
                   <option value='' className='bg-white dark:bg-black'>
                     Sélectionnez une note
                   </option>
-                  <option value='9-10' className='bg-white dark:bg-black'>
-                    9 à 10 - Chef d'œuvre
+                  <option value='8' className='bg-white dark:bg-black'>
+                    8/10 et plus
                   </option>
-                  <option value='7-9' className='bg-white dark:bg-black'>
-                    7 à 9 - Très bon
+                  <option value='7' className='bg-white dark:bg-black'>
+                    7/10 et plus
                   </option>
-                  <option value='4-7' className='bg-white dark:bg-black'>
-                    4 à 7 - Moyen
-                  </option>
-                  <option value='0-4' className='bg-white dark:bg-black'>
-                    0 à 4 - Mauvais
+                  <option value='6' className='bg-white dark:bg-black'>
+                    6/10 et plus
                   </option>
                 </select>
               </div>
-              <div className='w-full flex'>
+
+              <div className='w-full flex justify-center mt-4'>
                 <button
                   onClick={handleSearch}
                   className='bg-[var(--color-fuchsia)] text-white py-2 px-8 rounded hover:bg-[var(--color-fuchsia-hover)] whitespace-nowrap'>
@@ -445,9 +399,9 @@ export default function Home() {
               <div className='flex flex-col items-center justify-center h-full text-center p-8'>
                 <p className='text-gray-600 dark:text-gray-300 mb-4'>
                   Aucun{" "}
-                  {selectedType.film && !selectedType.serie
+                  {selectedTypes.movie && !selectedTypes.tv
                     ? "film"
-                    : !selectedType.film && selectedType.serie
+                    : !selectedTypes.movie && selectedTypes.tv
                     ? "série"
                     : "film ou série"}{" "}
                   ne correspond à vos critères 😕
@@ -460,8 +414,8 @@ export default function Home() {
               <div className='flex flex-col md:flex-row gap-6'>
                 <div className='hidden md:block flex-shrink-0'>
                   <img
-                    src={filteredResult.image}
-                    alt={filteredResult.titre}
+                    src={`https://image.tmdb.org/t/p/w500${filteredResult.poster_path}`}
+                    alt={filteredResult.title || filteredResult.name}
                     className='w-32 h-48 object-cover rounded'
                     style={{ minWidth: "128px" }}
                   />
@@ -469,17 +423,20 @@ export default function Home() {
                 <div className='flex flex-col justify-between w-full'>
                   <div>
                     <h3 className='text-xl font-bold text-gray-900 dark:text-white'>
-                      {filteredResult.titre}
+                      {filteredResult.title || filteredResult.name}
                     </h3>
                     <p className='text-gray-600 dark:text-gray-300 text-sm mt-2'>
-                      {new Date(filteredResult.dateSortie).getFullYear()} ·
-                      Note: {filteredResult.note.toFixed(1)} ·
-                      {filteredResult.dureeEpisodeMoyenne
-                        ? `${filteredResult.dureeEpisodeMoyenne} par épisode`
-                        : filteredResult.duree}
+                      {new Date(
+                        filteredResult.release_date ||
+                          filteredResult.first_air_date
+                      ).getFullYear()}{" "}
+                      · Note: {filteredResult.vote_average.toFixed(1)} ·
+                      {filteredResult.episode_run_time
+                        ? `${filteredResult.episode_run_time[0]} min par épisode`
+                        : `${filteredResult.runtime} min`}
                     </p>
                     <p className='text-gray-700 dark:text-gray-300 mt-4'>
-                      {filteredResult.synopsis}
+                      {filteredResult.overview}
                     </p>
                   </div>
                   <div className='flex gap-2 mt-4'>

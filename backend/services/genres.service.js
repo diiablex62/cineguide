@@ -1,12 +1,12 @@
 const Genre = require("../models/genres.schema");
 
-const TMDB_API_KEY = process.env.TMDB_API_KEY;
+const TMDB_API_TOKEN = process.env.TMDB_API_TOKEN;
 const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 
 const getFilmGenres = async () => {
   try {
     const response = await fetch(
-      `${TMDB_BASE_URL}/genre/movie/list?api_key=${TMDB_API_KEY}&language=fr-FR`
+      `${TMDB_BASE_URL}/genre/movie/list?api_key=${TMDB_API_TOKEN}&language=fr-FR`
     );
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -22,7 +22,7 @@ const getFilmGenres = async () => {
 const getSerieGenres = async () => {
   try {
     const response = await fetch(
-      `${TMDB_BASE_URL}/genre/tv/list?api_key=${TMDB_API_KEY}&language=fr-FR`
+      `${TMDB_BASE_URL}/genre/tv/list?api_key=${TMDB_API_TOKEN}&language=fr-FR`
     );
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
