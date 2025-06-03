@@ -82,7 +82,7 @@ const getSerieVideos = async (id) => fetchFromTMDB(`tv/${id}/videos`);
 
 const getPopularMovies = async (page) => {
   return fetchFromTMDB(
-    `discover/movie?sort_by=popularity.desc&page=${page}&with_origin_country=FR`
+    `discover/movie?sort_by=popularity.desc&page=${page}&with_origin_country=US`
   );
 };
 

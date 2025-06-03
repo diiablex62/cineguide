@@ -68,15 +68,6 @@ export function ActorProvider({ children }) {
     );
   };
 
-  // const recompenseByActor = () => {
-  //   // Filtre les films où l'acteur est présent dans le tableau des acteurs
-  //   setActorMovies(
-  //     film.filter((f) =>
-  //       f.acteurs.some((a) => a.id.toString() === actor.tmdbId)
-  //     )
-  //   );
-  // };
-
   const getGenredJob = (job) => {
     if (!job) return ""; // Protection contre les valeurs undefined ou null
 
@@ -166,7 +157,6 @@ export function ActorProvider({ children }) {
         toggleActor,
         actor,
         actorMovies,
-        recompenseByActor,
         getGenredJob,
         setActorMovies,
       }}
