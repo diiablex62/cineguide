@@ -1,29 +1,182 @@
 import React, { useState } from "react";
 import { CommentContext } from "../../context/CommentContext";
+import {
+  getAllComm,
+  postComm,
+  putComm,
+  deleteComm,
+  likeComm,
+  statComm,
+} from "../../apis/commentaire.api"; 
 
 export function CommentProvider({ children }) {
-  const [comments, setComments] = useState([
-    {
-      id: 1,
-      author: "Cinéphile23",
-      rating: 5,
-      text: "Un chef-d'œuvre intemporel du cinéma. La performance de Marlon Brando est extraordinaire et la réalisation de Coppola est magistrale.",
-      avatar: null,
-    },
-  ]);
+  const [comments, setComments] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const addComment = (newComment) => {
-    setComments([
-      ...comments,
-      {
-        id: comments.length + 1,
-        ...newComment,
-      },
-    ]);
+  const fetchComments = async (contentType, contentId, options = {}) => {
+    setLoading(true);
+    setError(null);
+    
+    try {
+     
+      const data = await getAllComm(contentType, contentId, options);
+      
+      
+      // Vérifier la structure des données retournées par l'API
+      let commentsArray = [];
+      
+      if (Array.isArray(data)) {
+        commentsArray = data;
+      } else if (data && Array.isArray(data.comments)) {
+        commentsArray = data.comments;
+      } else if (data && Array.isArray(data.data)) {
+        commentsArray = data.data;
+      } else {
+        console.warn("Format de données inattendu:", data);
+        commentsArray = [];
+      }
+      
+      setComments(commentsArray);
+      return commentsArray;
+    } catch (error) {
+      console.error("Erreur lors du chargement des commentaires:", error);
+      setError(error.message);
+      setComments([]); // Reset to empty array on error
+      return [];
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const createComment = async (commentData, token) => {
+    try {
+     
+      const newComment = await postComm(commentData, token);
+   
+      
+      if (newComment) {
+        setComments((prev) => {
+          const prevArray = Array.isArray(prev) ? prev : [];
+          return [newComment, ...prevArray]; // Ajouter en premier
+        });
+        
+        // Recharger les commentaires pour s'assurer de la cohérence
+        setTimeout(() => {
+          fetchComments(commentData.contentType, commentData.contentId);
+        }, 500);
+      }
+      return newComment;
+    } catch (error) {
+      console.error("Erreur lors de la création du commentaire:", error);
+      setError(error.message);
+      throw error;
+    }
+  };
+
+  const updateComment = async (commentId, updateData, token) => {
+    try {
+      const updated = await putComm(commentId, updateData, token);
+      if (updated) {
+        setComments((prev) => {
+          const prevArray = Array.isArray(prev) ? prev : [];
+          return prevArray.map((comment) => 
+            (comment.id === commentId || comment._id === commentId) ? updated : comment
+          );
+        });
+      }
+      return updated;
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour du commentaire:", error);
+      setError(error.message);
+      throw error;
+    }
+  };
+
+  const removeComment = async (commentId, token) => {
+    try {
+      await deleteComm(commentId, token);
+      setComments((prev) => {
+        const prevArray = Array.isArray(prev) ? prev : [];
+        return prevArray.filter((comment) => 
+          comment.id !== commentId && comment._id !== commentId
+        );
+      });
+    } catch (error) {
+      console.error("Erreur lors de la suppression du commentaire:", error);
+      setError(error.message);
+      throw error;
+    }
+  };
+
+ const toggleLikeComment = async (commentId, token) => {
+  try {
+    const result = await likeComm(commentId, token);
+    
+    if (result && result.success) {
+      setComments((prev) => {
+        const prevArray = Array.isArray(prev) ? prev : [];
+        return prevArray.map((comment) => {
+          if (comment.id === commentId || comment._id === commentId) {
+            return {
+              ...comment,
+              likes: result.likes,
+              
+              likedBy: result.isLiked 
+                ? [...(comment.likedBy || []), token.userId || 'current-user']
+                : (comment.likedBy || []).filter(id => id !== (token.userId || 'current-user'))
+            };
+          }
+          return comment;
+        });
+      });
+    }
+    
+    return result;
+  } catch (error) {
+    console.error("Erreur lors du like du commentaire:", error);
+    setError(error.message);
+    throw error;
+  }
+};
+  const getStats = async (contentType, contentId) => {
+    try {
+      return await statComm(contentType, contentId);
+    } catch (error) {
+      console.error("Erreur lors de la récupération des statistiques:", error);
+      setError(error.message);
+      throw error;
+    }
+  };
+
+  const resetComments = () => {
+    setComments([]);
+    setError(null);
+  };
+
+  const clearError = () => {
+    setError(null);
   };
 
   return (
-    <CommentContext.Provider value={{ comments, addComment }}>
+    <CommentContext.Provider
+      value={{
+        comments,
+        loading,
+        error,
+        setComments,
+        fetchComments,
+        createComment,
+        updateComment,
+        removeComment,
+        deleteComment: removeComment, 
+        toggleLikeComment,
+        likeComment: toggleLikeComment, 
+        getStats,
+        resetComments,
+        clearError,
+      }}
+    >
       {children}
     </CommentContext.Provider>
   );

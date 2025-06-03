@@ -11,10 +11,9 @@ const {
 
 // Routes pour les séries
 router.get("/", getAllSeries);
-router.get('/:id', getSerieById);
+// router.get("/import", importMultipleSeries);
+router.get("/:id", getSerieById);
 // router.post('/postserie', createSerie);
-
-router.get("/import", importMultipleSeries);
 
 // Récupérer une série par son ID MongoDB
 // router.get("/:id", getSerieById);

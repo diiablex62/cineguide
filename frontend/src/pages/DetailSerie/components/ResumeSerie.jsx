@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { SerieContext } from "../../../context/SerieContext";
 import { ActorContext } from "../../../context/ActorContext";
+import { CommentContext } from "../../../context/CommentContext";
 
 export default function ResumeSerie() {
   const { detailSerie, loading } = useContext(SerieContext);
@@ -67,7 +68,7 @@ export default function ResumeSerie() {
             <h2 className="font-bold mb-3 text-sm uppercase text-black dark:text-gray-200">
               {saisons.length} SAISONS
             </h2>
-            <div className="flex overflow-x-auto space-x-6 pb-2 md:justify-center md:items-center">
+            <div className="flex overflow-x-auto space-x-2 pb-2  md:items-center w-full">
               {saisons.map((saison, index) => (
                 <div
                   key={saison._id || `saison-${saison.numero || index}`}
@@ -221,13 +222,13 @@ export default function ResumeSerie() {
               CASTING
             </h2>
             <div className="flex flex-wrap gap-2 justify-center items-center">
-              {detailSerie.acteurs.map((actor, index) => (
+              {detailSerie.acteurs.map((actor) => (
                 <div
-                  key={`actor-${index}`}
-                  onClick={() => actor && actorRedirect(actor)}
+                  key={actor._id}
+                  onClick={() => actorRedirect(actor)}
                   className="bg-gray-200 dark:bg-gray-800 px-3 py-1 text-xs hover:bg-gray-300 dark:hover:bg-gray-700 cursor-pointer transition-colors"
                 >
-                  {actor || "Acteur inconnu"}
+                  {actor.name || "Acteur inconnu"}
                 </div>
               ))}
             </div>

@@ -15,7 +15,7 @@ export default function DetailSerie() {
     if (id) {
       loadSerieDetails(id);
     }
-    
+
     // Nettoyer l'état lors du démontage du composant
     return () => {
       // Si vous avez une fonction pour réinitialiser les détails, appelez-la ici
@@ -38,8 +38,8 @@ export default function DetailSerie() {
       const oneActor = allActors.find((a) => {
         return acteursList.some((acteur) => {
           return (
-            a.nom === acteur ||
-            (typeof acteur === "object" && a.nom === acteur.nom)
+            a.name === acteur ||
+            (typeof acteur === "object" && a.name === acteur.name)
           );
         });
       });

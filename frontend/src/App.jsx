@@ -14,6 +14,7 @@ import { ActuProvider } from "./components/providers/ActuProvider";
 import { LangageProvider } from "./components/providers/LangageProvider";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import { CommentProvider } from "./components/providers/CommentProvider";
 
 function App() {
   const location = useLocation();
@@ -36,25 +37,27 @@ function App() {
                 <ProfilProvider>
                   <FilmProvider>
                     <SerieProvider>
-                      <FiltreProvider>
-                        <ActuProvider>
-                          {" "}
-                          <ActorProvider>
-                            {!isAuthPage && <Header />}
-                            <main
-                              className={
-                                !isAuthPage
-                                  ? "min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white"
-                                  : ""
-                              }
-                            >
-                              <Outlet />
-                            </main>
-                            {!isAuthPage && <Footer />}
-                            <ScrollRestoration />
-                          </ActorProvider>
-                        </ActuProvider>
-                      </FiltreProvider>
+                      <CommentProvider>
+                        <FiltreProvider>
+                          <ActuProvider>
+                            {" "}
+                            <ActorProvider>
+                              {!isAuthPage && <Header />}
+                              <main
+                                className={
+                                  !isAuthPage
+                                    ? "min-h-screen bg-white dark:bg-black text-gray-900 dark:text-white"
+                                    : ""
+                                }
+                              >
+                                <Outlet />
+                              </main>
+                              {!isAuthPage && <Footer />}
+                              <ScrollRestoration />
+                            </ActorProvider>
+                          </ActuProvider>
+                        </FiltreProvider>
+                      </CommentProvider>
                     </SerieProvider>
                   </FilmProvider>
                 </ProfilProvider>

@@ -3,7 +3,9 @@ import { ActorContext } from "../../../context/ActorContext";
 import { NavLink } from "react-router-dom";
 
 export default function FilmographieActeur() {
-  const { filmsByActor } = useContext(ActorContext);
+  const { actorMovies, actor } = useContext(ActorContext);
+
+  console.log(actorMovies);
 
   return (
     <div className="w-full">
@@ -18,10 +20,10 @@ export default function FilmographieActeur() {
             <p className="md:w-1/3 px-1">Titre</p>
             <p className="md:w-1/3 hidden md:block px-1 text-right">Rôle</p>
           </div>
-          {filmsByActor.map((film) => (
-            <div key={film.id} className="flex items-center h-[50px]">
+          {actorMovies.map((film) => (
+            <div key={film._id} className="flex items-center h-[50px]">
               <p className="md:w-1/3 hidden md:block px-1">
-                {film.annee_sortie}
+                {new Date(film.dateSortie).getFullYear()}
               </p>
               <NavLink
                 to={`/detailfilm/${film.id}`}
@@ -30,37 +32,14 @@ export default function FilmographieActeur() {
                 {film.titre}
               </NavLink>
               <p className="md:w-1/3 hidden md:block px-1 text-right">
-                {film.role}
+                {actor.gender === 2
+                  ? "Acteur"
+                  : actor.gender === 1
+                  ? "Actrice"
+                  : null}
               </p>
             </div>
           ))}
-        </div>
-        <div>
-          <h2 className="mt-5 font-bold text-2xl">Producteur</h2>
-          <div className="flex items-center bg-gray-300 rounded-tl rounded-tr h-[50px] px-1 mt-4">
-            <p className="md:w-1/3 hidden md:block px-1">Année</p>
-            <p className="md:w-1/3 px-1">Titre</p>
-            <p className="md:w-1/3 hidden md:block px-1 text-right">Rôle</p>
-          </div>
-          {filmsByActor
-            .filter((film) => film.estProducteur)
-            .map((film) => (
-              <div key={film.id} className="flex items-center h-[50px]">
-                <p className="md:w-1/3 hidden md:block px-1">
-                  {film.annee_sortie}
-                </p>
-
-                <NavLink
-                  to={`/detailfilm/${film.id}`}
-                  className="font-bold underline ml-2 md:w-1/3 px-1"
-                >
-                  {film.titre}
-                </NavLink>
-                <p className="md:w-1/3 hidden md:block px-1 text-right">
-                  {film.role}
-                </p>
-              </div>
-            ))}
         </div>
       </div>
     </div>

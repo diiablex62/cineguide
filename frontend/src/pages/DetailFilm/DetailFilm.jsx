@@ -16,7 +16,7 @@ export default function DetailFilm() {
       console.log(detail);
 
       if (detail && allActors && allActors.length > 0) {
-        const oneActor = allActors.find((a) => detail.acteurs.includes(a.nom));
+        const oneActor = allActors.find((a) => detail.acteurs.includes(a.name));
         setDetailActor(oneActor);
       }
       if (detail) {

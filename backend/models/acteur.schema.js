@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const acteurSchema = new mongoose.Schema({
   metiers: { type: Array, required: true },
-  nom: { type: String, required: true, unique: true },
+  name: { type: String, required: true },
   image: { type: String, required: true },
   nom_de_naissance: { type: String, required: true },
   date_de_naissance: { type: String, required: true },
@@ -15,10 +15,11 @@ const acteurSchema = new mongoose.Schema({
   oeuvres_principales: { type: Array, required: true },
   description: { type: String, required: true },
   biographie: { type: String, required: true },
-  tmdbId: {
-    type: String,
-    required: true,
+  gender: {
+    type: Number,
+    default: 0,
   },
+  tmdbId: { type: String, required: true },
 });
 
 module.exports = mongoose.model("Acteur", acteurSchema);

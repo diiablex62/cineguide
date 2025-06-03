@@ -5,6 +5,7 @@ export default function MenuProvider({ children }) {
   // header
   const [menu, setMenu] = useState(false);
   const [menuFooter, setMenuFooter] = useState(false);
+  const [menuFooterMobile, setMenuFooterMobile] = useState(false);
   const menuRef = useRef(null);
   const [burger, setBurger] = useState(false);
   const [menuPlus, setMenuPlus] = useState(false);
@@ -58,6 +59,8 @@ export default function MenuProvider({ children }) {
         setMenuPlus,
         menuFooter,
         setMenuFooter,
+        menuFooterMobile,
+        setMenuFooterMobile,
       }}
     >
       {children}

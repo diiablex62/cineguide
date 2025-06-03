@@ -262,10 +262,6 @@ export const router = createBrowserRouter([
             element: <AccueilActeur />,
           },
           {
-            path: "biographie",
-            element: <BiographieActeur />,
-          },
-          {
             path: "filmographie",
             element: <FilmographieActeur />,
           },

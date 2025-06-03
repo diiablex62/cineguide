@@ -12,7 +12,7 @@ export default function ActeurProfil() {
       try {
         // Attendre que allActors soit défini et non vide
         if (allActors && allActors.length > 0) {
-          const acteur = allActors.find((a) => a.id === Number(id));
+          const acteur = allActors.find((a) => a._id === id);
           if (acteur) {
             toggleActor(acteur);
           } else {
@@ -29,7 +29,7 @@ export default function ActeurProfil() {
 
   return (
     <div className="flex flex-col gap-8 p-5 items-center text-black dark:text-white mt-12">
-      <h2 className="font-bold text-4xl">{actor.nom}</h2>
+      <h2 className="font-bold text-4xl text-center">{actor.name}</h2>
       <NavActeur />
       <Outlet />
     </div>

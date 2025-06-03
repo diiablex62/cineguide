@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const port = process.env.PORT || 4000;
@@ -11,6 +12,7 @@ const searchRoutes = require("./routes/search");
 const acteurRoutes = require("./routes/acteurs");
 const filmRoutes = require("./routes/film");
 const purchaseRoutes = require("./routes/purchase");
+const commentaireRoutes = require("./routes/commentaire");
 const trendingRoutes = require("./routes/trending");
 const actionSeriesRoutes = require("./routes/action-series");
 const similarSeriesRoutes = require("./routes/similar-series");
@@ -39,6 +41,9 @@ app.use(
   })
 );
 
+app.use(cookieParser());
+
+console.log("Chargement des routes");
 app.use("/api/acteurs", acteurRoutes);
 app.use("/api/films", filmRoutes);
 app.use("/api/users", userRoutes);
@@ -47,6 +52,9 @@ app.use("/api/series", serieRoutes);
 app.use("/api/series", episodeRoutes);
 app.use("/api/series", saisonRoutes);
 app.use("/api/purchase", purchaseRoutes);
+app.use("/api/commentaires", commentaireRoutes);
+
+// Route de test pour vérifier que le serveur répond
 app.use("/api/trending", trendingRoutes);
 app.use("/api/action-series", actionSeriesRoutes);
 app.use("/api/similar-series", similarSeriesRoutes);
