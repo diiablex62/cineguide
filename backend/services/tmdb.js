@@ -82,7 +82,7 @@ const getSerieVideos = async (id) => fetchFromTMDB(`tv/${id}/videos`);
 
 const getPopularMovies = async (page) => {
   return fetchFromTMDB(
-    `discover/movie?sort_by=popularity.desc&page=${page}&with_origin_country=US`
+    `discover/movie?sort_by=popularity.desc&page=${page}&with_origin_country=FR`
   );
 };
 
@@ -174,6 +174,25 @@ const getTVTop = async (time) => {
 //     return null; // ← on retourne null pour toute autre erreur réseau/API aussi
 //   }
 // };
+
+// Recherche globale (films, séries, acteurs)
+const searchAll = async (query) => {
+  try {
+    const response = await fetch(
+      `${TMDB_BASE_URL}/search/multi?api_key=${TMDB_API_KEY}&language=fr-FR&query=${encodeURIComponent(
+        query
+      )}`
+    );
+    if (!response.ok) {
+      throw new Error(`Erreur HTTP: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.results;
+  } catch (error) {
+    console.error("Erreur lors de la recherche:", error.message);
+    throw error;
+  }
+};
 
 module.exports = {
   fetchFromTMDB,

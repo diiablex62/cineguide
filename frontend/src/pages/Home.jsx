@@ -1,32 +1,21 @@
-import React, { useContext, useCallback, useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import Netflix from "../components/home/Netflix";
 import Primevideo from "../components/home/Primevideo";
 import Disney from "../components/home/Disney";
 import Hulu from "../components/home/hulu";
 import peakyBg from "../assets/peaky2.jpg";
-import { HomeContext } from "../context/HomeContext";
-import { NavLink } from "react-router-dom";
+import { FaCheck, FaPlus, FaEye } from "react-icons/fa";
+import RechercheSoir from "../components/home/RechercheSoir";
 
 export default function Home() {
-  const {
-    selectedGenre,
-    setSelectedGenre,
-    selectedType,
-    setSelectedType,
-    selectedNote,
-    setSelectedNote,
-    filteredResult,
-    setFilteredResult,
-    errors,
-    setErrors,
-    series,
-    genres,
-  } = useContext(HomeContext);
-
   const [moviesTrending, setMoviesTrending] = useState([]);
   const [seriesTrending, setSeriesTrending] = useState([]);
   const [loadingMovies, setLoadingMovies] = useState(true);
   const [loadingSeries, setLoadingSeries] = useState(true);
+  const [movies, setMovies] = useState([]);
+  const [series, setSeries] = useState([]);
+  const [loading, setLoading] = useState(true);
   // const [actionSeries, setActionSeries] = useState([]);
   // const [loadingAction, setLoadingAction] = useState(true);
   // const [similarSeries, setSimilarSeries] = useState([]);
@@ -65,119 +54,106 @@ export default function Home() {
       }
     };
 
+    const fetchData = async () => {
+      try {
+        // Récupérer les films pour la recherche
+        const moviesResponse = await fetch("http://localhost:3000/api/films");
+        if (!moviesResponse.ok) {
+          throw new Error("Erreur lors de la récupération des films");
+        }
+        const moviesData = await moviesResponse.json();
+        setMovies(moviesData);
+
+        // Récupérer les séries pour la recherche
+        const seriesResponse = await fetch("http://localhost:3000/api/series");
+        if (!seriesResponse.ok) {
+          throw new Error("Erreur lors de la récupération des séries");
+        }
+        const seriesData = await seriesResponse.json();
+        setSeries(seriesData);
+        setLoading(false);
+      } catch {
+        setLoading(false);
+      }
+    };
+
+    
     // const fetchActionSeries = async () => {
-    //   try {
-    //     const response = await fetch("http://localhost:3000/api/action-series");
-    //     if (!response.ok) {
-    //       throw new Error(`Erreur HTTP: ${response.status}`);
-    //     }
-    //     const data = await response.json();
-    //     setActionSeries(data);
-    //   } catch (error) {
-    //     console.error(
-    //       "Erreur lors de la récupération des séries d'action:",
-    //       error
-    //     );
-    //   } finally {
+      //   try {
+        //     const response = await fetch("http://localhost:3000/api/action-series");
+        //     if (!response.ok) {
+          //       throw new Error(`Erreur HTTP: ${response.status}`);
+          //     }
+          //     const data = await response.json();
+          //     setActionSeries(data);
+          //   } catch (error) {
+            //     console.error(
+              //       "Erreur lors de la récupération des séries d'action:",
+              //       error
+              //     );
+              //   } finally {
     //     setLoadingAction(false);
     //   }
     // };
-
+    
     // const fetchSimilarSeries = async () => {
-    //   try {
-    //     const response = await fetch(
-    //       "http://localhost:3000/api/similar-series"
-    //     );
-    //     if (!response.ok) {
-    //       throw new Error(`Erreur HTTP: ${response.status}`);
-    //     }
-    //     const data = await response.json();
-    //     setSimilarSeries(data);
-    //   } catch (error) {
-    //     console.error(
-    //       "Erreur lors de la récupération des séries similaires:",
-    //       error
-    //     );
-    //   } finally {
-    //     setLoadingSimilar(false);
-    //   }
-    // };
+      //   try {
+        //     const response = await fetch(
+          //       "http://localhost:3000/api/similar-series"
+          //     );
+          //     if (!response.ok) {
+            //       throw new Error(`Erreur HTTP: ${response.status}`);
+            //     }
+            //     const data = await response.json();
+            //     setSimilarSeries(data);
+            //   } catch (error) {
+              //     console.error(
+                //       "Erreur lors de la récupération des séries similaires:",
+                //       error
+                //     );
+                //   } finally {
+                  //     setLoadingSimilar(false);
+                  //   }
+                  // };
+                  
+                  fetchTrendingMovies();
+                  fetchTrendingSeries();
+                  fetchData();
+                  // fetchActionSeries();
+                  // fetchSimilarSeries();
+                  const [movies, setMovies] = useState([]);
+                  const [series, setSeries] = useState([]);
+  const [top10, setTop10] = useState([]);
+  const [actionSeries, setActionSeries] = useState([]);
+  const [similarSeries, setSimilarSeries] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-    fetchTrendingMovies();
-    fetchTrendingSeries();
-    // fetchActionSeries();
-    // fetchSimilarSeries();
-  }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Récupérer les films pour la recherche
+        const moviesResponse = await fetch("http://localhost:3000/api/films");
+        if (!moviesResponse.ok) {
+          throw new Error("Erreur lors de la récupération des films");
+        }
+        const moviesData = await moviesResponse.json();
+        setMovies(moviesData);
 
-  // Log à chaque render de Home
-  console.log("[Home] Render");
-
-  // Log à chaque render de Home
-  console.log("[Home] Render");
-
-  const handleGenreChange = useCallback(
-    (e) => {
-      setSelectedGenre(e.target.value);
-    },
-    [setSelectedGenre]
-  );
-
-  const handleTypeChange = useCallback(
-    (type) => {
-      setSelectedType((prev) => ({
-        ...prev,
-        [type]: !prev[type],
-      }));
-    },
-    [setSelectedType]
-  );
-
-  const handleNoteChange = useCallback(
-    (e) => {
-      setSelectedNote(e.target.value);
-    },
-    [setSelectedNote]
-  );
-
-  const handleSearch = useCallback(() => {
-    const newErrors = {
-      genre: !selectedGenre,
-      type: !selectedType.film && !selectedType.serie,
-      note: false,
+        // Récupérer les séries pour la recherche
+        const seriesResponse = await fetch("http://localhost:3000/api/series");
+        if (!seriesResponse.ok) {
+          throw new Error("Erreur lors de la récupération des séries");
+        }
+        const seriesData = await seriesResponse.json();
+        setSeries(seriesData);
+        setLoading(false);
+      } catch {
+        setLoading(false);
+      }
     };
 
-    setErrors(newErrors);
-
-    if (Object.values(newErrors).some((error) => error)) {
-      return;
-    }
-
-    // Filtrage des résultats correspondants aux critères
-    const matchingResults = series.filter((item) => {
-      const matchesGenre = item.genre.includes(selectedGenre);
-      const matchesType = selectedType.serie;
-      const [minNote, maxNote] = selectedNote.split("-").map(Number);
-      const matchesNote =
-        !selectedNote || (item.note >= minNote && item.note <= maxNote);
-
-      return matchesGenre && matchesType && matchesNote;
-    });
-
-    // Sélection aléatoire parmi les résultats
-    if (matchingResults.length > 0) {
-      const randomIndex = Math.floor(Math.random() * matchingResults.length);
-      setFilteredResult(matchingResults[randomIndex]);
-    } else {
-      setFilteredResult("no_results");
-    }
-  }, [
-    selectedGenre,
-    selectedType,
-    selectedNote,
-    series,
-    setErrors,
-    setFilteredResult,
-  ]);
+    fetchData();
+  }, []);
 
   return (
     <div className="p-10 bg-white dark:bg-black">

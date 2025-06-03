@@ -170,7 +170,6 @@ export const AfficheProvider = ({ children }) => {
         genreList,
         setSelectedTheme,
         removeGenre,
-        setGenreList,
         addGenreList,
         setStepGame,
         stepGame,
