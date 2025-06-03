@@ -16,30 +16,71 @@ export default function Home() {
   });
   const [selectedNote, setSelectedNote] = useState("");
   const [errors, setErrors] = useState({});
-  const [trending, setTrending] = useState([]);
+  const [movies, setMovies] = useState([]);
   const [series, setSeries] = useState([]);
+  const [top10, setTop10] = useState([]);
+  const [actionSeries, setActionSeries] = useState([]);
+  const [similarSeries, setSimilarSeries] = useState([]);
   const [filteredResult, setFilteredResult] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [loadingSimilar, setLoadingSimilar] = useState(true);
 
   useEffect(() => {
-    const fetchTrending = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/trending");
-        if (!response.ok) {
-          throw new Error("Erreur lors de la récupération des tendances");
+        // Récupérer les films pour la recherche
+        const moviesResponse = await fetch("http://localhost:3000/api/films");
+        if (!moviesResponse.ok) {
+          throw new Error("Erreur lors de la récupération des films");
         }
-        const data = await response.json();
-        setTrending(data);
-        setSeries(data);
+        const moviesData = await moviesResponse.json();
+        setMovies(moviesData);
+
+        // Récupérer les séries pour la recherche
+        const seriesResponse = await fetch("http://localhost:3000/api/series");
+        if (!seriesResponse.ok) {
+          throw new Error("Erreur lors de la récupération des séries");
+        }
+        const seriesData = await seriesResponse.json();
+        setSeries(seriesData);
+
+        // Récupérer le top 10
+        const top10Response = await fetch("http://localhost:3000/api/trending");
+        if (!top10Response.ok) {
+          throw new Error("Erreur lors de la récupération du top 10");
+        }
+        const top10Data = await top10Response.json();
+        setTop10(top10Data);
+
+        // Récupérer les séries d'action
+        const actionSeriesResponse = await fetch(
+          "http://localhost:3000/api/action-series"
+        );
+        if (!actionSeriesResponse.ok) {
+          throw new Error("Erreur lors de la récupération des séries d'action");
+        }
+        const actionSeriesData = await actionSeriesResponse.json();
+        setActionSeries(actionSeriesData);
+
+        // Récupérer les séries similaires à Peaky Blinders
+        const similarSeriesResponse = await fetch(
+          "http://localhost:3000/api/similar-series"
+        );
+        if (!similarSeriesResponse.ok) {
+          throw new Error(
+            "Erreur lors de la récupération des séries similaires"
+          );
+        }
+        const similarSeriesData = await similarSeriesResponse.json();
+        setSimilarSeries(similarSeriesData);
+
         setLoading(false);
       } catch (error) {
-        console.error("Erreur lors de la récupération des tendances:", error);
+        console.error("Erreur lors de la récupération des données:", error);
         setLoading(false);
       }
     };
 
-    fetchTrending();
+    fetchData();
   }, []);
 
   const handleGenreChange = (e) => {
@@ -75,20 +116,35 @@ export default function Home() {
       return;
     }
 
+    // Combiner les films et séries
+    const allContent = [
+      ...movies.map((movie) => ({ ...movie, type: "movie" })),
+      ...series.map((serie) => ({ ...serie, type: "tv" })),
+    ];
+
     // Filtrage des résultats correspondants aux critères
-    const matchingResults = series.filter((item) => {
-      const matchesGenre = item.genre_ids.includes(parseInt(selectedGenre));
-      const matchesType = selectedTypes[item.media_type];
+    const matchingResults = allContent.filter((item) => {
+      // Vérifier si le genre sélectionné est contenu dans l'un des genres de l'item
+      const matchesGenre = item.genre.some((genre) =>
+        genre.toLowerCase().includes(selectedGenre.toLowerCase())
+      );
+
+      const matchesType = selectedTypes[item.type];
       const matchesNote =
-        !selectedNote || item.vote_average >= parseInt(selectedNote);
+        !selectedNote || parseFloat(item.note) >= parseFloat(selectedNote);
 
       return matchesGenre && matchesType && matchesNote;
     });
 
-    // Sélection aléatoire parmi les résultats
-    if (matchingResults.length > 0) {
-      const randomIndex = Math.floor(Math.random() * matchingResults.length);
-      setFilteredResult(matchingResults[randomIndex]);
+    // Éliminer les doublons basés sur l'ID
+    const uniqueResults = Array.from(
+      new Map(matchingResults.map((item) => [item._id, item])).values()
+    );
+
+    // Sélection aléatoire parmi les résultats uniques
+    if (uniqueResults.length > 0) {
+      const randomIndex = Math.floor(Math.random() * uniqueResults.length);
+      setFilteredResult(uniqueResults[randomIndex]);
     } else {
       setFilteredResult("no_results");
     }
@@ -133,7 +189,7 @@ export default function Home() {
                 <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--color-fuchsia)]'></div>
               </div>
             ) : (
-              trending.map((item, index) => (
+              top10.map((item, index) => (
                 <NavLink
                   className='cursor-pointer'
                   to={`/${
@@ -165,7 +221,7 @@ export default function Home() {
                 <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--color-fuchsia)]'></div>
               </div>
             ) : (
-              trending.map((item, index) => (
+              top10.map((item, index) => (
                 <NavLink
                   className='cursor-pointer'
                   to={`/${
@@ -197,7 +253,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Section 3 */}
+      {/* Section Meilleures séries Action */}
       <div className='mt-10 bg-white dark:bg-black'>
         <h2 className='text-xl font-bold mb-4 text-left text-black dark:text-white -mx-10 md:mx-0 px-4 md:px-0'>
           Meilleures séries Action
@@ -209,7 +265,7 @@ export default function Home() {
                 <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--color-fuchsia)]'></div>
               </div>
             ) : (
-              series.map((serie) => (
+              actionSeries.map((serie) => (
                 <NavLink
                   className='cursor-pointer'
                   to={`/detailserie/${serie.id}`}
@@ -232,7 +288,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Section 4 - Peaky Blinders */}
+      {/* Section Peaky Blinders */}
       <div
         className='mt-20 relative h-[55vh] bg-cover bg-bottom bg-no-repeat overflow-hidden'
         style={{
@@ -251,7 +307,7 @@ export default function Home() {
                   <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--color-fuchsia)]'></div>
                 </div>
               ) : (
-                series.map((serie) => (
+                similarSeries.map((serie) => (
                   <NavLink
                     className='cursor-pointer'
                     to={`/detailserie/${serie.id}`}
@@ -303,7 +359,7 @@ export default function Home() {
                   {genresFromAPI.map((genre) => (
                     <option
                       key={genre.id}
-                      value={genre.id}
+                      value={genre.name}
                       className='bg-white dark:bg-black'>
                       {genre.name}
                     </option>
@@ -400,8 +456,8 @@ export default function Home() {
               <div className='flex flex-col md:flex-row gap-6'>
                 <div className='hidden md:block flex-shrink-0'>
                   <img
-                    src={`https://image.tmdb.org/t/p/w500${filteredResult.poster_path}`}
-                    alt={filteredResult.title || filteredResult.name}
+                    src={filteredResult.image}
+                    alt={filteredResult.titre}
                     className='w-32 h-48 object-cover rounded'
                     style={{ minWidth: "128px" }}
                   />
@@ -409,20 +465,17 @@ export default function Home() {
                 <div className='flex flex-col justify-between w-full'>
                   <div>
                     <h3 className='text-xl font-bold text-gray-900 dark:text-white'>
-                      {filteredResult.title || filteredResult.name}
+                      {filteredResult.titre}
                     </h3>
                     <p className='text-gray-600 dark:text-gray-300 text-sm mt-2'>
-                      {new Date(
-                        filteredResult.release_date ||
-                          filteredResult.first_air_date
-                      ).getFullYear()}{" "}
-                      · Note: {filteredResult.vote_average.toFixed(1)} ·
-                      {filteredResult.episode_run_time
-                        ? `${filteredResult.episode_run_time[0]} min par épisode`
-                        : `${filteredResult.runtime} min`}
+                      {new Date(filteredResult.dateSortie).getFullYear()} ·
+                      Note: {filteredResult.note} ·
+                      {filteredResult.type === "tv"
+                        ? "Série"
+                        : `${filteredResult.duree} min`}
                     </p>
                     <p className='text-gray-700 dark:text-gray-300 mt-4'>
-                      {filteredResult.overview}
+                      {filteredResult.synopsis}
                     </p>
                   </div>
                   <div className='flex gap-2 mt-4'>
