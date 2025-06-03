@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import useGenres from "../hooks/useGenres";
 import Netflix from "../components/home/Netflix";
 import Primevideo from "../components/home/Primevideo";
 import Disney from "../components/home/Disney";
@@ -10,24 +9,12 @@ import { FaCheck, FaPlus, FaEye } from "react-icons/fa";
 import RechercheSoir from "../components/home/RechercheSoir";
 
 export default function Home() {
-  const { genres: genresFromAPI } = useGenres();
-  const [selectedGenre, setSelectedGenre] = useState("");
-  const [selectedTypes, setSelectedTypes] = useState({
-    movie: false,
-    tv: false,
-  });
-  const [selectedNote, setSelectedNote] = useState("");
-  const [errors, setErrors] = useState({});
   const [movies, setMovies] = useState([]);
   const [series, setSeries] = useState([]);
   const [top10, setTop10] = useState([]);
   const [actionSeries, setActionSeries] = useState([]);
   const [similarSeries, setSimilarSeries] = useState([]);
-  const [filteredResult, setFilteredResult] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [displayedItems, setDisplayedItems] = useState(new Set());
-  const [alreadySeenStates, setAlreadySeenStates] = useState({});
-  const [goSeeStates, setGoSeeStates] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,156 +34,14 @@ export default function Home() {
         }
         const seriesData = await seriesResponse.json();
         setSeries(seriesData);
-
-        // Récupérer le top 10
-        const top10Response = await fetch("http://localhost:3000/api/trending");
-        if (!top10Response.ok) {
-          throw new Error("Erreur lors de la récupération du top 10");
-        }
-        const top10Data = await top10Response.json();
-        setTop10(top10Data);
-
-        // Récupérer les séries d'action
-        const actionSeriesResponse = await fetch(
-          "http://localhost:3000/api/action-series"
-        );
-        if (!actionSeriesResponse.ok) {
-          throw new Error("Erreur lors de la récupération des séries d'action");
-        }
-        const actionSeriesData = await actionSeriesResponse.json();
-        setActionSeries(actionSeriesData);
-
-        // Récupérer les séries similaires à Peaky Blinders
-        const similarSeriesResponse = await fetch(
-          "http://localhost:3000/api/similar-series"
-        );
-        if (!similarSeriesResponse.ok) {
-          throw new Error(
-            "Erreur lors de la récupération des séries similaires"
-          );
-        }
-        const similarSeriesData = await similarSeriesResponse.json();
-        setSimilarSeries(similarSeriesData);
-
         setLoading(false);
-      } catch (error) {
+      } catch {
         setLoading(false);
       }
     };
 
     fetchData();
   }, []);
-
-  // Réinitialiser les items affichés quand on change les filtres
-  useEffect(() => {
-    setDisplayedItems(new Set());
-    setFilteredResult(null);
-  }, [selectedGenre, selectedTypes, selectedNote]);
-
-  const handleGenreChange = (e) => {
-    setSelectedGenre(e.target.value);
-    if (e.target.value) {
-      setErrors((prev) => ({ ...prev, genre: false }));
-    }
-  };
-
-  const handleTypeChange = (type) => {
-    setSelectedTypes((prev) => ({
-      ...prev,
-      [type]: !prev[type],
-    }));
-    if (Object.values(selectedTypes).some((value) => value)) {
-      setErrors((prev) => ({ ...prev, type: false }));
-    }
-  };
-
-  const handleSearch = () => {
-    const newErrors = {
-      type: !Object.values(selectedTypes).some((value) => value),
-    };
-    setErrors(newErrors);
-    if (Object.values(newErrors).some((error) => error)) {
-      return;
-    }
-
-    // Combiner les films et séries
-    const allContent = [
-      ...movies.map((movie) => ({ ...movie, type: "movie" })),
-      ...series.map((serie) => ({ ...serie, type: "tv" })),
-    ];
-
-    // Filtrage des résultats correspondants aux critères
-    const matchingResults = allContent.filter((item) => {
-      // Si aucun genre sélectionné, on accepte tout
-      const matchesGenre =
-        !selectedGenre ||
-        item.genre.some((genre) =>
-          genre.toLowerCase().includes(selectedGenre.toLowerCase())
-        );
-
-      const matchesType = selectedTypes[item.type];
-
-      // Gestion plus précise des notes
-      let matchesNote = true;
-      if (selectedNote) {
-        const itemNote = parseFloat(item.note);
-        const minNote = parseFloat(selectedNote);
-        matchesNote = !isNaN(itemNote) && itemNote >= minNote;
-      }
-
-      return matchesGenre && matchesType && matchesNote;
-    });
-
-    // Éliminer les doublons basés sur l'ID
-    const uniqueResults = Array.from(
-      new Map(matchingResults.map((item) => [item._id, item])).values()
-    );
-
-    // Filtrer les résultats déjà affichés
-    const availableResults = uniqueResults.filter(
-      (item) => !displayedItems.has(item._id)
-    );
-
-    if (availableResults.length > 0) {
-      // Sélection aléatoire parmi les résultats disponibles
-      const randomIndex = Math.floor(Math.random() * availableResults.length);
-      const selectedItem = availableResults[randomIndex];
-
-      // Ajouter l'item sélectionné à la liste des items affichés
-      setDisplayedItems((prev) => new Set([...prev, selectedItem._id]));
-      setFilteredResult(selectedItem);
-    } else if (uniqueResults.length > 0) {
-      // Si tous les résultats ont été affichés, réinitialiser et recommencer
-      setDisplayedItems(new Set());
-      const randomIndex = Math.floor(Math.random() * uniqueResults.length);
-      setFilteredResult(uniqueResults[randomIndex]);
-    } else {
-      setFilteredResult("no_results");
-    }
-  };
-
-  const toggleState = (id) => {
-    setAlreadySeenStates((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
-  };
-
-  // Fonction pour la watchlist
-  const toggleGoSee = (id) => {
-    setGoSeeStates((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
-  };
-
-  // Filtrer dynamiquement les genres selon le(s) type(s) sélectionné(s)
-  const filteredGenres = genresFromAPI.filter((genre) => {
-    if (selectedTypes.movie && selectedTypes.tv) return true;
-    if (selectedTypes.movie) return genre.type === "film";
-    if (selectedTypes.tv) return genre.type === "serie";
-    return false;
-  });
 
   return (
     <div className='p-10 bg-white dark:bg-black'>
