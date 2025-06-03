@@ -125,11 +125,36 @@ const getMoviePlatforms = async (movieId) => {
   }
 };
 
-const getWeekTop = async (time) => {
+const getMovieTop = async (time) => {
   try {
-    return await fetchFromTMDB(`trending/tv/${time}`);
+    let trending = await fetchFromTMDB(
+      `trending/movie/${time}?language=en-US&page=1`
+    );
+    const allMovies = [];
+    for (const oneMovie of trending.results) {
+      const movieDetails = await getMovieDetails(oneMovie.id);
+      allMovies.push(movieDetails);
+    }
+    return allMovies;
   } catch (err) {
-    console.error("Erreur récupération plateformes:", err.message);
+    console.error("Erreur récupération films:", err.message);
+    return [];
+  }
+};
+
+const getTVTop = async (time) => {
+  try {
+    let trending = await fetchFromTMDB(
+      `trending/tv/${time}?language=fr-FR&page=1`
+    );
+    const allMovies = [];
+    for (const oneMovie of trending.results) {
+      const movieDetails = await getSerieDetails(oneMovie.id);
+      allMovies.push(movieDetails);
+    }
+    return allMovies;
+  } catch (err) {
+    console.error("Erreur récupération séries:", err.message);
     return [];
   }
 };
@@ -162,5 +187,6 @@ module.exports = {
   getMovieDetails,
   getFilmVideos,
   getMoviePlatforms,
-  getWeekTop,
+  getMovieTop,
+  getTVTop,
 };

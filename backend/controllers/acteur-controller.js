@@ -133,26 +133,28 @@ function calculerAge(dateNaissance) {
   }
 }
 
-async function ajouterHF() {
-  try {
-    const allActeurs = await getActeursExistant();
-    for (const oneActor of allActeurs) {
-      const acteursFind = await Acteur.findOne({
-        $or: [{ name: oneActor.name }, { tmdbId: oneActor.id.toString() }],
-      });
-      const acteur = await fetchFromTMDB(`person/${acteursFind.tmdbId}`);
-      await Acteur.findByIdAndUpdate(
-        acteursFind._id,
-        { gender: acteur.gender || 0 },
-        { new: true }
-      );
-      console.log(`✅ Genre ajouté pour : ${acteursFind.name}`);
-    }
-  } catch (err) {
-    console.error(`❌ Erreur`, err.message);
-    return null;
-  }
-}
+// async function ajouterHF() {
+//   try {
+//     const allActeurs = await getActeursExistant();
+//     for (const oneActor of allActeurs) {
+//       const acteursFind = await Acteur.findOne({
+//         $or: [{ name: oneActor.name }, { tmdbId: oneActor.id.toString() }],
+//       });
+//       const acteur = await fetchFromTMDB(`person/${acteursFind.tmdbId}`);
+//       if (acteursFind.gender === 0) {
+//         await Acteur.findByIdAndUpdate(
+//           acteursFind._id,
+//           { gender: acteur.gender || 0 },
+//           { new: true }
+//         );
+//         console.log(`✅ Genre ajouté pour : ${acteursFind.name}`);
+//       } else continue;
+//     }
+//   } catch (err) {
+//     console.error(`❌ Erreur`, err.message);
+//     return null;
+//   }
+// }
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -386,6 +388,7 @@ async function importActeursDepuisTMDB() {
             connu.known_for?.map((o) => o.title || o.name) || [],
           description: `${details.name} est principalement connu pour ${details.known_for_department}`,
           biographie: details.biography || "Biographie indisponible",
+          gender: details.gender || details.genre,
           tmdbId: details.id.toString(),
         });
 
@@ -423,5 +426,5 @@ module.exports = {
   // deleteActeur,
   // createActeur,
   importActeursDepuisTMDB,
-  ajouterHF,
+  // ajouterHF,
 };

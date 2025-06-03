@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const {
-  importActeursDepuisTMDB,
+  // importActeursDepuisTMDB,
   getActeurs,
-  ajouterHF,
+  // ajouterHF,
 } = require("../controllers/acteur-controller");
 
 // localhost:3000/api/acteurs

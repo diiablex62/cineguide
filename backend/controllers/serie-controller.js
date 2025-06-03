@@ -202,4 +202,5 @@ module.exports = {
   getAllSeries,
   getSerieById,
   importMultipleSeries,
+  createSerieWithDetails,
 };

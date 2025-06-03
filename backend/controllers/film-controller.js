@@ -56,7 +56,7 @@ async function createMovieWithDetails(details) {
     const dispo = await getMoviePlatforms(details.id);
     const frProviders = dispo.results?.FR?.flatrate || [];
     const film = new Movie({
-      titre: details.original_title,
+      titre: details.title || details.original_title,
       synopsis: details.overview ? details.overview : "N/A",
       image: details.poster_path
         ? `https://image.tmdb.org/t/p/w500${details.poster_path}`
@@ -100,7 +100,7 @@ async function createMovieWithDetails(details) {
 }
 
 async function importMultipleMovies() {
-  const pageMax = 3; // Limite pour tests
+  const pageMax = 5; // Limite pour tests
   let moviesCount = 0;
 
   for (let page = 1; page <= pageMax; page += 1) {
@@ -164,6 +164,31 @@ const getMovieById = async (req, res) => {
   }
 };
 
+const updateAllMovieTitles = async (req, res) => {
+  try {
+    const movies = await Movie.find();
+    const updatedMovies = [];
+
+    for (const movie of movies) {
+      const details = await getMovieDetails(movie.tmdbId);
+      if (details && details.title) {
+        const updatedMovie = await Movie.findByIdAndUpdate(
+          movie._id,
+          { titre: details.title },
+          { new: true }
+        );
+        updatedMovies.push(updatedMovie);
+      }
+    }
+
+    console.log({
+      message: `${updatedMovies.length} films ont été mis à jour`,
+    });
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
 /**
  * Récupérer toutes les films (exemple simple)
  */
@@ -176,4 +201,11 @@ const getAllMovies = async (req, res) => {
   }
 };
 
-module.exports = { getAllMovies, getMovieById, importMultipleMovies, getAll };
+module.exports = {
+  getAllMovies,
+  getMovieById,
+  importMultipleMovies,
+  getAll,
+  createMovieWithDetails,
+  updateAllMovieTitles,
+};
