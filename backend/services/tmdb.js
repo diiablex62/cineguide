@@ -1,5 +1,5 @@
 const TMDB_BASE_URL = "https://api.themoviedb.org/3/";
-const TMDB_API_TOKEN = process.env.TMDB_API_TOKEN; // Met ton token dans les variables d'environnement
+const TMDB_API_TOKEN = process.env.TMDB_API_TOKEN; // Met ton token dans les variables d’environnement
 
 if (!TMDB_API_TOKEN) {
   throw new Error("Le token TMDB_API_TOKEN est requis");
@@ -82,7 +82,7 @@ const getSerieVideos = async (id) => fetchFromTMDB(`tv/${id}/videos`);
 
 const getPopularMovies = async (page) => {
   return fetchFromTMDB(
-    `discover/movie?sort_by=popularity.desc&page=${page}&with_origin_country=US`
+    `discover/movie?sort_by=popularity.desc&page=${page}&with_origin_country=FR`
   );
 };
 
@@ -154,7 +154,7 @@ const getWeekTop = async (time) => {
 const searchAll = async (query) => {
   try {
     const response = await fetch(
-      `${TMDB_BASE_URL}/search/multi?api_key=${TMDB_API_TOKEN}&language=fr-FR&query=${encodeURIComponent(
+      `${TMDB_BASE_URL}/search/multi?api_key=${TMDB_API_KEY}&language=fr-FR&query=${encodeURIComponent(
         query
       )}`
     );
@@ -182,5 +182,4 @@ module.exports = {
   getFilmVideos,
   getMoviePlatforms,
   getWeekTop,
-  searchAll,
 };

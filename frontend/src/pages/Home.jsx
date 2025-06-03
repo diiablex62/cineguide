@@ -1,17 +1,14 @@
-import React, { useContext, useCallback, useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import useGenres from "../hooks/useGenres";
 import Netflix from "../components/home/Netflix";
 import Primevideo from "../components/home/Primevideo";
 import Disney from "../components/home/Disney";
 import Hulu from "../components/home/hulu";
 import peakyBg from "../assets/peaky2.jpg";
-import { HomeContext } from "../context/HomeContext";
-import { NavLink } from "react-router-dom";
-import useGenres from "../hooks/useGenres";
 
 export default function Home() {
-  const { genres } = useContext(HomeContext);
-
-  const { genres: genresFromAPI, loading: genresLoading } = useGenres();
+  const { genres: genresFromAPI } = useGenres();
   const [selectedGenre, setSelectedGenre] = useState("");
   const [selectedTypes, setSelectedTypes] = useState({
     movie: false,
@@ -23,8 +20,6 @@ export default function Home() {
   const [series, setSeries] = useState([]);
   const [filteredResult, setFilteredResult] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [loadingAction, setLoadingAction] = useState(true);
-  const [similarSeries, setSimilarSeries] = useState([]);
   const [loadingSimilar, setLoadingSimilar] = useState(true);
 
   useEffect(() => {
@@ -66,16 +61,12 @@ export default function Home() {
 
   const handleNoteChange = (e) => {
     setSelectedNote(e.target.value);
-    if (e.target.value) {
-      setErrors((prev) => ({ ...prev, note: false }));
-    }
   };
 
   const handleSearch = () => {
     const newErrors = {
       genre: !selectedGenre,
       type: !Object.values(selectedTypes).some((value) => value),
-      note: false,
     };
 
     setErrors(newErrors);
@@ -213,7 +204,7 @@ export default function Home() {
         </h2>
         <div className='flex overflow-x-auto scrollbar-hide -mx-10 md:mx-0 px-4 md:px-0'>
           <div className='flex gap-2'>
-            {loadingAction ? (
+            {loading ? (
               <div className='flex items-center justify-center w-full'>
                 <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--color-fuchsia)]'></div>
               </div>
@@ -255,7 +246,7 @@ export default function Home() {
           </h2>
           <div className='flex overflow-x-auto scrollbar-hide max-w-full'>
             <div className='flex gap-4 px-4'>
-              {loadingSimilar ? (
+              {loading ? (
                 <div className='flex items-center justify-center w-full'>
                   <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--color-fuchsia)]'></div>
                 </div>
@@ -356,20 +347,15 @@ export default function Home() {
               </div>
 
               <div className='w-[80%]'>
-                {errors.note && (
-                  <p className='text-red-500 dark:text-red-400 text-sm mb-2'>
-                    Veuillez sélectionner une note
-                  </p>
-                )}
                 <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>
-                  NOTE MINIMALE :
+                  NOTE MINIMALE (optionnel) :
                 </label>
                 <select
                   className='w-full p-2 border border-black dark:border-gray-700 rounded bg-white dark:bg-black text-black dark:text-white'
                   value={selectedNote}
                   onChange={handleNoteChange}>
                   <option value='' className='bg-white dark:bg-black'>
-                    Sélectionnez une note
+                    Toutes les notes
                   </option>
                   <option value='8' className='bg-white dark:bg-black'>
                     8/10 et plus
