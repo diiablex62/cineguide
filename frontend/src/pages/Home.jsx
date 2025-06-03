@@ -152,7 +152,7 @@ export default function Home() {
       {/* Top 10 Films */}
       <div className="mt-10">
         <h2 className="text-xl font-bold mb-4 text-left dark:text-white">
-          Top 10 des films cette semaine
+          Top 20 des films cette semaine
         </h2>
         <div className="relative w-[70%] mx-auto md:h-[15rem]">
           <div className="hidden md:flex gap-20 h-full overflow-x-auto overflow-y-hidden scroll-snap-x pl-10 pr-52 scrollbar-hide">
@@ -225,7 +225,7 @@ export default function Home() {
       {/* Top 10 Séries */}
       <div className="mt-10">
         <h2 className="text-xl font-bold mb-4 text-left dark:text-white">
-          Top 10 des séries cette semaine
+          Top 20 des séries cette semaine
         </h2>
         <div className="relative w-[70%] mx-auto md:h-[15rem]">
           <div className="hidden md:flex gap-20 h-full overflow-x-auto overflow-y-hidden scroll-snap-x pl-10 pr-52 scrollbar-hide">
