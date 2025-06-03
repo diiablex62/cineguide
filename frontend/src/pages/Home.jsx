@@ -89,12 +89,6 @@ export default function Home() {
     fetchSimilarSeries();
   }, []);
 
-  // Log à chaque render de Home
-  console.log("[Home] Render");
-
-  // Log à chaque render de Home
-  console.log("[Home] Render");
-
   const handleGenreChange = useCallback(
     (e) => {
       setSelectedGenre(e.target.value);

@@ -16,6 +16,7 @@ const commentaireRoutes = require("./routes/commentaire");
 const trendingRoutes = require("./routes/trending");
 const actionSeriesRoutes = require("./routes/action-series");
 const similarSeriesRoutes = require("./routes/similar-series");
+const genresRoutes = require("./routes/genres.routes");
 const { verifyEmailConfig } = require("./utils/email/config");
 const app = express();
 app.use(express.json());
@@ -53,6 +54,7 @@ app.use("/api/series", episodeRoutes);
 app.use("/api/series", saisonRoutes);
 app.use("/api/purchase", purchaseRoutes);
 app.use("/api/commentaires", commentaireRoutes);
+app.use("/api/genres", genresRoutes);
 
 // Route de test pour vérifier que le serveur répond
 app.use("/api/trending", trendingRoutes);

@@ -1,3 +1,7 @@
+const express = require("express");
+const cors = require("cors");
+const app = express();
+
 // Configuration CORS
 const allowedOrigins = process.env.ALLOWED_ORIGINS
   ? process.env.ALLOWED_ORIGINS.split(",")
@@ -21,3 +25,14 @@ app.use(
     optionsSuccessStatus: 200,
   })
 );
+
+// Middleware pour parser le JSON
+app.use(express.json());
+
+// Import des routes
+const genresRoutes = require("./routes/genres.routes");
+
+// Utilisation des routes
+app.use("/api/genres", genresRoutes);
+
+module.exports = app;
