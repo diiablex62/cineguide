@@ -7,6 +7,7 @@ import Hulu from "../components/home/hulu";
 // import peakyBg from "../assets/peaky2.jpg";
 // import { FaCheck, FaPlus, FaEye } from "react-icons/fa";
 import RechercheSoir from "../components/home/RechercheSoir";
+import { BASE_URL } from "../utils/url";
 
 export default function Home() {
   const [moviesTrending, setMoviesTrending] = useState([]);
@@ -24,9 +25,7 @@ export default function Home() {
   useEffect(() => {
     const fetchTrendingMovies = async () => {
       try {
-        const response = await fetch(
-          "http://localhost:3000/api/trending/movies"
-        );
+        const response = await fetch(`${BASE_URL}/trending/movies`);
         if (!response.ok) {
           throw new Error(`Erreur HTTP: ${response.status}`);
         }
@@ -41,7 +40,7 @@ export default function Home() {
 
     const fetchTrendingSeries = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/trending/tv");
+        const response = await fetch(`${BASE_URL}/trending/tv`);
         if (!response.ok) {
           throw new Error(`Erreur HTTP: ${response.status}`);
         }
@@ -57,7 +56,7 @@ export default function Home() {
     const fetchData = async () => {
       try {
         // Récupérer les films pour la recherche
-        const moviesResponse = await fetch("http://localhost:3000/api/films");
+        const moviesResponse = await fetch(`${BASE_URL}/films`);
         if (!moviesResponse.ok) {
           throw new Error("Erreur lors de la récupération des films");
         }
@@ -65,7 +64,7 @@ export default function Home() {
         setMovies(moviesData);
 
         // Récupérer les séries pour la recherche
-        const seriesResponse = await fetch("http://localhost:3000/api/series");
+        const seriesResponse = await fetch(`${BASE_URL}/series`);
         if (!seriesResponse.ok) {
           throw new Error("Erreur lors de la récupération des séries");
         }
