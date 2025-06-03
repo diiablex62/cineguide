@@ -3,6 +3,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require("path");
 const port = process.env.PORT || 4000;
 const userRoutes = require("./routes/users");
 const serieRoutes = require("./routes/serie");
@@ -21,9 +22,9 @@ const { verifyEmailConfig } = require("./utils/email/config");
 const app = express();
 app.use(express.json());
 
-const path = require("path");
 const __DIRNAME = path.resolve();
 
+// Configuration CORS
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -51,6 +52,7 @@ app.use(
 
 app.use(cookieParser());
 
+// Routes API
 console.log("Chargement des routes");
 app.use("/api/acteurs", acteurRoutes);
 app.use("/api/films", filmRoutes);
@@ -62,8 +64,6 @@ app.use("/api/series", saisonRoutes);
 app.use("/api/purchase", purchaseRoutes);
 app.use("/api/commentaires", commentaireRoutes);
 app.use("/api/genres", genresRoutes);
-
-// Route de test pour vérifier que le serveur répond
 app.use("/api/trending", trendingRoutes);
 app.use("/api/action-series", actionSeriesRoutes);
 app.use("/api/similar-series", similarSeriesRoutes);
@@ -72,10 +72,21 @@ app.get("/api/test", (req, res) => {
   res.status(200).json({ message: "Serveur API fonctionnel!" });
 });
 
-// Route racine
-app.get("/", (req, res) => {
-  res.status(200).json({ message: "Bienvenue sur l'API Cineguide!" });
-});
+// En production, servir les fichiers statiques du frontend
+if (process.env.NODE_ENV === "production") {
+  // Servir les fichiers statiques du dossier build
+  app.use(express.static(path.join(__DIRNAME, "../frontend/dist")));
+
+  // Pour toutes les autres routes, renvoyer index.html
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__DIRNAME, "../frontend/dist/index.html"));
+  });
+} else {
+  // En développement, route racine simple
+  app.get("/", (req, res) => {
+    res.status(200).json({ message: "Bienvenue sur l'API Cineguide!" });
+  });
+}
 
 // Gestion des erreurs 404
 app.use((req, res) => {
