@@ -77,82 +77,49 @@ export default function Home() {
       }
     };
 
-    
     // const fetchActionSeries = async () => {
-      //   try {
-        //     const response = await fetch("http://localhost:3000/api/action-series");
-        //     if (!response.ok) {
-          //       throw new Error(`Erreur HTTP: ${response.status}`);
-          //     }
-          //     const data = await response.json();
-          //     setActionSeries(data);
-          //   } catch (error) {
-            //     console.error(
-              //       "Erreur lors de la récupération des séries d'action:",
-              //       error
-              //     );
-              //   } finally {
+    //   try {
+    //     const response = await fetch("http://localhost:3000/api/action-series");
+    //     if (!response.ok) {
+    //       throw new Error(`Erreur HTTP: ${response.status}`);
+    //     }
+    //     const data = await response.json();
+    //     setActionSeries(data);
+    //   } catch (error) {
+    //     console.error(
+    //       "Erreur lors de la récupération des séries d'action:",
+    //       error
+    //     );
+    //   } finally {
     //     setLoadingAction(false);
     //   }
     // };
-    
+
     // const fetchSimilarSeries = async () => {
-      //   try {
-        //     const response = await fetch(
-          //       "http://localhost:3000/api/similar-series"
-          //     );
-          //     if (!response.ok) {
-            //       throw new Error(`Erreur HTTP: ${response.status}`);
-            //     }
-            //     const data = await response.json();
-            //     setSimilarSeries(data);
-            //   } catch (error) {
-              //     console.error(
-                //       "Erreur lors de la récupération des séries similaires:",
-                //       error
-                //     );
-                //   } finally {
-                  //     setLoadingSimilar(false);
-                  //   }
-                  // };
-                  
-                  fetchTrendingMovies();
-                  fetchTrendingSeries();
-                  fetchData();
-                  // fetchActionSeries();
-                  // fetchSimilarSeries();
-                  const [movies, setMovies] = useState([]);
-                  const [series, setSeries] = useState([]);
-  const [top10, setTop10] = useState([]);
-  const [actionSeries, setActionSeries] = useState([]);
-  const [similarSeries, setSimilarSeries] = useState([]);
-  const [loading, setLoading] = useState(true);
+    //   try {
+    //     const response = await fetch(
+    //       "http://localhost:3000/api/similar-series"
+    //     );
+    //     if (!response.ok) {
+    //       throw new Error(`Erreur HTTP: ${response.status}`);
+    //     }
+    //     const data = await response.json();
+    //     setSimilarSeries(data);
+    //   } catch (error) {
+    //     console.error(
+    //       "Erreur lors de la récupération des séries similaires:",
+    //       error
+    //     );
+    //   } finally {
+    //     setLoadingSimilar(false);
+    //   }
+    // };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Récupérer les films pour la recherche
-        const moviesResponse = await fetch("http://localhost:3000/api/films");
-        if (!moviesResponse.ok) {
-          throw new Error("Erreur lors de la récupération des films");
-        }
-        const moviesData = await moviesResponse.json();
-        setMovies(moviesData);
-
-        // Récupérer les séries pour la recherche
-        const seriesResponse = await fetch("http://localhost:3000/api/series");
-        if (!seriesResponse.ok) {
-          throw new Error("Erreur lors de la récupération des séries");
-        }
-        const seriesData = await seriesResponse.json();
-        setSeries(seriesData);
-        setLoading(false);
-      } catch {
-        setLoading(false);
-      }
-    };
-
+    fetchTrendingMovies();
+    fetchTrendingSeries();
     fetchData();
+    // fetchActionSeries();
+    // fetchSimilarSeries();
   }, []);
 
   return (
