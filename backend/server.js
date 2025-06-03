@@ -27,9 +27,16 @@ const __DIRNAME = path.resolve();
 app.use(
   cors({
     origin: function (origin, callback) {
+      // En développement, accepter toutes les origines
+      if (process.env.NODE_ENV === "development") {
+        return callback(null, true);
+      }
+
+      // En production, vérifier les origines autorisées
       const allowedOrigins = process.env.ALLOWED_ORIGINS
         ? process.env.ALLOWED_ORIGINS.split(",")
         : [process.env.CLIENT_URL];
+
       if (!origin || allowedOrigins.indexOf(origin) !== -1) {
         callback(null, true);
       } else {
