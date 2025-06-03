@@ -22,9 +22,7 @@ import Profil from "./pages/Profil/Profil";
 import ModalAbo from "./components/modal-abo/modalAbo";
 import ActeurProfil from "./pages/Acteurs/ActeurProfil";
 import AccueilActeur from "./pages/Acteurs/components/AccueilActeur";
-import BiographieActeur from "./pages/Acteurs/components/BiographieActeur";
 import FilmographieActeur from "./pages/Acteurs/components/FilmographieActeur";
-import RecompensesActeur from "./pages/Acteurs/components/RecompensesActeur";
 import ProfilActiviter from "./pages/Profil/ProfilActiviter";
 import ProfilListe from "./pages/Profil/ProfilListe";
 import ProfileReviews from "./pages/Profil/ProfileReviews";
@@ -264,10 +262,6 @@ export const router = createBrowserRouter([
           {
             path: "filmographie",
             element: <FilmographieActeur />,
-          },
-          {
-            path: "recompenses",
-            element: <RecompensesActeur />,
           },
         ],
       },
