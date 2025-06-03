@@ -24,6 +24,7 @@ export default function Home() {
   const [filteredResult, setFilteredResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [displayedItems, setDisplayedItems] = useState(new Set());
+  const [alreadySeenStates, setAlreadySeenStates] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -175,6 +176,13 @@ export default function Home() {
     } else {
       setFilteredResult("no_results");
     }
+  };
+
+  const toggleState = (id) => {
+    setAlreadySeenStates((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
   };
 
   return (
@@ -441,19 +449,31 @@ export default function Home() {
                     Toutes les notes
                   </option>
                   <option value='9.0' className='bg-white dark:bg-black'>
-                    Exceptionnel (9.0+)
+                    9.0 - 10.0
                   </option>
-                  <option value='7.5' className='bg-white dark:bg-black'>
-                    Excellent (7.5+)
+                  <option value='8.0' className='bg-white dark:bg-black'>
+                    8.0 - 8.9
+                  </option>
+                  <option value='7.0' className='bg-white dark:bg-black'>
+                    7.0 - 7.9
                   </option>
                   <option value='6.0' className='bg-white dark:bg-black'>
-                    Très bon (6.0+)
+                    6.0 - 6.9
                   </option>
-                  <option value='4.5' className='bg-white dark:bg-black'>
-                    Bon (4.5+)
+                  <option value='5.0' className='bg-white dark:bg-black'>
+                    5.0 - 5.9
+                  </option>
+                  <option value='4.0' className='bg-white dark:bg-black'>
+                    4.0 - 4.9
                   </option>
                   <option value='3.0' className='bg-white dark:bg-black'>
-                    Moyen (3.0+)
+                    3.0 - 3.9
+                  </option>
+                  <option value='2.0' className='bg-white dark:bg-black'>
+                    2.0 - 2.9
+                  </option>
+                  <option value='1.0' className='bg-white dark:bg-black'>
+                    1.0 - 1.9
                   </option>
                 </select>
               </div>
@@ -501,10 +521,22 @@ export default function Home() {
                       {filteredResult.titre}
                     </h3>
                     <p className='text-gray-600 dark:text-gray-300 text-sm mt-2'>
-                      {new Date(filteredResult.dateSortie).getFullYear()} ·
-                      Note: {parseFloat(filteredResult.note).toFixed(1)} ·
                       {filteredResult.type === "tv"
-                        ? "Série"
+                        ? `${new Date(
+                            filteredResult.dateDebut
+                          ).getFullYear()} - ${
+                            filteredResult.dateFin
+                              ? new Date(filteredResult.dateFin).getFullYear()
+                              : "En cours"
+                          }`
+                        : new Date(filteredResult.dateSortie).getFullYear()}
+                    </p>
+                    <p className='text-gray-600 dark:text-gray-300 text-sm'>
+                      Note: {parseFloat(filteredResult.note).toFixed(1)} ·{" "}
+                      {filteredResult.type === "tv"
+                        ? `${
+                            parseInt(filteredResult.dureeEpisodeMoyenne) || 0
+                          } min`
                         : `${filteredResult.duree} min`}
                     </p>
                     <p className='text-gray-700 dark:text-gray-300 mt-4'>
@@ -512,11 +544,25 @@ export default function Home() {
                     </p>
                   </div>
                   <div className='flex gap-2 mt-4'>
-                    <button className='bg-[var(--color-fuchsia)] text-white px-4 py-2 rounded'>
+                    <NavLink
+                      to={`/${
+                        filteredResult.type === "movie"
+                          ? "detailfilm"
+                          : "detailserie"
+                      }/${filteredResult._id}`}
+                      className='bg-[var(--color-fuchsia)] text-white px-4 py-2 rounded'>
                       À voir
-                    </button>
-                    <button className='bg-green-600 text-white px-4 py-2 rounded'>
-                      Déjà vu
+                    </NavLink>
+                    <button
+                      onClick={() => toggleState(filteredResult._id)}
+                      className={`text-white px-4 py-2 rounded ${
+                        alreadySeenStates[filteredResult._id]
+                          ? "bg-green-600"
+                          : "bg-red-400"
+                      }`}>
+                      {alreadySeenStates[filteredResult._id]
+                        ? "Déjà vu"
+                        : "Pas encore vu"}
                     </button>
                   </div>
                 </div>
