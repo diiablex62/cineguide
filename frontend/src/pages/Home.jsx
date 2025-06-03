@@ -6,6 +6,7 @@ import Primevideo from "../components/home/Primevideo";
 import Disney from "../components/home/Disney";
 import Hulu from "../components/home/hulu";
 import peakyBg from "../assets/peaky2.jpg";
+import { FaCheck, FaPlus, FaEye } from "react-icons/fa";
 
 export default function Home() {
   const { genres: genresFromAPI } = useGenres();
@@ -25,6 +26,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [displayedItems, setDisplayedItems] = useState(new Set());
   const [alreadySeenStates, setAlreadySeenStates] = useState({});
+  const [goSeeStates, setGoSeeStates] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -108,18 +110,11 @@ export default function Home() {
     }
   };
 
-  const handleNoteChange = (e) => {
-    setSelectedNote(e.target.value);
-  };
-
   const handleSearch = () => {
     const newErrors = {
-      genre: !selectedGenre,
       type: !Object.values(selectedTypes).some((value) => value),
     };
-
     setErrors(newErrors);
-
     if (Object.values(newErrors).some((error) => error)) {
       return;
     }
@@ -132,10 +127,12 @@ export default function Home() {
 
     // Filtrage des résultats correspondants aux critères
     const matchingResults = allContent.filter((item) => {
-      // Vérifier si le genre sélectionné est contenu dans l'un des genres de l'item
-      const matchesGenre = item.genre.some((genre) =>
-        genre.toLowerCase().includes(selectedGenre.toLowerCase())
-      );
+      // Si aucun genre sélectionné, on accepte tout
+      const matchesGenre =
+        !selectedGenre ||
+        item.genre.some((genre) =>
+          genre.toLowerCase().includes(selectedGenre.toLowerCase())
+        );
 
       const matchesType = selectedTypes[item.type];
 
@@ -184,6 +181,22 @@ export default function Home() {
       [id]: !prev[id],
     }));
   };
+
+  // Fonction pour la watchlist
+  const toggleGoSee = (id) => {
+    setGoSeeStates((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
+
+  // Filtrer dynamiquement les genres selon le(s) type(s) sélectionné(s)
+  const filteredGenres = genresFromAPI.filter((genre) => {
+    if (selectedTypes.movie && selectedTypes.tv) return true;
+    if (selectedTypes.movie) return genre.type === "film";
+    if (selectedTypes.tv) return genre.type === "serie";
+    return false;
+  });
 
   return (
     <div className='p-10 bg-white dark:bg-black'>
@@ -375,33 +388,7 @@ export default function Home() {
           {/* Colonne de gauche - Filtres */}
           <div className='w-full md:w-1/2 space-y-6 flex flex-col items-center'>
             <div className='space-y-4 w-[50%]'>
-              <div className='w-[80%]'>
-                {errors.genre && (
-                  <p className='text-red-500 dark:text-red-400 text-sm mb-2'>
-                    Veuillez sélectionner un genre
-                  </p>
-                )}
-                <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>
-                  GENRE :
-                </label>
-                <select
-                  className='w-full p-2 border border-black dark:border-gray-700 rounded bg-white dark:bg-black text-black dark:text-white'
-                  value={selectedGenre}
-                  onChange={handleGenreChange}>
-                  <option value='' className='bg-white dark:bg-black'>
-                    Sélectionnez un genre
-                  </option>
-                  {genresFromAPI.map((genre) => (
-                    <option
-                      key={genre.id}
-                      value={genre.name}
-                      className='bg-white dark:bg-black'>
-                      {genre.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
+              {/* TYPE d'abord */}
               <div className='w-[80%]'>
                 {errors.type && (
                   <p className='text-red-500 dark:text-red-400 text-sm mb-2'>
@@ -436,46 +423,57 @@ export default function Home() {
                   </label>
                 </div>
               </div>
+              {/* Puis GENRE */}
+              <div className='w-[80%]'>
+                <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>
+                  GENRE :
+                </label>
+                <select
+                  className='w-full p-2 border border-black dark:border-gray-700 rounded bg-white dark:bg-black text-black dark:text-white'
+                  value={selectedGenre}
+                  onChange={handleGenreChange}
+                  disabled={!selectedTypes.movie && !selectedTypes.tv}>
+                  <option value='' className='bg-white dark:bg-black'>
+                    Tous les genres
+                  </option>
+                  {filteredGenres.map((genre) => (
+                    <option
+                      key={genre.id}
+                      value={genre.name}
+                      className='bg-white dark:bg-black'>
+                      {genre.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
               <div className='w-[80%]'>
                 <label className='block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1'>
                   NOTE MINIMALE (optionnel) :
                 </label>
-                <select
-                  className='w-full p-2 border border-black dark:border-gray-700 rounded bg-white dark:bg-black text-black dark:text-white'
-                  value={selectedNote}
-                  onChange={handleNoteChange}>
-                  <option value='' className='bg-white dark:bg-black'>
-                    Toutes les notes
-                  </option>
-                  <option value='9.0' className='bg-white dark:bg-black'>
-                    9.0 - 10.0
-                  </option>
-                  <option value='8.0' className='bg-white dark:bg-black'>
-                    8.0 - 8.9
-                  </option>
-                  <option value='7.0' className='bg-white dark:bg-black'>
-                    7.0 - 7.9
-                  </option>
-                  <option value='6.0' className='bg-white dark:bg-black'>
-                    6.0 - 6.9
-                  </option>
-                  <option value='5.0' className='bg-white dark:bg-black'>
-                    5.0 - 5.9
-                  </option>
-                  <option value='4.0' className='bg-white dark:bg-black'>
-                    4.0 - 4.9
-                  </option>
-                  <option value='3.0' className='bg-white dark:bg-black'>
-                    3.0 - 3.9
-                  </option>
-                  <option value='2.0' className='bg-white dark:bg-black'>
-                    2.0 - 2.9
-                  </option>
-                  <option value='1.0' className='bg-white dark:bg-black'>
-                    1.0 - 1.9
-                  </option>
-                </select>
+                <div className='flex flex-col gap-2'>
+                  <input
+                    type='range'
+                    min='0'
+                    max='10'
+                    step='1'
+                    value={selectedNote}
+                    onChange={(e) => setSelectedNote(e.target.value)}
+                    className='w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700'
+                  />
+                  <div className='flex justify-between text-sm text-gray-600 dark:text-gray-300'>
+                    <span>0</span>
+                    <span>2</span>
+                    <span>4</span>
+                    <span>6</span>
+                    <span>8</span>
+                    <span>10</span>
+                  </div>
+                  <p className='text-sm text-gray-600 dark:text-gray-300'>
+                    Note minimale sélectionnée :{" "}
+                    {selectedNote ? selectedNote : "—"}
+                  </p>
+                </div>
               </div>
 
               <div className='w-full flex justify-center mt-4'>
@@ -528,42 +526,85 @@ export default function Home() {
                             filteredResult.dateFin
                               ? new Date(filteredResult.dateFin).getFullYear()
                               : "En cours"
+                          } ${
+                            filteredResult.genre &&
+                            filteredResult.genre.length > 0
+                              ? filteredResult.genre[0]
+                              : ""
                           }`
-                        : new Date(filteredResult.dateSortie).getFullYear()}
+                        : `${new Date(
+                            filteredResult.dateSortie
+                          ).getFullYear()} ${
+                            filteredResult.genre &&
+                            filteredResult.genre.length > 0
+                              ? filteredResult.genre[0]
+                              : ""
+                          }`}
                     </p>
                     <p className='text-gray-600 dark:text-gray-300 text-sm'>
-                      Note: {parseFloat(filteredResult.note).toFixed(1)} ·{" "}
-                      {filteredResult.type === "tv"
-                        ? `${
-                            parseInt(filteredResult.dureeEpisodeMoyenne) || 0
-                          } min`
-                        : `${filteredResult.duree} min`}
+                      {(() => {
+                        const note = parseFloat(filteredResult.note).toFixed(1);
+                        if (filteredResult.type === "tv") {
+                          const duree =
+                            filteredResult.dureeEpisodeMoyenne &&
+                            filteredResult.dureeEpisodeMoyenne !== "Inconnue" &&
+                            !isNaN(parseInt(filteredResult.dureeEpisodeMoyenne))
+                              ? `${parseInt(
+                                  filteredResult.dureeEpisodeMoyenne
+                                )} min`
+                              : "";
+                          return duree
+                            ? `Note: ${note} · ${duree}`
+                            : `Note: ${note}`;
+                        } else {
+                          return `Note: ${note} · ${filteredResult.duree} min`;
+                        }
+                      })()}
                     </p>
                     <p className='text-gray-700 dark:text-gray-300 mt-4'>
                       {filteredResult.synopsis}
                     </p>
                   </div>
-                  <div className='flex gap-2 mt-4'>
+                  <div className='flex flex-col gap-2 mt-4'>
+                    <div className='flex gap-2'>
+                      <button
+                        onClick={() => toggleGoSee(filteredResult._id)}
+                        className={`flex items-center gap-2 px-4 py-2 rounded text-white font-medium transition-colors duration-200 ${
+                          goSeeStates[filteredResult._id]
+                            ? "bg-gray-600"
+                            : "bg-gray-800"
+                        }`}>
+                        {goSeeStates[filteredResult._id] ? (
+                          <FaCheck className='text-white' />
+                        ) : (
+                          <FaPlus className='text-white' />
+                        )}
+                        {goSeeStates[filteredResult._id]
+                          ? "Déjà ajouté"
+                          : "À voir"}
+                      </button>
+                      <button
+                        onClick={() => toggleState(filteredResult._id)}
+                        className={`flex items-center gap-2 px-4 py-2 rounded text-white font-medium transition-colors duration-200 ${
+                          alreadySeenStates[filteredResult._id]
+                            ? "bg-green-600"
+                            : "bg-red-400"
+                        }`}>
+                        <FaEye className='text-white' />
+                        {alreadySeenStates[filteredResult._id]
+                          ? "Déjà vu"
+                          : "Pas encore vu"}
+                      </button>
+                    </div>
                     <NavLink
                       to={`/${
                         filteredResult.type === "movie"
                           ? "detailfilm"
                           : "detailserie"
                       }/${filteredResult._id}`}
-                      className='bg-[var(--color-fuchsia)] text-white px-4 py-2 rounded'>
-                      À voir
+                      className='mt-2 bg-[var(--color-fuchsia)] text-white px-4 py-2 rounded font-bold text-center w-full block'>
+                      REGARDER MAINTENANT
                     </NavLink>
-                    <button
-                      onClick={() => toggleState(filteredResult._id)}
-                      className={`text-white px-4 py-2 rounded ${
-                        alreadySeenStates[filteredResult._id]
-                          ? "bg-green-600"
-                          : "bg-red-400"
-                      }`}>
-                      {alreadySeenStates[filteredResult._id]
-                        ? "Déjà vu"
-                        : "Pas encore vu"}
-                    </button>
                   </div>
                 </div>
               </div>
@@ -573,8 +614,8 @@ export default function Home() {
                   Pas d'inspiration pour ce soir ? 🎬
                 </p>
                 <p className='text-gray-500 dark:text-gray-400'>
-                  Utilisez les filtres et cliquez sur "TROUVER UN FILM" pour
-                  obtenir une suggestion personnalisée !
+                  Utilisez les filtres et cliquez sur "CHERCHER" pour obtenir
+                  une suggestion personnalisée !
                 </p>
               </div>
             )}
