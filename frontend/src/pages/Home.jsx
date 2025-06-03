@@ -23,6 +23,7 @@ export default function Home() {
   const [similarSeries, setSimilarSeries] = useState([]);
   const [filteredResult, setFilteredResult] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [displayedItems, setDisplayedItems] = useState(new Set());
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,6 +84,12 @@ export default function Home() {
     fetchData();
   }, []);
 
+  // Réinitialiser les items affichés quand on change les filtres
+  useEffect(() => {
+    setDisplayedItems(new Set());
+    setFilteredResult(null);
+  }, [selectedGenre, selectedTypes, selectedNote]);
+
   const handleGenreChange = (e) => {
     setSelectedGenre(e.target.value);
     if (e.target.value) {
@@ -141,8 +148,22 @@ export default function Home() {
       new Map(matchingResults.map((item) => [item._id, item])).values()
     );
 
-    // Sélection aléatoire parmi les résultats uniques
-    if (uniqueResults.length > 0) {
+    // Filtrer les résultats déjà affichés
+    const availableResults = uniqueResults.filter(
+      (item) => !displayedItems.has(item._id)
+    );
+
+    if (availableResults.length > 0) {
+      // Sélection aléatoire parmi les résultats disponibles
+      const randomIndex = Math.floor(Math.random() * availableResults.length);
+      const selectedItem = availableResults[randomIndex];
+
+      // Ajouter l'item sélectionné à la liste des items affichés
+      setDisplayedItems((prev) => new Set([...prev, selectedItem._id]));
+      setFilteredResult(selectedItem);
+    } else if (uniqueResults.length > 0) {
+      // Si tous les résultats ont été affichés, réinitialiser et recommencer
+      setDisplayedItems(new Set());
       const randomIndex = Math.floor(Math.random() * uniqueResults.length);
       setFilteredResult(uniqueResults[randomIndex]);
     } else {
@@ -429,7 +450,7 @@ export default function Home() {
                 <button
                   onClick={handleSearch}
                   className='bg-[var(--color-fuchsia)] text-white py-2 px-8 rounded hover:bg-[var(--color-fuchsia-hover)] whitespace-nowrap'>
-                  TROUVER UN FILM
+                  CHERCHER
                 </button>
               </div>
             </div>
