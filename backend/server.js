@@ -74,12 +74,16 @@ app.get("/api/test", (req, res) => {
 
 // En production, servir les fichiers statiques du frontend
 if (process.env.NODE_ENV === "production") {
+  console.log("Mode production activé");
+  console.log("Chemin du dossier dist:", path.join(__DIRNAME, "frontend/dist"));
+
   // Servir les fichiers statiques du dossier build
-  app.use(express.static(path.join(__DIRNAME, "../frontend/dist")));
+  app.use(express.static(path.join(__DIRNAME, "frontend/dist")));
 
   // Pour toutes les autres routes, renvoyer index.html
   app.get("*", (req, res) => {
-    res.sendFile(path.join(__DIRNAME, "../frontend/dist/index.html"));
+    console.log("Requête reçue pour:", req.path);
+    res.sendFile(path.join(__DIRNAME, "frontend/dist/index.html"));
   });
 } else {
   // En développement, route racine simple
