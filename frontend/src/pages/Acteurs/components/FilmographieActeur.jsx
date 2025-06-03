@@ -8,39 +8,50 @@ export default function FilmographieActeur() {
   console.log(actorMovies);
 
   return (
-    <div className="w-full">
-      <div>
-        <div className="flex justify-center md:justify-start ">
-          <h2 className="font-bold text-2xl">Filmographie</h2>
-        </div>
-        <div>
-          <h2 className="mt-5 font-bold text-2xl">Acteur</h2>
-          <div className="flex items-center bg-gray-300 rounded-tl rounded-tr h-[50px] px-1 mt-4">
-            <p className="md:w-1/3 hidden md:block px-1">Année</p>
-            <p className="md:w-1/3 px-1">Titre</p>
-            <p className="md:w-1/3 hidden md:block px-1 text-right">Rôle</p>
-          </div>
-          {actorMovies.map((film) => (
-            <div key={film._id} className="flex items-center h-[50px]">
-              <p className="md:w-1/3 hidden md:block px-1">
-                {new Date(film.dateSortie).getFullYear()}
-              </p>
-              <NavLink
-                to={`/detailfilm/${film.id}`}
-                className="font-bold underline ml-2 md:w-1/3 px-1"
-              >
-                {film.titre}
-              </NavLink>
-              <p className="md:w-1/3 hidden md:block px-1 text-right">
-                {actor.gender === 2
-                  ? "Acteur"
-                  : actor.gender === 1
-                  ? "Actrice"
-                  : null}
-              </p>
-            </div>
-          ))}
-        </div>
+    <div className="w-full p-4">
+      <h2 className="font-bold text-2xl mb-4">Filmographie</h2>
+      <div className="overflow-x-auto">
+        <table className="min-w-full">
+          <thead>
+            <tr className="bg-black dark:bg-white">
+              <th className="text-white px-4 py-2 text-left dark:text-black">
+                Année
+              </th>
+              <th className="text-white px-4 py-2 text-left dark:text-black">
+                Titre
+              </th>
+              <th className="text-white px-4 py-2 text-right dark:text-black">
+                Note
+              </th>
+              <th className="text-white px-4 py-2 text-right dark:text-black">
+                Durée
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {actorMovies.map((film) => (
+              <tr key={film._id} className="border-b">
+                <td className="px-4 py-2 text-black dark:text-white">
+                  {new Date(film.dateSortie).getFullYear()}
+                </td>
+                <td className="px-4 py-2 ">
+                  <NavLink
+                    to={`/detailfilm/${film._id}`}
+                    className="font-bold hover:underline text-black dark:text-white"
+                  >
+                    {film.titre}
+                  </NavLink>
+                </td>
+                <td className="px-4 py-2 text-right text-black dark:text-white">
+                  {Number(film.note).toFixed(1)}
+                </td>
+                <td className="px-4 py-2 text-right text-black dark:text-white">
+                  {Math.floor(film.duree / 60)}h{film.duree % 60}min
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

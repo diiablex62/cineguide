@@ -11,26 +11,11 @@ export default function NavActeur() {
       document
         .getElementById("FilmographieActeur")
         .classList.remove("activeActeur");
-      document
-        .getElementById("RecompensesActeur")
-        .classList.remove("activeActeur");
     }
     if (path.pathname.includes("filmographie")) {
       document.getElementById("AccueilActeur").classList.remove("activeActeur");
       document
         .getElementById("FilmographieActeur")
-        .classList.add("activeActeur");
-      document
-        .getElementById("RecompensesActeur")
-        .classList.remove("activeActeur");
-    }
-    if (path.pathname.includes("recompenses")) {
-      document.getElementById("AccueilActeur").classList.remove("activeActeur");
-      document
-        .getElementById("FilmographieActeur")
-        .classList.remove("activeActeur");
-      document
-        .getElementById("RecompensesActeur")
         .classList.add("activeActeur");
     }
   });
@@ -53,15 +38,6 @@ export default function NavActeur() {
           className="flex justify-center items-center px-5 py-[5px] border border-black w-32 dark:bg-white dark:text-black"
         >
           Filmographie
-        </Link>
-      </div>
-      <div className="flex justify-center items-center px-4">
-        <Link
-          id="RecompensesActeur"
-          to={`/acteurs/${id}/recompenses`}
-          className="flex justify-center items-center px-5 py-[5px] border border-black w-32 dark:bg-white dark:text-black"
-        >
-          Récompenses
         </Link>
       </div>
     </div>
