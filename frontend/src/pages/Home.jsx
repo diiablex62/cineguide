@@ -137,8 +137,14 @@ export default function Home() {
       );
 
       const matchesType = selectedTypes[item.type];
-      const matchesNote =
-        !selectedNote || parseFloat(item.note) >= parseFloat(selectedNote);
+
+      // Gestion plus précise des notes
+      let matchesNote = true;
+      if (selectedNote) {
+        const itemNote = parseFloat(item.note);
+        const minNote = parseFloat(selectedNote);
+        matchesNote = !isNaN(itemNote) && itemNote >= minNote;
+      }
 
       return matchesGenre && matchesType && matchesNote;
     });
@@ -434,14 +440,20 @@ export default function Home() {
                   <option value='' className='bg-white dark:bg-black'>
                     Toutes les notes
                   </option>
-                  <option value='8' className='bg-white dark:bg-black'>
-                    8/10 et plus
+                  <option value='9.0' className='bg-white dark:bg-black'>
+                    Exceptionnel (9.0+)
                   </option>
-                  <option value='7' className='bg-white dark:bg-black'>
-                    7/10 et plus
+                  <option value='7.5' className='bg-white dark:bg-black'>
+                    Excellent (7.5+)
                   </option>
-                  <option value='6' className='bg-white dark:bg-black'>
-                    6/10 et plus
+                  <option value='6.0' className='bg-white dark:bg-black'>
+                    Très bon (6.0+)
+                  </option>
+                  <option value='4.5' className='bg-white dark:bg-black'>
+                    Bon (4.5+)
+                  </option>
+                  <option value='3.0' className='bg-white dark:bg-black'>
+                    Moyen (3.0+)
                   </option>
                 </select>
               </div>
@@ -490,7 +502,7 @@ export default function Home() {
                     </h3>
                     <p className='text-gray-600 dark:text-gray-300 text-sm mt-2'>
                       {new Date(filteredResult.dateSortie).getFullYear()} ·
-                      Note: {filteredResult.note} ·
+                      Note: {parseFloat(filteredResult.note).toFixed(1)} ·
                       {filteredResult.type === "tv"
                         ? "Série"
                         : `${filteredResult.duree} min`}
