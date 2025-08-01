@@ -67,25 +67,46 @@ app.get("/api/test", (req, res) => {
 console.log("NODE_ENV:", process.env.NODE_ENV);
 console.log("__DIRNAME:", __DIRNAME);
 
+// Détection automatique de l'environnement de production
+const isProduction = process.env.NODE_ENV === "production" || process.env.RENDER || process.env.PORT;
+
 // Servir les fichiers statiques du frontend en production
-if (process.env.NODE_ENV === "production") {
+if (isProduction) {
   console.log("Mode production détecté - Configuration des fichiers statiques");
   const distPath = path.join(__DIRNAME, "dist");
   console.log("Chemin dist:", distPath);
   
-  app.use(express.static(distPath));
-  
-  app.get("*", (req, res) => {
-    const indexPath = path.join(distPath, "index.html");
-    console.log("Serving index.html from:", indexPath);
-    res.sendFile(indexPath);
-  });
+  // Vérifier si le dossier dist existe
+  const fs = require("fs");
+  if (fs.existsSync(distPath)) {
+    console.log("Dossier dist trouvé, configuration des fichiers statiques");
+    app.use(express.static(distPath));
+    
+    app.get("*", (req, res) => {
+      const indexPath = path.join(distPath, "index.html");
+      console.log("Serving index.html from:", indexPath);
+      res.sendFile(indexPath);
+    });
+  } else {
+    console.log("Dossier dist non trouvé, mode API seulement");
+    app.get("/", (req, res) => {
+      res.status(200).json({ 
+        message: "API CineGuide - Serveur opérationnel",
+        mode: "production",
+        distPath: distPath,
+        distExists: false
+      });
+    });
+  }
 } else {
   console.log("Mode développement - Pas de fichiers statiques");
   
   // Route racine pour éviter l'erreur /get (seulement en développement)
   app.get("/", (req, res) => {
-    res.status(200).json({ message: "API CineGuide - Serveur opérationnel" });
+    res.status(200).json({ 
+      message: "API CineGuide - Serveur opérationnel",
+      mode: "development"
+    });
   });
 }
 
