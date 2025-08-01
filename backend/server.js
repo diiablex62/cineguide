@@ -63,11 +63,6 @@ app.get("/api/test", (req, res) => {
   res.status(200).json({ message: "Serveur API fonctionnel!" });
 });
 
-// Route racine pour éviter l'erreur /get
-app.get("/", (req, res) => {
-  res.status(200).json({ message: "API CineGuide - Serveur opérationnel" });
-});
-
 // Debug: Afficher l'environnement
 console.log("NODE_ENV:", process.env.NODE_ENV);
 console.log("__DIRNAME:", __DIRNAME);
@@ -87,6 +82,11 @@ if (process.env.NODE_ENV === "production") {
   });
 } else {
   console.log("Mode développement - Pas de fichiers statiques");
+  
+  // Route racine pour éviter l'erreur /get (seulement en développement)
+  app.get("/", (req, res) => {
+    res.status(200).json({ message: "API CineGuide - Serveur opérationnel" });
+  });
 }
 
 mongoose
