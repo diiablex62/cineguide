@@ -63,6 +63,20 @@ app.get("/api/test", (req, res) => {
   res.status(200).json({ message: "Serveur API fonctionnel!" });
 });
 
+// Route racine pour éviter l'erreur /get
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "API CineGuide - Serveur opérationnel" });
+});
+
+// Servir les fichiers statiques du frontend en production
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__DIRNAME, "dist")));
+  
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__DIRNAME, "dist/index.html"));
+  });
+}
+
 mongoose
   .connect(process.env.MONGO_URI)
   .then(async () => {
@@ -71,4 +85,6 @@ mongoose
   })
   .catch((err) => console.log("Erreur de connexion MongoDB:", err));
 
-app.listen(process.env.PORT);
+app.listen(process.env.PORT || 4000, () => {
+  console.log(`Serveur démarré sur le port ${process.env.PORT || 4000}`);
+});

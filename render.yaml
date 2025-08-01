@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: cineguide
+    env: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: CLIENT_URL
+        value: https://cineguide.onrender.com
+      - key: ALLOWED_ORIGINS
+        value: https://cineguide.onrender.com,http://localhost:5173 

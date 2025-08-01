@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
-    "build": "cd ../frontend && npm install && npm run build && cd ../backend"
+    "build": "cd ../frontend && npm install && npm run build && cp -r dist ../backend/ && cd ../backend"
   },
   "keywords": [],
   "author": "",
@@ -22,5 +22,8 @@
     "mongoose": "^8.3.4",
     "nodemailer": "^6.9.13",
     "nodemon": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
