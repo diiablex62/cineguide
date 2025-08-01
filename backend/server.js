@@ -68,13 +68,25 @@ app.get("/", (req, res) => {
   res.status(200).json({ message: "API CineGuide - Serveur opérationnel" });
 });
 
+// Debug: Afficher l'environnement
+console.log("NODE_ENV:", process.env.NODE_ENV);
+console.log("__DIRNAME:", __DIRNAME);
+
 // Servir les fichiers statiques du frontend en production
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__DIRNAME, "dist")));
+  console.log("Mode production détecté - Configuration des fichiers statiques");
+  const distPath = path.join(__DIRNAME, "dist");
+  console.log("Chemin dist:", distPath);
+  
+  app.use(express.static(distPath));
   
   app.get("*", (req, res) => {
-    res.sendFile(path.join(__DIRNAME, "dist/index.html"));
+    const indexPath = path.join(distPath, "index.html");
+    console.log("Serving index.html from:", indexPath);
+    res.sendFile(indexPath);
   });
+} else {
+  console.log("Mode développement - Pas de fichiers statiques");
 }
 
 mongoose
